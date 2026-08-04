@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 구버전 사이트(/v1/ 그누보드 + 루트 .php 랜딩) 콘텐츠 전량 백업 스크레이퍼
  *
@@ -8,9 +9,8 @@
  *   database/content/legacy/landings/{이름}.html          — 랜딩 원본 HTML
  *   database/content/legacy/manifest.json                 — 수집 결과 목록/실패 목록
  */
-
 const BASE = 'https://j-curve.co.kr';
-const OUT  = __DIR__.'/../database/content/legacy';
+const OUT = __DIR__.'/../database/content/legacy';
 
 // 서버에 부담 안 주게 요청 간격(초)
 const DELAY_SEC = 1;
@@ -28,6 +28,7 @@ function fetch(string $url): ?string
     ]]);
     $html = @file_get_contents($url, false, $ctx);
     sleep(DELAY_SEC);
+
     return $html === false ? null : $html;
 }
 
@@ -37,6 +38,7 @@ function toUtf8(string $html): string
     if (preg_match('/charset\s*=\s*["\']?euc-kr/i', $html)) {
         return iconv('EUC-KR', 'UTF-8//IGNORE', $html);
     }
+
     return $html;
 }
 
@@ -55,28 +57,40 @@ echo '칼럼 시도 대상: '.count($articleUrls)."건 (wr_id 1~80)\n";
 $seq = 0;
 foreach ($articleUrls as $key => $url) {
     $html = fetch($url);
-    if ($html === null) { $manifest['failed'][] = $url; continue; }
+    if ($html === null) {
+        $manifest['failed'][] = $url;
+
+        continue;
+    }
     $html = toUtf8($html);
 
-    $doc = new DOMDocument();
+    $doc = new DOMDocument;
     @$doc->loadHTML('<?xml encoding="UTF-8">'.$html);
     $xp = new DOMXPath($doc);
 
     // 그누보드 표준 마크업: 제목 #bo_v_title, 본문 #bo_v_con, 날짜 .if_date|bo_v_info
     $titleNode = $xp->query('//*[@id="bo_v_title"]')->item(0) ?? $xp->query('//h1|//h2')->item(0);
-    $bodyNode  = $xp->query('//*[@id="bo_v_con"]')->item(0) ?? $xp->query('//article')->item(0);
-    $dateNode  = $xp->query('//*[contains(@class,"if_date")]')->item(0)
+    $bodyNode = $xp->query('//*[@id="bo_v_con"]')->item(0) ?? $xp->query('//article')->item(0);
+    $dateNode = $xp->query('//*[contains(@class,"if_date")]')->item(0)
               ?? $xp->query('//*[@id="bo_v_info"]//*[contains(text(),"-")]')->item(0);
 
-    if ($bodyNode === null) { $manifest['failed'][] = $url.' (본문 파싱 실패)'; continue; }
+    if ($bodyNode === null) {
+        $manifest['failed'][] = $url.' (본문 파싱 실패)';
+
+        continue;
+    }
 
     $title = trim(preg_replace('/\s+/', ' ', $titleNode?->textContent ?? ''));
     // 카테고리는 제목 앞 [분류] 또는 페이지 내 sca 링크에서 추출
     $cat = null;
-    if (preg_match('/[?&]sca=([^&"]+)/', $html, $cm)) { $cat = rawurldecode($cm[1]); }
+    if (preg_match('/[?&]sca=([^&"]+)/', $html, $cm)) {
+        $cat = rawurldecode($cm[1]);
+    }
 
     $bodyHtml = '';
-    foreach ($bodyNode->childNodes as $child) { $bodyHtml .= $doc->saveHTML($child); }
+    foreach ($bodyNode->childNodes as $child) {
+        $bodyHtml .= $doc->saveHTML($child);
+    }
 
     // 슬러그: 짧은주소면 그 슬러그, wr_id면 제목 기반
     $slug = str_starts_with($key, 'wr_id:')
@@ -106,7 +120,11 @@ $landings = [
 ];
 foreach ($landings as $name) {
     $html = fetch(BASE."/{$name}.php");
-    if ($html === null) { $manifest['failed'][] = "/{$name}.php"; continue; }
+    if ($html === null) {
+        $manifest['failed'][] = "/{$name}.php";
+
+        continue;
+    }
     file_put_contents(OUT."/landings/{$name}.html", toUtf8($html));
     $manifest['landings'][] = "{$name}.html";
     echo "  랜딩: {$name}.php\n";
@@ -118,7 +136,9 @@ foreach (['portfolio', 'ad_campaign', 'contact', 'company', 'policy'] as $name) 
         file_put_contents(OUT."/landings/v1-{$name}.html", toUtf8($html));
         $manifest['landings'][] = "v1-{$name}.html";
         echo "  랜딩: /v1/{$name}.php\n";
-    } else { $manifest['failed'][] = "/v1/{$name}.php"; }
+    } else {
+        $manifest['failed'][] = "/v1/{$name}.php";
+    }
 }
 
 file_put_contents(OUT.'/manifest.json', json_encode($manifest, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));

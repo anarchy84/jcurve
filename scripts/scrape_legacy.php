@@ -42,21 +42,14 @@ function toUtf8(string $html): string
 
 $manifest = ['columns' => [], 'landings' => [], 'failed' => []];
 
-// ── 1. 칼럼 목록 4페이지에서 글 링크 수집 ─────────────────────────
+// ── 1. 칼럼 수집 대상: wr_id 전수 열람 ─────────────────────────────
+// 프리티 URL(/v1/manager/column/슬러그/)은 서버 리라이트가 깨져 404.
+// 확실히 열리는 wr_id 방식으로 1~80 전수 시도, 없는 글은 본문 파싱 실패로 걸러짐.
 $articleUrls = [];
-for ($page = 1; $page <= 4; $page++) {
-    $list = fetch(BASE."/v1/manager/bbs/board.php?bo_table=column&page={$page}");
-    if ($list === null) { $manifest['failed'][] = "list-page-{$page}"; continue; }
-    $list = toUtf8($list);
-
-    // 짧은주소(/v1/manager/column/슬러그/)와 wr_id 주소 모두 수집
-    preg_match_all('#href="(https?://j-curve\.co\.kr)?(/v1/manager/column/[^"]+?)/?(\?[^"]*)?"#', $list, $m1);
-    preg_match_all('#href="[^"]*board\.php\?bo_table=column&(?:amp;)?wr_id=(\d+)[^"]*"#', $list, $m2);
-
-    foreach ($m1[2] as $path) { $articleUrls[rawurldecode($path)] = BASE.$path; }
-    foreach ($m2[1] as $wrId) { $articleUrls["wr_id:{$wrId}"] = BASE."/v1/manager/bbs/board.php?bo_table=column&wr_id={$wrId}"; }
+for ($wrId = 1; $wrId <= 80; $wrId++) {
+    $articleUrls["wr_id:{$wrId}"] = BASE."/v1/manager/bbs/board.php?bo_table=column&wr_id={$wrId}";
 }
-echo '칼럼 링크 수집: '.count($articleUrls)."건\n";
+echo '칼럼 시도 대상: '.count($articleUrls)."건 (wr_id 1~80)\n";
 
 // ── 2. 칼럼 본문 수집 ─────────────────────────────────────────────
 $seq = 0;
@@ -110,7 +103,6 @@ $landings = [
     'gfa', 'facebook', 'youtube',
     'instagram', 'followers_up', 'instagram_likes',
     'shopping_marketing', 'shopping_smartstore', 'marketing-support-project',
-    'company', 'policy',
 ];
 foreach ($landings as $name) {
     $html = fetch(BASE."/{$name}.php");
@@ -120,7 +112,7 @@ foreach ($landings as $name) {
     echo "  랜딩: {$name}.php\n";
 }
 // /v1/ 전용 페이지도 백업
-foreach (['portfolio', 'ad_campaign', 'contact'] as $name) {
+foreach (['portfolio', 'ad_campaign', 'contact', 'company', 'policy'] as $name) {
     $html = fetch(BASE."/v1/{$name}.php");
     if ($html !== null) {
         file_put_contents(OUT."/landings/v1-{$name}.html", toUtf8($html));

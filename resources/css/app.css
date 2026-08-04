@@ -247,6 +247,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
    ============================================================ */
 .home__hero {
     position: relative;
+    min-height: 100vh; /* 구형 사파리 폴백 */
     min-height: 100svh;
     display: flex;
     flex-direction: column;
@@ -449,13 +450,16 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 48px;
-    padding: 80px clamp(24px, 5vw, 40px);
+    gap: clamp(40px, 6vw, 80px);
+    /* 배경은 풀블리드(색 전환=구분선) 유지, 콘텐츠만 중앙 1440 컨테이너로 정렬.
+       뷰포트<1440 이면 clamp 여백, 초광폭이면 (100%-1440)/2 여백 → 좌우 대칭 보장 */
+    padding: 80px max(clamp(24px, 5vw, 40px), calc((100% - var(--container)) / 2));
 }
 .pillar__body {
     max-width: 520px;
-    margin-left: auto;
     width: 100%;
+    min-width: 0;
+    margin-left: auto;
 }
 .pillar:nth-child(even) .pillar__body { margin-left: 0; margin-right: auto; order: 2; }
 .pillar:nth-child(even) .pillar__media { order: 1; }
@@ -496,6 +500,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .pillar__cta:hover { opacity: 0.7; }
 .pillar__media {
     aspect-ratio: 4 / 3;
+    min-width: 0;
     border-radius: 18px;
     background: var(--parchment);
     box-shadow: var(--shadow-media);

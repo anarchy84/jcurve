@@ -5,15 +5,25 @@
 @section('content')
     <main class="home">
         <section class="home__hero">
-            <div class="home__hero-media" aria-hidden="true"><span>J</span></div>
+            <div class="home__hero-media" aria-hidden="true">
+                {{-- 풀사이즈 히어로 동영상 슬롯: public/media/hero.mp4 + hero-poster.jpg 를 넣으면 자동 재생.
+                     에셋 부착 전에는 니어블랙 폴백. prefers-reduced-motion 시 CSS로 숨김 처리. --}}
+                <video class="home__hero-video" autoplay muted loop playsinline preload="metadata"
+                       poster="{{ asset('media/hero-poster.jpg') }}">
+                    <source src="{{ asset('media/hero.webm') }}" type="video/webm">
+                    <source src="{{ asset('media/hero.mp4') }}" type="video/mp4">
+                </video>
+            </div>
 
-            <span class="home__hero-badge">● 퍼포먼스 · CPA · SEO · 리워드 네트워크</span>
-            <h1>데이터로 증명하는<br><span class="grad">퍼포먼스 마케팅</span></h1>
-            <p>제이커브인터렉티브는 성과형 광고부터 검색·AI 최적화, 자체 데이터 솔루션까지 —
-               숫자로 말하는 종합 디지털 마케팅 에이전시입니다.</p>
-            <div class="cta-row">
-                <a class="btn-primary" href="{{ route('contact') }}">프로젝트 문의하기</a>
-                <a class="btn-ghost" href="{{ route('work.index') }}">성과 사례 보기</a>
+            <div class="home__hero-inner">
+                <span class="home__hero-badge">퍼포먼스 · CPA · SEO · 리워드 네트워크</span>
+                <h1>데이터로 증명하는<br><span class="grad">퍼포먼스 마케팅</span></h1>
+                <p>제이커브인터렉티브는 성과형 광고부터 검색·AI 최적화, 자체 데이터 솔루션까지 —
+                   숫자로 말하는 종합 디지털 마케팅 에이전시입니다.</p>
+                <div class="cta-row">
+                    <a class="btn-primary" href="{{ route('contact') }}">프로젝트 문의하기</a>
+                    <a class="btn-ghost" href="{{ route('work.index') }}">성과 사례 보기</a>
+                </div>
             </div>
         </section>
 

@@ -20,6 +20,8 @@ class Insight extends Model
         'meta_title',
         'meta_description',
         'published_at',
+        'legacy_wr_id',
+        'source_url',
     ];
 
     protected function casts(): array

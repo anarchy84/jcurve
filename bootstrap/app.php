@@ -1,9 +1,12 @@
 <?php
 
+use App\Models\LegacyRedirect;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -18,4 +21,23 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*'),
         );
+
+        // 라우트 매칭 실패(404) 시에만 레거시 URL 리다이렉트 조회.
+        // 정상 트래픽에는 오버헤드 0 (404에서만 DB 1회 조회).
+        $exceptions->render(function (NotFoundHttpException $e, Request $request): ?Response {
+            try {
+                $redirect = LegacyRedirect::resolveFor($request);
+            } catch (Throwable) {
+                // DB 미가동(마이그레이션 전 등)이면 조용히 기본 404 유지.
+                return null;
+            }
+
+            if ($redirect === null) {
+                return null;
+            }
+
+            $redirect->increment('hit_count');
+
+            return redirect($redirect->to_path, $redirect->status_code);
+        });
     })->create();

@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             BoardSeeder::class,
             InsightCategorySeeder::class,
+            LegacyRedirectSeeder::class,
+            LegacyContentSeeder::class,
         ]);
     }
 }

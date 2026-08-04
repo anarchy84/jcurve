@@ -63,4 +63,51 @@ class PageController extends Controller
     {
         return view('pages.anarchy');
     }
+
+    // ── 레거시 301 도착지 서브페이지 (config/subpages.php 데이터 주도) ──
+
+    public function seoSub(string $sub): View
+    {
+        return $this->subpage('seo', $sub);
+    }
+
+    public function cpaSub(string $sub): View
+    {
+        return $this->subpage('cpa', $sub);
+    }
+
+    public function performanceSub(string $sub): View
+    {
+        return $this->subpage('performance', $sub);
+    }
+
+    public function boostingshopSub(string $sub): View
+    {
+        return $this->subpage('boostingshop', $sub);
+    }
+
+    public function marketingSupport(): View
+    {
+        return view('pages.marketing-support');
+    }
+
+    public function privacy(): View
+    {
+        return view('pages.privacy');
+    }
+
+    /**
+     * config/subpages.php의 그룹·서브슬러그로 서브페이지를 렌더한다.
+     * 화이트리스트에 없는 slug는 404.
+     */
+    private function subpage(string $group, string $sub): View
+    {
+        $items = config("subpages.{$group}.items", []);
+        abort_unless(isset($items[$sub]), 404);
+
+        return view('pages.subpage', [
+            'parent' => config("subpages.{$group}.parent"),
+            'page' => $items[$sub],
+        ]);
+    }
 }

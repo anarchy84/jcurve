@@ -13,10 +13,9 @@
     RewriteCond %{HTTP:x-xsrf-token} .
     RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:X-XSRF-Token}]
 
-    # Redirect Trailing Slashes If Not A Folder...
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} (.+)/$
-    RewriteRule ^ %1 [L,R=301]
+    # 트레일링 슬래시 제거 301 룰 제거됨 (SEO 의도).
+    # 레거시 색인 URL(예: /seo/)이 별도 301 홉 없이 프론트 컨트롤러 →
+    # 404 훅 → 최종 목적지로 "1회"만 301 되도록 한다. (docs/URL-MIGRATION.md v2 §D)
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d

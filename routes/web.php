@@ -14,11 +14,18 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/services', [PageController::class, 'services'])->name('services.index');
+// 구체적 경로를 {slug} 와일드카드보다 먼저 등록한다.
+Route::get('/services/marketing-support', [PageController::class, 'marketingSupport'])->name('services.marketing-support');
 Route::get('/services/seo/aeo', [PageController::class, 'seoAeo'])->name('services.seo.aeo');
 Route::get('/services/seo/geo', [PageController::class, 'seoGeo'])->name('services.seo.geo');
+Route::get('/services/seo/{sub}', [PageController::class, 'seoSub'])->name('services.seo.sub');
+Route::get('/services/cpa-marketing/{sub}', [PageController::class, 'cpaSub'])->name('services.cpa.sub');
+Route::get('/services/performance-marketing/{sub}', [PageController::class, 'performanceSub'])->name('services.performance.sub');
 Route::get('/services/{slug}', [PageController::class, 'service'])->name('services.show');
 Route::get('/solutions/rankfree', [PageController::class, 'rankfree'])->name('solutions.rankfree');
 Route::get('/solutions/boostingshop', [PageController::class, 'boostingshop'])->name('solutions.boostingshop');
+Route::get('/solutions/boostingshop/{sub}', [PageController::class, 'boostingshopSub'])->name('solutions.boostingshop.sub');
+Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('/company', [PageController::class, 'company'])->name('company');
 Route::get('/company/anarchy', [PageController::class, 'anarchy'])->name('company.anarchy');
 

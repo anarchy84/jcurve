@@ -319,79 +319,344 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .home__hero .btn-ghost { color: var(--on-dark); border-color: rgba(255, 255, 255, 0.4); }
 .home__hero .btn-ghost:hover { background: rgba(255, 255, 255, 0.1); }
 
+/* 스크롤 다운 인디케이터 */
+.home__hero-scroll {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: 26px;
+    height: 42px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 999px;
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+}
+.home__hero-scroll span {
+    width: 3px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--muted-on-dark);
+    animation: hero-scroll 1.8s var(--ease) infinite;
+}
+@keyframes hero-scroll {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(12px); opacity: 0; }
+}
+
 /* ============================================================
-   통계 스트립 — 파치먼트 타일 + 큰 ink 숫자
+   S2. 신뢰 스트립 [파치먼트] — 클라이언트 로고월 (조용한 그레이)
+   ============================================================ */
+.home__trust {
+    background: var(--parchment);
+    padding: 64px clamp(24px, 5vw, 40px);
+    text-align: center;
+}
+.home__trust-head {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.224px;
+    color: var(--text-muted);
+    margin: 0 0 28px;
+}
+.home__trust-logos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px 40px;
+    max-width: var(--container);
+    margin: 0 auto 28px;
+    padding: 0;
+    list-style: none;
+}
+.home__trust-logo {
+    font-size: 21px;
+    font-weight: 600;
+    letter-spacing: -0.374px;
+    color: var(--text-muted);
+    opacity: 0.55;
+    white-space: nowrap;
+}
+.home__trust-proof {
+    font-size: 17px;
+    letter-spacing: -0.374px;
+    color: var(--ink);
+    margin: 0;
+}
+
+/* ============================================================
+   S3. 통계 [다크 타일] — 4대 숫자 (강세 앵커)
    ============================================================ */
 .home__stats {
+    background: var(--tile-1);
+    padding: 80px clamp(24px, 5vw, 40px);
+}
+.home__stats-inner {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
     max-width: var(--container);
     margin: 0 auto;
-    padding: 80px clamp(24px, 5vw, 40px);
-    background: var(--parchment);
     text-align: center;
 }
-
 .home__stats .stat strong {
     display: block;
     font-size: clamp(34px, 5vw, 48px);
     font-weight: 600;
     letter-spacing: -0.02em;
-    color: var(--ink);
+    color: var(--on-dark);
     line-height: 1.05;
     margin-bottom: 8px;
+    font-variant-numeric: tabular-nums;
 }
-
-.home__stats .stat span { color: var(--text-muted); font-size: 17px; letter-spacing: -0.374px; }
+.home__stats .stat span { color: var(--muted-on-dark); font-size: 17px; letter-spacing: -0.374px; }
 
 /* ============================================================
-   사업 영역 — 유틸 카드 그리드 (hairline, radius 18)
+   S4. 사업영역 인트로 [라이트]
    ============================================================ */
-.home__services {
-    max-width: var(--container);
-    margin: 0 auto;
-    padding: 96px clamp(24px, 5vw, 40px);
+.home__intro {
     background: var(--canvas);
-}
-
-.home__services > h2 {
-    font-size: clamp(32px, 5vw, 40px);
-    letter-spacing: 0;
-    margin: 0 0 12px;
+    max-width: var(--container-text);
+    margin: 0 auto;
+    padding: 96px clamp(24px, 5vw, 40px) 48px;
     text-align: center;
 }
-
-.home__services > p.section-sub { margin: 0 auto 48px; text-align: center; }
-
-.home__services nav ul {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.home__intro h2 {
+    font-size: clamp(32px, 5vw, 40px);
+    letter-spacing: 0;
+    margin: 0 0 16px;
 }
+.home__intro .section-sub { margin: 0 auto; }
 
-.home__services nav li a {
-    display: flex;
+/* ============================================================
+   S5. 핵심영역 타일 ×3 [라이트↔다크 교차] — 풀블리드 2단 타일
+   ============================================================ */
+.home__pillars { }
+.pillar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
+    gap: 48px;
+    padding: 80px clamp(24px, 5vw, 40px);
+}
+.pillar__body {
+    max-width: 520px;
+    margin-left: auto;
+    width: 100%;
+}
+.pillar:nth-child(even) .pillar__body { margin-left: 0; margin-right: auto; order: 2; }
+.pillar:nth-child(even) .pillar__media { order: 1; }
+.pillar--light { background: var(--canvas); color: var(--ink); }
+.pillar--dark { background: var(--tile-1); color: var(--on-dark); }
+.pillar__label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+    margin-bottom: 16px;
+}
+.pillar--dark .pillar__label { color: var(--primary-on-dark); }
+.pillar__title {
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 16px;
+}
+.pillar__sub {
+    font-size: 21px;
+    line-height: 1.35;
+    letter-spacing: 0;
+    margin: 0 0 24px;
+}
+.pillar--light .pillar__sub { color: var(--text-muted); }
+.pillar--dark .pillar__sub { color: var(--muted-on-dark); }
+.pillar__ctas { display: flex; flex-wrap: wrap; gap: 20px; }
+.pillar__cta {
+    font-size: 17px;
+    font-weight: 400;
+    letter-spacing: -0.374px;
+    color: var(--primary);
+    transition: opacity 0.2s var(--ease);
+}
+.pillar--dark .pillar__cta { color: var(--primary-on-dark); }
+.pillar__cta:hover { opacity: 0.7; }
+.pillar__media {
+    aspect-ratio: 4 / 3;
+    border-radius: 18px;
+    background: var(--parchment);
+    box-shadow: var(--shadow-media);
+}
+.pillar--dark .pillar__media { background: var(--tile-3); }
+
+/* ============================================================
+   S6. 나머지 영역 + 허브 [파치먼트]
+   ============================================================ */
+.home__more {
+    background: var(--parchment);
+    padding: 80px clamp(24px, 5vw, 40px);
+}
+.home__more-title {
+    max-width: var(--container);
+    margin: 0 auto 24px;
+    font-size: 21px;
+    letter-spacing: 0.231px;
+    color: var(--text-muted);
+    text-align: center;
+}
+.home__more-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 820px;
+    margin: 0 auto;
+}
+.home__more-card {
+    display: block;
     padding: 28px;
-    height: 100%;
     background: var(--canvas);
     border: 1px solid var(--hairline);
     border-radius: 18px;
-    color: var(--ink);
-    font-size: 21px;
-    font-weight: 600;
-    letter-spacing: -0.374px;
     transition: transform 0.2s var(--ease), border-color 0.2s var(--ease);
 }
+.home__more-card:hover { transform: translateY(-4px); border-color: var(--ink); }
+.home__more-card strong { display: block; font-size: 21px; letter-spacing: -0.374px; color: var(--ink); margin-bottom: 6px; }
+.home__more-card span { font-size: 14px; letter-spacing: -0.224px; color: var(--text-muted); }
 
-.home__services nav li a:hover {
-    transform: translateY(-4px);
-    border-color: var(--ink);
+/* ============================================================
+   S7. 자체 솔루션 [다크 타일] — 최대 차별점 앵커
+   ============================================================ */
+.home__solutions {
+    background: var(--tile-1);
+    color: var(--on-dark);
+    padding: 96px clamp(24px, 5vw, 40px);
 }
+.home__solutions-inner { max-width: var(--container-text); margin: 0 auto; text-align: center; }
+.home__solutions h2 {
+    font-size: clamp(30px, 4.5vw, 40px);
+    letter-spacing: -0.02em;
+    margin: 12px 0 16px;
+}
+.home__solutions-sub { font-size: 21px; line-height: 1.35; color: var(--muted-on-dark); margin: 0 auto 48px; max-width: 640px; }
+.home__solutions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; text-align: left; }
+.solution-card {
+    padding: 32px;
+    background: var(--tile-3);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+}
+.solution-card strong { display: block; font-size: 24px; letter-spacing: -0.374px; color: var(--on-dark); margin-bottom: 8px; }
+.solution-card strong span { color: var(--muted-on-dark); font-weight: 400; font-size: 17px; }
+.solution-card p { font-size: 17px; line-height: 1.47; color: var(--muted-on-dark); margin: 0 0 16px; }
+.solution-card a { color: var(--primary-on-dark); font-size: 17px; letter-spacing: -0.374px; }
+.solution-card a:hover { opacity: 0.7; }
+
+/* ============================================================
+   S8. 대표 성과 [라이트] — work 프리뷰 카드
+   ============================================================ */
+.home__works {
+    background: var(--canvas);
+    padding: 96px clamp(24px, 5vw, 40px);
+    text-align: center;
+}
+.home__works h2 { font-size: clamp(30px, 4.5vw, 40px); letter-spacing: 0; margin: 0 0 12px; }
+.home__works .section-sub { margin: 0 auto 48px; }
+.home__works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: var(--container);
+    margin: 0 auto 40px;
+    text-align: left;
+}
+.work-preview {
+    display: block;
+    padding: 20px;
+    border: 1px solid var(--hairline);
+    border-radius: 18px;
+    transition: transform 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.work-preview:hover { transform: translateY(-4px); border-color: var(--ink); }
+.work-preview__thumb {
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+    background: var(--parchment);
+    box-shadow: var(--shadow-media);
+    margin-bottom: 16px;
+}
+.work-preview__meta { display: block; font-size: 14px; letter-spacing: -0.224px; color: var(--text-muted); margin-bottom: 6px; }
+.work-preview__title { display: block; font-size: 21px; letter-spacing: -0.374px; color: var(--ink); margin-bottom: 12px; }
+.work-preview__link { font-size: 17px; color: var(--primary); }
+.home__works-cta { display: flex; justify-content: center; }
+
+/* ============================================================
+   S9. 아나키 밴드 [파치먼트] — 은은하게 (얇은 1줄)
+   ============================================================ */
+.home__anarchy {
+    background: var(--parchment);
+    padding: 32px clamp(24px, 5vw, 40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.home__anarchy-text { font-size: 17px; letter-spacing: -0.374px; color: var(--ink); margin: 0; }
+.home__anarchy-text span { color: var(--text-muted); }
+.home__anarchy-link { font-size: 17px; color: var(--primary); white-space: nowrap; }
+.home__anarchy-link:hover { opacity: 0.7; }
+
+/* ============================================================
+   S10a. 인사이트 프리뷰 [라이트]
+   ============================================================ */
+.home__insights {
+    background: var(--canvas);
+    padding: 96px clamp(24px, 5vw, 40px);
+    text-align: center;
+}
+.home__insights h2 { font-size: clamp(30px, 4.5vw, 40px); letter-spacing: 0; margin: 0 0 12px; }
+.home__insights .section-sub { margin: 0 auto 48px; }
+.home__insights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: var(--container);
+    margin: 0 auto 40px;
+    text-align: left;
+}
+.insight-preview {
+    display: flex;
+    flex-direction: column;
+    padding: 28px;
+    border: 1px solid var(--hairline);
+    border-radius: 18px;
+    transition: transform 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.insight-preview:hover { transform: translateY(-4px); border-color: var(--ink); }
+.insight-preview__cat { font-size: 14px; font-weight: 600; letter-spacing: -0.224px; color: var(--primary); margin-bottom: 12px; }
+.insight-preview__title { font-size: 21px; letter-spacing: -0.374px; color: var(--ink); line-height: 1.25; margin-bottom: 10px; }
+.insight-preview__excerpt { font-size: 15px; line-height: 1.5; color: var(--ink-48); margin-bottom: 16px; }
+.insight-preview__date { font-size: 14px; letter-spacing: -0.224px; color: var(--text-muted); margin-top: auto; }
+.home__insights-cta { display: flex; justify-content: center; }
+
+/* ============================================================
+   S10b. 최종 CTA [다크 타일] — 페이지 클로징 앵커
+   ============================================================ */
+.home__cta {
+    background: var(--tile-1);
+    color: var(--on-dark);
+    padding: 120px clamp(24px, 5vw, 40px);
+    text-align: center;
+}
+.home__cta-inner { max-width: var(--container-text); margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+.home__cta h2 { font-size: clamp(32px, 5vw, 48px); letter-spacing: -0.28px; margin: 0 0 16px; }
+.home__cta p { font-size: 21px; line-height: 1.35; color: var(--muted-on-dark); margin: 0 0 36px; }
+.home__cta .btn-ghost { color: var(--on-dark); border-color: rgba(255, 255, 255, 0.4); }
+.home__cta .btn-ghost:hover { background: rgba(255, 255, 255, 0.1); }
 
 /* ============================================================
    공개 서브페이지 공통 — 파치먼트/화이트 에디토리얼
@@ -677,15 +942,19 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
    반응형
    ============================================================ */
 @media (max-width: 1068px) {
-    .home__stats { grid-template-columns: repeat(2, 1fr); }
-    .home__services nav ul { grid-template-columns: repeat(2, 1fr); }
+    .home__stats-inner { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
+    .home__works-grid, .home__insights-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 833px) {
     .site-nav__list { display: none; }
-    .home__services nav ul { grid-template-columns: 1fr; }
     .services__overview nav ul { grid-template-columns: 1fr; }
     .home__hero { padding-top: 96px; padding-bottom: 72px; }
+    .pillar { grid-template-columns: 1fr; gap: 32px; padding-top: 56px; padding-bottom: 56px; }
+    .pillar__body, .pillar:nth-child(even) .pillar__body { max-width: none; margin: 0; order: 2; }
+    .pillar:nth-child(even) .pillar__media, .pillar__media { order: 1; }
+    .home__more-grid, .home__solutions-grid,
+    .home__works-grid, .home__insights-grid { grid-template-columns: 1fr; }
     .subpage__content, .legal__content, .service__content, .solution__content,
     .services__overview, .company__introduction, .anarchy__profile,
     .insight-list__content, .insight-detail__content, .work-list__content,
@@ -694,7 +963,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 }
 
 @media (max-width: 640px) {
-    .home__stats { grid-template-columns: 1fr; }
+    .home__stats-inner { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

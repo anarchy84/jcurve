@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Insight;
+use App\Models\Work;
 use Illuminate\View\View;
 
 class PageController extends Controller
@@ -19,7 +21,24 @@ class PageController extends Controller
 
     public function home(): View
     {
-        return view('pages.home');
+        // S8 대표 성과: work 데이터 없으면 뷰에서 @if로 섹션 숨김(빈 카드 금지).
+        $works = Work::query()
+            ->published()
+            ->latest('published_at')
+            ->latest('id')
+            ->take(3)
+            ->get();
+
+        // S10a 인사이트 프리뷰: 최신 3건. 없으면 뷰에서 섹션 숨김.
+        $insights = Insight::query()
+            ->with('category')
+            ->published()
+            ->latest('published_at')
+            ->latest('id')
+            ->take(3)
+            ->get();
+
+        return view('pages.home', compact('works', 'insights'));
     }
 
     public function services(): View

@@ -63,9 +63,24 @@ class PageController extends Controller
         return view('services.seo.geo');
     }
 
+    public function solutions(): View
+    {
+        return view('solutions.index');
+    }
+
     public function rankfree(): View
     {
         return view('solutions.rankfree');
+    }
+
+    public function leadbay(): View
+    {
+        return view('solutions.leadbay');
+    }
+
+    public function call2sale(): View
+    {
+        return view('solutions.call2sale');
     }
 
     public function boostingshop(): View
@@ -76,11 +91,6 @@ class PageController extends Controller
     public function company(): View
     {
         return view('pages.company');
-    }
-
-    public function anarchy(): View
-    {
-        return view('pages.anarchy');
     }
 
     // ── 레거시 301 도착지 서브페이지 (config/subpages.php 데이터 주도) ──

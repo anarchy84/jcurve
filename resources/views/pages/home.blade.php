@@ -182,7 +182,7 @@
             {{-- [검증 V4] 홈에서는 직함 미표기(임원 신분·개인 브랜드 충돌 회피). 직함 확정 시 "총괄이사가 운영하는"으로 --}}
             <p class="home__anarchy-text">제이커브가 함께하는 유튜브 채널 ‘아나키’ —
                마케팅 현장의 이야기를 콘텐츠로 풉니다. <span>(구독 5.06만)</span></p>
-            <a class="home__anarchy-link" href="{{ route('company.anarchy') }}">채널 보기 →</a>
+            <a class="home__anarchy-link" href="{{ route('company') }}#anarchy">채널 보기 →</a>
         </section>
 
         {{-- ============ S10a. 인사이트 프리뷰 [라이트] — 없으면 섹션 숨김 ============ --}}

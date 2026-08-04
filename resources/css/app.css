@@ -46,6 +46,15 @@
     --ease: cubic-bezier(0.28, 0.11, 0.32, 1);
     --container: 1440px;
     --container-text: 980px;
+
+    /* 역동 레이어 (v2 확장 — 08_역동성_레이어.md). 콘텐츠 영역 전용, 크롬엔 미적용 */
+    --orb-blue: radial-gradient(circle, rgba(0, 102, 204, 0.35), transparent 70%);
+    --orb-deep: radial-gradient(circle, rgba(41, 151, 255, 0.18), transparent 70%);
+    --glass-fill: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-blur: saturate(160%) blur(24px);
+    --stat-huge: clamp(48px, 8vw, 104px);
+    --accent-warm: #ff7a59;
 }
 
 * { box-sizing: border-box; }
@@ -933,18 +942,48 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     background: var(--parchment);
 }
 
+.site-footer__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    max-width: var(--container);
+    margin: 0 auto 48px;
+}
+.site-footer__col h3 {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.224px;
+    color: var(--ink);
+    margin: 0 0 16px;
+}
+.site-footer__col ul { list-style: none; margin: 0; padding: 0; }
+.site-footer__col li { margin-bottom: 10px; }
+.site-footer__col a {
+    font-size: 14px;
+    letter-spacing: -0.224px;
+    color: var(--ink-48);
+    transition: color 0.2s var(--ease);
+}
+.site-footer__col a:hover { color: var(--ink); }
+.site-footer__newsletter p { font-size: 14px; line-height: 1.5; color: var(--ink-48); margin: 0 0 16px; }
+.site-footer__newsletter-link { color: var(--primary); font-weight: 600; font-size: 14px; }
+.site-footer__consent { font-size: 12px; letter-spacing: -0.12px; color: var(--text-muted); margin-top: 16px; }
+.site-footer__consent a { color: var(--primary); }
+
 .site-footer__company {
     max-width: var(--container);
     margin: 0 auto;
+    padding-top: 32px;
+    border-top: 1px solid var(--hairline);
     color: var(--ink-48);
     font-size: 12px;
-    line-height: 1.8;
+    line-height: 1.9;
     letter-spacing: -0.12px;
 }
-
-.site-footer__company strong { color: var(--ink); font-size: 14px; }
-.site-footer__company address { font-style: normal; display: inline; }
+.site-footer__company strong { color: var(--ink); font-size: 13px; }
+.site-footer__company address { font-style: normal; }
 .site-footer__company a { color: var(--primary); }
+.site-footer__legal { margin-top: 12px; }
 
 /* 페이지 헤더 슬롯 */
 .page-header {
@@ -963,6 +1002,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 
 @media (max-width: 833px) {
     .site-nav__list { display: none; }
+    .site-footer__grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
     .services__overview nav ul { grid-template-columns: 1fr; }
     .home__hero { padding-top: 96px; padding-bottom: 72px; }
     .pillar { grid-template-columns: 1fr; gap: 32px; padding-top: 56px; padding-bottom: 56px; }
@@ -979,6 +1019,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 
 @media (max-width: 640px) {
     .home__stats-inner { grid-template-columns: 1fr; }
+    .site-footer__grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

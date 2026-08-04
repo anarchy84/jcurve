@@ -22,12 +22,17 @@ Route::get('/services/seo/{sub}', [PageController::class, 'seoSub'])->name('serv
 Route::get('/services/cpa-marketing/{sub}', [PageController::class, 'cpaSub'])->name('services.cpa.sub');
 Route::get('/services/performance-marketing/{sub}', [PageController::class, 'performanceSub'])->name('services.performance.sub');
 Route::get('/services/{slug}', [PageController::class, 'service'])->name('services.show');
+// 솔루션 허브 + 4종 (03_솔루션.md). 구체 경로를 {sub} 와일드카드보다 먼저 등록한다.
+Route::get('/solutions', [PageController::class, 'solutions'])->name('solutions.index');
 Route::get('/solutions/rankfree', [PageController::class, 'rankfree'])->name('solutions.rankfree');
+Route::get('/solutions/leadbay', [PageController::class, 'leadbay'])->name('solutions.leadbay');
+Route::get('/solutions/call2sale', [PageController::class, 'call2sale'])->name('solutions.call2sale');
 Route::get('/solutions/boostingshop', [PageController::class, 'boostingshop'])->name('solutions.boostingshop');
 Route::get('/solutions/boostingshop/{sub}', [PageController::class, 'boostingshopSub'])->name('solutions.boostingshop.sub');
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('/company', [PageController::class, 'company'])->name('company');
-Route::get('/company/anarchy', [PageController::class, 'anarchy'])->name('company.anarchy');
+// 아나키 별도 페이지 폐지 → /company#anarchy 앵커로 301 통일 (04_회사소개.md)
+Route::redirect('/company/anarchy', '/company#anarchy', 301);
 
 Route::get('/work', [WorkController::class, 'index'])->name('work.index');
 Route::get('/work/{work:slug}', [WorkController::class, 'show'])->name('work.show');

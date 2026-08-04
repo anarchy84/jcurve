@@ -158,4 +158,5 @@ Sitemap: https://j-curve.co.kr/sitemap.xml
 - [ ] GSC + 네이버 서치어드바이저 + Bing 등록
 - [ ] Lighthouse 모바일: Perf 90+ / SEO 100
 - [ ] 구글 Rich Results Test: Organization, Service, FAQ, Article, Person 전부 인식
+- [ ] **기존 색인 URL 보존 검증** (docs/URL-MIGRATION.md): A목록 전부 200, B·C목록 전부 301, 한글 슬러그 아티클 3편 원문 이식, /wp-content/uploads/ 미러링 — llms.txt·사이트맵·본문 링크의 URL도 개정된 경로(/seo/, /wordpress-agency/, /about-us/, /contact-us/, /blog/) 기준으로 생성
 ```

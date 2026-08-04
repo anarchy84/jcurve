@@ -80,6 +80,10 @@
 └── /sitemap.xml /robots.txt /llms.txt
 ```
 
+> **⚠️ §3 개정 (2026-08-04)** — 기존 사이트 색인 URL 보존 정책(docs/URL-MIGRATION.md) 확정에 따라 다음 URL은 기존 워드프레스 경로를 그대로 승계한다 (트레일링 슬래시 포함):
+> `/services/seo` → **`/seo/`** · `/services/wordpress` → **`/wordpress-agency/`** · `/company` → **`/about-us/`** · `/contact` → **`/contact-us/`** · `/insights` → **`/blog/`** · 부스팅샵 허브에 **`/shop/`** 승계.
+> 신규 생성 URL은 /services/performance-marketing, /services/cpa-marketing, /services/reward-network, /services/seo/aeo·geo(→ `/seo/aeo/`, `/seo/geo/`로 조정), /solutions/*, /company/anarchy(→ `/about-us/anarchy/`), /work, /community만. 키워드 맵(§4)의 URL도 이에 따라 읽을 것.
+
 **내부링크 설계 (토픽 클러스터)**
 - `/services/*` 각 페이지 하단 → 관련 `/insights` 아티클 3개 + 관련 `/work` 사례 → 허브로 역링크.
 - `/insights` 아티클 본문 → 해당 서비스 페이지로 contextual link (앵커텍스트 = 타겟 키워드).

@@ -275,7 +275,8 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     position: absolute;
     inset: 0;
     z-index: 0;
-    background: var(--tile-3);
+    /* A톤 글로우 배경(orb 대용). 비디오 부착 시 그 위를 덮는다. (08 §4 S1) */
+    background: url('/media/bg/hero-glow.webp') center / cover no-repeat, var(--tile-3);
     overflow: hidden;
 }
 .home__hero-video {
@@ -381,17 +382,8 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     color: var(--text-muted);
     margin: 0 0 28px;
 }
-.home__trust-logos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 16px 40px;
-    max-width: var(--container);
-    margin: 0 auto 28px;
-    padding: 0;
-    list-style: none;
-}
+.home__trust-marquee { margin: 0 0 28px; }
+.home__trust-marquee .marquee__track { align-items: center; margin: 0; padding: 0; list-style: none; }
 .home__trust-logo {
     font-size: 21px;
     font-weight: 600;
@@ -412,24 +404,25 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
    ============================================================ */
 .home__stats {
     background: var(--tile-1);
-    padding: 80px clamp(24px, 5vw, 40px);
+    padding: 96px clamp(24px, 5vw, 40px);
 }
 .home__stats-inner {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    gap: 20px;
     max-width: var(--container);
     margin: 0 auto;
     text-align: center;
 }
+.home__stats .stat.glass-card { padding: 44px 20px; }
 .home__stats .stat strong {
     display: block;
-    font-size: clamp(34px, 5vw, 48px);
+    font-size: var(--stat-huge);
     font-weight: 600;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     color: var(--on-dark);
-    line-height: 1.05;
-    margin-bottom: 8px;
+    line-height: 1.0;
+    margin-bottom: 10px;
     font-variant-numeric: tabular-nums;
 }
 .home__stats .stat span { color: var(--muted-on-dark); font-size: 17px; letter-spacing: -0.374px; }
@@ -508,6 +501,9 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .pillar--dark .pillar__cta { color: var(--primary-on-dark); }
 .pillar__cta:hover { opacity: 0.7; }
 .pillar__media {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     aspect-ratio: 4 / 3;
     min-width: 0;
     border-radius: 18px;
@@ -515,6 +511,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     box-shadow: var(--shadow-media);
 }
 .pillar--dark .pillar__media { background: var(--tile-3); }
+.pillar__media .icon3d { width: 52%; max-width: 300px; aspect-ratio: 1; }
 
 /* ============================================================
    S6. 나머지 영역 + 허브 [파치먼트]
@@ -565,18 +562,21 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     margin: 12px 0 16px;
 }
 .home__solutions-sub { font-size: 21px; line-height: 1.35; color: var(--muted-on-dark); margin: 0 auto 48px; max-width: 640px; }
-.home__solutions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; text-align: left; }
+.home__solutions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: left; }
 .solution-card {
-    padding: 32px;
-    background: var(--tile-3);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    padding: 28px;
+    transition: transform 0.2s var(--ease);
 }
-.solution-card strong { display: block; font-size: 24px; letter-spacing: -0.374px; color: var(--on-dark); margin-bottom: 8px; }
-.solution-card strong span { color: var(--muted-on-dark); font-weight: 400; font-size: 17px; }
-.solution-card p { font-size: 17px; line-height: 1.47; color: var(--muted-on-dark); margin: 0 0 16px; }
-.solution-card a { color: var(--primary-on-dark); font-size: 17px; letter-spacing: -0.374px; }
-.solution-card a:hover { opacity: 0.7; }
+.solution-card:hover { transform: translateY(-4px); }
+.solution-card__icon { width: 64px; height: 64px; margin-bottom: 20px; }
+.solution-card__icon.icon3d--empty { border-radius: 16px; background: var(--glass-fill); border: 1px solid var(--glass-border); }
+.solution-card strong { display: block; font-size: 21px; letter-spacing: -0.374px; color: var(--on-dark); margin-bottom: 8px; }
+.solution-card strong span { color: var(--muted-on-dark); font-weight: 400; font-size: 14px; }
+.solution-card p { font-size: 15px; line-height: 1.5; color: var(--muted-on-dark); margin: 0 0 16px; }
+.solution-card__cta { margin-top: auto; color: var(--primary-on-dark); font-size: 15px; letter-spacing: -0.224px; }
+.solution-card:hover .solution-card__cta { opacity: 0.7; }
 
 /* ============================================================
    S8. 대표 성과 [라이트] — work 프리뷰 카드
@@ -997,7 +997,8 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
    ============================================================ */
 @media (max-width: 1068px) {
     .home__stats-inner { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
-    .home__works-grid, .home__insights-grid { grid-template-columns: repeat(2, 1fr); }
+    .home__works-grid, .home__insights-grid,
+    .home__solutions-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 833px) {
@@ -1022,7 +1023,67 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     .site-footer__grid { grid-template-columns: 1fr; }
 }
 
+/* ============================================================
+   역동 레이어 컴포넌트 (08_역동성_레이어.md) — 콘텐츠 전용, 크롬 미적용.
+   모든 모션 = CSS transform/opacity. prefers-reduced-motion 전부 정지.
+   ============================================================ */
+
+/* C1 — Orb 글로우 배경 (다크 섹션 무드) */
+.has-orb { position: relative; overflow: hidden; }
+.has-orb > * { position: relative; z-index: 1; }
+.has-orb::before,
+.has-orb::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    width: 70vw;
+    max-width: 880px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    pointer-events: none;
+    background: var(--orb-blue);
+}
+.has-orb::before { top: -25%; left: -8%; animation: orb-drift-a 18s var(--ease) infinite alternate; }
+.has-orb::after { bottom: -28%; right: -10%; background: var(--orb-deep); animation: orb-drift-b 22s var(--ease) infinite alternate; }
+@keyframes orb-drift-a { to { transform: translate(10%, 8%); } }
+@keyframes orb-drift-b { to { transform: translate(-9%, -6%); } }
+
+/* C2 — 3D 아이콘 (힉스필드) + floating */
+.icon3d { display: inline-flex; align-items: center; justify-content: center; }
+.icon3d img { width: 100%; height: 100%; object-fit: contain; }
+.icon3d--float { animation: icon-float 3s ease-in-out infinite; }
+@keyframes icon-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+/* C3 — 글래스모피즘 카드 (다크 위에서만) */
+.glass-card {
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-radius: 20px;
+}
+
+/* C5 — 마퀴 (흐르는 로고·아이콘 띠) */
+.marquee {
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee__track {
+    display: flex;
+    gap: 56px;
+    width: max-content;
+    animation: marquee-flow 34s linear infinite;
+}
+.marquee:hover .marquee__track { animation-play-state: paused; }
+.marquee--reverse .marquee__track { animation-direction: reverse; }
+@keyframes marquee-flow { to { transform: translateX(-50%); } }
+
 @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; scroll-behavior: auto !important; transition: none !important; }
     .home__hero-video { display: none; }
+    /* 마퀴 → 정적 중앙 그리드 폴백 */
+    .marquee { -webkit-mask-image: none; mask-image: none; }
+    .marquee__track { flex-wrap: wrap; width: auto; justify-content: center; transform: none; }
+    .has-orb::before, .has-orb::after { transform: none; }
 }

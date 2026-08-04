@@ -39,31 +39,35 @@
         <section class="home__trust" id="home-trust" aria-labelledby="home-trust-title">
             {{-- [검증 V1] 현재는 매체노출도 포괄하는 안전 표현. 직접계약 확인 시 "함께한 브랜드"로 강화 --}}
             <p class="home__trust-head" id="home-trust-title">캠페인이 집행된 브랜드</p>
-            <ul class="home__trust-logos" role="list">
-                @foreach (['넷플릭스', 'LG유플러스', '현대해상', '야놀자', '함소아', '대명리조트', '라미화장품', '1300K', '유가네닭갈비'] as $brand)
-                    <li class="home__trust-logo">{{ $brand }}</li>
-                @endforeach
-            </ul>
+            @php($trustBrands = ['넷플릭스', 'LG유플러스', '현대해상', '야놀자', '함소아', '대명리조트', '라미화장품', '1300K', '유가네닭갈비'])
+            <div class="marquee home__trust-marquee">
+                <ul class="marquee__track" role="list">
+                    {{-- 무한 흐름 위해 2세트 복제(translateX -50% 반복). reduce-motion 시 정적 그리드 --}}
+                    @foreach (array_merge($trustBrands, $trustBrands) as $i => $brand)
+                        <li class="home__trust-logo"@if ($i >= count($trustBrands)) aria-hidden="true"@endif>{{ $brand }}</li>
+                    @endforeach
+                </ul>
+            </div>
             {{-- [검증 V2] 기준시점 병기(산출 근거·기준시점 미표기 시 신뢰 하락 방지) --}}
             <p class="home__trust-proof">2026년 기준 누적 집행 광고비 373억원 · 진행 캠페인 15,700건</p>
         </section>
 
         {{-- ============ S3. 통계 [다크 타일] — 4대 숫자 (강세) ============ --}}
-        <section class="home__stats" aria-label="핵심 성과 지표">
+        <section class="home__stats has-orb" aria-label="핵심 성과 지표">
             <div class="home__stats-inner">
-                <div class="stat">
+                <div class="stat glass-card">
                     <strong data-count-to="373" data-count-suffix="억+">373억+</strong>
                     <span>누적 집행 광고비</span>
                 </div>
-                <div class="stat">
+                <div class="stat glass-card">
                     <strong data-count-to="128" data-count-suffix="만+">128만+</strong>
                     <span>누적 수집 DB</span>
                 </div>
-                <div class="stat">
+                <div class="stat glass-card">
                     <strong data-count-to="15700" data-count-suffix="+" data-count-comma="1">15,700+</strong>
                     <span>진행 캠페인</span>
                 </div>
-                <div class="stat">
+                <div class="stat glass-card">
                     <strong data-count-to="5.06" data-count-suffix="만" data-count-decimals="2">5.06만</strong>
                     <span>아나키 채널 구독자</span>
                 </div>
@@ -88,7 +92,9 @@
                        감이 아니라 데이터로 예산을 배분합니다.</p>
                     <a class="pillar__cta" href="{{ route('services.show', ['slug' => 'performance-marketing']) }}">퍼포먼스 마케팅 →</a>
                 </div>
-                <div class="pillar__media" aria-hidden="true"></div>
+                <div class="pillar__media" aria-hidden="true">
+                    <span class="icon3d icon3d--float"><img src="{{ asset('media/icons3d/performance.webp') }}" alt="" loading="lazy" width="360" height="360"></span>
+                </div>
             </article>
 
             {{-- 5-2 CPA · 리워드 네트워크 [다크] --}}
@@ -103,7 +109,9 @@
                         <a class="pillar__cta" href="{{ route('services.show', ['slug' => 'reward-network']) }}">리워드 네트워크 →</a>
                     </div>
                 </div>
-                <div class="pillar__media" aria-hidden="true"></div>
+                <div class="pillar__media" aria-hidden="true">
+                    <span class="icon3d icon3d--float"><img src="{{ asset('media/icons3d/cpa.webp') }}" alt="" loading="lazy" width="360" height="360"></span>
+                </div>
             </article>
 
             {{-- 5-3 SEO · AEO · GEO [라이트] --}}
@@ -115,7 +123,9 @@
                        이 사이트 자체가 저희의 포트폴리오입니다.</p>
                     <a class="pillar__cta" href="{{ route('services.show', ['slug' => 'seo']) }}">SEO · AEO · GEO →</a>
                 </div>
-                <div class="pillar__media" aria-hidden="true"></div>
+                <div class="pillar__media" aria-hidden="true">
+                    <span class="icon3d icon3d--float"><img src="{{ asset('media/icons3d/seo.webp') }}" alt="" loading="lazy" width="360" height="360"></span>
+                </div>
             </article>
         </section>
 
@@ -135,23 +145,39 @@
         </section>
 
         {{-- ============ S7. 자체 솔루션 [다크 타일] — 최대 차별점 ============ --}}
-        <section class="home__solutions" aria-labelledby="home-solutions-title">
+        <section class="home__solutions has-orb" aria-labelledby="home-solutions-title">
             <div class="home__solutions-inner">
                 <span class="pillar__label">OUR PRODUCTS</span>
                 <h2 id="home-solutions-title">우리는 도구까지 직접 만듭니다</h2>
-                <p class="home__solutions-sub">남의 툴을 빌려 쓰지 않습니다. 현장에서 필요한 데이터 솔루션을
-                   직접 개발해 운영합니다.</p>
+                {{-- 03_솔루션.md 상호링크 규칙: 홈 S7 = 자체 솔루션 4종. 리드 톤도 4종(데이터+CRM) 반영 --}}
+                <p class="home__solutions-sub">남의 툴을 빌려 쓰지 않습니다. 마케팅 데이터부터 보험 세일즈 CRM까지,
+                   현장에서 필요한 도구를 직접 개발해 운영합니다.</p>
                 <div class="home__solutions-grid">
-                    <div class="solution-card">
+                    <a class="solution-card glass-card" href="{{ route('solutions.rankfree') }}">
+                        <span class="icon3d solution-card__icon"><img src="{{ asset('media/icons3d/rankfree.webp') }}" alt="" loading="lazy" width="128" height="128"></span>
                         <strong>랭크프리 <span>(RankFree)</span></strong>
-                        <p>데이터드리븐 순위 추적·분석 솔루션</p>
-                        <a href="{{ route('solutions.rankfree') }}">자세히 →</a>
-                    </div>
-                    <div class="solution-card">
+                        <p>네이버 순위·시장 분석</p>
+                        <span class="solution-card__cta">자세히 →</span>
+                    </a>
+                    <a class="solution-card glass-card" href="{{ route('solutions.boostingshop') }}">
+                        {{-- boostingshop 3D 아이콘 미생성(다음 배치) → 빈 글래스 자리 폴백 --}}
+                        <span class="icon3d solution-card__icon icon3d--empty" aria-hidden="true"></span>
                         <strong>부스팅샵 <span>(BoostingShop)</span></strong>
-                        <p>직접 돌리는 셀프 마케팅 솔루션</p>
-                        <a href="{{ route('solutions.boostingshop') }}">자세히 →</a>
-                    </div>
+                        <p>직접 돌리는 셀프 마케팅</p>
+                        <span class="solution-card__cta">자세히 →</span>
+                    </a>
+                    <a class="solution-card glass-card" href="{{ route('solutions.leadbay') }}">
+                        <span class="icon3d solution-card__icon"><img src="{{ asset('media/icons3d/leadbay.webp') }}" alt="" loading="lazy" width="128" height="128"></span>
+                        <strong>리드베이 <span>(LEADBAY)</span></strong>
+                        <p>보험 영업조직 세일즈 CRM</p>
+                        <span class="solution-card__cta">자세히 →</span>
+                    </a>
+                    <a class="solution-card glass-card" href="{{ route('solutions.call2sale') }}">
+                        <span class="icon3d solution-card__icon"><img src="{{ asset('media/icons3d/call2sale.webp') }}" alt="" loading="lazy" width="128" height="128"></span>
+                        <strong>콜투세일 <span>(Call2.Sale)</span></strong>
+                        <p>보험DB 콜센터 CRM</p>
+                        <span class="solution-card__cta">자세히 →</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -213,7 +239,7 @@
         @endif
 
         {{-- ============ S10b. 최종 CTA [다크 타일] — 페이지 클로징 앵커 ============ --}}
-        <section class="home__cta" aria-labelledby="home-cta-title">
+        <section class="home__cta has-orb" aria-labelledby="home-cta-title">
             <div class="home__cta-inner">
                 <h2 id="home-cta-title">숫자로 증명할 준비가 되어 있습니다</h2>
                 {{-- [검증 V3] "첫 상담 무료" 삭제(대웅 미확정 — 단정 시 고객이 근거 요구). 확인 후 복원 가능 --}}

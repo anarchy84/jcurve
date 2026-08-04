@@ -22,6 +22,8 @@
                 <h1>데이터로 증명하는<br><span class="grad">퍼포먼스 마케팅</span></h1>
                 <p>성과형 광고부터 검색·AI 최적화, 자체 데이터 솔루션까지 —
                    숫자로 말하는 종합 디지털 마케팅 에이전시입니다.</p>
+                {{-- 증거 한 줄(하네스 Creative Director): 제이커브만의 훅 = 자기 사이트로 SEO 실력 증명 --}}
+                <p class="home__hero-proof">지금 이 화면도 저희가 직접 검색 상위에 올린 결과입니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">프로젝트 문의하기</a>
                     <a class="btn-ghost" href="{{ route('work.index') }}">성과 사례 보기</a>
@@ -35,13 +37,15 @@
 
         {{-- ============ S2. 신뢰 스트립 [파치먼트] — 클라이언트 로고월 ============ --}}
         <section class="home__trust" id="home-trust" aria-labelledby="home-trust-title">
-            <p class="home__trust-head" id="home-trust-title">이미 이런 브랜드들과 함께했습니다</p>
+            {{-- [검증 V1] 현재는 매체노출도 포괄하는 안전 표현. 직접계약 확인 시 "함께한 브랜드"로 강화 --}}
+            <p class="home__trust-head" id="home-trust-title">캠페인이 집행된 브랜드</p>
             <ul class="home__trust-logos" role="list">
                 @foreach (['넷플릭스', 'LG유플러스', '현대해상', '야놀자', '함소아', '대명리조트', '라미화장품', '1300K', '유가네닭갈비'] as $brand)
                     <li class="home__trust-logo">{{ $brand }}</li>
                 @endforeach
             </ul>
-            <p class="home__trust-proof">누적 광고비 373억원 · 진행 캠페인 15,700건</p>
+            {{-- [검증 V2] 기준시점 병기(산출 근거·기준시점 미표기 시 신뢰 하락 방지) --}}
+            <p class="home__trust-proof">2026년 기준 누적 집행 광고비 373억원 · 진행 캠페인 15,700건</p>
         </section>
 
         {{-- ============ S3. 통계 [다크 타일] — 4대 숫자 (강세) ============ --}}
@@ -175,7 +179,8 @@
 
         {{-- ============ S9. 아나키 밴드 [파치먼트] — 은은하게 ============ --}}
         <section class="home__anarchy" aria-label="아나키 유튜브 채널">
-            <p class="home__anarchy-text">총괄이사가 직접 운영하는 유튜브 채널 ‘아나키’ —
+            {{-- [검증 V4] 홈에서는 직함 미표기(임원 신분·개인 브랜드 충돌 회피). 직함 확정 시 "총괄이사가 운영하는"으로 --}}
+            <p class="home__anarchy-text">제이커브가 함께하는 유튜브 채널 ‘아나키’ —
                마케팅 현장의 이야기를 콘텐츠로 풉니다. <span>(구독 5.06만)</span></p>
             <a class="home__anarchy-link" href="{{ route('company.anarchy') }}">채널 보기 →</a>
         </section>
@@ -211,7 +216,8 @@
         <section class="home__cta" aria-labelledby="home-cta-title">
             <div class="home__cta-inner">
                 <h2 id="home-cta-title">숫자로 증명할 준비가 되어 있습니다</h2>
-                <p>지금 진행 중인 마케팅, 데이터로 다시 보겠습니다.<br>첫 상담은 무료입니다.</p>
+                {{-- [검증 V3] "첫 상담 무료" 삭제(대웅 미확정 — 단정 시 고객이 근거 요구). 확인 후 복원 가능 --}}
+                <p>지금 진행 중인 마케팅, 데이터로 다시 보겠습니다.<br>현재 성과를 알려주시면 개선 지점부터 짚어드립니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">프로젝트 문의하기</a>
                     <a class="btn-ghost" href="{{ route('work.index') }}">성과 사례 보기</a>

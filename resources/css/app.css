@@ -312,7 +312,17 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     letter-spacing: 0.196px;
     font-weight: 400;
     color: var(--muted-on-dark);
-    margin: 0 0 36px;
+    margin: 0 0 20px;
+}
+
+/* S1 증거 한 줄: body-strong 17/600, 라이트블루, CTA 바로 위 얇게 */
+.home__hero-proof {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.374px;
+    line-height: 1.24;
+    color: var(--primary-on-dark);
+    margin: 0 0 32px;
 }
 
 /* 다크 배경 위 CTA: 파란 pill 유지 + 고스트는 흰 테두리로 */

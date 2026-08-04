@@ -28,7 +28,7 @@ return new class extends Migration
             $table->index(['board_id', 'published_at']);
         });
 
-        if (DB::getDriverName() === 'mysql') {
+        if (in_array(DB::getDriverName(), ['mysql', 'mariadb'], true)) {
             DB::statement('ALTER TABLE posts ADD FULLTEXT posts_title_content_fulltext (title, content)');
         }
     }

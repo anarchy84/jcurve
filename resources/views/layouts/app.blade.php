@@ -98,7 +98,6 @@
                     <h3>회사</h3>
                     <ul>
                         <li><a href="{{ route('company') }}">회사소개</a></li>
-                        <li><a href="{{ route('company') }}#anarchy">아나키</a></li>
                         <li><a href="{{ route('work.index') }}">성과</a></li>
                         <li><a href="{{ route('insights.index') }}">인사이트</a></li>
                         <li><a href="{{ route('community.index') }}">커뮤니티</a></li>

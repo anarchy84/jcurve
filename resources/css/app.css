@@ -1161,6 +1161,62 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .landing__body { font-size: 17px; line-height: 1.6; color: var(--ink); max-width: 720px; margin: 0; }
 .landing__section--dark .landing__body { color: var(--on-dark); }
 
+/* 번호 프로세스 스텝 (퍼포먼스 방법 · 워드프레스 공정) */
+.steps { margin-top: 40px; counter-reset: step; display: flex; flex-direction: column; gap: 26px; max-width: 760px; }
+.steps__item { position: relative; padding-left: 56px; }
+.steps__item::before {
+    counter-increment: step;
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: var(--primary);
+    color: var(--on-dark);
+    font-weight: 600;
+    font-size: 16px;
+}
+.steps__item strong { display: block; font-size: 18px; font-weight: 600; letter-spacing: -0.374px; color: var(--ink); margin-bottom: 6px; }
+.steps__item p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--text-muted); }
+.landing__section--dark .steps__item strong { color: var(--on-dark); }
+.landing__section--dark .steps__item p { color: var(--muted-on-dark); }
+
+/* 비교표 (CPA 과금 구조 등) */
+.compare-table-wrap { margin-top: 32px; overflow-x: auto; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: 16px; min-width: 520px; }
+.compare-table th, .compare-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--hairline); }
+.compare-table thead th { font-size: 14px; font-weight: 600; color: var(--ink); }
+.compare-table tbody th { font-weight: 400; color: var(--text-muted); }
+.compare-table td { color: var(--ink); }
+.compare-table .is-cpa { color: var(--primary); font-weight: 600; }
+
+/* FAQ 아코디언 (<details>) */
+.faq { margin-top: 40px; max-width: 780px; }
+.faq__item { border-bottom: 1px solid var(--hairline); }
+.faq__item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 20px 0;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.374px;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+.faq__item summary::-webkit-details-marker { display: none; }
+.faq__item summary::after { content: '+'; font-size: 24px; font-weight: 400; color: var(--primary); line-height: 1; }
+.faq__item[open] summary::after { content: '\2212'; }
+.faq__item p { padding: 0 0 22px; margin: 0; font-size: 16px; line-height: 1.65; color: var(--text-muted); max-width: 720px; }
+.faq__item summary:focus-visible { outline: 2px solid var(--primary-focus); outline-offset: 2px; }
+
 /* 필수 고지·주석 (랭크프리 추정치 고지 등) — fine print */
 .landing__note {
     margin: 28px 0 0;

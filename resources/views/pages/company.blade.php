@@ -1,38 +1,38 @@
 @extends('layouts.app')
 
-@section('title', '회사소개 — 숫자로 증명하는 마케팅 | 제이커브인터렉티브')
+@section('title', '회사소개 — 2009년부터, 숫자로 말해왔습니다 | 제이커브인터렉티브')
 @section('meta')
-    <meta name="description" content="제이커브인터렉티브는 SEO 에이전시와 셀프 마케팅 플랫폼을 함께 운영하는 종합 디지털 마케팅 전문 기업입니다. 2009년 설립, 자체 솔루션 4종 운영.">
+    <meta name="description" content="2009년 시작. 보여준 값이 아니라 만들어낸 값으로 말해온 회사. 373억 집행·15,700 캠페인·128만 DB, 그리고 필요해서 직접 만든 자체 솔루션 4종.">
 @endsection
 
 @section('content')
     <main class="landing">
-        {{-- S1 히어로 [파치먼트] --}}
+        {{-- 히어로 [파치먼트] --}}
         <section class="landing__hero">
             <div class="landing__hero-inner">
                 <span class="landing__eyebrow">About</span>
-                <h1>숫자로 증명하는 마케팅을 만듭니다</h1>
-                <p class="landing__lead">제이커브인터렉티브는 SEO 에이전시와 셀프 마케팅 플랫폼을 함께 운영하는
-                   종합 디지털 마케팅 전문 기업입니다.</p>
+                <h1>2009년부터, 숫자로 말해왔습니다</h1>
+                <p class="landing__lead">광고 시장이 ‘노출’을 팔던 시절에 시작했습니다.
+                   그때부터 지금까지 지킨 기준은 하나 — 보여준 값이 아니라 만들어낸 값으로 말할 것.</p>
             </div>
         </section>
 
-        {{-- S2 우리는 누구인가 [라이트] --}}
+        {{-- 우리는 — 연대기 서사 [라이트] --}}
         <section class="landing__section landing__section--light">
             <div class="landing__inner">
-                <span class="landing__eyebrow">Who we are</span>
-                <h2 class="landing__head">대행하고, 직접 만들고, 데이터로 증명합니다</h2>
-                <p class="landing__body">2009년 설립 이래, 지금은 퍼포먼스·CPA·SEO를 아우르는
-                   종합 마케팅 에이전시로 성장했습니다. 남의 도구를 빌리지 않고, 필요한 솔루션은
-                   직접 개발해 운영합니다. 광고를 파는 게 아니라 성과를 만드는 것 — 그게 저희 기준입니다.</p>
+                <span class="landing__eyebrow">Our story</span>
+                <h2 class="landing__head">우리는 이렇게 일해왔습니다</h2>
+                <div class="prose">
+                    <p>우리는 2009년에 시작했습니다. 광고 시장이 ‘노출’을 팔던 시절이었죠. 그때부터 지금까지 한 가지 기준을 지켰습니다 — 보여준 값이 아니라 만들어낸 값으로 말할 것.</p>
+                    <p>그 기준으로 373억 원의 광고비를 집행했고, 15,700개의 캠페인을 돌렸고, 128만 건의 DB를 만들었습니다.</p>
+                </div>
             </div>
         </section>
 
-        {{-- S3 숫자 [다크 타일] — 홈 stat 컴포넌트 재사용 --}}
+        {{-- 숫자 [다크] — 홈 stat 재사용 [검증 V2] 회사 전체 누적 --}}
         <section class="home__stats has-orb" aria-label="회사 핵심 지표">
             <div class="home__stats-inner">
                 <div class="stat glass-card">
-                    {{-- [검증 V2] 회사 전체 누적 기준 --}}
                     <strong data-count-to="373" data-count-suffix="억+">373억+</strong>
                     <span>누적 집행 광고비</span>
                 </div>
@@ -51,39 +51,32 @@
             </div>
         </section>
 
-        {{-- S4 왜 종합 에이전시인가 [라이트] --}}
+        {{-- 도구를 만들다 [라이트] --}}
         <section class="landing__section landing__section--light">
             <div class="landing__inner">
-                <span class="landing__eyebrow">Why</span>
-                <h2 class="landing__head">대행사를 여러 곳 쓰지 않아도 됩니다</h2>
-                <div class="landing__points">
-                    <div class="landing__point landing__point--light">
-                        <strong>한 팀에서 통합</strong>
-                        <span>매체·SEO·크리에이티브·개발이 한 회사에. 커뮤니케이션 손실 0.</span>
-                    </div>
-                    <div class="landing__point landing__point--light">
-                        <strong>자체 솔루션 보유</strong>
-                        <span>랭크프리·부스팅샵·리드베이·콜투세일을 직접 개발·운영.</span>
-                    </div>
-                    <div class="landing__point landing__point--light">
-                        <strong>데이터 기준</strong>
-                        <span>노출이 아니라 전환·매출로 성과를 정의합니다.</span>
-                    </div>
-                    <div class="landing__point landing__point--light">
-                        <strong>크리에이티브 내재화</strong>
-                        <span>촬영·편집·디자인이 사내에 있어 빠르게 실행합니다.</span>
-                    </div>
+                <span class="landing__eyebrow">Products</span>
+                <h2 class="landing__head">도구가 없으면, 만들었습니다</h2>
+                <div class="prose">
+                    <p>순위 분석이 필요해서 랭크프리를 만들었고, 보험 영업 관리가 엉망이라 리드베이와 콜투세일을 만들었고, 셀프 마케팅 수요가 보여서 부스팅샵을 열었습니다.</p>
+                    <p>대행사가 소프트웨어를 만드는 건 흔치 않은 길이지만, 현장에 필요하면 만드는 게 저희 방식입니다.</p>
+                </div>
+                <div class="subcards">
+                    <a class="subcard" href="{{ route('solutions.rankfree') }}"><strong>랭크프리</strong><span>네이버 순위·시장 분석 →</span></a>
+                    <a class="subcard" href="{{ route('solutions.boostingshop') }}"><strong>부스팅샵</strong><span>셀프 마케팅 →</span></a>
+                    <a class="subcard" href="{{ route('solutions.leadbay') }}"><strong>리드베이</strong><span>보험 영업 CRM →</span></a>
+                    <a class="subcard" href="{{ route('solutions.call2sale') }}"><strong>콜투세일</strong><span>보험DB 콜센터 CRM →</span></a>
                 </div>
             </div>
         </section>
 
-        {{-- S5 ⭐ 아나키 섹션 [파치먼트] — 작게 (id=anarchy) --}}
+        {{-- 아나키 섹션 [파치먼트] — 작게 (id=anarchy) --}}
         <section class="landing__section landing__section--parchment" id="anarchy">
             <div class="landing__inner">
                 <span class="landing__eyebrow">Anarchy · 유튜브</span>
-                <h2 class="landing__head">총괄이사가 직접 운영하는 유튜브 채널</h2>
-                <p class="landing__body">마케팅 현장의 이야기를 콘텐츠로 풉니다. 이론이 아니라 실제로
-                   돌려본 것만 다룹니다. 유튜브 채널 ‘아나키’.</p>
+                <h2 class="landing__head">2011년엔, 유튜브 채널도 열었습니다</h2>
+                <div class="prose">
+                    <p>총괄이사가 직접 운영하는 ‘아나키’ — 마케팅 현장 이야기를 하는 채널입니다. 이론이 아니라 실제로 돌려본 것만 다룹니다.</p>
+                </div>
                 <ul class="landing__evidence">
                     <li>구독 5.06만 · 영상 248개 · 누적 조회 239만+</li>
                 </ul>
@@ -93,24 +86,11 @@
             </div>
         </section>
 
-        {{-- S6 연혁 [라이트] — 확정분만. 세부는 [자료 필요] --}}
-        <section class="landing__section landing__section--light">
-            <div class="landing__inner">
-                <span class="landing__eyebrow">History</span>
-                <h2 class="landing__head">걸어온 길</h2>
-                <ul class="landing__evidence">
-                    <li><strong>2009</strong> — (주)제이커브인터렉티브 법인 설립</li>
-                    <li><strong>2011</strong> — 유튜브 채널 ‘아나키’ 개설</li>
-                    <li><strong>현재</strong> — 자체 솔루션 4종(랭크프리·부스팅샵·리드베이·콜투세일) 운영</li>
-                </ul>
-                {{-- ⚠️ [자료 필요] 벤처인증·연구소 등 세부 연혁은 대웅 확인 후 추가 --}}
-            </div>
-        </section>
-
-        {{-- S8 최종 CTA [다크] --}}
+        {{-- 다음 10년 + CTA [다크] --}}
         <section class="landing__cta has-orb">
             <div class="landing__cta-inner">
-                <h2>마케팅, 한 팀에서 끝내세요</h2>
+                <h2>광고를 파는 회사가 아니라, 성과를 만드는 회사로</h2>
+                <p class="landing__lead" style="text-align:center;color:var(--muted-on-dark);">지금 우리는 검색과 AI의 경계에서 다음 10년을 준비하고 있습니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">프로젝트 문의하기</a>
                 </div>

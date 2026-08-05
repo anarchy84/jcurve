@@ -1088,6 +1088,142 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .marquee--reverse .marquee__track { animation-direction: reverse; }
 @keyframes marquee-flow { to { transform: translateX(-50%); } }
 
+/* ============================================================
+   랜딩형 상세 페이지 (아키타입 B) — 서비스·솔루션 공용
+   히어로(파치먼트) → 문제(라이트) → 방법(다크) → 증거(파치먼트)
+   → 하위(라이트) → 최종 CTA(다크). 색 교차 = 섹션 구분선.
+   ============================================================ */
+.landing { position: relative; }
+
+/* 페이지 히어로 [파치먼트] — 카피만 중앙 */
+.landing__hero {
+    background: var(--parchment);
+    padding: clamp(96px, 12vw, 168px) clamp(24px, 5vw, 40px) clamp(64px, 8vw, 96px);
+    text-align: center;
+}
+.landing__hero-inner { max-width: var(--container-text); margin: 0 auto; }
+.landing__hero h1 {
+    font-size: clamp(34px, 5vw, 56px);
+    font-weight: 600;
+    line-height: 1.07;
+    letter-spacing: -0.28px;
+    color: var(--ink);
+    margin: 0 0 20px;
+}
+.landing__hero .landing__lead { margin-left: auto; margin-right: auto; max-width: 720px; }
+.landing__hero .cta-row { justify-content: center; }
+
+/* 공통 섹션 — 풀블리드 타일, 색 교차 */
+.landing__section { padding: 80px clamp(24px, 5vw, 40px); }
+.landing__section--light { background: var(--canvas); color: var(--ink); }
+.landing__section--parchment { background: var(--parchment); color: var(--ink); }
+.landing__section--dark { background: var(--tile-1); color: var(--on-dark); }
+.landing__inner { max-width: var(--container-text); margin: 0 auto; }
+.landing__inner--wide { max-width: var(--container); }
+.landing__section--center { text-align: center; }
+.landing__section--center .cta-row { justify-content: center; }
+.landing__section--center .landing__lead { margin-left: auto; margin-right: auto; max-width: 720px; }
+
+/* 아이라벨(eyebrow) */
+.landing__eyebrow {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin-bottom: 16px;
+}
+.landing__section--dark .landing__eyebrow { color: var(--primary-on-dark); }
+
+/* 헤드라인·리드·본문 */
+.landing__head {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: -0.374px;
+    margin: 0 0 20px;
+}
+.landing__lead { font-size: 21px; line-height: 1.5; color: var(--text-muted); margin: 0 0 8px; }
+.landing__section--dark .landing__lead { color: var(--muted-on-dark); }
+.landing__body { font-size: 17px; line-height: 1.6; color: var(--ink); max-width: 720px; margin: 0; }
+.landing__section--dark .landing__body { color: var(--on-dark); }
+
+/* 필수 고지·주석 (랭크프리 추정치 고지 등) — fine print */
+.landing__note {
+    margin: 28px 0 0;
+    padding: 14px 18px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-48);
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: 12px;
+    max-width: 780px;
+}
+.landing__section--dark .landing__note { color: var(--muted-on-dark); background: var(--glass-fill); border-color: var(--glass-border); }
+
+/* 방법 포인트 — 다크 위 글래스 카드 그리드 */
+.landing__points { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 40px; }
+.landing__point {
+    padding: 24px 24px 26px;
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-radius: 18px;
+}
+.landing__point strong { display: block; font-size: 17px; font-weight: 600; letter-spacing: -0.374px; color: var(--on-dark); margin-bottom: 8px; }
+.landing__point span { font-size: 15px; line-height: 1.5; color: var(--muted-on-dark); }
+/* 라이트 섹션용 카드 variant — 글래스는 다크 위에서만이므로 라이트에선 화이트+헤어라인 */
+.landing__point--light { background: var(--canvas); border-color: var(--hairline); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.landing__point--light strong { color: var(--ink); }
+.landing__point--light span { color: var(--text-muted); }
+
+/* 플랫폼 칩 나열 (다크 위) */
+.landing__chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.landing__chips span {
+    font-size: 14px;
+    color: var(--on-dark);
+    padding: 7px 15px;
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+}
+
+/* 증거 리스트 [파치먼트/라이트] */
+.landing__evidence { list-style: none; padding: 0; margin: 32px 0 0; display: flex; flex-direction: column; gap: 16px; }
+.landing__evidence li { position: relative; padding-left: 28px; font-size: 17px; line-height: 1.5; color: var(--ink); max-width: 780px; }
+.landing__evidence li::before { content: ""; position: absolute; left: 4px; top: 9px; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); }
+
+/* 하위 영역 카드 그리드 */
+.subcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 32px; }
+.subcard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 24px;
+    background: var(--canvas);
+    border: 1px solid var(--hairline);
+    border-radius: 18px;
+    transition: transform 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+.subcard:hover { transform: translateY(-4px); border-color: var(--ink); }
+.subcard strong { display: block; font-size: 19px; letter-spacing: -0.374px; color: var(--ink); }
+.subcard span { font-size: 14px; color: var(--primary); }
+
+/* 최종 CTA [다크] — home__cta 스펙과 동일 규칙 */
+.landing__cta { background: var(--tile-1); color: var(--on-dark); padding: 120px clamp(24px, 5vw, 40px); text-align: center; }
+.landing__cta-inner { max-width: var(--container-text); margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+.landing__cta h2 { font-size: clamp(32px, 5vw, 48px); letter-spacing: -0.28px; margin: 0 0 24px; }
+.landing__cta .cta-row { justify-content: center; }
+.landing__cta .btn-ghost { color: var(--on-dark); border-color: rgba(255, 255, 255, 0.4); }
+.landing__cta .btn-ghost:hover { background: rgba(255, 255, 255, 0.1); }
+
+@media (max-width: 767px) {
+    .landing__points { grid-template-columns: 1fr; }
+}
+
 @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; scroll-behavior: auto !important; transition: none !important; }
     .home__hero-video { display: none; }

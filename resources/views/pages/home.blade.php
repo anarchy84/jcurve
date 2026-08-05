@@ -19,7 +19,7 @@
 
             <div class="home__hero-inner">
                 <span class="home__hero-badge">퍼포먼스 · CPA · SEO · 리워드 네트워크</span>
-                <h1>데이터로 증명하는<br><span class="grad">퍼포먼스 마케팅</span></h1>
+                <h1>여러분들의 매출 파트너<br><span class="grad">제이커브인터렉티브</span></h1>
                 <p>성과형 광고부터 검색·AI 최적화, 자체 데이터 솔루션까지 —
                    숫자로 말하는 종합 디지털 마케팅 에이전시입니다.</p>
                 {{-- 증거 한 줄(하네스 Creative Director): 제이커브만의 훅 = 자기 사이트로 SEO 실력 증명 --}}

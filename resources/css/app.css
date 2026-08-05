@@ -292,7 +292,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     position: absolute;
     inset: 0;
     /* 밝은 실사 영상 위 흰 텍스트 가독성 확보 — 단색 딤(그라디언트 아님) */
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.55);
     pointer-events: none;
 }
 
@@ -329,7 +329,8 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     line-height: 1.14;
     letter-spacing: 0.196px;
     font-weight: 400;
-    color: var(--muted-on-dark);
+    /* 밝은 실사 영상 위 서브카피 가독성 — 히어로 한정 거의 흰색(위계는 크기·굵기로 유지) */
+    color: rgba(255, 255, 255, 0.92);
     margin: 0 0 20px;
 }
 

@@ -160,8 +160,7 @@
                         <span class="solution-card__cta">자세히 →</span>
                     </a>
                     <a class="solution-card glass-card" href="{{ route('solutions.boostingshop') }}">
-                        {{-- boostingshop 3D 아이콘 미생성(다음 배치) → 빈 글래스 자리 폴백 --}}
-                        <span class="icon3d solution-card__icon icon3d--empty" aria-hidden="true"></span>
+                        <span class="icon3d solution-card__icon"><img src="{{ asset('media/icons3d/boostingshop.webp') }}" alt="" loading="lazy" width="128" height="128"></span>
                         <strong>부스팅샵 <span>(BoostingShop)</span></strong>
                         <p>직접 돌리는 셀프 마케팅</p>
                         <span class="solution-card__cta">자세히 →</span>

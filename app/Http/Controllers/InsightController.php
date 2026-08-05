@@ -17,7 +17,9 @@ class InsightController extends Controller
             ->latest('id')
             ->paginate(12);
 
-        return view('insights.index', compact('insights'));
+        $categories = InsightCategory::query()->orderBy('name')->get();
+
+        return view('insights.index', compact('insights', 'categories'));
     }
 
     public function category(string $slug): View
@@ -33,7 +35,9 @@ class InsightController extends Controller
             ->latest('id')
             ->paginate(12);
 
-        return view('insights.category', compact('category', 'insights'));
+        $categories = InsightCategory::query()->orderBy('name')->get();
+
+        return view('insights.category', compact('category', 'insights', 'categories'));
     }
 
     public function show(Insight $insight): View

@@ -71,7 +71,7 @@
                 </tbody>
             </table>
 
-            {{ $posts->links() }}
+            <div class="listing__pagination">{{ $posts->links('partials.pagination') }}</div>
         </section>
 
         <nav aria-label="커뮤니티 탐색">

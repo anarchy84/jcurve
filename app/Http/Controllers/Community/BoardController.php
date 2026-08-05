@@ -11,6 +11,7 @@ class BoardController extends Controller
     public function index(): View
     {
         $boards = Board::query()
+            ->withCount(['posts' => fn ($q) => $q->published()])
             ->orderBy('order')
             ->get();
 

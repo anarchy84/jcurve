@@ -869,7 +869,8 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .board__posts td a:hover, .board__notices td a:hover { color: var(--primary); }
 .board__notices tr { background: var(--parchment); }
 
-.community-index__boards .board-list { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 16px; }
+.board-list { list-style: none; padding: 0; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 980px; }
+.community-index__boards .board-list { margin: 24px 0 0; }
 .board-list__item {
     border: 1px solid var(--hairline);
     border-radius: 18px;
@@ -878,6 +879,9 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 }
 .board-list__item:hover { transform: translateY(-4px); border-color: var(--ink); }
 .board-list__item a { color: var(--ink); font-weight: 600; font-size: 21px; }
+.board-list__item p { font-size: 15px; line-height: 1.5; color: var(--text-muted); margin: 8px 0 0; }
+.board-list__item .board-list__count { display: block; font-size: 14px; color: var(--ink-48); margin-top: 12px; }
+@media (max-width: 833px) { .board-list { grid-template-columns: 1fr; } }
 
 /* ============================================================
    댓글 (2단 중첩)
@@ -1222,6 +1226,83 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 
 @media (max-width: 767px) {
     .landing__points { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   목록 페이지 (아키타입 C) — 성과·인사이트·커뮤니티 공용
+   헤더는 .landing__hero 재사용, 카드는 work-preview/insight-preview 재사용
+   ============================================================ */
+.listing { position: relative; }
+.listing__body { background: var(--canvas); padding: 72px clamp(24px, 5vw, 40px) 96px; }
+.listing__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: var(--container);
+    margin: 0 auto;
+}
+.listing__grid--2 { grid-template-columns: repeat(2, 1fr); max-width: 980px; }
+
+/* 카테고리/필터 탭 — 헤더 하단 */
+.listing__filters { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 32px; }
+.listing__filter {
+    font-size: 15px;
+    padding: 8px 18px;
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    color: var(--ink);
+    transition: border-color 0.2s var(--ease), background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.listing__filter:hover { border-color: var(--ink); }
+.listing__filter--active { background: var(--ink); color: var(--on-dark); border-color: var(--ink); }
+
+/* 성과 카드 대표 지표 (metrics 실데이터 있을 때만) */
+.work-preview__metric {
+    display: block;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.374px;
+    color: var(--ink);
+    margin-bottom: 10px;
+}
+.work-preview__metric small { display: block; font-size: 14px; font-weight: 400; letter-spacing: -0.224px; color: var(--text-muted); margin-top: 4px; }
+
+/* 빈 상태 — 리드 유입구 */
+.listing__empty { max-width: 620px; margin: 24px auto; text-align: center; }
+.listing__empty .landing__head { margin-bottom: 16px; }
+.listing__empty .landing__lead { margin: 0 auto 24px; max-width: 520px; }
+.listing__empty .cta-row { justify-content: center; }
+
+/* 페이지네이션 컨테이너 (Laravel links()) */
+.listing__pagination { max-width: var(--container); margin: 44px auto 0; }
+.listing__pagination nav { display: flex; justify-content: center; }
+
+/* 커스텀 페이지네이션 (partials.pagination) */
+.pager { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: center; }
+.pager__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 14px;
+    font-size: 15px;
+    color: var(--ink);
+    border: 1px solid var(--hairline);
+    border-radius: 999px;
+    transition: border-color 0.2s var(--ease), background 0.2s var(--ease), color 0.2s var(--ease);
+}
+.pager__link:hover { border-color: var(--ink); }
+.pager__link--active { background: var(--primary); color: var(--on-dark); border-color: var(--primary); }
+.pager__link--disabled { color: var(--ink-48); border-color: var(--divider-soft); pointer-events: none; }
+.pager__dots { color: var(--ink-48); padding: 0 4px; }
+
+@media (max-width: 1068px) {
+    .listing__grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 833px) {
+    .listing__grid, .listing__grid--2 { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

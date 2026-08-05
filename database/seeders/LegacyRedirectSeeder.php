@@ -52,6 +52,9 @@ class LegacyRedirectSeeder extends Seeder
             'shopping_marketing.php' => '/services/seo/naver-shopping',
             'shopping_smartstore.php' => '/services/seo/naver-shopping',
             'marketing-support-project.php' => '/services/marketing-support',
+            // 루트 contact.php: /v1/ 첫 페이지가 링크하고 라이브 200(색인 대상).
+            // 문서엔 v1/contact.php만 있어 누락 → 크롤링 대조로 발견(2026-08-05).
+            'contact.php' => '/contact',
 
             // ── §B-3 /v1/ 페이지 ──
             'v1' => '/',

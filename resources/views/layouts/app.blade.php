@@ -40,12 +40,7 @@
                             <li><a href="{{ route('solutions.call2sale') }}">콜투세일</a></li>
                         </ul>
                     </li>
-                    <li class="site-nav__item">
-                        <a href="{{ route('company') }}">회사소개</a>
-                        <ul class="site-nav__sublist">
-                            <li><a href="{{ route('company') }}#anarchy">아나키</a></li>
-                        </ul>
-                    </li>
+                    <li class="site-nav__item"><a href="{{ route('company') }}">회사소개</a></li>
                     <li class="site-nav__item"><a href="{{ route('work.index') }}">성과</a></li>
                     <li class="site-nav__item"><a href="{{ route('insights.index') }}">인사이트</a></li>
                     <li class="site-nav__item"><a href="{{ route('community.index') }}">커뮤니티</a></li>

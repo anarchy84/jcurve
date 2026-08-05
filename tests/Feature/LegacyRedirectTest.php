@@ -45,6 +45,13 @@ class LegacyRedirectTest extends TestCase
             ->assertRedirect('/services/cpa-marketing');
     }
 
+    public function test_v1_insurance_landing_redirects_in_one_hop(): void
+    {
+        $this->get('/v1/insurance.php')
+            ->assertStatus(301)
+            ->assertRedirect('/services/cpa-marketing/insurance');
+    }
+
     public function test_avada_dummy_portfolio_redirects_to_work(): void
     {
         $this->get('/portfolio-items/cras-mollis-nons')

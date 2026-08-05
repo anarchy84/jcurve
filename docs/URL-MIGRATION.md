@@ -48,6 +48,7 @@
 | /land.php | /services/cpa-marketing/real-estate |
 | /stock.php | /services/cpa-marketing/stock |
 | /insurance.php | /services/cpa-marketing/insurance |
+| /v1/insurance.php | /services/cpa-marketing/insurance |
 | /coin.php | /services/cpa-marketing/coin |
 | /permission.php | /services/cpa-marketing/permission-call |
 | /gfa.php | /services/performance-marketing/naver-gfa |

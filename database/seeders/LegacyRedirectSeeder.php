@@ -60,6 +60,7 @@ class LegacyRedirectSeeder extends Seeder
             'v1/contact.php' => '/contact',
             'v1/portfolio.php' => '/work',
             'v1/ad_campaign.php' => '/work',
+            'v1/insurance.php' => '/services/cpa-marketing/insurance',
         ];
 
         // Avada 테마 더미 포트폴리오 13개 → /work

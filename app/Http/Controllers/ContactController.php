@@ -13,9 +13,18 @@ class ContactController extends Controller
     private const SERVICE_INTERESTS = [
         'performance-marketing',
         'cpa-marketing',
+        'cpa-insurance',
         'reward-network',
+        'reward-advertiser',
+        'reward-publisher',
         'seo',
         'wordpress',
+        'rankfree',
+        'boostingshop',
+        'leadbay',
+        'call2sale',
+        'marketing-support',
+        'other',
     ];
 
     private const UTM_KEYS = [

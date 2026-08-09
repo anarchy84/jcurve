@@ -43,14 +43,17 @@
 
 @section('content')
     <main class="landing">
-        <section class="landing__hero">
+        <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
+                <div class="landing__hero-copy">
                 <span class="landing__eyebrow">SEO · AEO · GEO</span>
                 <h1>검색과 AI 답변에서 발견될 수 있는 구조를 만듭니다</h1>
                 <p class="landing__lead">키워드 몇 개를 올리는 일이 아닙니다. 검색엔진이 사이트를 읽고, 사용자의 질문과 연결하고, 믿을 만한 정보로 판단할 수 있도록 기술·콘텐츠·신뢰 근거를 함께 정비합니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">SEO 진단 요청</a>
                 </div>
+                </div>
+                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/seo.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
             </div>
         </section>
 

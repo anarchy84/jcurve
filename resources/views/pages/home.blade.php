@@ -92,8 +92,8 @@
                        감이 아니라 데이터로 예산을 배분합니다.</p>
                     <a class="pillar__cta" href="{{ route('services.show', ['slug' => 'performance-marketing']) }}">퍼포먼스 마케팅 →</a>
                 </div>
-                <div class="pillar__media" aria-hidden="true">
-                    <span class="icon3d icon3d--float"><img src="{{ asset('media/icons3d/performance.webp') }}" alt="" loading="lazy" width="360" height="360"></span>
+                <div class="pillar__media pillar__media--fill" aria-hidden="true">
+                    <img src="{{ asset('media/scenes/pillar_performance.webp') }}" alt="" loading="lazy" width="1400" height="1050">
                 </div>
             </article>
 
@@ -109,8 +109,8 @@
                         <a class="pillar__cta" href="{{ route('services.show', ['slug' => 'reward-network']) }}">리워드 네트워크 →</a>
                     </div>
                 </div>
-                <div class="pillar__media" aria-hidden="true">
-                    <span class="icon3d icon3d--float"><img src="{{ asset('media/icons3d/cpa.webp') }}" alt="" loading="lazy" width="360" height="360"></span>
+                <div class="pillar__media pillar__media--fill" aria-hidden="true">
+                    <img src="{{ asset('media/scenes/pillar_cparewards.webp') }}" alt="" loading="lazy" width="1400" height="1050">
                 </div>
             </article>
 
@@ -123,8 +123,8 @@
                        이 사이트 자체가 저희의 포트폴리오입니다.</p>
                     <a class="pillar__cta" href="{{ route('services.show', ['slug' => 'seo']) }}">SEO · AEO · GEO →</a>
                 </div>
-                <div class="pillar__media" aria-hidden="true">
-                    <span class="icon3d icon3d--float"><img src="{{ asset('media/icons3d/seo.webp') }}" alt="" loading="lazy" width="360" height="360"></span>
+                <div class="pillar__media pillar__media--fill" aria-hidden="true">
+                    <img src="{{ asset('media/scenes/pillar_search.webp') }}" alt="" loading="lazy" width="1400" height="1050">
                 </div>
             </article>
         </section>
@@ -189,8 +189,18 @@
                 <div class="home__works-grid">
                     @foreach ($works as $work)
                         <a class="work-preview" href="{{ route('work.show', ['work' => $work->slug]) }}">
-                            <div class="work-preview__thumb" aria-hidden="true"></div>
+                            <div class="work-preview__thumb" aria-hidden="true">
+                                @if ($work->cover_image)<img src="{{ asset($work->cover_image) }}" alt="" loading="lazy" width="1280" height="720">@endif
+                            </div>
                             <span class="work-preview__meta">{{ $work->client }}@if ($work->industry) · {{ $work->industry }}@endif</span>
+                            {{-- 인라인 @php() 사용: 파일 상단 @php() 인라인과 @php 블록이 섞이면 Blade가 오파싱하므로 --}}
+                            @php($metrics = $work->metrics)
+                            @php($m = is_array($metrics) && count($metrics) ? reset($metrics) : null)
+                            @php($mv = is_array($m) ? ($m['value'] ?? null) : $m)
+                            @php($ml = is_array($m) ? ($m['label'] ?? null) : null)
+                            @if (! empty($mv))
+                                <span class="work-preview__metric">{{ $mv }}@if ($ml)<small>{{ $ml }}</small>@endif</span>
+                            @endif
                             <strong class="work-preview__title">{{ $work->title }}</strong>
                             <span class="work-preview__link">사례 보기 →</span>
                         </a>

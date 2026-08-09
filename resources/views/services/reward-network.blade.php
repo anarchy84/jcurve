@@ -32,8 +32,9 @@
 @section('content')
     <main class="landing">
         {{-- 경쟁사명은 meta·title·본문에 사용하지 않는다. 정보 밀도와 구조만 참고한다. --}}
-        <section class="landing__hero">
+        <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
+                <div class="landing__hero-copy">
                 <span class="landing__eyebrow">Reward Network</span>
                 <h1>유저의 참여가<br>광고주의 액션과 매체의 수익이 되도록</h1>
                 <p class="landing__lead">설치 수만 늘리는 리워드가 아닙니다. 목표 액션, 보상, 유효 기준, 트래킹과 정산을 한 구조로 설계해 광고주·유저·매체가 오래 갈 수 있는 네트워크를 만듭니다.</p>
@@ -49,6 +50,8 @@
                     <a class="btn-primary" href="{{ route('contact', ['service_interest' => 'reward-advertiser', 'message' => '리워드 광고 캠페인 집행을 문의합니다. 목표 액션과 일정, 예산 범위를 상담하고 싶습니다.']) }}">광고주 캠페인 문의</a>
                     <a class="btn-ghost" href="{{ route('contact', ['service_interest' => 'reward-publisher', 'message' => '앱 리워드 매체 제휴를 문의합니다. 서비스와 이용자, 희망 지면을 상담하고 싶습니다.']) }}">앱 매체 제휴 문의</a>
                 </div>
+                </div>
+                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/reward.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
             </div>
         </section>
 

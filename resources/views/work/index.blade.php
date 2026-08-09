@@ -62,19 +62,22 @@
                     <div class="listing__grid">
                         @foreach ($works as $work)
                             <a class="work-preview" href="{{ route('work.show', $work) }}">
-                                <span class="work-preview__thumb" aria-hidden="true"></span>
+                                <span class="work-preview__thumb" aria-hidden="true">
+                                    @if ($work->cover_image)<img src="{{ asset($work->cover_image) }}" alt="" loading="lazy" width="1280" height="720">@endif
+                                </span>
                                 @if ($work->client || $work->industry)
                                     <span class="work-preview__meta">{{ $work->client }}@if ($work->client && $work->industry) · @endif{{ $work->industry }}</span>
                                 @endif
                                 @php
                                     $metric = null;
-                                    if (is_array($work->metrics) && count($work->metrics)) {
-                                        $first = reset($work->metrics);
+                                    $metrics = $work->metrics; // 오버로드 속성 직접 reset() 방지 위해 로컬 복사
+                                    if (is_array($metrics) && count($metrics)) {
+                                        $first = reset($metrics);
                                         if (is_array($first)) {
                                             $metric = ['value' => $first['value'] ?? null, 'label' => $first['label'] ?? null];
                                         } else {
-                                            $k = array_key_first($work->metrics);
-                                            $metric = ['value' => $work->metrics[$k], 'label' => is_string($k) ? $k : null];
+                                            $k = array_key_first($metrics);
+                                            $metric = ['value' => $metrics[$k], 'label' => is_string($k) ? $k : null];
                                         }
                                     }
                                 @endphp

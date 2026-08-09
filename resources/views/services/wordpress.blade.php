@@ -43,14 +43,17 @@
 
 @section('content')
     <main class="landing">
-        <section class="landing__hero">
+        <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
+                <div class="landing__hero-copy">
                 <span class="landing__eyebrow">WordPress</span>
                 <h1>검색·광고·운영까지 고려한 웹사이트를 만듭니다</h1>
                 <p class="landing__lead">화면만 완성하는 제작이 아닙니다. 사용자가 찾고, 이해하고, 문의할 수 있으며 운영자가 계속 고칠 수 있는 구조를 설계합니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">제작 범위 상담</a>
                 </div>
+                </div>
+                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/wordpress.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
             </div>
         </section>
 

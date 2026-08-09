@@ -43,14 +43,17 @@
 
 @section('content')
     <main class="landing">
-        <section class="landing__hero">
+        <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
+                <div class="landing__hero-copy">
                 <span class="landing__eyebrow">CPA Marketing</span>
                 <h1>사전 합의한 유효 액션을 기준으로 정산합니다</h1>
                 <p class="landing__lead">설치·가입·구매·상담신청처럼 측정 가능한 행동을 정의하고, 승인 기준을 통과한 액션을 중심으로 운영하는 성과형 광고입니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">CPA 가능 여부 상담</a>
                 </div>
+                </div>
+                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/cpa.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
             </div>
         </section>
 

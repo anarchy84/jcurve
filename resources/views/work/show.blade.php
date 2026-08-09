@@ -10,30 +10,35 @@
 @section('content')
     <main class="detail">
         {{-- 히어로 [파치먼트] — 클라이언트·산업 · 제목 · 지표 --}}
-        <section class="landing__hero">
+        <section class="landing__hero @if ($work->cover_image)landing__hero--media @endif">
             <div class="landing__hero-inner">
-                @if ($work->client || $work->industry)
-                    <span class="landing__eyebrow">{{ $work->client }}@if ($work->client && $work->industry) · @endif{{ $work->industry }}</span>
-                @endif
-                <h1>{{ $work->title }}</h1>
-                @if ($work->summary)
-                    <p class="landing__lead">{{ $work->summary }}</p>
-                @endif
+                <div class="landing__hero-copy">
+                    @if ($work->client || $work->industry)
+                        <span class="landing__eyebrow">{{ $work->client }}@if ($work->client && $work->industry) · @endif{{ $work->industry }}</span>
+                    @endif
+                    <h1>{{ $work->title }}</h1>
+                    @if ($work->summary)
+                        <p class="landing__lead">{{ $work->summary }}</p>
+                    @endif
 
-                {{-- 대표 지표: metrics 실데이터만 (허위 금지, Evidence Guardian) --}}
-                @if (is_array($work->metrics) && count($work->metrics))
-                    <div class="detail__metrics">
-                        @foreach ($work->metrics as $key => $value)
-                            @php
-                                $mv = is_array($value) ? ($value['value'] ?? implode(', ', $value)) : $value;
-                                $ml = is_array($value) ? ($value['label'] ?? (is_string($key) ? $key : null)) : (is_string($key) ? $key : null);
-                            @endphp
-                            <div class="detail__metric">
-                                <strong>{{ $mv }}</strong>
-                                @if ($ml)<span>{{ $ml }}</span>@endif
-                            </div>
-                        @endforeach
-                    </div>
+                    {{-- 대표 지표: metrics 실데이터만 (허위 금지, Evidence Guardian) --}}
+                    @if (is_array($work->metrics) && count($work->metrics))
+                        <div class="detail__metrics">
+                            @foreach ($work->metrics as $key => $value)
+                                @php
+                                    $mv = is_array($value) ? ($value['value'] ?? implode(', ', $value)) : $value;
+                                    $ml = is_array($value) ? ($value['label'] ?? (is_string($key) ? $key : null)) : (is_string($key) ? $key : null);
+                                @endphp
+                                <div class="detail__metric">
+                                    <strong>{{ $mv }}</strong>
+                                    @if ($ml)<span>{{ $ml }}</span>@endif
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+                @if ($work->cover_image)
+                    <figure class="landing__hero-figure"><img src="{{ asset($work->cover_image) }}" alt="" width="1280" height="720"></figure>
                 @endif
             </div>
         </section>

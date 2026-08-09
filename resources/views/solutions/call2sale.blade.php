@@ -8,8 +8,9 @@
 @section('content')
     <main class="landing">
         {{-- 히어로 [파치먼트] --}}
-        <section class="landing__hero">
+        <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
+                <div class="landing__hero-copy">
                 <nav class="subpage__breadcrumb" aria-label="상위"><a href="{{ route('solutions.index') }}">솔루션</a></nav>
                 <span class="landing__eyebrow">Call2.Sale</span>
                 <h1>동의 기반 보험 상담 리드를<br>생산·운영·납품하는 CRM</h1>
@@ -20,6 +21,8 @@
                     <a class="btn-ghost" href="#governance">AI·개인정보 확인사항</a>
                 </div>
                 <p class="landing__note">AI 분석은 상담 검토를 돕는 보조 정보입니다. 분석 결과의 정확도나 영업 성과를 보장하지 않으며 최종 평가는 사람이 원자료와 맥락을 함께 확인해야 합니다.</p>
+                </div>
+                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/call2sale.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
             </div>
         </section>
 

@@ -8,8 +8,9 @@
 @section('content')
     <main class="landing">
         {{-- 히어로 [파치먼트] --}}
-        <section class="landing__hero">
+        <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
+                <div class="landing__hero-copy">
                 <nav class="subpage__breadcrumb" aria-label="상위"><a href="{{ route('solutions.index') }}">솔루션</a></nav>
                 <span class="landing__eyebrow">RankFree</span>
                 <h1>사장님, 지금 몇 등인지 아세요?</h1>
@@ -21,6 +22,8 @@
                 </div>
                 <p class="landing__body" style="margin-top:20px;color:var(--text-muted);">이미 1,200+ 사장님이 확인했습니다.</p>
                 <p class="landing__note">랭크프리의 순위·점수·시장 데이터는 자체 수집·분석 기반의 추정 정보이며 네이버가 제공하거나 보증하는 공식 지표가 아닙니다.</p>
+                </div>
+                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/rankfree.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
             </div>
         </section>
 

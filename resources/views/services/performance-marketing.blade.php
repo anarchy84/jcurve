@@ -43,8 +43,9 @@
 
 @section('content')
     <main class="landing">
-        <section class="landing__hero">
+        <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
+                <div class="landing__hero-copy">
                 <span class="landing__eyebrow">Performance Marketing</span>
                 <h1>광고비의 성적표를 만들어 드립니다</h1>
                 <p class="landing__lead">2026년 기준 제이커브 회사 전체 누적으로 373억 원의 광고비와 15,700건 이상의 캠페인을 운영했습니다. 그 과정에서 확인한 것은 단순합니다. 매체 숫자가 아니라 사업에 남는 결과를 기준으로 봐야 한다는 것.</p>
@@ -56,6 +57,8 @@
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">현재 광고 구조 진단 요청</a>
                 </div>
+                </div>
+                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/performance.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
             </div>
         </section>
 

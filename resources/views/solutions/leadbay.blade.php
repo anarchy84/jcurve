@@ -8,8 +8,9 @@
 @section('content')
     <main class="landing">
         {{-- 히어로 [파치먼트] --}}
-        <section class="landing__hero">
+        <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
+                <div class="landing__hero-copy">
                 <nav class="subpage__breadcrumb" aria-label="상위"><a href="{{ route('solutions.index') }}">솔루션</a></nav>
                 <span class="landing__eyebrow">LEADBAY</span>
                 <h1>보험DB, 사는 순간부터 계약까지 한 흐름으로</h1>
@@ -20,6 +21,8 @@
                     <a class="btn-ghost" href="#compliance">개인정보 확인사항</a>
                 </div>
                 <p class="landing__note">품질 점수와 업체 정보는 비교를 돕는 서비스 내 정보이며 개별 DB의 적법성, 상담 연결, 계약 체결 또는 영업 성과를 보장하지 않습니다.</p>
+                </div>
+                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/leadbay.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
             </div>
         </section>
 

@@ -1791,3 +1791,29 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     }
     .home__works-rail .work-preview { scroll-snap-align: start; }
 }
+
+/* ============================================================
+   레이아웃 QA 정렬 보정 (2026-08-09) — 수직 리듬 통일 + 카드 높이 균일화
+   codex 1차 타임아웃 → Claude 직접 처리. 파일 최후미(우선순위 최상).
+   ============================================================ */
+
+/* 1) 주요 콘텐츠 섹션 수직 리듬 통일 (stats 112 / goals·bento 120 / 나머지 96 혼재 → 통일) */
+.home__stats, .home__goals, .home__bento,
+.home__solutions, .home__works, .home__insights, .home__seocheck {
+    padding-top: clamp(80px, 10vw, 120px);
+    padding-bottom: clamp(80px, 10vw, 120px);
+}
+
+/* 2) 목표 카드 — 같은 행 카드 높이 균일화(아래 끝선 정렬). 콘텐츠는 상단부터 흐름 */
+.home__goals-grid { align-items: stretch; }
+.goalcard { height: 100%; }
+
+/* 3) 성과 카드 — 카드 높이 균일 + "사례 보기" 링크를 하단 고정 */
+.home__works-rail .work-preview { display: flex; flex-direction: column; }
+.home__works-rail .work-preview__link { margin-top: auto; }
+
+/* 4) 벤토 — 5타일 3열 배치 시 우하단 빈 셀 제거: 증거 타일을 2열 span으로 채움 */
+.home__bento-grid .bento--proof { grid-column: span 2; }
+@media (max-width: 833px) {
+    .home__bento-grid .bento--proof { grid-column: span 1; }
+}

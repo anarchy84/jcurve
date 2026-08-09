@@ -629,6 +629,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 }
 .work-preview:hover { transform: translateY(-4px); border-color: var(--ink); }
 .work-preview__thumb {
+    display: block; /* /work 페이지는 thumb가 <span>(inline) → aspect-ratio 무시되던 버그 방지 */
     aspect-ratio: 16 / 9;
     border-radius: 8px;
     background: var(--tile-3); /* 커버 이미지(다크 씬) 로딩 전 배경 */
@@ -1808,9 +1809,9 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .home__goals-grid { align-items: stretch; }
 .goalcard { height: 100%; }
 
-/* 3) 성과 카드 — 카드 높이 균일 + "사례 보기" 링크를 하단 고정 */
-.home__works-rail .work-preview { display: flex; flex-direction: column; }
-.home__works-rail .work-preview__link { margin-top: auto; }
+/* 3) 성과 카드 — 카드 높이 균일 + "사례 보기" 링크를 하단 고정 (홈·/work 공통) */
+.work-preview { display: flex; flex-direction: column; }
+.work-preview__link { margin-top: auto; }
 
 /* 4) 벤토 — 5타일 3열 배치 시 우하단 빈 셀 제거: 증거 타일을 2열 span으로 채움 */
 .home__bento-grid .bento--proof { grid-column: span 2; }

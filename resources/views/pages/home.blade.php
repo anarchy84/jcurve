@@ -294,9 +294,9 @@
         {{-- ============ S10. 무료 SEO 진단 진입 [파치먼트] ============ --}}
         <section class="home__seocheck" aria-labelledby="home-seocheck-title">
             <div class="home__seocheck-inner">
-                <span class="section-eyebrow">FREE SEO CHECK</span>
-                <h2 id="home-seocheck-title">내 사이트, 지금 SEO 몇 점일까요?</h2>
-                <p class="section-sub" style="margin:0 auto 28px;">주소만 넣으면 타이틀·메타·모바일·구조화 데이터까지 온페이지 SEO를 즉석 점검합니다. 무료입니다.</p>
+                <span class="section-eyebrow">FREE SEO · GEO·AEO CHECK</span>
+                <h2 id="home-seocheck-title">내 사이트, SEO와 AI 답변 최적화 몇 점일까요?</h2>
+                <p class="section-sub" style="margin:0 auto 28px;">주소만 넣으면 온페이지 SEO(타이틀·메타·모바일)부터 GEO·AEO(구조화 데이터·스키마·llms.txt·답변형 구조)까지 즉석 점검합니다. 무료입니다.</p>
                 <form class="seocheck__form" method="GET" action="{{ route('seo.check') }}" role="search">
                     <input type="url" name="url" inputmode="url" autocomplete="url"
                            placeholder="https://내사이트.com" aria-label="분석할 웹사이트 주소" required>

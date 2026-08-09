@@ -53,6 +53,7 @@
                 <p class="landing__lead">사용자가 묻는 질문을 분해하고, 결론·근거·조건·다음 행동이 한 문서 안에서 명확히 연결되도록 설계합니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">AEO 진단 요청</a>
+                    <a class="btn-ghost" href="{{ route('seo.check') }}">무료 GEO·AEO 자가진단 →</a>
                 </div>
             </div>
         </section>
@@ -222,6 +223,7 @@
                 <p class="landing__lead" style="text-align:center;color:var(--muted-on-dark);">사이트 URL과 중요한 서비스, 자주 받는 고객 질문을 알려주시면 우선 진단할 문서부터 정리하겠습니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">AEO 진단 요청</a>
+                    <a class="btn-ghost" href="{{ route('seo.check') }}">무료 GEO·AEO 자가진단 →</a>
                 </div>
             </div>
         </section>

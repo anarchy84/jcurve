@@ -53,6 +53,7 @@
                 <p class="landing__lead">회사·인물·서비스·근거 자료를 일관된 엔티티로 정리하고, 생성형 AI가 참고할 수 있는 명확한 디지털 자산을 구축합니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">GEO 진단 요청</a>
+                    <a class="btn-ghost" href="{{ route('seo.check') }}">무료 GEO·AEO 자가진단 →</a>
                 </div>
             </div>
         </section>
@@ -240,6 +241,7 @@
                 <p class="landing__lead" style="text-align:center;color:var(--muted-on-dark);">공식 사이트와 중요한 브랜드·서비스, 확인하고 싶은 질문을 알려주시면 정보 불일치와 우선 진단 범위를 정리하겠습니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">GEO 진단 요청</a>
+                    <a class="btn-ghost" href="{{ route('seo.check') }}">무료 GEO·AEO 자가진단 →</a>
                 </div>
             </div>
         </section>

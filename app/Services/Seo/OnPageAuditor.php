@@ -97,11 +97,22 @@ class OnPageAuditor
         $checks = $this->analyze($html, $finalUrl, $res);
         [$score, $grade] = $this->score($checks);
 
+        // 섹션별(온페이지 SEO / GEO·AEO) 서브점수
+        $catScores = [];
+        foreach (['seo', 'geo'] as $cat) {
+            $sub = array_values(array_filter($checks, fn ($ck) => ($ck['category'] ?? 'seo') === $cat));
+            if ($sub) {
+                [$s, $g] = $this->score($sub);
+                $catScores[$cat] = ['score' => $s, 'grade' => $g, 'count' => count($sub)];
+            }
+        }
+
         return [
             'ok' => true,
             'url' => $finalUrl,
             'score' => $score,
             'grade' => $grade,
+            'catScores' => $catScores,
             'fetch' => [
                 'status' => $status,
                 'https' => str_starts_with($finalUrl, 'https://'),
@@ -123,8 +134,9 @@ class OnPageAuditor
 
         $c = [];
         // by-reference 캡처(arrow fn은 값 복사라 push가 반영되지 않음)
-        $add = function ($key, $label, $status, $detail) use (&$c) {
-            $c[] = compact('key', 'label', 'status', 'detail');
+        // category: 'seo'(온페이지) | 'geo'(GEO·AEO, AI 답변 최적화)
+        $add = function ($key, $label, $status, $detail, $category = 'seo') use (&$c) {
+            $c[] = compact('key', 'label', 'status', 'detail', 'category');
         };
 
         // title
@@ -189,16 +201,114 @@ class OnPageAuditor
             $add('img-alt', '이미지 대체텍스트', $st, "{$total}개 중 {$missing}개 alt 누락.");
         }
 
-        // 구조화 데이터
-        $ld = $xp->query('//script[@type="application/ld+json"]');
-        $add('structured', '구조화 데이터', $ld->length > 0 ? 'pass' : 'warn',
-            $ld->length > 0 ? "JSON-LD {$ld->length}개 감지." : 'JSON-LD 구조화 데이터가 없습니다. 리치결과 기회 손실.');
-
         // HTTPS
         $add('https', 'HTTPS 보안', str_starts_with($url, 'https://') ? 'pass' : 'fail',
             str_starts_with($url, 'https://') ? 'HTTPS 사용.' : 'HTTP — 보안/순위에 불리.');
 
+        /* ============ GEO · AEO (AI 답변 최적화) ============ */
+
+        // 구조화 데이터(JSON-LD) 존재 — AI가 사실을 구조로 이해하는 1차 신호
+        $ld = $xp->query('//script[@type="application/ld+json"]');
+        $add('structured', '구조화 데이터(JSON-LD)', $ld->length > 0 ? 'pass' : 'fail',
+            $ld->length > 0 ? "JSON-LD {$ld->length}개 감지." : 'JSON-LD가 없습니다. AI가 사실을 구조로 읽지 못합니다.', 'geo');
+
+        // 스키마 타입 — FAQ/HowTo/Article 등 AI가 인용하기 좋은 타입인지
+        $types = [];
+        foreach ($ld as $node) {
+            $json = json_decode(trim($node->textContent), true);
+            if (! is_array($json)) continue;
+            $walk = function ($obj) use (&$types, &$walk) {
+                if (! is_array($obj)) return;
+                if (isset($obj['@type'])) {
+                    foreach ((array) $obj['@type'] as $t) if (is_string($t)) $types[] = $t;
+                }
+                foreach ($obj as $k => $v) {
+                    if (is_array($v)) $walk($v); // @graph·중첩·배열 모두 탐색
+                }
+            };
+            $walk($json);
+        }
+        $types = array_values(array_unique($types));
+        $aiTypes = array_values(array_intersect($types,
+            ['FAQPage', 'QAPage', 'HowTo', 'Article', 'NewsArticle', 'BlogPosting', 'Organization', 'Person', 'Product', 'Service', 'BreadcrumbList', 'WebSite']));
+        if ($aiTypes) $add('schema-types', '인용 가능 스키마 타입', 'pass', '감지: '.implode(', ', array_slice($aiTypes, 0, 6)).'.', 'geo');
+        elseif ($types) $add('schema-types', '인용 가능 스키마 타입', 'warn', 'JSON-LD는 있으나 FAQ·HowTo·Article 등 인용형 타입이 없습니다.', 'geo');
+        else $add('schema-types', '인용 가능 스키마 타입', 'warn', 'FAQPage·HowTo·Article 스키마가 없습니다. AI 답변 인용에 불리.', 'geo');
+
+        // 작성자·발행 신뢰 신호(E-E-A-T) — AI는 출처가 분명한 문서를 선호
+        $author = trim($xp->evaluate('string(//meta[@name="author"]/@content)'));
+        $published = trim($xp->evaluate('string(//meta[@property="article:published_time"]/@content)'));
+        $ldText = '';
+        foreach ($ld as $node) $ldText .= ' '.$node->textContent;
+        $ldHasAuthor = preg_match('/"author"\s*:/i', $ldText) === 1;
+        $ldHasDate = preg_match('/"datePublished"\s*:/i', $ldText) === 1;
+        $hasAuthor = $author !== '' || $ldHasAuthor;
+        $hasDate = $published !== '' || $ldHasDate;
+        if ($hasAuthor && $hasDate) $add('eeat', '작성자·발행 신뢰 신호', 'pass', '작성자와 발행일 정보가 있습니다.', 'geo');
+        elseif ($hasAuthor || $hasDate) $add('eeat', '작성자·발행 신뢰 신호', 'warn', ($hasAuthor ? '작성자' : '발행일').' 정보만 있습니다. 둘 다 있어야 신뢰도가 높습니다.', 'geo');
+        else $add('eeat', '작성자·발행 신뢰 신호', 'warn', '작성자·발행일 정보가 없습니다. AI 신뢰(E-E-A-T)에 불리.', 'geo');
+
+        // 질문형 헤딩·답변 구조 — Q&A 형식은 AI 답변 인용률이 높음
+        $heads = $xp->query('//h2 | //h3');
+        $qh = 0;
+        foreach ($heads as $h) {
+            $t = trim($h->textContent);
+            if ($t !== '' && (str_contains($t, '?') || str_contains($t, '？'))) $qh++;
+        }
+        $add('qa-format', '질문형 헤딩·답변 구조', $qh >= 1 ? 'pass' : 'warn',
+            $qh >= 1 ? "질문형 헤딩 {$qh}개 — 답변형 구조." : '질문형 헤딩이 없습니다. FAQ·Q&A 구조가 AI 인용에 유리.', 'geo');
+
+        // 본문 추출성 — AI가 인용할 실제 텍스트가 충분한지(SPA·이미지형은 불리)
+        $ptxt = '';
+        foreach ($xp->query('//body//p') as $p) $ptxt .= ' '.$p->textContent;
+        $plen = mb_strlen(trim(preg_replace('/\s+/u', ' ', $ptxt)));
+        if ($plen >= 600) $add('extractable', '본문 추출성', 'pass', "본문 텍스트 {$plen}자 — AI가 인용할 콘텐츠 충분.", 'geo');
+        elseif ($plen >= 200) $add('extractable', '본문 추출성', 'warn', "본문 텍스트 {$plen}자 — 다소 부족. 인용 가능한 문단을 늘리세요.", 'geo');
+        else $add('extractable', '본문 추출성', 'fail', "본문 텍스트 {$plen}자 — AI가 인용할 콘텐츠가 거의 없습니다(SPA·이미지형 의심).", 'geo');
+
+        // llms.txt — AI 크롤러 안내 파일(신규 관행)
+        $c[] = $this->checkLlmsTxt($url);
+
         return $c;
+    }
+
+    /**
+     * llms.txt 존재 점검. finalUrl의 origin/llms.txt 를 UrlGuard로 재검증+IP 고정해 가져온다.
+     * (같은 호스트지만 DNS 리바인딩 방지 위해 audit()과 동일한 방식 적용)
+     * @return array{key:string,label:string,status:string,detail:string,category:string}
+     */
+    private function checkLlmsTxt(string $finalUrl): array
+    {
+        $base = ['key' => 'llms-txt', 'label' => 'llms.txt (AI 크롤러 안내)', 'category' => 'geo'];
+        try {
+            $parts = parse_url($finalUrl);
+            if (! $parts || empty($parts['scheme']) || empty($parts['host'])) {
+                return $base + ['status' => 'warn', 'detail' => 'llms.txt 확인 불가.'];
+            }
+            $origin = $parts['scheme'].'://'.$parts['host'].(isset($parts['port']) ? ':'.$parts['port'] : '');
+            $target = $origin.'/llms.txt';
+
+            $v = $this->guard->validate($target);
+            if (! $v['ok']) {
+                return $base + ['status' => 'warn', 'detail' => 'llms.txt 확인 불가.'];
+            }
+            $port = str_starts_with($v['url'], 'https://') ? 443 : 80;
+            $res = Http::withHeaders(['User-Agent' => 'JcurveSEOBot/1.0 (+https://jcurve; on-page audit)'])
+                ->timeout(6)->connectTimeout(4)
+                ->withOptions([
+                    'allow_redirects' => false,
+                    'curl' => [CURLOPT_RESOLVE => ["{$v['host']}:{$port}:{$v['ip']}"]],
+                ])
+                ->get($v['url']);
+            $ct = strtolower($res->header('Content-Type') ?? '');
+            // 200 + (text/*) 여야 실제 파일로 인정. SPA는 없는 경로에도 200 HTML을 주므로 text/html은 제외.
+            if ($res->status() === 200 && ($ct === '' || str_contains($ct, 'text/plain') || str_contains($ct, 'markdown'))) {
+                return $base + ['status' => 'pass', 'detail' => 'llms.txt가 있습니다. AI 크롤러에 콘텐츠 구조를 안내합니다.'];
+            }
+            return $base + ['status' => 'warn', 'detail' => 'llms.txt가 없습니다. AI 크롤러 안내 파일 추가를 권장합니다.'];
+        } catch (\Throwable $e) {
+            return $base + ['status' => 'warn', 'detail' => 'llms.txt 확인 불가.'];
+        }
     }
 
     /** @return array{0:int,1:string} */

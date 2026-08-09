@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', '무료 SEO 진단 — URL 하나로 온페이지 점검 | 제이커브인터렉티브')
+@section('title', '무료 SEO · GEO·AEO 진단 — URL 하나로 온페이지 + AI 답변 최적화 점검 | 제이커브인터렉티브')
 @section('meta')
-    <meta name="description" content="주소만 넣으면 타이틀·메타·H1·모바일·구조화 데이터까지 온페이지 SEO를 즉석 점검합니다. 백링크·키워드 정밀 분석은 제이커브에 문의하세요.">
+    <meta name="description" content="주소만 넣으면 타이틀·메타·H1·모바일부터 구조화 데이터·스키마 타입·llms.txt·답변형 구조까지 SEO와 GEO·AEO(AI 답변 최적화)를 즉석 점검합니다. 무료.">
 @endsection
 
 @section('content')
@@ -10,10 +10,10 @@
         {{-- 히어로 + 입력 --}}
         <section class="landing__hero">
             <div class="landing__hero-inner">
-                <span class="landing__eyebrow">Free SEO Check</span>
-                <h1>주소 하나로, 지금 SEO 상태를 봅니다</h1>
-                <p class="landing__lead">타이틀·메타 설명·H1·모바일·구조화 데이터까지 온페이지 요소를 즉석 점검합니다.
-                   백링크·키워드 순위 같은 정밀 분석은 제이커브가 이어서 도와드립니다.</p>
+                <span class="landing__eyebrow">Free SEO · GEO·AEO Check</span>
+                <h1>주소 하나로, SEO와 AI 답변 최적화까지 봅니다</h1>
+                <p class="landing__lead">타이틀·메타·H1·모바일 같은 온페이지 SEO부터 구조화 데이터·스키마 타입·llms.txt·답변형 구조 같은
+                   GEO·AEO(AI 답변 최적화)까지 즉석 점검합니다. 백링크·키워드 정밀 분석은 제이커브가 이어서 도와드립니다.</p>
 
                 <form class="seocheck__form" method="GET" action="{{ route('seo.check') }}" role="search">
                     <input type="url" name="url" inputmode="url" autocomplete="url"
@@ -45,25 +45,55 @@
                                 <em>{{ $result['grade'] }}</em>
                             </div>
                             <div class="seocheck__scoremeta">
-                                <span class="landing__eyebrow">On-Page Result</span>
-                                <h2 class="landing__head">온페이지 SEO 점수</h2>
+                                <span class="landing__eyebrow">On-Page + AI Result</span>
+                                <h2 class="landing__head">SEO + GEO·AEO 종합 점수</h2>
                                 <p class="landing__lead" style="margin:0;word-break:break-all;">{{ $result['url'] }}</p>
+                                @if (! empty($result['catScores']))
+                                    <div class="seocheck__subscores">
+                                        @isset($result['catScores']['seo'])
+                                            <span class="seocheck__subscore seocheck__subscore--{{ strtolower($result['catScores']['seo']['grade']) }}">온페이지 SEO <strong>{{ $result['catScores']['seo']['score'] }}</strong></span>
+                                        @endisset
+                                        @isset($result['catScores']['geo'])
+                                            <span class="seocheck__subscore seocheck__subscore--{{ strtolower($result['catScores']['geo']['grade']) }}">GEO·AEO <strong>{{ $result['catScores']['geo']['score'] }}</strong></span>
+                                        @endisset
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
-                        <ul class="seocheck__list">
-                            @foreach ($result['checks'] as $ck)
-                                <li class="seocheck__item seocheck__item--{{ $ck['status'] }}">
-                                    <span class="seocheck__badge" aria-hidden="true">
-                                        @if ($ck['status'] === 'pass') ✓ @elseif ($ck['status'] === 'warn') ! @else × @endif
-                                    </span>
-                                    <div class="seocheck__itembody">
-                                        <strong>{{ $ck['label'] }}</strong>
-                                        <span>{{ $ck['detail'] }}</span>
-                                    </div>
-                                </li>
-                            @endforeach
-                        </ul>
+                        @php
+                            $groups = collect($result['checks'])->groupBy(fn ($ck) => $ck['category'] ?? 'seo');
+                            $sections = [
+                                'seo' => ['온페이지 SEO', '검색엔진이 페이지를 읽고 순위 매기는 기본 요소'],
+                                'geo' => ['GEO · AEO (AI 답변 최적화)', 'AI 검색·챗봇이 이 페이지를 인용하도록 만드는 요소'],
+                            ];
+                        @endphp
+                        @foreach ($sections as $cat => $meta)
+                            @if ($groups->has($cat))
+                                <div class="seocheck__group">
+                                    <h3 class="seocheck__grouptitle">
+                                        {{ $meta[0] }}
+                                        @isset($result['catScores'][$cat])
+                                            <span class="seocheck__grouptitle-score">{{ $result['catScores'][$cat]['score'] }}점</span>
+                                        @endisset
+                                    </h3>
+                                    <p class="seocheck__groupdesc">{{ $meta[1] }}</p>
+                                    <ul class="seocheck__list">
+                                        @foreach ($groups->get($cat) as $ck)
+                                            <li class="seocheck__item seocheck__item--{{ $ck['status'] }}">
+                                                <span class="seocheck__badge" aria-hidden="true">
+                                                    @if ($ck['status'] === 'pass') ✓ @elseif ($ck['status'] === 'warn') ! @else × @endif
+                                                </span>
+                                                <div class="seocheck__itembody">
+                                                    <strong>{{ $ck['label'] }}</strong>
+                                                    <span>{{ $ck['detail'] }}</span>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                 </section>
 

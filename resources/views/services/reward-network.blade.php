@@ -35,6 +35,7 @@
         <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
                 <div class="landing__hero-copy">
+                <div class="landing__hero-mark"><span class="icon3d icon3d--float"><img src="{{ asset('media/icons3d/reward.webp') }}" alt="리워드 네트워크" width="76" height="76" loading="eager"></span></div>
                 <span class="landing__eyebrow">Reward Network</span>
                 <h1>유저의 참여가<br>광고주의 액션과 매체의 수익이 되도록</h1>
                 <p class="landing__lead">설치 수만 늘리는 리워드가 아닙니다. 목표 액션, 보상, 유효 기준, 트래킹과 정산을 한 구조로 설계해 광고주·유저·매체가 오래 갈 수 있는 네트워크를 만듭니다.</p>

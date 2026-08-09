@@ -247,6 +247,20 @@
             </section>
         @endif
 
+        {{-- ============ S10a-2. 무료 SEO 진단 진입 [파치먼트] ============ --}}
+        <section class="home__seocheck" aria-labelledby="home-seocheck-title">
+            <div class="home__seocheck-inner">
+                <span class="landing__eyebrow">Free SEO Check</span>
+                <h2 id="home-seocheck-title">내 사이트, 지금 SEO 몇 점일까요?</h2>
+                <p class="section-sub" style="margin:0 auto 28px;">주소만 넣으면 타이틀·메타·모바일·구조화 데이터까지 온페이지 SEO를 즉석 점검합니다. 무료입니다.</p>
+                <form class="seocheck__form" method="GET" action="{{ route('seo.check') }}" role="search">
+                    <input type="url" name="url" inputmode="url" autocomplete="url"
+                           placeholder="https://내사이트.com" aria-label="분석할 웹사이트 주소" required>
+                    <button type="submit" class="btn-primary">무료로 진단 →</button>
+                </form>
+            </div>
+        </section>
+
         {{-- ============ S10b. 최종 CTA [다크 타일] — 페이지 클로징 앵커 ============ --}}
         <section class="home__cta has-orb" aria-labelledby="home-cta-title">
             <div class="home__cta-inner">

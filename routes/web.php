@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 use Spatie\Honeypot\ProtectAgainstSpam;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
+
+// 무료 SEO 인스턴트 진단 (온페이지 감사) — 남용 방지 rate limit
+Route::get('/seo-check', [\App\Http\Controllers\SeoCheckController::class, 'index'])
+    ->middleware('throttle:30,1')->name('seo.check');
+
 Route::get('/services', [PageController::class, 'services'])->name('services.index');
 // 구체적 경로를 {slug} 와일드카드보다 먼저 등록한다.
 Route::get('/services/marketing-support', [PageController::class, 'marketingSupport'])->name('services.marketing-support');

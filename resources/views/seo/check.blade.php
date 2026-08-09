@@ -58,6 +58,9 @@
                                         @endisset
                                     </div>
                                 @endif
+                                <div class="seocheck__actions">
+                                    <a class="btn-primary" href="{{ route('seo.check.pdf', ['url' => $result['url']]) }}">리포트 PDF 다운로드 ↓</a>
+                                </div>
                             </div>
                         </div>
 
@@ -96,6 +99,51 @@
                         @endforeach
                     </div>
                 </section>
+
+                {{-- 백링크 프로필 (지금은 샘플 데이터 — 유료 API 키 확보 시 실데이터로 교체) --}}
+                @isset($backlinks)
+                    <section class="landing__section landing__section--parchment" id="backlinks">
+                        <div class="landing__inner landing__inner--wide">
+                            <span class="landing__eyebrow">Backlink Profile</span>
+                            <h2 class="landing__head">
+                                백링크 프로필
+                                @if (! empty($backlinks['sample']))
+                                    <span class="seocheck__sample-badge">샘플 데이터</span>
+                                @endif
+                            </h2>
+                            @if (! empty($backlinks['sample']))
+                                <p class="landing__note" style="margin-top:-8px;">아래 수치는 레이아웃 확인용 <strong>예시</strong>입니다. 실제 백링크 데이터 연동(Ahrefs 등)은 준비 중입니다.</p>
+                            @endif
+
+                            <div class="seocheck__blstats">
+                                <div class="seocheck__blstat"><strong>{{ $backlinks['domain_rating'] }}</strong><span>도메인 등급 (DR)</span></div>
+                                <div class="seocheck__blstat"><strong>{{ number_format($backlinks['referring_domains']) }}</strong><span>참조 도메인</span></div>
+                                <div class="seocheck__blstat"><strong>{{ number_format($backlinks['total_backlinks']) }}</strong><span>전체 백링크</span></div>
+                                <div class="seocheck__blstat"><strong>{{ round($backlinks['dofollow_ratio'] * 100) }}%</strong><span>Dofollow 비율</span></div>
+                            </div>
+
+                            <h3 class="seocheck__grouptitle" style="margin-top:32px;">상위 백링크</h3>
+                            <div class="seocheck__bltable-wrap">
+                                <table class="seocheck__bltable">
+                                    <thead>
+                                        <tr><th scope="col">참조 페이지</th><th scope="col">DR</th><th scope="col">앵커 텍스트</th><th scope="col">유형</th><th scope="col">최초 발견</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($backlinks['top'] as $bl)
+                                            <tr>
+                                                <td class="seocheck__blurl">{{ $bl['domain'] }}<span>{{ \Illuminate\Support\Str::after($bl['url'], $bl['domain']) }}</span></td>
+                                                <td class="seocheck__bldr">{{ $bl['dr'] }}</td>
+                                                <td>{{ $bl['anchor'] }}</td>
+                                                <td><span class="seocheck__bltype seocheck__bltype--{{ $bl['type'] }}">{{ $bl['type'] }}</span></td>
+                                                <td>{{ $bl['first_seen'] }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                @endisset
 
                 {{-- 백링크·키워드: 유료 데이터 영역 → 리드 전환 (어댑터 연동 시 실데이터로 교체) --}}
                 <section class="landing__section landing__section--dark has-orb">

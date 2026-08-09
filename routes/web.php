@@ -17,6 +17,9 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 // 무료 SEO 인스턴트 진단 (온페이지 감사) — 남용 방지 rate limit
 Route::get('/seo-check', [\App\Http\Controllers\SeoCheckController::class, 'index'])
     ->middleware('throttle:30,1')->name('seo.check');
+// 리포트 PDF 다운로드 (dompdf) — PDF 렌더가 무거우니 더 타이트한 rate limit
+Route::get('/seo-check/report.pdf', [\App\Http\Controllers\SeoCheckController::class, 'pdf'])
+    ->middleware('throttle:10,1')->name('seo.check.pdf');
 
 Route::get('/services', [PageController::class, 'services'])->name('services.index');
 // 구체적 경로를 {slug} 와일드카드보다 먼저 등록한다.

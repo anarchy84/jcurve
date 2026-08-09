@@ -1664,6 +1664,36 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .seocheck__grouptitle-score { font-size: 14px; font-weight: 400; color: var(--text-muted); font-variant-numeric: tabular-nums; }
 .seocheck__groupdesc { font-size: 14px; color: var(--text-muted); margin: 0 0 16px; }
 
+/* PDF 버튼 액션 */
+.seocheck__actions { margin-top: 16px; }
+
+/* 샘플 데이터 배지 */
+.seocheck__sample-badge {
+    display: inline-block; vertical-align: middle; margin-left: 10px;
+    padding: 3px 10px; border-radius: 999px; font-size: 13px; font-weight: 600;
+    letter-spacing: -0.01em; color: #a06a00; background: rgba(208, 135, 0, 0.12);
+    border: 1px solid rgba(208, 135, 0, 0.4);
+}
+
+/* 백링크 요약 스탯 */
+.seocheck__blstats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 20px; }
+.seocheck__blstat { padding: 20px; background: var(--canvas); border: 1px solid var(--hairline); border-radius: 14px; text-align: center; }
+.seocheck__blstat strong { display: block; font-size: clamp(26px, 3vw, 36px); font-weight: 600; letter-spacing: -0.03em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.seocheck__blstat span { display: block; font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+
+/* 백링크 테이블 */
+.seocheck__bltable-wrap { overflow-x: auto; }
+.seocheck__bltable { width: 100%; border-collapse: collapse; font-size: 14px; }
+.seocheck__bltable th, .seocheck__bltable td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--hairline); vertical-align: top; }
+.seocheck__bltable th { font-size: 12px; letter-spacing: 0.04em; color: var(--text-muted); text-transform: uppercase; }
+.seocheck__blurl { min-width: 200px; color: var(--ink); font-weight: 500; }
+.seocheck__blurl span { display: block; font-size: 12px; color: var(--text-muted); font-weight: 400; word-break: break-all; }
+.seocheck__bldr { font-variant-numeric: tabular-nums; font-weight: 600; }
+.seocheck__bltype { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+.seocheck__bltype--dofollow { color: #1f7a45; background: rgba(31, 157, 85, 0.12); }
+.seocheck__bltype--nofollow { color: var(--text-muted); background: rgba(0, 0, 0, 0.05); }
+@media (max-width: 640px) { .seocheck__blstats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
 /* 체크 리스트 */
 .seocheck__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .seocheck__item {

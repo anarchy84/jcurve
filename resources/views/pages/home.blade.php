@@ -5,7 +5,7 @@
 @section('content')
     <main class="home">
 
-        {{-- ============ S1. 히어로 [다크·검정] — 풀스크린 비디오 + 스크롤 줌 ============ --}}
+        {{-- ============ S1. 히어로 [다크·검정] — 풀스크린 비디오 + 스크롤 줌 (변경 금지 영역) ============ --}}
         <section class="home__hero">
             <div class="home__hero-media" data-hero-zoom aria-hidden="true">
                 {{-- 풀사이즈 히어로 동영상 슬롯: public/media/hero.mp4 + hero-poster.jpg 를 넣으면 자동 재생.
@@ -30,7 +30,7 @@
                 </div>
             </div>
 
-            <a class="home__hero-scroll" href="#home-trust" aria-label="아래로 스크롤">
+            <a class="home__hero-scroll" href="#home-stats" aria-label="아래로 스크롤">
                 <span></span>
             </a>
         </section>
@@ -52,102 +52,142 @@
             <p class="home__trust-proof">2026년 기준 누적 집행 광고비 373억원 · 진행 캠페인 15,700건</p>
         </section>
 
-        {{-- ============ S3. 통계 [다크 타일] — 4대 숫자 (강세) ============ --}}
-        <section class="home__stats has-orb" aria-label="핵심 성과 지표">
+        {{-- ============ S3. 핵심 지표 [다크] — 3D 아이콘 스탯 카드 (버즈빌형) ============ --}}
+        <section class="home__stats has-orb" id="home-stats" aria-label="핵심 성과 지표">
+            @include('partials.section-mesh', ['k' => 'stats'])
+            <div class="home__stats-head">
+                <span class="section-eyebrow">BY THE NUMBERS</span>
+                <h2>숫자가 먼저 말합니다</h2>
+                <p class="section-sub section-sub--dark">감이 아니라 누적 데이터로 증명합니다. 2026년 기준.</p>
+            </div>
+            @php($stats = [
+                ['icon' => 'performance', 'to' => '373', 'suffix' => '억+', 'label' => '누적 집행 광고비', 'note' => '실집행 미디어 스펜드'],
+                ['icon' => 'leadbay', 'to' => '128', 'suffix' => '만+', 'label' => '누적 수집 DB', 'note' => '성과형·리드 캠페인 합산'],
+                ['icon' => 'cpa', 'to' => '15700', 'suffix' => '+', 'comma' => '1', 'label' => '진행 캠페인', 'note' => '누적 집행 건수'],
+                ['icon' => 'rankfree', 'to' => '5.06', 'suffix' => '만', 'decimals' => '2', 'label' => '아나키 채널 구독자', 'note' => '자체 유튜브 채널'],
+            ])
             <div class="home__stats-inner">
-                <div class="stat glass-card">
-                    <strong data-count-to="373" data-count-suffix="억+">373억+</strong>
-                    <span>누적 집행 광고비</span>
-                </div>
-                <div class="stat glass-card">
-                    <strong data-count-to="128" data-count-suffix="만+">128만+</strong>
-                    <span>누적 수집 DB</span>
-                </div>
-                <div class="stat glass-card">
-                    <strong data-count-to="15700" data-count-suffix="+" data-count-comma="1">15,700+</strong>
-                    <span>진행 캠페인</span>
-                </div>
-                <div class="stat glass-card">
-                    <strong data-count-to="5.06" data-count-suffix="만" data-count-decimals="2">5.06만</strong>
-                    <span>아나키 채널 구독자</span>
-                </div>
-            </div>
-        </section>
-
-        {{-- ============ S4. 사업영역 인트로 [라이트] ============ --}}
-        <section class="home__intro" aria-labelledby="home-intro-title">
-            <h2 id="home-intro-title">하나의 팀, 아홉 개의 전문 영역</h2>
-            <p class="section-sub">유입부터 전환, 데이터 분석까지 — 흩어진 대행사 대신
-               한 팀에서 통합 운영합니다. 매체·데이터·개발이 한자리에 있습니다.</p>
-        </section>
-
-        {{-- ============ S5. 핵심영역 타일 ×3 [라이트↔다크 교차] ============ --}}
-        <section class="home__pillars" aria-label="핵심 사업 영역">
-            {{-- 5-1 퍼포먼스 마케팅 [라이트] --}}
-            <article class="pillar pillar--light">
-                <div class="pillar__body">
-                    <span class="pillar__label">PERFORMANCE</span>
-                    <h3 class="pillar__title">쓴 만큼이 아니라, 번 만큼 말합니다</h3>
-                    <p class="pillar__sub">ROAS·CPA·전환을 기준으로 매체를 운용합니다.
-                       감이 아니라 데이터로 예산을 배분합니다.</p>
-                    <a class="pillar__cta" href="{{ route('services.show', ['slug' => 'performance-marketing']) }}">퍼포먼스 마케팅 →</a>
-                </div>
-                <div class="pillar__media pillar__media--fill" aria-hidden="true">
-                    <img src="{{ asset('media/scenes/pillar_performance.webp') }}" alt="" loading="lazy" width="1400" height="1050">
-                </div>
-            </article>
-
-            {{-- 5-2 CPA · 리워드 네트워크 [다크] --}}
-            <article class="pillar pillar--dark">
-                <div class="pillar__body">
-                    <span class="pillar__label">CPA · REWARD</span>
-                    <h3 class="pillar__title">성과가 나온 만큼만 비용이 발생합니다</h3>
-                    <p class="pillar__sub">CPA 성과형 광고와 리워드 네트워크 운영.
-                       앱 설치·회원가입·구매까지, 액션 단위로 과금합니다.</p>
-                    <div class="pillar__ctas">
-                        <a class="pillar__cta" href="{{ route('services.show', ['slug' => 'cpa-marketing']) }}">CPA 마케팅 →</a>
-                        <a class="pillar__cta" href="{{ route('services.show', ['slug' => 'reward-network']) }}">리워드 네트워크 →</a>
+                @foreach ($stats as $s)
+                    <div class="statcard glass-card">
+                        <span class="icon3d statcard__icon icon3d--float">
+                            <img src="{{ asset('media/icons3d/' . $s['icon'] . '.webp') }}" alt="" loading="lazy" width="128" height="128">
+                        </span>
+                        <strong data-count-to="{{ $s['to'] }}" data-count-suffix="{{ $s['suffix'] }}"
+                            @isset($s['decimals']) data-count-decimals="{{ $s['decimals'] }}" @endisset
+                            @isset($s['comma']) data-count-comma="1" @endisset>{{ isset($s['comma']) ? number_format((int) $s['to']) . $s['suffix'] : $s['to'] . $s['suffix'] }}</strong>
+                        <span class="statcard__label">{{ $s['label'] }}</span>
+                        <span class="statcard__note">{{ $s['note'] }}</span>
                     </div>
-                </div>
-                <div class="pillar__media pillar__media--fill" aria-hidden="true">
-                    <img src="{{ asset('media/scenes/pillar_cparewards.webp') }}" alt="" loading="lazy" width="1400" height="1050">
-                </div>
-            </article>
-
-            {{-- 5-3 SEO · AEO · GEO [라이트] --}}
-            <article class="pillar pillar--light">
-                <div class="pillar__body">
-                    <span class="pillar__label">SEARCH · AI</span>
-                    <h3 class="pillar__title">검색을 넘어, AI 답변에 노출됩니다</h3>
-                    <p class="pillar__sub">구글·네이버 상위노출(SEO)부터 AI 검색 최적화(AEO·GEO)까지.
-                       이 사이트 자체가 저희의 포트폴리오입니다.</p>
-                    <a class="pillar__cta" href="{{ route('services.show', ['slug' => 'seo']) }}">SEO · AEO · GEO →</a>
-                </div>
-                <div class="pillar__media pillar__media--fill" aria-hidden="true">
-                    <img src="{{ asset('media/scenes/pillar_search.webp') }}" alt="" loading="lazy" width="1400" height="1050">
-                </div>
-            </article>
-        </section>
-
-        {{-- ============ S6. 나머지 영역 + 허브 [파치먼트] ============ --}}
-        <section class="home__more" aria-labelledby="home-more-title">
-            <h3 class="home__more-title" id="home-more-title">그 외 전문 영역</h3>
-            <div class="home__more-grid">
-                <a class="home__more-card" href="{{ route('services.show', ['slug' => 'wordpress']) }}">
-                    <strong>워드프레스 대행</strong>
-                    <span>제작부터 SEO·유지보수까지</span>
-                </a>
-                <a class="home__more-card" href="{{ route('services.index') }}">
-                    <strong>전체 서비스 보기 →</strong>
-                    <span>9개 전문 영역 한눈에</span>
-                </a>
+                @endforeach
             </div>
         </section>
 
-        {{-- ============ S7. 자체 솔루션 [다크 타일] — 최대 차별점 ============ --}}
+        {{-- ============ S4. 목표 필터 [라이트] — Alpine 인터랙티브 (버즈빌 "목표가 무엇인가요?") ============ --}}
+        @php($goalPills = [
+            'all' => '전체',
+            'brand' => '브랜드 알리기',
+            'lead' => '잠재고객 확보',
+            'convert' => '전환 극대화',
+            'search' => '검색·AI 노출',
+            'build' => '채널·제작',
+        ])
+        @php($goalCards = [
+            ['slug' => 'performance-marketing', 'route' => ['services.show', ['slug' => 'performance-marketing']], 'eyebrow' => 'ROAS로 증명하는', 'title' => '퍼포먼스 마케팅', 'desc' => 'ROAS·CPA·전환 기준으로 매체를 운용합니다. 감이 아니라 데이터로 예산을 배분합니다.', 'img' => 'performance', 'goals' => ['brand', 'convert']],
+            ['slug' => 'cpa-marketing', 'route' => ['services.show', ['slug' => 'cpa-marketing']], 'eyebrow' => '액션당 과금하는', 'title' => 'CPA 마케팅', 'desc' => '앱 설치·회원가입·구매까지, 성과가 나온 액션 단위로만 과금합니다.', 'img' => 'cpa', 'goals' => ['lead', 'convert']],
+            ['slug' => 'reward-network', 'route' => ['services.show', ['slug' => 'reward-network']], 'eyebrow' => '대량 유입을 만드는', 'title' => '리워드 네트워크', 'desc' => '리워드 매체 네트워크로 잠재고객을 대규모로 확보합니다.', 'img' => 'reward', 'goals' => ['lead']],
+            ['slug' => 'seo', 'route' => ['services.show', ['slug' => 'seo']], 'eyebrow' => '검색을 넘어 AI 답변까지', 'title' => 'SEO · AEO · GEO', 'desc' => '구글·네이버 상위노출부터 AI 검색 최적화까지. 이 사이트가 곧 포트폴리오입니다.', 'img' => 'seo', 'goals' => ['brand', 'search']],
+            ['slug' => 'wordpress', 'route' => ['services.show', ['slug' => 'wordpress']], 'eyebrow' => '제작부터 운영까지', 'title' => '워드프레스 대행', 'desc' => '사이트 제작부터 SEO·유지보수까지 한 팀에서 끝냅니다.', 'img' => 'wordpress', 'goals' => ['search', 'build']],
+        ])
+        <section class="home__goals" aria-labelledby="home-goals-title" x-data="{ goal: 'all' }">
+            <div class="home__goals-head">
+                <span class="section-eyebrow">WHAT'S YOUR GOAL?</span>
+                <h2 id="home-goals-title">지금, 목표가 무엇인가요?</h2>
+                <p class="section-sub">목표를 고르면 딱 맞는 방식을 보여드립니다. 흩어진 대행사 대신 한 팀에서 통합 운영합니다.</p>
+            </div>
+
+            <div class="goalfilter" role="tablist" aria-label="마케팅 목표 필터">
+                @foreach ($goalPills as $key => $label)
+                    <button type="button" class="pill" role="tab"
+                            :class="{ 'is-active': goal === '{{ $key }}' }"
+                            :aria-selected="goal === '{{ $key }}' ? 'true' : 'false'"
+                            @click="goal = '{{ $key }}'">{{ $label }}</button>
+                @endforeach
+            </div>
+
+            <div class="home__goals-grid">
+                @foreach ($goalCards as $c)
+                    <a class="goalcard" href="{{ route($c['route'][0], $c['route'][1]) }}"
+                       data-goals="{{ implode('|', $c['goals']) }}"
+                       x-show="goal === 'all' || '{{ implode('|', $c['goals']) }}'.split('|').includes(goal)"
+                       x-transition.opacity>
+                        <span class="goalcard__eyebrow">{{ $c['eyebrow'] }}</span>
+                        <span class="goalcard__title">{{ $c['title'] }} <span aria-hidden="true">→</span></span>
+                        <span class="goalcard__media">
+                            <img src="{{ asset('media/scenes/' . $c['img'] . '.webp') }}" alt="" loading="lazy" width="1400" height="1050">
+                        </span>
+                        <span class="goalcard__desc">{{ $c['desc'] }}</span>
+                    </a>
+                @endforeach
+            </div>
+        </section>
+
+        {{-- ============ S5. 차별점 벤토 [다크] — "대행 넘어 도구까지" (버즈빌 인터랙션 AI 벤토) ============ --}}
+        <section class="home__bento has-orb" aria-labelledby="home-bento-title">
+            @include('partials.section-mesh', ['k' => 'bento'])
+            <div class="home__bento-head">
+                <span class="section-eyebrow">WHY J-CURVE</span>
+                <h2 id="home-bento-title">광고에서 끝나지 않습니다.<br>데이터와 도구까지 직접 만듭니다.</h2>
+            </div>
+            <div class="home__bento-grid">
+                {{-- 큰 타일: 통합 운영 + 씬 이미지 --}}
+                <article class="bento bento--wide glass-card">
+                    <div class="bento__body">
+                        <h3 class="bento__title">흩어진 대행사 대신,<br>한 팀에서 통합 운영</h3>
+                        <p class="bento__text">매체·데이터·개발이 한자리에 있습니다. 유입부터 전환, 분석까지 끊김 없이 이어집니다.</p>
+                        <a class="bento__cta" href="{{ route('services.index') }}">9개 전문 영역 보기 →</a>
+                    </div>
+                    <div class="bento__media" aria-hidden="true">
+                        <img src="{{ asset('media/scenes/pillar_search.webp') }}" alt="" loading="lazy" width="1400" height="1050">
+                    </div>
+                </article>
+
+                {{-- 스탯 타일 --}}
+                <article class="bento bento--stat glass-card">
+                    <strong class="bento__stat" data-count-to="128" data-count-suffix="만+">128만+</strong>
+                    <span class="bento__stat-label">누적 수집 DB</span>
+                    <p class="bento__text">캠페인은 끝나도 데이터는 남습니다.</p>
+                </article>
+
+                {{-- 자체 솔루션 타일 --}}
+                <article class="bento bento--accent glass-card">
+                    <span class="icon3d bento__icon"><img src="{{ asset('media/icons3d/rankfree.webp') }}" alt="" loading="lazy" width="96" height="96"></span>
+                    <h3 class="bento__title bento__title--sm">도구까지 직접 개발</h3>
+                    <p class="bento__text">남의 툴을 빌리지 않습니다. 현장에서 필요한 솔루션 4종을 자체 운영합니다.</p>
+                    <a class="bento__cta" href="{{ route('solutions.index') }}">자체 솔루션 →</a>
+                </article>
+
+                {{-- 스탯 타일 --}}
+                <article class="bento bento--stat glass-card">
+                    <strong class="bento__stat" data-count-to="15700" data-count-suffix="+" data-count-comma="1">15,700+</strong>
+                    <span class="bento__stat-label">진행 캠페인</span>
+                    <p class="bento__text">373억+ 광고비를 실제로 태워봤습니다.</p>
+                </article>
+
+                {{-- 검색 증명 타일 --}}
+                <article class="bento bento--proof glass-card">
+                    <span class="icon3d bento__icon"><img src="{{ asset('media/icons3d/seo.webp') }}" alt="" loading="lazy" width="96" height="96"></span>
+                    <h3 class="bento__title bento__title--sm">이 사이트가 증거입니다</h3>
+                    <p class="bento__text">지금 이 화면도 저희가 직접 검색 상위에 올린 결과입니다. SEO 실력을 자기 사이트로 증명합니다.</p>
+                    <a class="bento__cta" href="{{ route('services.show', ['slug' => 'seo']) }}">SEO · AEO · GEO →</a>
+                </article>
+            </div>
+        </section>
+
+        {{-- ============ S6. 자체 솔루션 [다크 타일] — 최대 차별점 ============ --}}
         <section class="home__solutions has-orb" aria-labelledby="home-solutions-title">
+            @include('partials.section-mesh', ['k' => 'sol'])
             <div class="home__solutions-inner">
-                <span class="pillar__label">OUR PRODUCTS</span>
+                <span class="section-eyebrow">OUR PRODUCTS</span>
                 <h2 id="home-solutions-title">우리는 도구까지 직접 만듭니다</h2>
                 {{-- 03_솔루션.md 상호링크 규칙: 홈 S7 = 자체 솔루션 4종. 리드 톤도 4종(데이터+CRM) 반영 --}}
                 <p class="home__solutions-sub">남의 툴을 빌려 쓰지 않습니다. 마케팅 데이터부터 보험 세일즈 CRM까지,
@@ -181,12 +221,18 @@
             </div>
         </section>
 
-        {{-- ============ S8. 대표 성과 [라이트] — 데이터 없으면 섹션 숨김 ============ --}}
+        {{-- ============ S7. 대표 성과 [라이트] — 캐러셀 (버즈빌 브랜드 성장). 데이터 없으면 숨김 ============ --}}
         @if ($works->isNotEmpty())
             <section class="home__works" aria-labelledby="home-works-title">
-                <h2 id="home-works-title">숫자로 남은 결과들</h2>
-                <p class="section-sub">캠페인은 끝나도 데이터는 남습니다. 대표 사례 몇 가지입니다.</p>
-                <div class="home__works-grid">
+                <div class="home__works-head">
+                    <div>
+                        <span class="section-eyebrow">CASE STUDIES</span>
+                        <h2 id="home-works-title">함께 만든 브랜드의 성장</h2>
+                        <p class="section-sub">캠페인은 끝나도 데이터는 남습니다. 대표 사례 몇 가지입니다.</p>
+                    </div>
+                    <a class="btn-ghost home__works-headcta" href="{{ route('work.index') }}">전체 성과 보기 →</a>
+                </div>
+                <div class="home__works-rail">
                     @foreach ($works as $work)
                         <a class="work-preview" href="{{ route('work.show', ['work' => $work->slug]) }}">
                             <div class="work-preview__thumb" aria-hidden="true">
@@ -206,23 +252,13 @@
                         </a>
                     @endforeach
                 </div>
-                <div class="home__works-cta">
-                    <a class="btn-ghost" href="{{ route('work.index') }}">전체 성과 보기 →</a>
-                </div>
             </section>
         @endif
 
-        {{-- ============ S9. 아나키 밴드 [파치먼트] — 은은하게 ============ --}}
-        <section class="home__anarchy" aria-label="아나키 유튜브 채널">
-            {{-- [검증 V4] 홈에서는 직함 미표기(임원 신분·개인 브랜드 충돌 회피). 직함 확정 시 "총괄이사가 운영하는"으로 --}}
-            <p class="home__anarchy-text">제이커브가 함께하는 유튜브 채널 ‘아나키’ —
-               마케팅 현장의 이야기를 콘텐츠로 풉니다. <span>(구독 5.06만)</span></p>
-            <a class="home__anarchy-link" href="{{ route('company') }}#anarchy">채널 보기 →</a>
-        </section>
-
-        {{-- ============ S10a. 인사이트 프리뷰 [라이트] — 없으면 섹션 숨김 ============ --}}
+        {{-- ============ S8. 인사이트 프리뷰 [라이트] — 없으면 섹션 숨김 ============ --}}
         @if ($insights->isNotEmpty())
             <section class="home__insights" aria-labelledby="home-insights-title">
+                <span class="section-eyebrow">INSIGHTS</span>
                 <h2 id="home-insights-title">마케팅, 계속 공부합니다</h2>
                 <p class="section-sub">현장에서 검증한 것만 글로 남깁니다.</p>
                 <div class="home__insights-grid">
@@ -247,10 +283,18 @@
             </section>
         @endif
 
-        {{-- ============ S10a-2. 무료 SEO 진단 진입 [파치먼트] ============ --}}
+        {{-- ============ S9. 아나키 밴드 [파치먼트] — 은은하게 ============ --}}
+        <section class="home__anarchy" aria-label="아나키 유튜브 채널">
+            {{-- [검증 V4] 홈에서는 직함 미표기(임원 신분·개인 브랜드 충돌 회피). 직함 확정 시 "총괄이사가 운영하는"으로 --}}
+            <p class="home__anarchy-text">제이커브가 함께하는 유튜브 채널 ‘아나키’ —
+               마케팅 현장의 이야기를 콘텐츠로 풉니다. <span>(구독 5.06만)</span></p>
+            <a class="home__anarchy-link" href="{{ route('company') }}#anarchy">채널 보기 →</a>
+        </section>
+
+        {{-- ============ S10. 무료 SEO 진단 진입 [파치먼트] ============ --}}
         <section class="home__seocheck" aria-labelledby="home-seocheck-title">
             <div class="home__seocheck-inner">
-                <span class="landing__eyebrow">Free SEO Check</span>
+                <span class="section-eyebrow">FREE SEO CHECK</span>
                 <h2 id="home-seocheck-title">내 사이트, 지금 SEO 몇 점일까요?</h2>
                 <p class="section-sub" style="margin:0 auto 28px;">주소만 넣으면 타이틀·메타·모바일·구조화 데이터까지 온페이지 SEO를 즉석 점검합니다. 무료입니다.</p>
                 <form class="seocheck__form" method="GET" action="{{ route('seo.check') }}" role="search">
@@ -261,8 +305,9 @@
             </div>
         </section>
 
-        {{-- ============ S10b. 최종 CTA [다크 타일] — 페이지 클로징 앵커 ============ --}}
+        {{-- ============ S11. 최종 CTA [다크 타일] — 페이지 클로징 앵커 ============ --}}
         <section class="home__cta has-orb" aria-labelledby="home-cta-title">
+            @include('partials.section-mesh', ['k' => 'cta'])
             <div class="home__cta-inner">
                 <h2 id="home-cta-title">숫자로 증명할 준비가 되어 있습니다</h2>
                 {{-- [검증 V3] "첫 상담 무료" 삭제(대웅 미확정 — 단정 시 고객이 근거 요구). 확인 후 복원 가능 --}}

@@ -1,0 +1,5 @@
+# dompdf 폰트 캐시는 런타임에 소스 TTF로부터 재생성된다. 소스 TTF만 추적.
+*
+!.gitignore
+!Pretendard-Regular.ttf
+!Pretendard-Bold.ttf

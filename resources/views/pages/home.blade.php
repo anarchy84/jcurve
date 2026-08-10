@@ -123,7 +123,7 @@
                         <span class="goalcard__eyebrow">{{ $c['eyebrow'] }}</span>
                         <span class="goalcard__title">{{ $c['title'] }} <span aria-hidden="true">→</span></span>
                         <span class="goalcard__media">
-                            <img src="{{ asset('media/scenes/' . $c['img'] . '.webp') }}" alt="" loading="lazy" width="1400" height="1050">
+                            @include('partials.scene', ['name' => $c['img']])
                         </span>
                         <span class="goalcard__desc">{{ $c['desc'] }}</span>
                     </a>
@@ -147,7 +147,7 @@
                         <a class="bento__cta" href="{{ route('services.index') }}">9개 전문 영역 보기 →</a>
                     </div>
                     <div class="bento__media" aria-hidden="true">
-                        <img src="{{ asset('media/scenes/pillar_search.webp') }}" alt="" loading="lazy" width="1400" height="1050">
+                        @include('partials.scene', ['name' => 'pillar_search'])
                     </div>
                 </article>
 

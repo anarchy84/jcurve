@@ -22,7 +22,7 @@
                 </div>
                 <p class="landing__note">AI 분석은 상담 검토를 돕는 보조 정보입니다. 분석 결과의 정확도나 영업 성과를 보장하지 않으며 최종 평가는 사람이 원자료와 맥락을 함께 확인해야 합니다.</p>
                 </div>
-                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/call2sale.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
+                <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'call2sale'])</figure>
             </div>
         </section>
 

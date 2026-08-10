@@ -52,7 +52,7 @@
                     <a class="btn-ghost" href="{{ route('contact', ['service_interest' => 'reward-publisher', 'message' => '앱 리워드 매체 제휴를 문의합니다. 서비스와 이용자, 희망 지면을 상담하고 싶습니다.']) }}">앱 매체 제휴 문의</a>
                 </div>
                 </div>
-                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/reward.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
+                <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'reward'])</figure>
             </div>
         </section>
 

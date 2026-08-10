@@ -22,7 +22,7 @@
                 </div>
                 <p class="landing__note">품질 점수와 업체 정보는 비교를 돕는 서비스 내 정보이며 개별 DB의 적법성, 상담 연결, 계약 체결 또는 영업 성과를 보장하지 않습니다.</p>
                 </div>
-                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/leadbay.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
+                <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'leadbay'])</figure>
             </div>
         </section>
 

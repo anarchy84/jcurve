@@ -53,7 +53,7 @@
                     <a class="btn-primary" href="{{ route('contact') }}">CPA 가능 여부 상담</a>
                 </div>
                 </div>
-                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/cpa.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
+                <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'cpa'])</figure>
             </div>
         </section>
 

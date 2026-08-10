@@ -21,7 +21,7 @@
                     <a class="btn-ghost" href="#policy">구매 전 확인사항</a>
                 </div>
                 </div>
-                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/boostingshop.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
+                <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'boostingshop'])</figure>
             </div>
         </section>
 

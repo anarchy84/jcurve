@@ -53,7 +53,7 @@
                     <a class="btn-primary" href="{{ route('contact') }}">SEO 진단 요청</a>
                 </div>
                 </div>
-                <figure class="landing__hero-figure"><img src="{{ asset('media/scenes/seo.webp') }}" alt="" width="1000" height="750" loading="eager"></figure>
+                <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'seo'])</figure>
             </div>
         </section>
 

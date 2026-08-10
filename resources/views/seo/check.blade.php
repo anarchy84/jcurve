@@ -2,7 +2,7 @@
 
 @section('title', '무료 SEO · GEO·AEO 진단 — URL 하나로 온페이지 + AI 답변 최적화 점검 | 제이커브인터렉티브')
 @section('meta')
-    <meta name="description" content="주소만 넣으면 타이틀·메타·H1·모바일부터 구조화 데이터·스키마 타입·llms.txt·답변형 구조까지 SEO와 GEO·AEO(AI 답변 최적화)를 즉석 점검합니다. 무료.">
+    <meta name="description" content="주소만 넣으면 타이틀·메타·H1·모바일부터 구조화 데이터·스키마 타입·답변형 구조까지 SEO와 GEO·AEO(AI 답변 최적화)를 즉석 점검합니다. 무료.">
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
             <div class="landing__hero-inner">
                 <span class="landing__eyebrow">Free SEO · GEO·AEO Check</span>
                 <h1>주소 하나로, SEO와 AI 답변 최적화까지 봅니다</h1>
-                <p class="landing__lead">타이틀·메타·H1·모바일 같은 온페이지 SEO부터 구조화 데이터·스키마 타입·llms.txt·답변형 구조 같은
+                <p class="landing__lead">타이틀·메타·H1·모바일 같은 온페이지 SEO부터 구조화 데이터·스키마 타입·답변형 구조 같은
                    GEO·AEO(AI 답변 최적화)까지 즉석 점검합니다. 백링크·키워드 정밀 분석은 제이커브가 이어서 도와드립니다.</p>
 
                 <form class="seocheck__form" method="GET" action="{{ route('seo.check') }}" role="search">

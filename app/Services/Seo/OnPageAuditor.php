@@ -266,49 +266,7 @@ class OnPageAuditor
         elseif ($plen >= 200) $add('extractable', '본문 추출성', 'warn', "본문 텍스트 {$plen}자 — 다소 부족. 인용 가능한 문단을 늘리세요.", 'geo');
         else $add('extractable', '본문 추출성', 'fail', "본문 텍스트 {$plen}자 — AI가 인용할 콘텐츠가 거의 없습니다(SPA·이미지형 의심).", 'geo');
 
-        // llms.txt — AI 크롤러 안내 파일(신규 관행)
-        $c[] = $this->checkLlmsTxt($url);
-
         return $c;
-    }
-
-    /**
-     * llms.txt 존재 점검. finalUrl의 origin/llms.txt 를 UrlGuard로 재검증+IP 고정해 가져온다.
-     * (같은 호스트지만 DNS 리바인딩 방지 위해 audit()과 동일한 방식 적용)
-     * @return array{key:string,label:string,status:string,detail:string,category:string}
-     */
-    private function checkLlmsTxt(string $finalUrl): array
-    {
-        $base = ['key' => 'llms-txt', 'label' => 'llms.txt (AI 크롤러 안내)', 'category' => 'geo'];
-        try {
-            $parts = parse_url($finalUrl);
-            if (! $parts || empty($parts['scheme']) || empty($parts['host'])) {
-                return $base + ['status' => 'warn', 'detail' => 'llms.txt 확인 불가.'];
-            }
-            $origin = $parts['scheme'].'://'.$parts['host'].(isset($parts['port']) ? ':'.$parts['port'] : '');
-            $target = $origin.'/llms.txt';
-
-            $v = $this->guard->validate($target);
-            if (! $v['ok']) {
-                return $base + ['status' => 'warn', 'detail' => 'llms.txt 확인 불가.'];
-            }
-            $port = str_starts_with($v['url'], 'https://') ? 443 : 80;
-            $res = Http::withHeaders(['User-Agent' => 'JcurveSEOBot/1.0 (+https://jcurve; on-page audit)'])
-                ->timeout(6)->connectTimeout(4)
-                ->withOptions([
-                    'allow_redirects' => false,
-                    'curl' => [CURLOPT_RESOLVE => ["{$v['host']}:{$port}:{$v['ip']}"]],
-                ])
-                ->get($v['url']);
-            $ct = strtolower($res->header('Content-Type') ?? '');
-            // 200 + (text/*) 여야 실제 파일로 인정. SPA는 없는 경로에도 200 HTML을 주므로 text/html은 제외.
-            if ($res->status() === 200 && ($ct === '' || str_contains($ct, 'text/plain') || str_contains($ct, 'markdown'))) {
-                return $base + ['status' => 'pass', 'detail' => 'llms.txt가 있습니다. AI 크롤러에 콘텐츠 구조를 안내합니다.'];
-            }
-            return $base + ['status' => 'warn', 'detail' => 'llms.txt가 없습니다. AI 크롤러 안내 파일 추가를 권장합니다.'];
-        } catch (\Throwable $e) {
-            return $base + ['status' => 'warn', 'detail' => 'llms.txt 확인 불가.'];
-        }
     }
 
     /** @return array{0:int,1:string} */

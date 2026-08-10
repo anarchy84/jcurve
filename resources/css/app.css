@@ -1336,7 +1336,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     border-radius: 12px;
     max-width: 780px;
 }
-.landing__section--dark .landing__note { color: var(--muted-on-dark); background: var(--glass-fill); border-color: var(--glass-border); }
+.landing__section--dark .landing__note { color: #c7c7cc; background: var(--glass-fill); border-color: var(--glass-border); }
 
 /* 방법 포인트 — 다크 위 글래스 카드 그리드 */
 .landing__points { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
@@ -1376,6 +1376,10 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .landing__evidence { list-style: none; padding: 0; margin: 32px 0 0; display: flex; flex-direction: column; gap: 16px; }
 .landing__evidence li { position: relative; padding-left: 28px; font-size: 17px; line-height: 1.5; color: var(--ink); max-width: 780px; }
 .landing__evidence li::before { content: ""; position: absolute; left: 4px; top: 9px; width: 8px; height: 8px; border-radius: 999px; background: var(--primary); }
+/* PLANS 등 다크 섹션: evidence 기본색이 --ink(거의 검정)이라 다크 배경에서 안 보이던 문제 → 밝게 */
+.landing__section--dark .landing__evidence li { color: var(--muted-on-dark); }
+.landing__section--dark .landing__evidence li strong { color: var(--on-dark); }
+.landing__section--dark .landing__evidence li::before { background: var(--primary-on-dark); }
 
 /* 하위 영역 카드 그리드 */
 .subcards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; margin-top: 32px; }

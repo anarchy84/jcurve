@@ -23,9 +23,11 @@
 
 | 이름 | 값 |
 |---|---|
-| `DEV_SSH_KEY` | jcdev SSH **개인키 전체**(암호zip으로 받은 `%USERPROFILE%\.ssh\jcdev` 내용, `-----BEGIN … END-----` 포함) |
+| `DEV_SSH_KEY` | jcdev SSH **개인키 전체**(받은 `~/.ssh/jcdev` 내용, `-----BEGIN … END-----` 포함) |
+| `DEV_SSH_PASSPHRASE` | 그 키의 **passphrase**(접속 시 물어보는 키 암호). 키에 암호가 없으면 등록 안 해도 됨 |
 
-> 개인키에 passphrase가 걸려 있으면 GitHub Actions에서 못 푼다. passphrase 없는 키를 쓰거나, passphrase 없는 배포 전용 키를 별도로 만들어 등록한다.
+> 받은 키에 passphrase가 걸려 있어서, appleboy 액션이 그 암호로 키를 풀도록 `DEV_SSH_PASSPHRASE` 를 함께 등록한다.
+> (zip 암호가 아니라 **SSH 접속 시 묻는 키 암호**가 이 값이다.)
 
 ## 🔑 서버 → GitHub 접근 (private 레포라 필수, 최초 1회)
 

@@ -162,6 +162,85 @@
         </div>
     @endisset
 
+    @isset($keywords)
+        <div class="sec">
+            <div class="sec-title">오가닉 키워드@if (! empty($keywords['sample']))<span class="bl-badge">샘플 데이터</span>@endif</div>
+            @if (! empty($keywords['sample']))
+                <div class="bl-note">검색 노출 키워드·순위·검색량 예시입니다. 실데이터 연동은 준비 중입니다.</div>
+            @endif
+            <table class="blstats">
+                <tr>
+                    <td><div class="blstat-n">{{ number_format($keywords['total_keywords']) }}</div><div class="blstat-l">노출 키워드</div></td>
+                    <td><div class="blstat-n">{{ number_format($keywords['top3']) }}</div><div class="blstat-l">TOP 3</div></td>
+                    <td><div class="blstat-n">{{ number_format($keywords['top10']) }}</div><div class="blstat-l">TOP 10</div></td>
+                    <td><div class="blstat-n">{{ count($keywords['keywords']) }}</div><div class="blstat-l">표시 키워드</div></td>
+                </tr>
+            </table>
+            <table class="bltop">
+                <thead>
+                    <tr><th>키워드</th><th>순위</th><th>월 검색량</th><th>트래픽 점유</th><th>의도</th></tr>
+                </thead>
+                <tbody>
+                    @foreach ($keywords['keywords'] as $kw)
+                        <tr>
+                            <td class="bl-from">{{ $kw['keyword'] }}<span>{{ $kw['url'] }}</span></td>
+                            <td>{{ $kw['position'] }}위</td>
+                            <td>{{ number_format($kw['volume']) }}</td>
+                            <td>{{ $kw['share'] }}%</td>
+                            <td>{{ $kw['intent'] }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endisset
+
+    @isset($traffic)
+        @php($trMax = collect($traffic['trend'])->max('visits') ?: 1)
+        <div class="sec">
+            <div class="sec-title">트래픽 추정@if (! empty($traffic['sample']))<span class="bl-badge">샘플 데이터</span>@endif</div>
+            @if (! empty($traffic['sample']))
+                <div class="bl-note">월 방문·추정 가치·유입 채널 예시입니다. 실데이터 연동은 준비 중입니다.</div>
+            @endif
+            <table class="blstats">
+                <tr>
+                    <td><div class="blstat-n">{{ number_format($traffic['monthly_visits']) }}</div><div class="blstat-l">월 방문(추정)</div></td>
+                    <td><div class="blstat-n" style="font-size:16px;">₩{{ number_format($traffic['traffic_value_krw']) }}</div><div class="blstat-l">월 트래픽 가치</div></td>
+                    <td><div class="blstat-n">{{ $traffic['channels'][0]['pct'] }}%</div><div class="blstat-l">오가닉 검색</div></td>
+                    <td><div class="blstat-n">{{ $traffic['countries'][0]['pct'] }}%</div><div class="blstat-l">{{ $traffic['countries'][0]['name'] }}</div></td>
+                </tr>
+            </table>
+            <table style="width:100%;border-collapse:collapse;margin-top:6px;">
+                <tr>
+                    <td style="width:50%;vertical-align:top;padding-right:12px;">
+                        <div style="font-size:11px;font-weight:700;margin-bottom:6px;">최근 6개월 추이</div>
+                        <table class="bartable" style="width:100%;border-collapse:collapse;">
+                            @foreach ($traffic['trend'] as $t)
+                                <tr>
+                                    <td style="width:34px;font-size:9px;color:#86868b;padding:3px 0;">{{ $t['month'] }}</td>
+                                    <td style="padding:3px 0;"><div style="background:#0066cc;height:8px;border-radius:4px;width:{{ max(4, round($t['visits'] / $trMax * 100)) }}%;"></div></td>
+                                    <td style="width:52px;font-size:9px;text-align:right;padding:3px 0;">{{ number_format($t['visits']) }}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </td>
+                    <td style="width:50%;vertical-align:top;padding-left:12px;">
+                        <div style="font-size:11px;font-weight:700;margin-bottom:6px;">유입 채널</div>
+                        <table style="width:100%;border-collapse:collapse;">
+                            @foreach ($traffic['channels'] as $ch)
+                                <tr>
+                                    <td style="width:64px;font-size:10px;padding:3px 0;">{{ $ch['name'] }}</td>
+                                    <td style="padding:3px 0;"><div style="background:#0066cc;height:8px;border-radius:4px;width:{{ $ch['pct'] }}%;"></div></td>
+                                    <td style="width:34px;font-size:9px;text-align:right;color:#6e6e73;padding:3px 0;">{{ $ch['pct'] }}%</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    @endisset
+
     <div class="cta">
         <h3>백링크·키워드·경쟁사까지, 실데이터로 더 깊게</h3>
         <p>온페이지 너머의 정밀 SEO·GEO 분석은 제이커브가 이어서 도와드립니다. 문의: <span class="site">j-curve.co.kr</span></p>

@@ -145,6 +145,95 @@
                     </section>
                 @endisset
 
+                {{-- 오가닉 키워드 (샘플) --}}
+                @isset($keywords)
+                    <section class="landing__section landing__section--light" id="keywords">
+                        <div class="landing__inner landing__inner--wide">
+                            <span class="landing__eyebrow">Organic Keywords</span>
+                            <h2 class="landing__head">
+                                오가닉 키워드
+                                @if (! empty($keywords['sample'])) <span class="seocheck__sample-badge">샘플 데이터</span> @endif
+                            </h2>
+                            @if (! empty($keywords['sample']))
+                                <p class="landing__note" style="margin-top:-8px;">검색에서 걸리는 키워드·순위·검색량 <strong>예시</strong>입니다. 실데이터 연동(Ahrefs·Semrush 등)은 준비 중입니다.</p>
+                            @endif
+                            <div class="seocheck__blstats">
+                                <div class="seocheck__blstat"><strong>{{ number_format($keywords['total_keywords']) }}</strong><span>노출 키워드</span></div>
+                                <div class="seocheck__blstat"><strong>{{ number_format($keywords['top3']) }}</strong><span>TOP 3 키워드</span></div>
+                                <div class="seocheck__blstat"><strong>{{ number_format($keywords['top10']) }}</strong><span>TOP 10 키워드</span></div>
+                            </div>
+                            <h3 class="seocheck__grouptitle" style="margin-top:32px;">상위 키워드</h3>
+                            <div class="seocheck__bltable-wrap">
+                                <table class="seocheck__bltable">
+                                    <thead>
+                                        <tr><th scope="col">키워드</th><th scope="col">순위</th><th scope="col">월 검색량</th><th scope="col">트래픽 점유</th><th scope="col">의도</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($keywords['keywords'] as $kw)
+                                            <tr>
+                                                <td class="seocheck__blurl">{{ $kw['keyword'] }}<span>{{ $kw['url'] }}</span></td>
+                                                <td class="seocheck__bldr">{{ $kw['position'] }}위</td>
+                                                <td>{{ number_format($kw['volume']) }}</td>
+                                                <td>{{ $kw['share'] }}%</td>
+                                                <td>{{ $kw['intent'] }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                @endisset
+
+                {{-- 트래픽 추정 (샘플) --}}
+                @isset($traffic)
+                    @php($trMax = collect($traffic['trend'])->max('visits') ?: 1)
+                    <section class="landing__section landing__section--parchment" id="traffic">
+                        <div class="landing__inner landing__inner--wide">
+                            <span class="landing__eyebrow">Traffic Estimate</span>
+                            <h2 class="landing__head">
+                                트래픽 추정
+                                @if (! empty($traffic['sample'])) <span class="seocheck__sample-badge">샘플 데이터</span> @endif
+                            </h2>
+                            @if (! empty($traffic['sample']))
+                                <p class="landing__note" style="margin-top:-8px;">월 방문·추정 가치·유입 채널 <strong>예시</strong>입니다. 실데이터 연동(Ahrefs·SimilarWeb·GSC)은 준비 중입니다.</p>
+                            @endif
+                            <div class="seocheck__blstats">
+                                <div class="seocheck__blstat"><strong>{{ number_format($traffic['monthly_visits']) }}</strong><span>월 오가닉 방문(추정)</span></div>
+                                <div class="seocheck__blstat"><strong>₩{{ number_format($traffic['traffic_value_krw']) }}</strong><span>월 트래픽 가치(추정)</span></div>
+                                <div class="seocheck__blstat"><strong>{{ $traffic['channels'][0]['pct'] }}%</strong><span>오가닉 검색 비중</span></div>
+                                <div class="seocheck__blstat"><strong>{{ $traffic['countries'][0]['pct'] }}%</strong><span>{{ $traffic['countries'][0]['name'] }} 비중</span></div>
+                            </div>
+
+                            <div class="seocheck__trafgrid">
+                                <div>
+                                    <h3 class="seocheck__grouptitle" style="margin-top:28px;">최근 6개월 추이</h3>
+                                    <div class="seocheck__trend">
+                                        @foreach ($traffic['trend'] as $t)
+                                            <div class="seocheck__trend-col">
+                                                <div class="seocheck__trend-bar" style="height:{{ max(6, round($t['visits'] / $trMax * 100)) }}%"></div>
+                                                <span class="seocheck__trend-m">{{ $t['month'] }}</span>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="seocheck__grouptitle" style="margin-top:28px;">유입 채널</h3>
+                                    <div class="seocheck__channels">
+                                        @foreach ($traffic['channels'] as $ch)
+                                            <div class="seocheck__channel">
+                                                <span class="seocheck__channel-name">{{ $ch['name'] }}</span>
+                                                <span class="seocheck__channel-track"><span class="seocheck__channel-fill" style="width:{{ $ch['pct'] }}%"></span></span>
+                                                <span class="seocheck__channel-pct">{{ $ch['pct'] }}%</span>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                @endisset
+
                 {{-- 백링크·키워드: 유료 데이터 영역 → 리드 전환 (어댑터 연동 시 실데이터로 교체) --}}
                 <section class="landing__section landing__section--dark has-orb">
                     <div class="landing__inner landing__inner--wide">

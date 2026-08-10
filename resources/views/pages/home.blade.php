@@ -54,7 +54,7 @@
 
         {{-- ============ S3. 핵심 지표 [다크] — 3D 아이콘 스탯 카드 (버즈빌형) ============ --}}
         <section class="home__stats has-orb" id="home-stats" aria-label="핵심 성과 지표">
-            @include('partials.section-mesh', ['k' => 'stats'])
+            @include('partials.section-mesh', ['k' => 'stats', 'variant' => 'data'])
             <div class="home__stats-head">
                 <span class="section-eyebrow">BY THE NUMBERS</span>
                 <h2>숫자가 먼저 말합니다</h2>
@@ -69,8 +69,8 @@
             <div class="home__stats-inner">
                 @foreach ($stats as $s)
                     <div class="statcard glass-card">
-                        <span class="icon3d statcard__icon icon3d--float">
-                            <img src="{{ asset('media/icons3d/' . $s['icon'] . '.webp') }}" alt="" loading="lazy" width="128" height="128">
+                        <span class="icon3d icon-il statcard__icon">
+                            @include('partials.icon', ['name' => $s['icon']])
                         </span>
                         <strong data-count-to="{{ $s['to'] }}" data-count-suffix="{{ $s['suffix'] }}"
                             @isset($s['decimals']) data-count-decimals="{{ $s['decimals'] }}" @endisset
@@ -133,7 +133,7 @@
 
         {{-- ============ S5. 차별점 벤토 [다크] — "대행 넘어 도구까지" (버즈빌 인터랙션 AI 벤토) ============ --}}
         <section class="home__bento has-orb" aria-labelledby="home-bento-title">
-            @include('partials.section-mesh', ['k' => 'bento'])
+            @include('partials.section-mesh', ['k' => 'bento', 'variant' => 'mesh'])
             <div class="home__bento-head">
                 <span class="section-eyebrow">WHY J-CURVE</span>
                 <h2 id="home-bento-title">광고에서 끝나지 않습니다.<br>데이터와 도구까지 직접 만듭니다.</h2>
@@ -160,7 +160,7 @@
 
                 {{-- 자체 솔루션 타일 --}}
                 <article class="bento bento--accent glass-card">
-                    <span class="icon3d bento__icon"><img src="{{ asset('media/icons3d/rankfree.webp') }}" alt="" loading="lazy" width="96" height="96"></span>
+                    <span class="icon3d icon-il bento__icon">@include('partials.icon', ['name' => 'rankfree'])</span>
                     <h3 class="bento__title bento__title--sm">도구까지 직접 개발</h3>
                     <p class="bento__text">남의 툴을 빌리지 않습니다. 현장에서 필요한 솔루션 4종을 자체 운영합니다.</p>
                     <a class="bento__cta" href="{{ route('solutions.index') }}">자체 솔루션 →</a>
@@ -175,7 +175,7 @@
 
                 {{-- 검색 증명 타일 --}}
                 <article class="bento bento--proof glass-card">
-                    <span class="icon3d bento__icon"><img src="{{ asset('media/icons3d/seo.webp') }}" alt="" loading="lazy" width="96" height="96"></span>
+                    <span class="icon3d icon-il bento__icon">@include('partials.icon', ['name' => 'seo'])</span>
                     <h3 class="bento__title bento__title--sm">이 사이트가 증거입니다</h3>
                     <p class="bento__text">지금 이 화면도 저희가 직접 검색 상위에 올린 결과입니다. SEO 실력을 자기 사이트로 증명합니다.</p>
                     <a class="bento__cta" href="{{ route('services.show', ['slug' => 'seo']) }}">SEO · AEO · GEO →</a>
@@ -185,7 +185,7 @@
 
         {{-- ============ S6. 자체 솔루션 [다크 타일] — 최대 차별점 ============ --}}
         <section class="home__solutions has-orb" aria-labelledby="home-solutions-title">
-            @include('partials.section-mesh', ['k' => 'sol'])
+            @include('partials.section-mesh', ['k' => 'sol', 'variant' => 'orbit'])
             <div class="home__solutions-inner">
                 <span class="section-eyebrow">OUR PRODUCTS</span>
                 <h2 id="home-solutions-title">우리는 도구까지 직접 만듭니다</h2>
@@ -194,25 +194,25 @@
                    현장에서 필요한 도구를 직접 개발해 운영합니다.</p>
                 <div class="home__solutions-grid">
                     <a class="solution-card glass-card" href="{{ route('solutions.rankfree') }}">
-                        <span class="icon3d solution-card__icon"><img src="{{ asset('media/icons3d/rankfree.webp') }}" alt="" loading="lazy" width="128" height="128"></span>
+                        <span class="icon3d icon-il solution-card__icon">@include('partials.icon', ['name' => 'rankfree'])</span>
                         <strong>랭크프리 <span>(RankFree)</span></strong>
                         <p>네이버 순위·시장 분석</p>
                         <span class="solution-card__cta">자세히 →</span>
                     </a>
                     <a class="solution-card glass-card" href="{{ route('solutions.boostingshop') }}">
-                        <span class="icon3d solution-card__icon"><img src="{{ asset('media/icons3d/boostingshop.webp') }}" alt="" loading="lazy" width="128" height="128"></span>
+                        <span class="icon3d icon-il solution-card__icon">@include('partials.icon', ['name' => 'boostingshop'])</span>
                         <strong>부스팅샵 <span>(BoostingShop)</span></strong>
                         <p>직접 돌리는 셀프 마케팅</p>
                         <span class="solution-card__cta">자세히 →</span>
                     </a>
                     <a class="solution-card glass-card" href="{{ route('solutions.leadbay') }}">
-                        <span class="icon3d solution-card__icon"><img src="{{ asset('media/icons3d/leadbay.webp') }}" alt="" loading="lazy" width="128" height="128"></span>
+                        <span class="icon3d icon-il solution-card__icon">@include('partials.icon', ['name' => 'leadbay'])</span>
                         <strong>리드베이 <span>(LEADBAY)</span></strong>
                         <p>보험 영업조직 세일즈 CRM</p>
                         <span class="solution-card__cta">자세히 →</span>
                     </a>
                     <a class="solution-card glass-card" href="{{ route('solutions.call2sale') }}">
-                        <span class="icon3d solution-card__icon"><img src="{{ asset('media/icons3d/call2sale.webp') }}" alt="" loading="lazy" width="128" height="128"></span>
+                        <span class="icon3d icon-il solution-card__icon">@include('partials.icon', ['name' => 'call2sale'])</span>
                         <strong>콜투세일 <span>(Call2.Sale)</span></strong>
                         <p>보험DB 콜센터 CRM</p>
                         <span class="solution-card__cta">자세히 →</span>
@@ -307,7 +307,7 @@
 
         {{-- ============ S11. 최종 CTA [다크 타일] — 페이지 클로징 앵커 ============ --}}
         <section class="home__cta has-orb" aria-labelledby="home-cta-title">
-            @include('partials.section-mesh', ['k' => 'cta'])
+            @include('partials.section-mesh', ['k' => 'cta', 'variant' => 'rays'])
             <div class="home__cta-inner">
                 <h2 id="home-cta-title">숫자로 증명할 준비가 되어 있습니다</h2>
                 {{-- [검증 V3] "첫 상담 무료" 삭제(대웅 미확정 — 단정 시 고객이 근거 요구). 확인 후 복원 가능 --}}

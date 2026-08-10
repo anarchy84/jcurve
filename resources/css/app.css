@@ -1093,6 +1093,18 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .icon3d--float { animation: icon-float 3s ease-in-out infinite; }
 @keyframes icon-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
 
+/* 플랫 일러스트 아이콘 — 3D 렌더(AI 느낌) 대체. 부드러운 틴트 타일 + 브랜드 블루 글리프.
+   색은 currentColor 상속(2-tone) → 다크 섹션 기본, 라이트 컨텍스트만 개별 오버라이드. */
+.icon-il {
+    color: var(--primary-on-dark);
+    background: rgba(41, 151, 255, 0.12);
+    border: 1px solid rgba(41, 151, 255, 0.18);
+    border-radius: 22%;
+}
+.icon-il .icon-il__svg { width: 62%; height: 62%; }
+/* 라이트 배경(리워드 히어로 등)에서는 진한 브랜드 블루 */
+.landing__hero-mark .icon-il { color: var(--primary); background: rgba(0, 102, 204, 0.09); border-color: rgba(0, 102, 204, 0.16); }
+
 /* C3 — 글래스모피즘 카드 (다크 위에서만) */
 .glass-card {
     background: var(--glass-fill);

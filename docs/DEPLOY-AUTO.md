@@ -1,65 +1,90 @@
-# 자동 배포 가이드 — dev.j-curve.kr (GitHub Actions)
+# 자동 배포 가이드 — dev.j-curve.co.kr (GitHub Actions)
 
-> `main` 브랜치에 push하면 GitHub가 자동으로 dev 서버에 배포한다.
+> `main` 에 push하면 GitHub가 자동으로 dev 서버에 배포한다.
 > 워크플로: `.github/workflows/deploy.yml`
 
-## 동작 방식
+## 서버 정보 (dev 전용 격리 계정)
 
+| 항목 | 값 |
+|---|---|
+| 호스트 | `49.247.13.187` |
+| 포트 | `9022` |
+| 계정 | `jcdev` (sudo 없음, 타 프로젝트 접근 불가, 전용 php-fpm 풀 `jcdev.sock`) |
+| 작업경로 | `/www/jcurve/j-curve-dev` (DocumentRoot = `public/`) |
+| 사이트 | https://dev.j-curve.co.kr |
+| PHP | **`php83`** (`php`는 7.x라 안 됨 — 모든 명령 `php83`로) |
+| node | 서버엔 불필요(에셋은 GitHub에서 빌드해 업로드) |
+
+호스트·포트·계정·경로는 워크플로 `env:` 에 박아뒀다(비밀 아님). **비밀은 SSH 개인키 하나뿐.**
+
+## ⚙️ 최초 1회 — GitHub 시크릿 1개만 등록
+
+**저장소 → Settings → Secrets and variables → Actions → New repository secret**
+
+| 이름 | 값 |
+|---|---|
+| `DEV_SSH_KEY` | jcdev SSH **개인키 전체**(암호zip으로 받은 `%USERPROFILE%\.ssh\jcdev` 내용, `-----BEGIN … END-----` 포함) |
+
+> 개인키에 passphrase가 걸려 있으면 GitHub Actions에서 못 푼다. passphrase 없는 키를 쓰거나, passphrase 없는 배포 전용 키를 별도로 만들어 등록한다.
+
+## 🔑 서버 → GitHub 접근 (private 레포라 필수, 최초 1회)
+
+레포가 **private** 이라 dev 서버가 코드를 받으려면 서버에 GitHub 읽기 권한이 있어야 한다. 서버(jcdev)에서:
+
+```bash
+# 1) 서버에 배포용 SSH 키 생성 (passphrase 없이 Enter)
+ssh-keygen -t ed25519 -C "jcdev-deploy" -f ~/.ssh/gh_deploy -N ""
+cat ~/.ssh/gh_deploy.pub     # 이 공개키를 복사
 ```
-개발자가 main 에 push
-   └─ GitHub Actions 실행
-        1) GitHub에서 프론트 에셋 빌드 (npm ci && npm run build)  ← 서버에 node 불필요
-        2) 빌드된 public/build 를 서버로 업로드(scp)
-        3) 서버에 SSH 접속 →
-             git reset --hard origin/main   (코드 최신화)
-             composer install --no-dev       (PHP 의존성)
-             php artisan migrate --force      (DB 마이그레이션)
-             php artisan optimize             (config/route/view 캐시)
-             php artisan storage:link
-   └─ 완료 (몇 분 소요)
+→ GitHub 저장소 **Settings → Deploy keys → Add deploy key** 에 붙여넣기(읽기 전용이면 충분).
+→ 서버 `~/.ssh/config` 에:
+```
+Host github.com
+  IdentityFile ~/.ssh/gh_deploy
+  IdentitiesOnly yes
+```
+그러면 서버에서 `git@github.com:anarchy84/jcurve.git` 로 clone/pull 가능.
+
+## 🚀 최초 1회 — 첫 배포(수동, 개발자가 서버에서)
+
+자동 배포는 "레포가 이미 clone돼 있고 `.env`가 세팅된 상태"를 전제한다. 그 상태를 만드는 첫 배포는 수동으로 한 번:
+
+```bash
+ssh -p 9022 jcdev@49.247.13.187
+
+rm -rf /www/jcurve/j-curve-dev/public          # 빈 public만 있어 clone이 막히므로 제거
+git clone git@github.com:anarchy84/jcurve.git /www/jcurve/j-curve-dev
+cd /www/jcurve/j-curve-dev
+
+php83 "$(command -v composer)" install --no-dev -o          # composer를 php83로 실행
+cp .env.example .env
+php83 artisan key:generate
+#  ↑ 이후 .env 편집: APP_ENV=production, APP_DEBUG=false,
+#     APP_URL=https://dev.j-curve.co.kr, DB_* (rankfree와 별도 스키마)
+php83 artisan migrate --force
+
+export NVM_DIR="$HOME/.nvm" && . "$NVM_DIR/nvm.sh"          # node 로드
+npm ci && npm run build
+
+chmod -R 775 storage bootstrap/cache
+php83 artisan config:cache && php83 artisan route:cache && php83 artisan view:cache
+php83 artisan storage:link
 ```
 
-## ⚙️ 최초 1회 설정 — GitHub 시크릿 등록 (형님이 GitHub 웹에서)
+여기까지 하면 https://dev.j-curve.co.kr 에 뜬다. **이후부터는 push만 하면 자동.**
 
-**저장소 → Settings → Secrets and variables → Actions → New repository secret** 에서 아래 4개 등록:
+## ✅ 자동 배포 동작 (첫 배포 이후)
 
-| 시크릿 이름 | 값 | 예시 |
-|---|---|---|
-| `DEV_SSH_HOST` | dev 서버 주소(IP 또는 도메인) | `49.247.x.x` 또는 `dev.j-curve.kr` |
-| `DEV_SSH_USER` | SSH 접속 계정 | `jcurve` |
-| `DEV_SSH_KEY` | SSH **개인키 전체**(-----BEGIN … END-----) | `~/.ssh/id_rsa` 내용 통째로 |
-| `DEV_SSH_PORT` | SSH 포트(표준이면 `22`) | `22` |
-| `DEV_DEPLOY_PATH` | 서버에 레포가 clone된 절대경로 | `/home/jcurve/dev.j-curve.kr` |
+`main` push → GitHub Actions:
+1. GitHub에서 에셋 빌드(`npm ci && npm run build`)
+2. `public/build` 를 서버로 scp 업로드
+3. 서버 SSH → `git reset --hard origin/main` → `php83 composer install` → `php83 artisan migrate --force` → `php83 artisan config:cache/route:cache/view:cache` → `storage:link` → `chmod`
 
-> `DEV_SSH_KEY` 는 형님이 이미 받은 그 개인키(private key) 파일 내용을 그대로 붙여넣으면 된다.
-> 시크릿은 GitHub에 암호화 저장되고 화면에 다시 안 보인다. (Claude/코드가 대신 못 넣음 — 형님이 직접)
+- 진행상황·로그: **저장소 → Actions 탭**
+- 수동 실행: Actions → "Deploy to dev.j-curve.co.kr" → **Run workflow**
+- `DEV_SSH_KEY` 미등록 시 배포는 **자동 스킵**(빨간 실패 아님)
 
-## 🖥️ 서버 쪽 전제 조건 (한 번만 확인)
-
-자동 배포가 돌려면 dev 서버에 아래가 준비돼 있어야 한다(대부분 이미 되어 있을 것):
-
-1. **레포가 한 번 clone 되어 있음** — `DEV_DEPLOY_PATH` 경로에.
-   서버가 GitHub에서 pull할 수 있어야 함(서버에 deploy key 등록 or https 토큰). 기존에 수동으로 pull 되던 서버면 이미 됨.
-2. **PHP 8.3 · Composer · MariaDB** 설치됨 (기존 `docs/DEPLOY.md` 스펙).
-3. **`.env` 파일이 서버에 이미 세팅**되어 있음(운영값). — 자동배포는 `.env`를 건드리지 않는다.
-4. Apache DocumentRoot = `<DEPLOY_PATH>/public`.
-
-> node/npm은 **서버에 없어도 됨** (에셋은 GitHub에서 빌드해 업로드).
-
-## ✅ 설정 후 사용법
-
-- 코드 push → 자동 배포. **GitHub 저장소 → Actions 탭**에서 진행상황·로그 확인.
-- 수동 배포하고 싶으면: Actions 탭 → "Deploy to dev.j-curve.kr" → **Run workflow** 버튼.
-- 시크릿을 아직 안 넣었으면 배포는 자동으로 **건너뛰기**(빨간 실패 아님) 처리된다.
-
-## 🌐 DNS (dev.j-curve.kr이 서버를 가리키게)
-
-현재 `dev.j-curve.kr`은 DNS 해석이 안 되는 상태다. 도메인 관리 콘솔(도메인 산 곳)에서
-`dev` 서브도메인 **A 레코드 → dev 서버 IP** 를 추가해야 브라우저로 접속된다.
-(자동 배포 자체는 IP로 SSH하므로 DNS 없이도 배포는 되지만, 사이트를 열려면 DNS 필요.)
-
-## 🔧 서버 세팅이 다르면 조정할 부분
-
-- 브랜치가 `main`이 아니면 `.github/workflows/deploy.yml` 의 `branches: [main]` 수정.
-- 무중단/릴리스 디렉토리 구조를 쓰면 SSH 스크립트 부분을 그 구조에 맞게 조정.
-- 큐 워커가 있으면 배포 끝에 `php artisan queue:restart` 추가 권장.
+## 참고
+- `.env` 는 배포가 절대 건드리지 않는다(서버에만 존재).
+- 큐 워커를 쓰게 되면 워크플로 SSH 스크립트 끝에 `php83 artisan queue:restart` 추가.
+- Apache 리로드 불필요(php-fpm 반영). sudo 불필요.

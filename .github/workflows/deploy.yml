@@ -1,15 +1,21 @@
-name: Deploy to dev.j-curve.kr
+name: Deploy to dev.j-curve.co.kr
 
-# main 에 push 되면 자동 배포. GitHub Actions 탭에서 수동 실행(workflow_dispatch)도 가능.
+# main 에 push 되면 자동 배포. Actions 탭에서 수동 실행(workflow_dispatch)도 가능.
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
-# 동시에 두 배포가 겹치지 않도록(앞 배포 끝나고 다음 배포)
 concurrency:
   group: deploy-dev
   cancel-in-progress: false
+
+# 서버 접속 정보(비밀 아님) — 여기서 관리. 비밀은 DEV_SSH_KEY 시크릿 하나뿐.
+env:
+  DEV_SSH_HOST: 49.247.13.187
+  DEV_SSH_PORT: "9022"
+  DEV_SSH_USER: jcdev
+  DEV_DEPLOY_PATH: /www/jcurve/j-curve-dev
 
 jobs:
   deploy:
@@ -17,18 +23,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # 시크릿 미설정 시 배포를 건너뛴다(설정 전까지 빨간 실패 방지)
-      - name: Check deploy secrets
+      # DEV_SSH_KEY 시크릿이 없으면 배포 스킵(설정 전 빨간 실패 방지)
+      - name: Check deploy secret
         id: check
+        env:
+          HAS_KEY: ${{ secrets.DEV_SSH_KEY != '' }}
         run: |
-          if [ -z "${{ secrets.DEV_SSH_HOST }}" ]; then
-            echo "::warning::DEV_SSH_* 시크릿이 없어 배포를 건너뜁니다. 저장소 Settings → Secrets에 등록하세요."
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-          else
+          if [ "$HAS_KEY" = "true" ]; then
             echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::DEV_SSH_KEY 시크릿이 없어 배포를 건너뜁니다. Settings → Secrets에 등록하세요."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
           fi
 
-      # 1) 프론트 에셋을 CI에서 빌드 (서버에 node가 없어도 됨)
+      # 1) 프론트 에셋을 CI에서 빌드 (서버에 node 불필요)
       - name: Setup Node
         if: steps.check.outputs.ready == 'true'
         uses: actions/setup-node@v4
@@ -41,40 +49,43 @@ jobs:
           npm ci
           npm run build
 
-      # 2) 빌드된 public/build 를 서버로 업로드
-      #    (/public/build 는 .gitignore 대상 → 아래 git reset 으로 지워지지 않음)
+      # 2) 빌드된 public/build 를 서버로 업로드 (/public/build 는 gitignore → git reset에 안 지워짐)
       - name: Upload built assets (scp)
         if: steps.check.outputs.ready == 'true'
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.DEV_SSH_HOST }}
-          username: ${{ secrets.DEV_SSH_USER }}
+          host: ${{ env.DEV_SSH_HOST }}
+          username: ${{ env.DEV_SSH_USER }}
           key: ${{ secrets.DEV_SSH_KEY }}
-          port: ${{ secrets.DEV_SSH_PORT }}
+          port: ${{ env.DEV_SSH_PORT }}
           source: "public/build"
-          target: ${{ secrets.DEV_DEPLOY_PATH }}
+          target: ${{ env.DEV_DEPLOY_PATH }}
           overwrite: true
 
-      # 3) 서버에서 코드 반영 + PHP 의존성 + 마이그레이션 + 캐시
+      # 3) 서버에서 코드 반영 + PHP 의존성 + 마이그레이션 + 캐시 (전부 php83)
       - name: Remote deploy (ssh)
         if: steps.check.outputs.ready == 'true'
         uses: appleboy/ssh-action@v1.2.0
         with:
-          host: ${{ secrets.DEV_SSH_HOST }}
-          username: ${{ secrets.DEV_SSH_USER }}
+          host: ${{ env.DEV_SSH_HOST }}
+          username: ${{ env.DEV_SSH_USER }}
           key: ${{ secrets.DEV_SSH_KEY }}
-          port: ${{ secrets.DEV_SSH_PORT }}
+          port: ${{ env.DEV_SSH_PORT }}
           script: |
             set -euo pipefail
-            cd "${{ secrets.DEV_DEPLOY_PATH }}"
+            cd "${{ env.DEV_DEPLOY_PATH }}"
             echo "▶ git 최신화"
             git fetch --all --prune
             git reset --hard origin/main
-            echo "▶ composer 설치"
-            composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+            echo "▶ composer 설치 (php83로 실행)"
+            php83 "$(command -v composer)" install --no-dev -o --no-interaction --prefer-dist
             echo "▶ DB 마이그레이션"
-            php artisan migrate --force
+            php83 artisan migrate --force
             echo "▶ 캐시 재생성"
-            php artisan optimize
-            php artisan storage:link || true
-            echo "✅ 배포 완료"
+            php83 artisan config:cache
+            php83 artisan route:cache
+            php83 artisan view:cache
+            php83 artisan storage:link || true
+            echo "▶ 쓰기 권한"
+            chmod -R 775 storage bootstrap/cache
+            echo "✅ 배포 완료 — https://dev.j-curve.co.kr"

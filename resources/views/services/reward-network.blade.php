@@ -39,7 +39,7 @@
                 <span class="landing__eyebrow">Reward Network</span>
                 <h1>유저의 참여가<br>광고주의 액션과 매체의 수익이 되도록</h1>
                 <p class="landing__lead">설치 수만 늘리는 리워드가 아닙니다. 목표 액션, 보상, 유효 기준, 트래킹과 정산을 한 구조로 설계해 광고주·유저·매체가 오래 갈 수 있는 네트워크를 만듭니다.</p>
-                <div class="landing__chips" style="justify-content:center;">
+                <div class="landing__chips">
                     <span style="color:var(--ink);border-color:var(--hairline);">앱 설치</span>
                     <span style="color:var(--ink);border-color:var(--hairline);">회원가입</span>
                     <span style="color:var(--ink);border-color:var(--hairline);">미션 완료</span>

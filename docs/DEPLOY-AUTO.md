@@ -1,7 +1,22 @@
-# 자동 배포 가이드 — dev.j-curve.co.kr (GitHub Actions)
+# 배포 가이드 — dev.j-curve.co.kr
 
-> `main` 에 push하면 GitHub가 자동으로 dev 서버에 배포한다.
-> 워크플로: `.github/workflows/deploy.yml`
+## 현재 상태 (2026-08-10)
+- **수동 배포 = 작동함.** 개발 PC(맥)에서 `bash scripts/deploy-dev.sh` 한 줄이면 배포된다(빌드→rsync→서버 composer/migrate/cache). ✅ 실제 배포·검증 완료.
+- **자동 배포(push→배포) = 아직 미완.** GitHub Actions 워크플로(`.github/workflows/deploy.yml`)는 만들어뒀지만 두 가지가 남았다:
+  1. GitHub 저장소에 시크릿 `DEV_SSH_KEY`(+`DEV_SSH_PASSPHRASE`) 등록 (형님이 GitHub 웹에서)
+  2. 서버가 GitHub를 못 당김(https 인증정보 없음) → 워크플로의 `git reset`이 실패. **서버에 Deploy Key 등록**(아래) 필요, 또는 워크플로를 rsync 방식으로 전환.
+
+## 빠른 재배포 (지금 바로 쓰는 법)
+개발 PC(맥) 터미널에서:
+```bash
+ssh-add ~/Downloads/jcdev        # 키를 ssh-agent에 등록(암호 1회). 세션 유지되면 생략 가능
+bash scripts/deploy-dev.sh       # 빌드 + 업로드 + 서버 배포
+```
+
+---
+
+## (선택) 자동 배포 — GitHub Actions
+> 아래를 마치면 `main` push 시 자동 배포된다. 워크플로: `.github/workflows/deploy.yml`
 
 ## 서버 정보 (dev 전용 격리 계정)
 

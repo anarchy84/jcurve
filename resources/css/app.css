@@ -1371,6 +1371,8 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
     border: 1px solid var(--glass-border);
     border-radius: 999px;
 }
+/* 칩 바로 뒤 CTA는 간격이 0이라 딱 붙던 문제 → 리듬 부여(칩=액션 태그 / CTA=버튼 시각 분리) */
+.landing__chips + .cta-row { margin-top: 20px; }
 
 /* 증거 리스트 [파치먼트/라이트] */
 .landing__evidence { list-style: none; padding: 0; margin: 32px 0 0; display: flex; flex-direction: column; gap: 16px; }

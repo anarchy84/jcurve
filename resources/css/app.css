@@ -1906,3 +1906,242 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 @media (max-width: 833px) {
     .home__bento-grid .bento--proof { grid-column: span 1; }
 }
+
+/* ============================================================
+   리워드 네트워크 — 미션 지면 쇼케이스 + 파트너 로고 벨트 (2026-08-10)
+   폰 목업은 특정 플랫폼 UI를 복제하지 않는 중립 재현. 모션은 transform/opacity만.
+   ============================================================ */
+
+/* 미션 지면 쇼케이스 (다크 섹션 위) */
+.rw-showcase {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 3vw, 44px);
+    margin-top: 48px;
+    align-items: start;
+}
+.rw-phone { display: flex; flex-direction: column; align-items: center; }
+.rw-phone__frame {
+    position: relative;
+    width: 100%;
+    max-width: 268px;
+    border-radius: 40px;
+    background: #0a0a0f;
+    padding: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-media);
+}
+.rw-phone__notch {
+    position: absolute;
+    top: 9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 82px;
+    height: 19px;
+    background: #0a0a0f;
+    border-radius: 0 0 14px 14px;
+    z-index: 6;
+}
+.rw-phone__screen {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-radius: 32px;
+    overflow: hidden;
+    background: #fff;
+    aspect-ratio: 9 / 19.3;
+    padding: 8px 12px 14px;
+    color: #1d1d1f;
+    font-size: 11px;
+    line-height: 1.35;
+    letter-spacing: -0.2px;
+}
+.rw-phone__status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 4px 0;
+    font-size: 10px;
+    font-weight: 700;
+}
+.rw-phone-cap {
+    margin: 16px 0 0;
+    font-size: 12px;
+    color: var(--muted-on-dark);
+    text-align: center;
+    max-width: 240px;
+}
+
+/* 검색바 */
+.rw-ss {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #f2f2f4;
+    border: 1px solid #e3e3e7;
+    font-weight: 600;
+}
+.rw-ss--sm { padding: 7px 12px; font-size: 10.5px; }
+.rw-ss__q { color: #1d1d1f; }
+.rw-ss__mic { opacity: 0.7; }
+.rw-tabs {
+    display: flex;
+    gap: 10px;
+    padding: 2px 2px 8px;
+    border-bottom: 1px solid #efeff2;
+    font-size: 9.5px;
+    color: #86868b;
+    overflow: hidden;
+}
+.rw-tabs span:first-child { color: #1d1d1f; font-weight: 700; }
+
+.rw-panel__head { display: flex; align-items: center; gap: 8px; padding: 2px 0 8px; }
+.rw-panel__head strong { font-size: 12px; }
+.rw-badge {
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #6b4eff;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+.rw-list { display: flex; flex-direction: column; gap: 8px; }
+.rw-card {
+    display: flex;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 14px;
+    border: 1px solid #ececf0;
+    background: #fff;
+}
+.rw-thumb {
+    flex: 0 0 auto;
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 22px;
+}
+.rw-thumb--meat { background: linear-gradient(135deg, #ffe1cf, #ffb38a); }
+.rw-thumb--flower { background: linear-gradient(135deg, #ffd9e6, #ff9dc0); }
+.rw-thumb--plant { background: linear-gradient(135deg, #d6f2d9, #8fd79a); }
+.rw-card__body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.rw-card__body strong { font-size: 11.5px; }
+.rw-meta { font-size: 9.5px; color: #86868b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rw-star { font-size: 10px; color: #ff8a00; font-weight: 700; }
+.rw-price { font-size: 11px; font-weight: 700; color: #1d1d1f; }
+.rw-price em { color: #ff3b30; font-style: normal; margin-right: 3px; }
+.rw-mini { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; }
+.rw-mini__box {
+    aspect-ratio: 1;
+    border-radius: 9px;
+    background: #f2f2f4;
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+}
+
+/* 미션 지면 */
+.rw-mission-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 14px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #7b5cff, #5b3ef0);
+    color: #fff;
+}
+.rw-mission-hero__eyebrow { font-size: 9.5px; opacity: 0.85; }
+.rw-mission-hero strong { font-size: 14px; font-weight: 700; }
+.rw-progress { display: flex; gap: 5px; margin-top: 2px; }
+.rw-progress i { flex: 1; height: 5px; border-radius: 3px; background: #fff; }
+.rw-progress i.is-off { background: rgba(255, 255, 255, 0.35); }
+.rw-mission-count { margin: 2px 0 0; font-size: 9.5px; color: #86868b; }
+.rw-mission-title { margin: 0; font-size: 12.5px; font-weight: 700; }
+.rw-missions { display: flex; flex-direction: column; gap: 7px; }
+.rw-mission {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 13px;
+    border: 1px solid #ececf0;
+    background: #fff;
+}
+.rw-mission div { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.rw-mission strong { font-size: 11px; }
+.rw-mission span:not(.rw-check):not(.rw-arrow) { font-size: 9px; color: #86868b; }
+.rw-mission.is-active { border-color: #cdbcff; background: #f6f2ff; }
+.rw-check { color: #6b4eff; font-weight: 800; font-size: 13px; }
+.rw-arrow { color: #b0b0b6; font-weight: 700; }
+
+/* 스토어 지면 */
+.rw-store-bar { display: flex; align-items: center; justify-content: space-between; padding: 2px 2px 4px; }
+.rw-store-bar strong { font-size: 12px; }
+.rw-chips { display: flex; gap: 6px; overflow: hidden; }
+.rw-chips span {
+    flex: 0 0 auto;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #f2f2f4;
+    font-size: 9.5px;
+    color: #6e6e73;
+}
+.rw-chips span.is-on { background: #1d1d1f; color: #fff; font-weight: 600; }
+
+.rw-showcase-cap {
+    margin: 44px auto 0;
+    max-width: 640px;
+    text-align: center;
+    font-size: clamp(15px, 1.6vw, 17px);
+    color: var(--on-dark);
+}
+
+/* 미션 쇼케이스 반응형 — 좁은 화면에서 가로 스크롤 캐러셀 */
+@media (max-width: 860px) {
+    .rw-showcase {
+        grid-auto-flow: column;
+        grid-template-columns: none;
+        grid-auto-columns: 74%;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 8px;
+        scrollbar-width: none;
+    }
+    .rw-showcase::-webkit-scrollbar { display: none; }
+    .rw-phone { scroll-snap-align: center; }
+}
+@media (max-width: 520px) {
+    .rw-showcase { grid-auto-columns: 82%; }
+}
+
+/* 파트너 로고 벨트 (블랙 섹션) */
+.landing__section--dark.is-black { background: var(--black); }
+.partner-belt-wrap { margin: 48px 0 8px; display: flex; flex-direction: column; gap: 20px; }
+.partner-belt { width: 100%; }
+.partner-belt .marquee__track { gap: 20px; width: max-content; }
+.marquee__track--reverse { animation-direction: reverse; }
+.partner-logo { flex: 0 0 auto; }
+.partner-logo img {
+    width: clamp(56px, 7vw, 76px);
+    height: clamp(56px, 7vw, 76px);
+    border-radius: 18px;
+    display: block;
+    object-fit: cover;
+    background: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* reduce-motion — 벨트 정지 + 줄바꿈 그리드 */
+@media (prefers-reduced-motion: reduce) {
+    .partner-belt .marquee__track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; transform: none; }
+    .rw-showcase { grid-auto-flow: initial; }
+}

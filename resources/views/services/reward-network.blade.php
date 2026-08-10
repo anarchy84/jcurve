@@ -69,6 +69,135 @@
             </div>
         </nav>
 
+        {{-- 리워드 미션 지면 쇼케이스 [다크] — 유저가 이미 머무는 검색·미션·스토어 지면에 미션을 얹는 방식을 폰 목업으로 시각화. 특정 플랫폼 UI를 그대로 복제하지 않고 중립적으로 재현. --}}
+        <section class="landing__section landing__section--dark has-orb" id="placements">
+            <div class="landing__inner">
+                <span class="landing__eyebrow">In-Feed Missions</span>
+                <h2 class="landing__head">유저가 이미 머무는 지면에서 미션이 시작됩니다</h2>
+                <p class="landing__lead">검색·탐색·저장처럼 이미 일어나는 행동 위에 리워드 미션을 얹습니다. 별도 앱을 새로 깔게 하지 않고, 필요한 순간에 자연스럽게 참여를 만듭니다.</p>
+
+                <div class="rw-showcase" role="list">
+                    {{-- 폰 1 — 검색 지면 --}}
+                    <div class="rw-phone" role="listitem">
+                        <div class="rw-phone__frame">
+                            <span class="rw-phone__notch"></span>
+                            <div class="rw-phone__screen">
+                                <div class="rw-phone__status"><span>10:24</span><span>●●● 5G</span></div>
+                                <div class="rw-ss"><span class="rw-ss__q">성수 맛집</span><span class="rw-ss__mic">🎙</span></div>
+                                <div class="rw-tabs"><span>블로그</span><span>카페</span><span>이미지</span><span>지식iN</span><span>동영상</span></div>
+                                <div class="rw-panel">
+                                    <div class="rw-panel__head"><strong>플레이스</strong><span class="rw-badge">리워드</span></div>
+                                    <div class="rw-list">
+                                        <div class="rw-card">
+                                            <div class="rw-thumb rw-thumb--meat">🥩</div>
+                                            <div class="rw-card__body">
+                                                <strong>리워드 성수고기</strong>
+                                                <span class="rw-meta">프리미엄 고기 맛집 · 리뷰 313</span>
+                                                <span class="rw-star">★ 4.88</span>
+                                            </div>
+                                        </div>
+                                        <div class="rw-mini"><span class="rw-mini__box">🍖</span><span class="rw-mini__box">🔥</span><span class="rw-mini__box">🥓</span><span class="rw-mini__box">🍗</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="rw-phone-cap">검색 지면 — 키워드 결과에서 리워드 접점 노출</p>
+                    </div>
+
+                    {{-- 폰 2 — 미션 지면 --}}
+                    <div class="rw-phone" role="listitem">
+                        <div class="rw-phone__frame">
+                            <span class="rw-phone__notch"></span>
+                            <div class="rw-phone__screen">
+                                <div class="rw-phone__status"><span>10:26</span><span>●●● 5G</span></div>
+                                <div class="rw-mission-hero">
+                                    <span class="rw-mission-hero__eyebrow">오늘의 리워드</span>
+                                    <strong>미션에 참여해보세요</strong>
+                                    <div class="rw-progress"><i></i><i></i><i class="is-off"></i><i class="is-off"></i></div>
+                                </div>
+                                <p class="rw-mission-count">미션 2/4 완료</p>
+                                <p class="rw-mission-title">참여할 미션을 선택하세요</p>
+                                <div class="rw-missions">
+                                    <div class="rw-mission is-done"><div><strong>플레이스 방문하기</strong><span>키워드 검색 미션</span></div><span class="rw-check">✓</span></div>
+                                    <div class="rw-mission is-done"><div><strong>스토어 상품 찾기</strong><span>상품 검색 미션</span></div><span class="rw-check">✓</span></div>
+                                    <div class="rw-mission is-active"><div><strong>플레이스 저장하기</strong><span>저장 참여 미션</span></div><span class="rw-arrow">→</span></div>
+                                    <div class="rw-mission"><div><strong>새로운 장소 발견하기</strong><span>방문 참여 미션</span></div><span class="rw-arrow">›</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="rw-phone-cap">미션 지면 — 단계별 참여 미션 선택</p>
+                    </div>
+
+                    {{-- 폰 3 — 스토어 지면 --}}
+                    <div class="rw-phone" role="listitem">
+                        <div class="rw-phone__frame">
+                            <span class="rw-phone__notch"></span>
+                            <div class="rw-phone__screen">
+                                <div class="rw-phone__status"><span>10:28</span><span>●●● 5G</span></div>
+                                <div class="rw-store-bar"><span>←</span><strong>스토어</strong><span>🛒</span></div>
+                                <div class="rw-ss rw-ss--sm"><span class="rw-ss__q">꽃</span><span class="rw-ss__mic">🔍</span></div>
+                                <div class="rw-chips"><span class="is-on">꽃 선물</span><span>꽃 정기구독</span><span>꽃다발</span><span>꽃 배송</span></div>
+                                <div class="rw-list">
+                                    <div class="rw-card">
+                                        <div class="rw-thumb rw-thumb--flower">🌷</div>
+                                        <div class="rw-card__body">
+                                            <strong>하늘 꽃 정원</strong>
+                                            <span class="rw-meta">당일배송 꽃다발 · 기념일 선물</span>
+                                            <span class="rw-price"><em>8%</em> 52,000원</span>
+                                        </div>
+                                    </div>
+                                    <div class="rw-card">
+                                        <div class="rw-thumb rw-thumb--plant">🪴</div>
+                                        <div class="rw-card__body">
+                                            <strong>나이스 플라워</strong>
+                                            <span class="rw-meta">싱그러운 식물과 꽃</span>
+                                            <span class="rw-price"><em>7%</em> 48,500원</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="rw-phone-cap">스토어 지면 — 상품 탐색·저장 유도</p>
+                    </div>
+                </div>
+
+                <p class="rw-showcase-cap">플레이스·스토어 키워드에 맞춘 참여형 리워드 미션으로 필요한 시점에 유입·저장·상품 탐색 행동을 연결합니다.</p>
+                <p class="landing__note">화면은 미션 노출 방식을 설명하기 위한 예시이며 특정 플랫폼의 실제 UI가 아닙니다.</p>
+            </div>
+        </section>
+
+        {{-- 미디어 파트너 로고 벨트 [블랙] — 실제 매체 앱 아이콘 2줄 마퀴. 대웅 검수 후 실제 연동 매체 기준으로 확정. --}}
+        <section class="landing__section landing__section--dark is-black" id="partners">
+            <div class="landing__inner">
+                <span class="landing__eyebrow">Partner Network</span>
+                <h2 class="landing__head">국내 주요 미디어 파트너와 함께<br>성장 스토리를 만들어 나갑니다</h2>
+                <p class="landing__lead">다양한 앱·플랫폼 매체 네트워크를 통해 리워드 캠페인의 접점을 넓힙니다. 유저가 이미 쓰는 서비스 안에서 자연스러운 참여를 만듭니다.</p>
+            </div>
+            @php
+                $partnerTop = range(1, 13);
+                $partnerBottom = range(14, 26);
+            @endphp
+            <div class="partner-belt-wrap">
+                <div class="marquee partner-belt" aria-label="미디어 파트너 로고">
+                    <ul class="marquee__track" role="list">
+                        @foreach (array_merge($partnerTop, $partnerTop) as $i => $n)
+                            <li class="partner-logo" aria-hidden="true"><img src="{{ asset('images/partners/logo-'.sprintf('%02d', $n).'.png') }}" alt="" loading="lazy" width="240" height="240"></li>
+                        @endforeach
+                    </ul>
+                </div>
+                <div class="marquee partner-belt" aria-hidden="true">
+                    <ul class="marquee__track marquee__track--reverse" role="list">
+                        @foreach (array_merge($partnerBottom, $partnerBottom) as $n)
+                            <li class="partner-logo"><img src="{{ asset('images/partners/logo-'.sprintf('%02d', $n).'.png') }}" alt="" loading="lazy" width="240" height="240"></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="landing__inner">
+                <p class="landing__note" style="text-align:center;">표시된 로고는 매체 네트워크 예시이며, 실제 연동 매체와 지원 범위는 캠페인 조건에 따라 확인 후 확정됩니다.</p>
+            </div>
+        </section>
+
         <section class="landing__section landing__section--light" id="ecosystem">
             <div class="landing__inner">
                 <span class="landing__eyebrow">Three-sided Network</span>

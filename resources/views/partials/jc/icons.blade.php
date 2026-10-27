@@ -44,5 +44,20 @@
         <symbol id="ji-megaphone" viewBox="0 0 24 24"><path d="M3.5 10v4a1 1 0 0 0 1 1h2.5l8 4.5V4.5l-8 4.5H4.5a1 1 0 0 0-1 1Z"/><path d="M7.5 15 9 20.5"/><path d="M18.5 9a4 4 0 0 1 0 6"/></symbol>
         <symbol id="ji-spark" viewBox="0 0 24 24"><path d="M12 3.5 13.8 10l6.7 2-6.7 2L12 20.5 10.2 14 3.5 12l6.7-2Z"/></symbol>
         <symbol id="ji-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5.5 3.5-5.5 3.5Z"/></symbol>
+        {{-- ── 주문·고객센터 (10/27 추가) ── --}}
+        <symbol id="ji-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 9.5h17"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M7.5 13h2M11 13h2M14.5 13h2M7.5 16.5h2M11 16.5h2"/></symbol>
+        <symbol id="ji-flag" viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4.5c4-2 6.5 2 11 0v8.5c-4.5 2-7-2-11 0"/></symbol>
+        <symbol id="ji-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+        <symbol id="ji-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+        <symbol id="ji-wallet" viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="3.5" y="7.5" width="17" height="12.5" rx="2"/><path d="M20.5 11.5h-4a2 2 0 0 0 0 4h4"/><circle cx="16.6" cy="13.5" r=".6"/></symbol>
+        <symbol id="ji-chat" viewBox="0 0 24 24"><path d="M12 4C7.3 4 3.5 7 3.5 10.8c0 2.4 1.6 4.6 4 5.8l-.9 3.4 3.9-2.6c.5.1 1 .1 1.5.1 4.7 0 8.5-3 8.5-6.7S16.7 4 12 4Z"/></symbol>
+        <symbol id="ji-kakao" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 3.5c-5 0-9 3.2-9 7.1 0 2.5 1.7 4.7 4.2 6l-1 3.7c-.1.3.3.6.6.4l4.3-2.9c.3 0 .6.1.9.1 5 0 9-3.2 9-7.2S17 3.5 12 3.5Z"/></symbol>
+        <symbol id="ji-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5"/><path d="M12 7.6v.4"/></symbol>
+        <symbol id="ji-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/><path d="M12 14.5v2"/></symbol>
+        <symbol id="ji-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z"/></symbol>
+        <symbol id="ji-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></symbol>
+        <symbol id="ji-route" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18h6a3.5 3.5 0 0 0 0-7h-5a3.5 3.5 0 0 1 0-7h6"/></symbol>
+        <symbol id="ji-bookmark" viewBox="0 0 24 24"><path d="M6.5 3.5h11v17l-5.5-4-5.5 4Z"/></symbol>
+        <symbol id="ji-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
     </defs>
 </svg>

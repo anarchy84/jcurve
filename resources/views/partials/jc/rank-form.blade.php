@@ -26,6 +26,6 @@
     </label>
     <button class="jc-btn {{ $jcRow ? 'jc-btn--up' : 'jc-btn--primary' }}" type="submit">{{ $jcRow ? '순위 확인' : '무료로 순위 확인' }}</button>
     @unless ($jcRow)
-        <a class="jc-underline" href="{{ route('self-marketing') }}#order">셀프마케팅 주문하기</a>
+        <a class="jc-underline" href="{{ route('self-marketing.order') }}">셀프마케팅 광고 시작하기</a>
     @endunless
 </form>

@@ -32,6 +32,7 @@
         </div>
 
         @include('partials.jc.footer')
+        @include('partials.jc.kakao-float')
 
         @stack('scripts')
     </body>

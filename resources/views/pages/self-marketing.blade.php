@@ -39,7 +39,7 @@
             <h1 id="sf-title" class="jc-display jc-h1--page">순위상승을 위한 실행,<br>직접 시작하세요.</h1>
             <p class="jc-lead">플레이스·쇼핑 마케팅을 직접 설정하고, 집행량과 순위 변화를 확인하세요. 대행 없이, 필요한 만큼만.</p>
             <div class="jc-btns">
-                <a class="jc-btn jc-btn--primary" href="#order">주문 시작하기</a>
+                <a class="jc-btn jc-btn--primary" href="{{ route('self-marketing.order') }}">광고 시작하기</a>
                 <a class="jc-btn jc-btn--line" href="#check">내 순위 변화 확인하기</a>
             </div>
         </div>
@@ -74,13 +74,13 @@
                     <h3 class="jc-display">플레이스</h3>
                     <p>지도·플레이스 검색에서 내 가게가 보이는 위치</p>
                     <dl class="jc-dl"><dt>측정</dt><dd>키워드별 순위, 상위 경쟁 결과 비교</dd><dt>집행</dt><dd>플레이스 순위상승 캠페인</dd></dl>
-                    <a class="jc-link" href="#order">주문하기</a>
+                    <div class="jc-btns"><a class="jc-btn jc-btn--primary jc-btn--sm" href="{{ route('self-marketing.order', ['type' => 'place']) }}">광고 시작하기</a><a class="jc-link" href="{{ route('self-marketing.place') }}">플레이스 자세히 →</a></div>
                 </div>
                 <div>
                     <h3 class="jc-display">쇼핑</h3>
                     <p>스마트스토어 상품이 검색되는 위치</p>
                     <dl class="jc-dl"><dt>측정</dt><dd>상품 순위, 6개월 시장 규모·매출 추정</dd><dt>집행</dt><dd>쇼핑 순위상승 캠페인</dd></dl>
-                    <a class="jc-link" href="#order">주문하기</a>
+                    <div class="jc-btns"><a class="jc-btn jc-btn--primary jc-btn--sm" href="{{ route('self-marketing.order', ['type' => 'shopping']) }}">광고 시작하기</a></div>
                 </div>
                 <div>
                     <h3 class="jc-display">웹 검색</h3>
@@ -98,14 +98,15 @@
         <div class="jc-wrap">
             <div class="jc-head">
                 <h2 id="sf-order" class="jc-display jc-h2">주문은 네 단계면 끝납니다</h2>
-                <p class="jc-text">결제와 집행은 고객님 본인의 랭크프리 계정으로 진행됩니다. 제이커브는 계정 키를 암호화해 보관하고, 화면에 다시 보여주지 않습니다.</p>
+                <p class="jc-text">이 사이트에서 바로 주문합니다. 매장을 찾고, 광고를 설정하고, 기간을 고른 뒤 마지막에 로그인해 주문하면 됩니다.</p>
             </div>
             <ol class="jc-order-steps">
-                <li><span class="jc-num" aria-hidden="true">1</span><strong>로그인</strong><span>제이커브 계정으로 로그인합니다. 처음이면 회원가입부터 합니다.</span></li>
-                <li><span class="jc-num" aria-hidden="true">2</span><strong>랭크프리 계정 연결</strong><span>마이페이지에서 랭크프리 API 키를 한 번 등록합니다. 언제든 해제할 수 있습니다.</span></li>
-                <li><span class="jc-num" aria-hidden="true">3</span><strong>캠페인 고르고 주문</strong><span>플레이스·쇼핑 캠페인을 고르고 키워드와 조건을 입력해 주문합니다.</span></li>
-                <li><span class="jc-num" aria-hidden="true">4</span><strong>접수·진행 확인</strong><span>주문은 ‘접수’로 시작해 진행·완료 상태로 바뀝니다. 금액과 상태는 랭크프리 기준으로 표시됩니다.</span></li>
+                <li><span class="jc-num" aria-hidden="true">1</span><strong>매장 찾기</strong><span>상호명이나 플레이스·상품 URL로 광고할 매장(상품)을 찾습니다.</span></li>
+                <li><span class="jc-num" aria-hidden="true">2</span><strong>광고 설정</strong><span>광고 유형과 메인 키워드, 하루 목표 수를 정합니다.</span></li>
+                <li><span class="jc-num" aria-hidden="true">3</span><strong>일정 설정</strong><span>광고 기간을 고릅니다. 시작일과 종료일이 함께 보입니다.</span></li>
+                <li><span class="jc-num" aria-hidden="true">4</span><strong>최종 확인·주문</strong><span>금액을 확인하고 로그인해 주문합니다. 진행 상황은 마이페이지에서 확인합니다.</span></li>
             </ol>
+            <div class="jc-btns" style="margin-top:32px"><a class="jc-btn jc-btn--primary" href="{{ route('self-marketing.order') }}">광고 시작하기</a><a class="jc-btn jc-btn--line" href="{{ route('self-marketing.place') }}">플레이스 광고 자세히</a></div>
 
             @if (! empty($products))
                 <div class="jc-order-products">

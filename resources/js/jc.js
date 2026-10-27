@@ -435,3 +435,306 @@ document.querySelectorAll('[data-jc-faq]').forEach((hub) => {
     const fromHash = location.hash.replace('#faq-', '');
     if (fromHash && buttons.some((b) => b.dataset.cat === fromHash)) showCategory(fromHash);
 });
+
+// 13) 셀프마케팅 주문 '광고 시작하기' 4단계 (pages/self-marketing-order)
+//     상품표·크레딧·라우트는 페이지에 박힌 JSON(data-jc-order-state)에서 읽는다. 상품표는 랭크프리에서 오고(GPT/Codex),
+//     로컬에선 견본 상품표가 들어온다. 금액은 화면 표시용 계산이며 서버가 다시 계산해 확정한다.
+document.querySelectorAll('[data-jc-order]').forEach((root) => {
+    const stateEl = root.querySelector('[data-jc-order-state]');
+    if (!stateEl) return;
+    const cfg = JSON.parse(stateEl.textContent || '{}');
+    const catalog = cfg.catalog || {};
+    const $ = (sel) => root.querySelector(`[data-o="${sel}"]`);
+    const main = $('main'), prevBtn = $('prev'), nextBtn = $('next'), hint = $('hint');
+    const KEY = 'jc-order-draft';
+    const won = (n) => `${Math.round(n).toLocaleString('ko-KR')}원`;
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const icon = (name, cls = '') => `<svg class="jc-ico ${cls}" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><use href="#ji-${name}"/></svg>`;
+    const DAY = ['일', '월', '화', '수', '목', '금', '토'];
+    const fmtDate = (d) => `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}(${DAY[d.getDay()]})`;
+    const range = (days) => {
+        const [y, m, d] = (cfg.today || new Date().toISOString().slice(0, 10)).split('-').map(Number);
+        const start = new Date(y, m - 1, d + 1); // 등록 다음 날부터
+        const end = new Date(y, m - 1, d + days);
+        return { start, end, text: `${fmtDate(start)} ~ ${fmtDate(end)}` };
+    };
+
+    // 상태
+    let s = { type: cfg.type, step: 1, target: null, productId: null, keyword: '', qty: null, days: null, note: '', results: [] };
+    try {
+        const saved = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+        if (saved && catalog[saved.type]) s = { ...s, ...saved, results: [] };
+    } catch (e) { /* 저장소를 못 쓰면 처음부터 */ }
+    const save = () => { try { sessionStorage.setItem(KEY, JSON.stringify({ ...s, results: [] })); } catch (e) { /* 무시 */ } };
+    const cat = () => catalog[s.type] || {};
+    const products = () => cat().products || [];
+    const product = () => products().find((p) => String(p.id) === String(s.productId)) || null;
+    const ensureDefaults = () => {
+        if (!product() && products().length) s.productId = products()[0].id;
+        const p = product();
+        if (p) {
+            if (!s.qty || s.qty < p.qty_min || s.qty > p.qty_max) s.qty = p.qty_min;
+            const days = p.days || [];
+            if (!days.includes(s.days)) s.days = p.popular_days && days.includes(p.popular_days) ? p.popular_days : days[0];
+        }
+    };
+    const total = () => { const p = product(); return p ? p.unit_price * s.qty * s.days : 0; };
+
+    // 단계별 그리기
+    const targetCard = (t, selectable = false, selected = false) => `
+        <${selectable ? 'button type="button"' : 'div'} class="jc-otarget${selected ? ' is-selected' : ''}" ${selectable ? `data-o-pick="${esc(t.id)}"` : ''}>
+            <span class="jc-otarget__thumb">${t.thumbnail ? `<img src="${esc(t.thumbnail)}" alt="" loading="lazy">` : icon(s.type === 'shopping' ? 'shopping' : 'store')}</span>
+            <span class="jc-otarget__txt">
+                <strong>${esc(t.name)}</strong>
+                ${t.category ? `<span>${esc(t.category)}</span>` : ''}
+                <span class="jc-otarget__tags">
+                    ${t.visitor_reviews != null ? `<em class="is-blue">방문자 리뷰 ${Number(t.visitor_reviews).toLocaleString('ko-KR')}</em>` : ''}
+                    ${t.blog_reviews != null ? `<em class="is-green">블로그 리뷰 ${Number(t.blog_reviews).toLocaleString('ko-KR')}</em>` : ''}
+                    ${t.sample ? '<em class="is-gray">견본</em>' : ''}
+                </span>
+            </span>
+            ${selected ? icon('check', 'jc-otarget__check') : ''}
+        </${selectable ? 'button' : 'div'}>`;
+
+    const pane1 = () => {
+        const t = cat().target || {};
+        return `
+            <h2 class="jc-order__h">${esc(t.heading || '대상 찾기')}</h2>
+            <p class="jc-order__lead">${esc(t.lead || '')}</p>
+            ${t.example ? `<p class="jc-order__note">${icon('info')}<span>${esc(t.example)}</span></p>` : ''}
+            <form class="jc-order__search" data-o-form="search">
+                <label for="o-q">${esc(t.label || '검색어')}</label>
+                <div class="jc-order__searchbox">
+                    <input id="o-q" type="text" name="q" autocomplete="off" value="${esc(s.lastQuery || '')}" placeholder="${esc(t.label || '')}">
+                    <button type="submit" aria-label="검색">${icon('search')}</button>
+                </div>
+            </form>
+            <div class="jc-order__results" data-o-results>
+                ${s.target && !s.results.length ? `<span class="jc-order__arrow" aria-hidden="true"></span>${targetCard(s.target, false, true)}` : ''}
+                ${s.results.map((r) => targetCard(r, true, s.target && String(s.target.id) === String(r.id))).join('')}
+            </div>`;
+    };
+    const pane2 = () => {
+        const p = product() || {};
+        const c = cat();
+        return `
+            <h2 class="jc-order__h">${icon('flag')}광고 유형</h2>
+            <p class="jc-order__lead">원하는 유형을 선택하세요.</p>
+            <div class="jc-oprod" role="radiogroup" aria-label="광고 유형">
+                ${products().map((x) => `
+                    <button type="button" role="radio" aria-checked="${String(x.id) === String(s.productId)}" data-o-prod="${esc(x.id)}" class="jc-oprod__item">
+                        ${String(x.id) === String(s.productId) ? icon('check', 'jc-oprod__check') : ''}
+                        ${icon(x.icon || 'spark', 'jc-oprod__ico')}
+                        <strong>${esc(x.name)}</strong>
+                        <em>${won(x.unit_price)}/${esc(x.unit || '회')}</em>
+                    </button>`).join('')}
+            </div>
+            <h2 class="jc-order__h">${icon('flag')}${esc(c.keyword_label || '메인 키워드')}</h2>
+            <p class="jc-order__lead">${esc(c.keyword_help || '')}</p>
+            <input class="jc-order__input" type="text" maxlength="40" data-o-input="keyword" value="${esc(s.keyword)}" placeholder="${esc(c.keyword_placeholder || '')}" aria-label="${esc(c.keyword_label || '메인 키워드')}">
+            <h2 class="jc-order__h">${icon('flag')}${esc(p.qty_label || '일일 목표 수량')}</h2>
+            <p class="jc-order__lead">최소 ${Number(p.qty_min || 0).toLocaleString('ko-KR')}${esc(p.qty_unit || '')}부터 ${Number(p.qty_step || 1).toLocaleString('ko-KR')}${esc(p.qty_unit || '')} 단위로 조절할 수 있습니다.</p>
+            <div class="jc-ostep">
+                <button type="button" data-o-qty="-1" aria-label="줄이기" ${s.qty <= p.qty_min ? 'disabled' : ''}>${icon('minus')}</button>
+                <output aria-live="polite"><b>${Number(s.qty).toLocaleString('ko-KR')}</b>${esc(p.qty_unit || '')}</output>
+                <button type="button" data-o-qty="1" aria-label="늘리기" ${s.qty >= p.qty_max ? 'disabled' : ''}>${icon('plus')}</button>
+            </div>
+            ${(p.guide || []).length ? `
+                <p class="jc-order__small">경쟁도별 권장 범위</p>
+                <ul class="jc-oguide">${p.guide.map(([lv, txt], i) => `<li class="is-${['low', 'mid', 'high'][i] || 'low'}"><b>${esc(lv)}</b><span>${esc(txt)}</span></li>`).join('')}</ul>` : ''}
+            <details class="jc-order__more" ${s.note ? 'open' : ''}>
+                <summary>고객 요청사항 추가 (선택)</summary>
+                <textarea maxlength="300" rows="3" data-o-input="note" placeholder="광고 진행 시 참고할 내용을 적어 주세요. (최대 300자)">${esc(s.note)}</textarea>
+            </details>`;
+    };
+    const pane3 = () => {
+        const p = product() || {};
+        const r = range(s.days || 0);
+        return `
+            <h2 class="jc-order__h">${icon('calendar')}광고 기간</h2>
+            <p class="jc-order__lead jc-order__range">${esc(r.text)}</p>
+            <div class="jc-odays" role="radiogroup" aria-label="광고 기간">
+                ${(p.days || []).map((d) => `
+                    <button type="button" role="radio" aria-checked="${d === s.days}" data-o-days="${d}">
+                        ${d === p.popular_days ? '<span class="jc-odays__badge">인기</span>' : ''}
+                        <strong>${d}일</strong>${d === s.days ? icon('check') : ''}
+                    </button>`).join('')}
+            </div>
+            <p class="jc-order__small">등록한 광고는 다음 날부터 진행됩니다.</p>`;
+    };
+    const pane4 = () => {
+        const p = product() || {};
+        const r = range(s.days || 0);
+        const sum = total();
+        const credit = typeof cfg.credit === 'number' ? cfg.credit : null;
+        const short = credit != null ? Math.max(0, sum - credit) : 0;
+        let account = '';
+        if (cfg.guest) {
+            account = `<div class="jc-oacct">${icon('lock')}<div><strong>주문하려면 로그인이 필요해요</strong><p>입력한 내용은 그대로 남아 있어요. 로그인 후 이 화면으로 돌아옵니다.</p></div></div>`;
+        } else if (cfg.connected === false) {
+            account = `<div class="jc-oacct">${icon('rankfree')}<div><strong>랭크프리 계정을 연결해 주세요</strong><p>주문은 연결한 랭크프리 계정의 크레딧으로 진행됩니다.</p><a class="jc-link" href="${esc(cfg.routes.connect)}">마이페이지에서 연결하기 →</a></div></div>`;
+        } else if (credit != null) {
+            account = `
+                <div class="jc-ocredit${short ? ' is-short' : ''}">
+                    <div><strong>보유 크레딧</strong>${short ? `<span>${icon('info')}크레딧 부족: ${won(short)}</span>` : '<span class="is-ok">바로 주문할 수 있어요</span>'}</div>
+                    <b>${won(credit)}</b>
+                </div>
+                ${short ? (cfg.routes.charge
+                    ? `<a class="jc-btn jc-btn--up jc-ocharge" href="${esc(cfg.routes.charge)}?amount=${short}">${icon('wallet')}크레딧 충전</a>`
+                    : `<button type="button" class="jc-btn jc-btn--up jc-ocharge" disabled>${icon('wallet')}크레딧 충전 (연결 준비 중)</button>`) : ''}`;
+        } else {
+            account = `<p class="jc-order__small">보유 크레딧은 랭크프리 연동 후 이 자리에 표시됩니다.</p>`;
+        }
+        return `
+            <h2 class="jc-order__h">${icon('flag')}${esc((cat().target || {}).noun || '대상')} 정보</h2>
+            ${s.target ? targetCard(s.target, false, true) : ''}
+            <h2 class="jc-order__h">${icon('flag')}광고 설정</h2>
+            <dl class="jc-osum">
+                <div><dt>광고 유형</dt><dd>${esc(p.name)} (${won(p.unit_price)}/${esc(p.unit || '회')})</dd></div>
+                <div><dt>메인 키워드</dt><dd>${esc(s.keyword)}</dd></div>
+                <div><dt>광고 기간</dt><dd><b>${s.days}일</b> <small>${esc(r.text)}</small></dd></div>
+                <div><dt>${esc(p.qty_label || '일일 목표 수량')}</dt><dd>${Number(s.qty).toLocaleString('ko-KR')}${esc(p.qty_unit || '')}</dd></div>
+                ${s.note ? `<div class="is-wide"><dt>요청사항</dt><dd>${esc(s.note)}</dd></div>` : ''}
+            </dl>
+            <h2 class="jc-order__h">${icon('flag')}비용 요약</h2>
+            <div class="jc-ocost">
+                <dl>
+                    <div><dt>일일 비용</dt><dd>${won(p.unit_price * s.qty)}</dd></div>
+                    <div><dt>광고 기간</dt><dd>${s.days}일</dd></div>
+                    <div class="is-total"><dt>총 광고비</dt><dd>${won(sum)}</dd></div>
+                </dl>
+                ${account}
+                <p class="jc-order__small">최종 금액은 주문 시 랭크프리가 다시 계산해 확정합니다.</p>
+            </div>`;
+    };
+
+    const stepTitles = () => {
+        const noun = (cat().target || {}).noun || '매장';
+        $('step1-title').textContent = `${noun} 정보 입력`;
+        $('step1-desc').textContent = `${noun}의 기본 정보를 입력하세요`;
+        $('title').textContent = cat().title || '';
+    };
+    const canNext = () => {
+        if (s.step === 1) return !!s.target;
+        if (s.step === 2) return !!product() && s.keyword.trim().length > 0;
+        if (s.step === 3) return !!s.days;
+        return false;
+    };
+    const syncFoot = () => {
+        prevBtn.disabled = s.step === 1;
+        prevBtn.style.visibility = s.step === 1 ? 'hidden' : 'visible';
+        hint.textContent = '';
+        if (s.step < 4) {
+            nextBtn.textContent = '다음';
+            nextBtn.disabled = !canNext();
+            if (s.step === 1 && !s.target) hint.textContent = `${(cat().target || {}).noun || '대상'}을 검색해서 선택해 주세요.`;
+            if (s.step === 2 && !s.keyword.trim()) hint.textContent = '메인 키워드를 입력해 주세요.';
+            return;
+        }
+        const credit = typeof cfg.credit === 'number' ? cfg.credit : null;
+        if (cfg.guest) { nextBtn.textContent = '로그인하고 주문하기'; nextBtn.disabled = false; return; }
+        nextBtn.textContent = '광고 생성하기';
+        const ready = cfg.routes.store && cfg.connected !== false && credit != null && credit >= total();
+        nextBtn.disabled = !ready;
+        if (cfg.sample || !cfg.routes.store) hint.textContent = '견본 화면에서는 주문이 접수되지 않아요.';
+        else if (credit != null && credit < total()) hint.textContent = '크레딧을 충전하면 바로 주문할 수 있어요.';
+    };
+    const render = () => {
+        ensureDefaults();
+        stepTitles();
+        root.querySelectorAll('[data-o-type]').forEach((b) => b.setAttribute('aria-pressed', b.dataset.oType === s.type ? 'true' : 'false'));
+        root.querySelectorAll('.jc-order__steps li').forEach((li) => {
+            const n = Number(li.dataset.step);
+            li.classList.toggle('is-done', n < s.step);
+            li.classList.toggle('is-active', n === s.step);
+            if (n === s.step) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
+        });
+        $('bar').style.width = `${(s.step / 4) * 100}%`;
+        main.innerHTML = `<div class="jc-order__pane" data-pane="${s.step}">${[pane1, pane2, pane3, pane4][s.step - 1]()}</div>`;
+        syncFoot();
+        save();
+    };
+    const go = (n) => { s.step = Math.min(4, Math.max(1, n)); render(); main.scrollTop = 0; const top = root.getBoundingClientRect().top; if (top < 0) root.scrollIntoView({ block: 'start', behavior: jcReduce ? 'auto' : 'smooth' }); };
+
+    // 검색: 실제 검색 라우트가 있으면 서버(GPT/Codex)에, 없으면(견본) 입력값으로 카드를 만든다
+    const search = async (q) => {
+        s.lastQuery = q;
+        if (!q) return;
+        hint.textContent = '찾는 중…';
+        if (cfg.routes.search) {
+            try {
+                const res = await fetch(`${cfg.routes.search}?type=${encodeURIComponent(s.type)}&q=${encodeURIComponent(q)}`, { headers: { Accept: 'application/json' }, credentials: 'same-origin' });
+                const json = await res.json();
+                s.results = Array.isArray(json.data) ? json.data : [];
+            } catch (e) { s.results = []; }
+            if (!s.results.length) { render(); hint.textContent = '검색 결과가 없어요. 이름 대신 URL로 다시 찾아보세요.'; return; }
+        } else {
+            const id = (q.match(/(?:place|products)\/(\d+)/) || [])[1];
+            s.results = [{ id: id || `sample-${Date.now()}`, name: id ? `${s.type === 'shopping' ? '상품' : '플레이스'} #${id}` : q, category: '매장·상품 정보는 검색 연결 후 표시', sample: true }];
+        }
+        if (s.results.length === 1) s.target = s.results[0];
+        render();
+    };
+
+    root.addEventListener('submit', (e) => {
+        if (!e.target.matches('[data-o-form="search"]')) return;
+        e.preventDefault();
+        search(e.target.querySelector('input').value.trim());
+    });
+    root.addEventListener('click', (e) => {
+        const t = e.target.closest('[data-o-type],[data-o-pick],[data-o-prod],[data-o-qty],[data-o-days]');
+        if (!t) return;
+        if (t.dataset.oType && t.dataset.oType !== s.type) {
+            s = { ...s, type: t.dataset.oType, step: 1, target: null, productId: null, qty: null, days: null, results: [], lastQuery: '' };
+            render();
+        } else if (t.dataset.oPick) {
+            s.target = s.results.find((r) => String(r.id) === t.dataset.oPick) || null; render();
+        } else if (t.dataset.oProd) {
+            s.productId = t.dataset.oProd; s.qty = null; render();
+        } else if (t.dataset.oQty) {
+            const p = product(); if (!p) return;
+            s.qty = Math.min(p.qty_max, Math.max(p.qty_min, s.qty + Number(t.dataset.oQty) * p.qty_step)); render();
+        } else if (t.dataset.oDays) {
+            s.days = Number(t.dataset.oDays); render();
+        }
+    });
+    root.addEventListener('input', (e) => {
+        const f = e.target.dataset.oInput;
+        if (!f) return;
+        s[f] = e.target.value;
+        save();
+        syncFoot();
+    });
+    prevBtn.addEventListener('click', () => go(s.step - 1));
+    nextBtn.addEventListener('click', async () => {
+        if (s.step < 4) { if (canNext()) go(s.step + 1); return; }
+        if (cfg.guest) {
+            save();
+            const back = `${cfg.routes.self}?type=${encodeURIComponent(s.type)}`;
+            location.href = `${cfg.routes.login}?redirect=${encodeURIComponent(back)}`;
+            return;
+        }
+        if (nextBtn.disabled || !cfg.routes.store) return;
+        nextBtn.disabled = true;
+        hint.textContent = '주문을 접수하는 중…';
+        try {
+            const res = await fetch(cfg.routes.store, {
+                method: 'POST',
+                credentials: 'same-origin',
+                headers: { 'Content-Type': 'application/json', Accept: 'application/json', 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || '' },
+                body: JSON.stringify({ type: s.type, product_id: s.productId, target_id: s.target?.id, target_url: s.target?.url || null, keyword: s.keyword.trim(), daily_quantity: s.qty, days: s.days, note: s.note.trim() || null }),
+            });
+            const json = await res.json().catch(() => ({}));
+            if (!res.ok) throw new Error(json?.error?.message || '주문을 접수하지 못했어요. 잠시 후 다시 시도해 주세요.');
+            try { sessionStorage.removeItem(KEY); } catch (e) { /* 무시 */ }
+            location.href = json?.data?.redirect || cfg.routes.orders || cfg.routes.self;
+        } catch (err) {
+            hint.textContent = err.message;
+            nextBtn.disabled = false;
+        }
+    });
+
+    // 로그인하고 돌아왔으면 마지막 단계부터
+    if (!cfg.guest && s.step === 4 && s.target) { /* 그대로 4단계 */ } else if (s.step > 1 && !s.target) s.step = 1;
+    render();
+});

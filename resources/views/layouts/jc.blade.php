@@ -18,6 +18,7 @@
             @yield('content')
         </main>
         @include('partials.jc.footer', ['variant' => trim($__env->yieldContent('footer_variant'))])
+        @include('partials.jc.kakao-float')
         @stack('scripts')
     </body>
 </html>

@@ -1,0 +1,286 @@
+/* ============================================================
+   제이커브 리뉴얼 v3 — 기존(v1) 페이지 새 톤 입히기
+   ------------------------------------------------------------
+   목적: 기존 페이지의 문장·제목·주소는 한 글자도 건드리지 않고
+         (SEO 트래픽 보존, 대웅 지시 2026-10-27) 디자인만 새 톤으로 바꾼다.
+   방식: layouts/app.blade.php 의 <body class="jc-legacy"> 아래에서
+         v1 디자인 변수와 공통 부품(landing·steps·faq·subcard…)을 다시 칠한다.
+   원칙: 왼쪽 정렬 편집 디자인 / 검정·흰색·파랑(#1E3AFF) 3색 / 그림자·유리·
+         둥근 알약 버튼·장식 일러스트 없음 / 제목은 Wanted Sans
+   ============================================================ */
+
+/* ---------- 1. 디자인 변수 교체 (v1 컴포넌트가 이 변수로 칠해짐) ---------- */
+.jc-legacy {
+    --primary: #1E3AFF;
+    --primary-focus: #1530E0;
+    --primary-on-dark: #9AA8FF;
+    --canvas: #ffffff;
+    --parchment: #F5F6F8;
+    --pearl: #FAFAFB;
+    --tile-1: #000000;
+    --tile-2: #0B0B0C;
+    --tile-3: #000000;
+    --black: #000000;
+    --ink: #0B0B0C;
+    --on-dark: #ffffff;
+    --text-muted: #5B5F66;
+    --muted-on-dark: #A9ADB5;
+    --ink-48: #6B6F76;
+    --hairline: #E6E7EA;
+    --shadow-media: none;
+    --orb-blue: none;
+    --orb-deep: none;
+    --glass-fill: transparent;
+    --glass-border: rgba(255, 255, 255, 0.22);
+    --glass-blur: none;
+    --font: var(--jc-font);
+    --container: var(--jc-max);
+    --container-text: var(--jc-max);
+    --stat-huge: clamp(34px, 3.6vw, 56px);
+    background: #fff;
+    color: var(--ink);
+    font-family: var(--jc-font);
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- 2. 장식 걷어내기 (빛 번짐·유리·떠다니는 3D·흐르는 띠) ---------- */
+.jc-legacy .has-orb::before,
+.jc-legacy .has-orb::after { display: none !important; }
+.jc-legacy .section-mesh,
+.jc-legacy .landing__hero-figure,
+.jc-legacy .landing__hero-mark,
+.jc-legacy .icon3d,
+.jc-legacy .goalcard__media,
+.jc-legacy .bento__media { display: none !important; }
+.jc-legacy .glass-card { background: transparent; border: 0; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; border-radius: 0; }
+.jc-legacy [class*="__thumb"] img { transition: none; }
+.jc-legacy .grad { color: inherit; background: none; -webkit-text-fill-color: currentColor; }
+
+/* ---------- 3. 글꼴 위계 ---------- */
+.jc-legacy main :is(h1, h2) { font-family: var(--jc-font-display); font-weight: 800; letter-spacing: -0.04em; color: inherit; text-wrap: balance; }
+.jc-legacy main h3 { letter-spacing: -0.02em; }
+
+/* ---------- 4. 버튼 — 알약 → 8px 각진 버튼 ---------- */
+.jc-legacy .btn-primary,
+.jc-legacy .btn-ghost {
+    height: 52px; padding: 0 24px; border-radius: var(--jc-radius); font-family: var(--jc-font);
+    font-size: 16px; font-weight: 600; letter-spacing: -0.01em; transition: background-color .15s ease, color .15s ease;
+}
+.jc-legacy .btn-primary { background: var(--jc-blue); border-color: var(--jc-blue); color: #fff; }
+.jc-legacy .btn-primary:hover { background: var(--jc-blue-press); border-color: var(--jc-blue-press); color: #fff; }
+.jc-legacy .btn-ghost { background: transparent; border: 1.5px solid var(--ink); color: var(--ink); }
+.jc-legacy .btn-ghost:hover { background: var(--ink); color: #fff; }
+.jc-legacy .btn-primary:active, .jc-legacy .btn-ghost:active { transform: none; }
+.jc-legacy :is(.landing__section--dark, .landing__cta, .home__cta) .btn-ghost { border-color: #fff; color: #fff; }
+.jc-legacy :is(.landing__section--dark, .landing__cta, .home__cta) .btn-ghost:hover { background: #fff; color: #000; }
+.jc-legacy .cta-row { gap: 12px; }
+
+/* ---------- 5. 페이지 머리(히어로) — 가운데 정렬 회색 판 → 왼쪽 정렬 흰 판 ---------- */
+.jc-legacy .landing__hero {
+    background: #fff; text-align: left; border-bottom: 1px solid var(--hairline);
+    padding: clamp(48px, 6vw, 96px) var(--jc-gutter) clamp(48px, 6vw, 88px);
+}
+.jc-legacy .landing__hero-inner { max-width: var(--jc-max); margin: 0 auto; }
+.jc-legacy .landing__hero--media .landing__hero-inner { grid-template-columns: minmax(0, 1fr); text-align: left; }
+.jc-legacy .landing__hero h1 { font-size: clamp(38px, 5vw, 68px); line-height: 1.12; letter-spacing: -0.045em; max-width: 15em; margin: 0 0 24px; }
+.jc-legacy .landing__hero .landing__lead { margin: 0; max-width: 680px; }
+.jc-legacy .landing__hero .cta-row { justify-content: flex-start; margin-top: 36px; }
+.jc-legacy .landing__hero .detail__metrics { margin-top: 36px; }
+
+/* 보조 라벨(영문 아이라벨 포함) — 파란 대문자 → 조용한 회색 소제목 */
+.jc-legacy :is(.landing__eyebrow, .section-eyebrow) {
+    display: block; margin-bottom: 14px; font-size: 13px; font-weight: 600; letter-spacing: 0;
+    text-transform: none; color: var(--ink-48);
+}
+.jc-legacy .landing__section--dark .landing__eyebrow { color: var(--muted-on-dark); }
+
+/* ---------- 6. 페이지 안 이동 탭 ---------- */
+.jc-legacy .landing__local-nav { top: 76px; background: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; border-top: 0; }
+.jc-legacy .landing__local-nav-inner { max-width: var(--jc-max); padding: 0 var(--jc-gutter); gap: 28px; box-sizing: content-box; }
+.jc-legacy .landing__local-nav a { padding: 16px 0; border-radius: 0; font-size: 14px; color: var(--ink-48); }
+.jc-legacy .landing__local-nav a:hover,
+.jc-legacy .landing__local-nav a:focus-visible { background: none; color: #000; box-shadow: inset 0 -2px 0 #000; }
+.jc-legacy .landing__section[id] { scroll-margin-top: 140px; }
+
+/* ---------- 7. 본문 구간 ---------- */
+.jc-legacy .landing__section { padding: var(--jc-section) var(--jc-gutter); }
+.jc-legacy .landing__section--parchment { background: var(--parchment); }
+.jc-legacy .landing__section--dark { background: #000; }
+.jc-legacy .landing__inner,
+.jc-legacy .landing__inner--wide { max-width: var(--jc-max); margin: 0 auto; }
+.jc-legacy .landing__section--center { text-align: left; }
+.jc-legacy .landing__section--center .cta-row { justify-content: flex-start; }
+.jc-legacy .landing__section--center .landing__lead { margin-left: 0; }
+.jc-legacy .landing__head { font-size: clamp(30px, 3.4vw, 48px); line-height: 1.18; letter-spacing: -0.04em; max-width: 18em; margin: 0 0 24px; }
+.jc-legacy .landing__lead { font-size: 19px; line-height: 1.65; color: var(--text-muted); max-width: 720px; }
+.jc-legacy .landing__body { font-size: 17px; line-height: 1.75; color: var(--text-muted); max-width: 720px; }
+.jc-legacy .landing__section--dark :is(.landing__lead, .landing__body) { color: var(--muted-on-dark); }
+.jc-legacy .landing__inner > .prose { max-width: 760px; }
+.jc-legacy .prose p { font-size: 17px; line-height: 1.8; color: var(--text-muted); }
+
+/* 카드 → 위 선 하나로 나누는 편집형 칸 */
+.jc-legacy .landing__points { gap: 0 40px; margin-top: 48px; }
+.jc-legacy .landing__point,
+.jc-legacy .landing__point--light {
+    background: none; border: 0; border-top: 1px solid var(--ink); border-radius: 0;
+    padding: 22px 0 28px; backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+.jc-legacy .landing__section--dark .landing__point { border-top-color: rgba(255, 255, 255, 0.4); }
+.jc-legacy .landing__point strong { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+.jc-legacy .landing__point :is(span, p) { font-size: 15px; line-height: 1.7; }
+.jc-legacy .landing__point--link:hover { transform: none; border-color: var(--jc-blue); }
+.jc-legacy .landing__point--link:hover strong { color: var(--jc-blue); }
+.jc-legacy .landing__point .landing__point-link { color: var(--jc-blue); }
+
+.jc-legacy .landing__split { gap: 0 40px; margin-top: 48px; }
+.jc-legacy .landing__panel { background: none; border: 0; border-top: 1px solid var(--ink); border-radius: 0; padding: 24px 0 32px; }
+.jc-legacy .landing__section--dark .landing__panel { border-top-color: rgba(255, 255, 255, 0.4); background: none; backdrop-filter: none; -webkit-backdrop-filter: none; }
+.jc-legacy .landing__panel h3 { font-size: 21px; font-weight: 700; letter-spacing: -0.02em; }
+.jc-legacy .landing__panel :is(p, li) { font-size: 15.5px; line-height: 1.7; }
+
+/* 단계 — 파란 동그라미 숫자 → 굵은 숫자 + 위 선 */
+.jc-legacy .steps { max-width: none; gap: 0; margin-top: 48px; }
+.jc-legacy .steps__item { padding: 22px 0 24px 72px; border-top: 1px solid var(--hairline); }
+.jc-legacy .steps__item:last-child { border-bottom: 1px solid var(--hairline); }
+.jc-legacy .landing__section--dark .steps__item { border-color: rgba(255, 255, 255, 0.18); }
+.jc-legacy .steps__item::before {
+    top: 20px; width: auto; height: auto; background: none; border-radius: 0; color: var(--ink);
+    font-family: var(--jc-font-display); font-weight: 800; font-size: 26px; letter-spacing: -0.03em; justify-content: flex-start;
+}
+.jc-legacy .landing__section--dark .steps__item::before { color: #fff; }
+.jc-legacy .steps__item strong { font-size: 18px; font-weight: 700; }
+.jc-legacy .steps__item p { font-size: 15.5px; line-height: 1.7; max-width: 720px; }
+
+/* 강조 문장 — 왼쪽 파란 막대 → 위 굵은 선 */
+.jc-legacy .landing__callout {
+    margin-top: 48px; padding: 24px 0 0; border-left: 0; border-top: 2px solid var(--ink); background: none;
+    font-family: var(--jc-font-display); font-weight: 700; font-size: clamp(22px, 2.4vw, 30px); line-height: 1.4; letter-spacing: -0.03em; max-width: 900px;
+}
+.jc-legacy .landing__section--dark .landing__callout { border-top-color: #fff; background: none; }
+
+/* 고지 문구 */
+.jc-legacy .landing__note { border: 0; border-top: 1px solid var(--hairline); border-radius: 0; background: none; padding: 14px 0 0; font-size: 13px; color: var(--ink-48); }
+.jc-legacy .landing__section--dark .landing__note { background: none; border-top-color: rgba(255, 255, 255, 0.18); color: var(--muted-on-dark); }
+
+/* 근거 목록 */
+.jc-legacy .landing__evidence li::before { top: 11px; width: 6px; height: 6px; border-radius: 0; background: var(--ink); }
+.jc-legacy .landing__section--dark .landing__evidence li::before { background: #fff; }
+
+/* 칩 */
+.jc-legacy .landing__chips span { border-radius: var(--jc-radius); border-color: rgba(255, 255, 255, 0.3); }
+
+/* 하위 페이지 카드 */
+.jc-legacy .subcards { gap: 0 32px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.jc-legacy .subcard { border: 0; border-top: 1px solid var(--ink); border-radius: 0; background: none; padding: 22px 0 26px; }
+.jc-legacy .subcard:hover { transform: none; border-color: var(--jc-blue); }
+.jc-legacy .subcard:hover strong { color: var(--jc-blue); }
+.jc-legacy .subcard strong { font-size: 19px; font-weight: 700; }
+.jc-legacy .subcard span { color: var(--jc-blue); font-weight: 600; }
+
+/* 비교표 */
+.jc-legacy .compare-table thead th { border-bottom: 2px solid var(--ink); }
+.jc-legacy .compare-table .is-cpa { color: var(--jc-blue); }
+
+/* 자주 묻는 질문 */
+.jc-legacy .faq { max-width: 880px; }
+.jc-legacy .faq__item:first-child { border-top: 1px solid var(--hairline); }
+.jc-legacy .faq__item summary { font-size: 17px; font-weight: 700; padding: 22px 0; }
+.jc-legacy .faq__item summary::after { color: var(--ink); font-size: 22px; }
+.jc-legacy .faq__item p { font-size: 15.5px; line-height: 1.75; }
+
+/* 숫자 지표 */
+.jc-legacy .detail__metrics { gap: 16px 40px; justify-content: flex-start; }
+.jc-legacy .detail__metric { text-align: left; min-width: 150px; border-top: 1px solid var(--ink); padding-top: 14px; background: none; border-radius: 0; }
+.jc-legacy .detail__metric strong { font-family: var(--jc-font-display); font-weight: 800; letter-spacing: -0.03em; }
+.jc-legacy .landing__section--dark .detail__metric { border-top-color: rgba(255, 255, 255, 0.4); }
+.jc-legacy .landing__section--dark .detail__metric strong { color: #fff; }
+
+/* 큰 숫자 칸 (회사소개·성과) — 가운데 → 왼쪽 정렬 + 위 선 */
+.jc-legacy .stat { text-align: left; align-items: flex-start !important; justify-content: flex-start !important; border-top: 1px solid currentColor; padding: 20px 0 0 !important; }
+.jc-legacy .stat strong { font-family: var(--jc-font-display); font-weight: 800; letter-spacing: -0.04em; justify-content: flex-start !important; }
+.jc-legacy .stat span { text-align: left; }
+
+/* ---------- 8. 마지막 상담 구간 — 가운데 → 왼쪽 정렬 검정 띠 ---------- */
+.jc-legacy .landing__cta { background: #000; text-align: left; padding: clamp(72px, 8vw, 112px) var(--jc-gutter); }
+.jc-legacy .landing__cta-inner { max-width: var(--jc-max); align-items: flex-start; }
+.jc-legacy .landing__cta h2 { font-size: clamp(32px, 3.6vw, 52px); line-height: 1.18; max-width: 18em; }
+.jc-legacy .landing__cta .cta-row { justify-content: flex-start; }
+.jc-legacy .landing__cta p { color: var(--muted-on-dark); }
+
+/* ---------- 9. 목록(성과·인사이트·커뮤니티)·글 상세 ---------- */
+.jc-legacy .listing__grid { gap: 0 32px; }
+.jc-legacy .insight-preview,
+.jc-legacy .work-preview { background: none; border: 0; border-top: 1px solid var(--ink); border-radius: 0; padding: 22px 0 28px; box-shadow: none; }
+.jc-legacy .insight-preview:hover,
+.jc-legacy .work-preview:hover { transform: none; border-color: var(--jc-blue); }
+.jc-legacy .insight-preview:hover .insight-preview__title,
+.jc-legacy .work-preview:hover .work-preview__title { color: var(--jc-blue); }
+.jc-legacy .insight-preview__cat { color: var(--ink-48); font-weight: 600; }
+.jc-legacy .insight-preview__title,
+.jc-legacy .work-preview__title { font-family: var(--jc-font); font-weight: 700; letter-spacing: -0.02em; }
+.jc-legacy .work-preview__thumb { border-radius: var(--jc-radius); }
+.jc-legacy .listing__filter { border-radius: var(--jc-radius); }
+.jc-legacy .listing__filter--active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+/* 게시판·글쓰기·입력칸 */
+.jc-legacy .board-list__item { border-radius: 0; border: 0; border-top: 1px solid var(--ink); background: none; padding: 22px 0; }
+.jc-legacy .board-list__item:hover { transform: none; }
+.jc-legacy .form-field input,
+.jc-legacy .form-field textarea,
+.jc-legacy .form-field select { border-radius: var(--jc-radius); border: 1px solid var(--jc-line-2); font-family: var(--jc-font); }
+.jc-legacy .form-field input:focus,
+.jc-legacy .form-field textarea:focus,
+.jc-legacy .form-field select:focus { border-color: var(--jc-blue); box-shadow: 0 0 0 3px rgba(30, 58, 255, 0.15); outline: 0; }
+.jc-legacy .form-field label { font-weight: 600; }
+
+/* 하위 상세 페이지 경로 표시 */
+.jc-legacy .subpage__breadcrumb a { color: var(--ink-48); }
+
+/* ---------- 10. 화면 폭별 ---------- */
+@media (max-width: 900px) {
+    .jc-legacy .landing__hero--media .landing__hero-inner { text-align: left; }
+    .jc-legacy .landing__hero--media .landing__lead { margin-left: 0; }
+    .jc-legacy .landing__hero--media .cta-row { justify-content: flex-start; }
+}
+@media (max-width: 760px) {
+    .jc-legacy .steps__item { padding-left: 52px; }
+    .jc-legacy .steps__item::before { font-size: 22px; }
+    .jc-legacy .landing__local-nav { top: 76px; }
+}
+
+/* 회사소개 숫자 띠(home__stats 재사용) */
+.jc-legacy .home__stats { background: #000; padding: clamp(64px, 7vw, 96px) var(--jc-gutter); }
+.jc-legacy .home__stats-inner { max-width: var(--jc-max); gap: 0 40px; text-align: left; }
+.jc-legacy .home__stats .stat { border-top-color: rgba(255, 255, 255, 0.4); }
+.jc-legacy .home__stats .stat span { font-size: 14px; }
+
+/* 리워드 네트워크 — 제휴 네트워크 줄 (검정 구간 위, 로고는 흰색으로 반전) */
+.jc-legacy .rw-networks { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 40px; margin-top: 36px; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.22); }
+.jc-legacy .rw-networks__title { font-size: 13px; font-weight: 700; color: var(--muted-on-dark); }
+.jc-legacy .rw-networks__logos { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 44px; list-style: none; margin: 0; padding: 0; }
+.jc-legacy .rw-networks__logos img { display: block; width: auto; filter: brightness(0) invert(1); }
+.jc-legacy .rw-networks__word { font-family: var(--jc-font-display); font-weight: 800; font-size: 26px; letter-spacing: -0.02em; color: #fff; }
+
+/* ---------- 11. 목록 필터·페이지 번호·입력 폼 — 가운데 알약 → 왼쪽 정렬 각진 버튼 ---------- */
+.jc-legacy .listing__filters { justify-content: flex-start; gap: 8px; }
+.jc-legacy .listing__filter { border-radius: var(--jc-radius); font-size: 14px; font-weight: 600; padding: 9px 16px; border-color: var(--jc-line-2); }
+.jc-legacy .listing__pagination nav,
+.jc-legacy .pager { justify-content: flex-start; }
+.jc-legacy .pager__link { border-radius: var(--jc-radius); border-color: var(--jc-line-2); }
+.jc-legacy .pager__link--active { background: #000; border-color: #000; color: #fff; }
+.jc-legacy .seocheck__form { margin: 36px 0 0; max-width: 720px; gap: 8px; }
+.jc-legacy .seocheck__form input { border-radius: var(--jc-radius); border-color: var(--jc-line-2); height: 52px; font-size: 16px; }
+.jc-legacy .seocheck__form input:focus { border-color: var(--jc-blue); box-shadow: 0 0 0 3px rgba(30, 58, 255, 0.15); }
+
+/* 본문 폭 컨테이너(문의·커뮤니티·글쓰기·약관 등) — 가운데 좁은 칸 → 사이트 기본 폭, 왼쪽 정렬 */
+.jc-legacy :is(.subpage__content, .legal__content, .service__content, .solution__content, .services__overview, .company__introduction, .anarchy__profile, .insight-list__content, .insight-detail__content, .work-list__content, .work-detail__content, .community-index__boards, .post-detail__content, .post-form__content, .contact__form) {
+    max-width: var(--jc-max); padding: var(--jc-section) var(--jc-gutter); box-sizing: content-box;
+}
+.jc-legacy .contact__form > * { max-width: 760px; }
+.jc-legacy .contact__form h2 { margin-bottom: 12px; }
+.jc-legacy .contact__form h2 + p { margin-bottom: 32px; color: var(--text-muted); }
+.jc-legacy .contact__form button[type="submit"] { border-radius: var(--jc-radius); background: var(--jc-blue); height: 52px; font-weight: 600; }
+.jc-legacy .board-list { margin: 0; max-width: none; gap: 0 40px; }
+.jc-legacy .landing__cta :is(h2, p) { text-align: left; }

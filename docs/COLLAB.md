@@ -52,6 +52,10 @@
 | `insights.show` (새 디자인) | `$related` | `Collection<Insight>` 같은 카테고리 최신 2~3건 (`title, slug, published_at`) | 제안 (Claude, 10/27) |
 | `insights.show` (새 디자인) | `$insight->sources` | `array<string>` — 인용 자료 목록. 없으면 블록 숨김 | 제안 (Claude, 10/27) |
 | 홈·셀프마케팅 순위 확인 폼 | 폼 전송 대상 | 랭크프리 검색으로 바로 보낼지(외부 링크 + 쿼리) 사이트 안에서 받을지 결정 필요 | 제안 (Claude, 10/27) — 대웅 확인 |
+| `pages.self-marketing` | `$products` | `array<{id:int, title:string, description:?string}>` — 운영자 허용표를 통과해 지금 주문 가능한 상품. 주문 기능이 꺼져 있거나 고객이 미연결이면 넘기지 않음(화면은 주문 순서 안내만 표시) | 제안 (Claude, 10/27) |
+| `pages.self-marketing` | `$rankfreeConnection` | `array{registered: bool}` — 로그인 고객의 랭크프리 연결 여부(`/api/account/rankfree-connection` GET과 같은 의미). 비로그인은 넘기지 않음 | 제안 (Claude, 10/27) |
+| 셀프마케팅 라우트 이름 | — | `self-marketing`(허브, 현재 `routes/pages.php` Route::view) · `self-marketing.products.show`(상품 상세·주문 폼, 파라미터 `product`) · `self-marketing.orders.index`(내 주문 현황). 컨트롤러로 바꿀 때 큐로 알려주면 pages.php의 Route::view 줄은 Claude가 지운다 | 제안 (Claude, 10/27) |
+| `dashboard` (마이페이지) | 랭크프리 연결 화면 | `/api/account/rankfree-connection` GET/PUT/DELETE를 화면에서 호출(현재 비밀번호·CSRF, 키 재표시 없음). 추가 변수 불필요 — 화면은 Claude 제작 예정 | 제안 (Claude, 10/27) |
 
 ## 4. 요청 큐 사용법 (`docs/collab/QUEUE.md`)
 

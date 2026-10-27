@@ -18,7 +18,7 @@
     <meta name="description" content="설치·가입·미션·구매 등 목표 액션을 설계하는 광고주 캠페인부터 오퍼월·리워드 지면을 운영하는 앱 매체 제휴까지. 유효 전환 기준, 트래킹, 운영, 검수와 정산을 한 흐름으로 연결합니다.">
     <script type="application/ld+json">
         {!! json_encode([
-            '@context' => 'https://schema.org',
+            '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
             '@type' => 'FAQPage',
             'mainEntity' => array_map(fn ($faq) => [
                 '@type' => 'Question',
@@ -172,6 +172,16 @@
                 <span class="landing__eyebrow">Partner Network</span>
                 <h2 class="landing__head">국내 주요 미디어 파트너와 함께<br>성장 스토리를 만들어 나갑니다</h2>
                 <p class="landing__lead">다양한 앱·플랫폼 매체 네트워크를 통해 리워드 캠페인의 접점을 넓힙니다. 유저가 이미 쓰는 서비스 안에서 자연스러운 참여를 만듭니다.</p>
+                {{-- 2026-10-27 추가: 제휴 리워드 네트워크 (대웅 확인 — 제휴사 노출 가능). NBT·OK캐쉬백은 공식 로고 파일 전까지 글자 표기 --}}
+                <div class="rw-networks">
+                    <span class="rw-networks__title">제휴 리워드 네트워크</span>
+                    <ul class="rw-networks__logos">
+                        <li><img src="{{ asset('images/networks/buzzvil.svg') }}" alt="버즈빌" width="113" height="34" style="height:30px"></li>
+                        <li><img src="{{ asset('images/networks/adpopcorn.png') }}" alt="애드팝콘" width="152" height="22" style="height:20px"></li>
+                        <li class="rw-networks__word">NBT</li>
+                        <li class="rw-networks__word">OK캐쉬백</li>
+                    </ul>
+                </div>
             </div>
             @php
                 $partnerTop = range(1, 13);

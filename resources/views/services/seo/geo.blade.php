@@ -30,7 +30,7 @@
     <meta name="description" content="생성형 AI가 회사·인물·서비스와 근거 정보를 혼동하지 않도록 엔티티, 공식 소스, 인용 가능한 콘텐츠와 기술 접근성을 정비하는 GEO 생성엔진 최적화.">
     <script type="application/ld+json">
         {!! json_encode([
-            '@context' => 'https://schema.org',
+            '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
             '@type' => 'FAQPage',
             'mainEntity' => array_map(fn ($faq) => [
                 '@type' => 'Question',

@@ -14,7 +14,7 @@
     <meta name="description" content="2009년 설립. 광고 집행, CPA, 리워드, 검색, 웹 제작과 자체 솔루션 개발을 한 팀에서 연결하는 제이커브인터렉티브의 역사와 일하는 방식을 소개합니다.">
     <script type="application/ld+json">
         {!! json_encode([
-            '@context' => 'https://schema.org',
+            '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
             '@type' => 'FAQPage',
             'mainEntity' => array_map(fn ($faq) => [
                 '@type' => 'Question',

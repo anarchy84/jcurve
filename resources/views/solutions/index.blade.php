@@ -96,6 +96,17 @@
                         <p>SEO 캠페인과 인스타그램 관련 상품을 개별 페이지에서 확인하는 셀프 마케팅 허브입니다.</p>
                         <span>상품과 확인사항 보기 →</span>
                     </a>
+                    {{-- 2026-10-27 추가: 운영 서비스 쇼피트렌드 --}}
+                    <a class="subcard" href="{{ route('solutions.shopitrend') }}">
+                        <strong>쇼피트렌드 (Shopitrend)</strong>
+                        <p>플레이스·쇼핑·SNS 광고를 직접 주문하고 광고 관리·순위체크까지 이어서 확인하는 셀프 마케팅 플랫폼입니다.</p>
+                        <span>플랫폼 소개 보기 →</span>
+                    </a>
+                    <a class="subcard" href="{{ route('self-marketing') }}">
+                        <strong>셀프마케팅 주문</strong>
+                        <p>제이커브 사이트에서 랭크프리 계정을 연결해 순위상승 캠페인을 바로 주문합니다.</p>
+                        <span>주문 시작하기 →</span>
+                    </a>
                 </div>
             </div>
         </section>

@@ -30,7 +30,7 @@
     <meta name="description" content="설치·가입·구매·상담신청 등 사전에 합의한 유효 액션을 기준으로 운영하는 CPA 마케팅. 액션 정의, 트래킹, 유효 기준, 매체 운영과 정산 구조를 설계합니다.">
     <script type="application/ld+json">
         {!! json_encode([
-            '@context' => 'https://schema.org',
+            '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
             '@type' => 'FAQPage',
             'mainEntity' => array_map(fn ($faq) => [
                 '@type' => 'Question',

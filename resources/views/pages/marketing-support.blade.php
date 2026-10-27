@@ -30,7 +30,7 @@
     <meta name="description" content="중소기업 마케팅 지원사업의 공고·과업·증빙 기준을 확인하고 광고, SEO, 콘텐츠, 영상, 웹 제작 실행과 결과 자료 준비를 지원합니다. 선정과 지원금 지급은 보장하지 않습니다.">
     <script type="application/ld+json">
         {!! json_encode([
-            '@context' => 'https://schema.org',
+            '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
             '@type' => 'FAQPage',
             'mainEntity' => array_map(fn ($faq) => [
                 '@type' => 'Question',

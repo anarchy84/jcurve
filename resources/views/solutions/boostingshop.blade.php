@@ -19,6 +19,8 @@
                 <div class="cta-row">
                     <a class="btn-primary" href="#products">구성 보기</a>
                     <a class="btn-ghost" href="#policy">구매 전 확인사항</a>
+                    {{-- 2026-10-27 추가: 운영 서비스 소개 → 실제 서비스 바로가기 --}}
+                    <a class="btn-ghost" href="https://boostings.shop" target="_blank" rel="noopener">부스팅샵 바로가기 ↗</a>
                 </div>
                 </div>
                 <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'boostingshop'])</figure>

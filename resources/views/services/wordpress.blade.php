@@ -30,7 +30,7 @@
     <meta name="description" content="디자인만이 아니라 검색·광고·콘텐츠 운영과 전환 측정까지 고려한 워드프레스 제작·운영. 사이트맵, 반응형 화면, SEO 기반, 분석 이벤트와 인수인계를 연결합니다.">
     <script type="application/ld+json">
         {!! json_encode([
-            '@context' => 'https://schema.org',
+            '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
             '@type' => 'FAQPage',
             'mainEntity' => array_map(fn ($faq) => [
                 '@type' => 'Question',

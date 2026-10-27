@@ -15,7 +15,7 @@
     <meta name="description" content="퍼포먼스 광고, CPA, 리워드 네트워크, SEO·AEO·GEO, 워드프레스까지. 유입·전환·측정·개선을 하나의 성장 체계로 연결합니다.">
     <script type="application/ld+json">
         {!! json_encode([
-            '@context' => 'https://schema.org',
+            '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
             '@type' => 'FAQPage',
             'mainEntity' => array_map(fn ($faq) => [
                 '@type' => 'Question',

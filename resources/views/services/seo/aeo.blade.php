@@ -30,7 +30,7 @@
     <meta name="description" content="사용자의 질문을 분해하고 핵심 답변·근거·조건·관련 문서를 명확하게 연결하는 AEO 답변엔진 최적화. 콘텐츠 구조, 내부 링크, 구조화 데이터와 측정 기준을 설계합니다.">
     <script type="application/ld+json">
         {!! json_encode([
-            '@context' => 'https://schema.org',
+            '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
             '@type' => 'FAQPage',
             'mainEntity' => array_map(fn ($faq) => [
                 '@type' => 'Question',

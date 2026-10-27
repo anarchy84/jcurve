@@ -31,7 +31,7 @@
     $contactUrl = route('contact', $contactParams);
 
     $faqSchema = $faq->isEmpty() ? null : [
-        '@context' => 'https://schema.org',
+        '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
         '@type' => 'FAQPage',
         'mainEntity' => $faq->map(fn ($item) => [
             '@type' => 'Question',

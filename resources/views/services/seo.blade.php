@@ -30,7 +30,7 @@
     <meta name="description" content="구글·네이버 검색 최적화부터 AEO·GEO까지. 크롤링·색인·콘텐츠·엔티티·신뢰 근거와 전환 동선을 함께 정비하는 제이커브 SEO 서비스.">
     <script type="application/ld+json">
         {!! json_encode([
-            '@context' => 'https://schema.org',
+            '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
             '@type' => 'FAQPage',
             'mainEntity' => array_map(fn ($faq) => [
                 '@type' => 'Question',

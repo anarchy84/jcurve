@@ -30,7 +30,7 @@
     <meta name="description" content="2026년 기준 제이커브 회사 전체 누적 광고비 373억 원, 캠페인 15,700건 이상. 매체 숫자가 아니라 매출·유효 리드·가입 등 합의한 비즈니스 KPI를 기준으로 광고를 운영합니다.">
     <script type="application/ld+json">
         {!! json_encode([
-            '@context' => 'https://schema.org',
+            '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
             '@type' => 'FAQPage',
             'mainEntity' => array_map(fn ($faq) => [
                 '@type' => 'Question',

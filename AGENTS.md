@@ -7,6 +7,11 @@
 2. 성과 수치(373억 등)는 임의 수정 금지 — 라벨·고지 문구 유지
 3. 미디어 파일(`public/media/`)은 힉스필드 산출물 — 덮어쓰지 말 것
 
+## 🤝 Claude ↔ Codex 분업 (2026-10-27~, 대웅 지시)
+- **프론트엔드·디자인·콘텐츠 = Claude / 백엔드 = Codex.**
+- 작업 전에 **`docs/COLLAB.md`(파일 구역·데이터 계약)**와 **`docs/collab/QUEUE.md`(요청 큐)**를 먼저 읽는다.
+- 내 구역 밖 파일은 직접 고치지 않고 큐에 요청한다. 커밋·푸시는 대웅만 한다.
+
 ## 📊 대웅 대시보드 연동 (모든 AI 세션 공통)
 
 대웅이 보는 업무 화면은 **`/Users/anarchy/Claude_Projects/AnarchyContentTeam/대시보드.html`** 하나다.

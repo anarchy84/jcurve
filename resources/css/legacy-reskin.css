@@ -97,7 +97,7 @@
 .jc-legacy .landing__section--dark .landing__eyebrow { color: var(--muted-on-dark); }
 
 /* ---------- 6. 페이지 안 이동 탭 ---------- */
-.jc-legacy .landing__local-nav { top: 76px; background: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; border-top: 0; }
+.jc-legacy .landing__local-nav { top: 76px; z-index: 40; background: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; border-top: 0; }
 .jc-legacy .landing__local-nav-inner { max-width: var(--jc-max); padding: 0 var(--jc-gutter); gap: 28px; box-sizing: content-box; }
 .jc-legacy .landing__local-nav a { padding: 16px 0; border-radius: 0; font-size: 14px; color: var(--ink-48); }
 .jc-legacy .landing__local-nav a:hover,

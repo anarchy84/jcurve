@@ -43,14 +43,23 @@
                 <{{ $jcHeading }} class="jc-media__title">네트워크로 연결된 매체</{{ $jcHeading }}>
                 <span class="jc-media__legend"><span class="jc-dot" aria-hidden="true"></span>제이커브 자체 앱</span>
             </div>
-            <ul class="jc-wall" aria-label="제휴 매체 앱 26개와 제이커브 자체 앱 12개">
-                @foreach ($jcWall as $app)
-                    <li>
-                        <img src="{{ $app['src'] }}" alt="{{ $app['alt'] }}" width="56" height="56" loading="lazy">
-                        @if ($app['own'])<span class="jc-wall__own" aria-hidden="true"></span>@endif
-                    </li>
+            {{-- 두 줄이 서로 반대 방향으로 흐르는 띠. 끊김 없이 돌도록 같은 목록을 한 번 더 붙이고(보조기기에선 숨김), 마우스를 올리면 멈춘다 --}}
+            <div class="jc-wall-marquee" aria-label="제휴 매체 앱 26개와 제이커브 자체 앱 12개">
+                @foreach (array_chunk($jcWall, (int) ceil(count($jcWall) / 2)) as $r => $row)
+                    <div class="jc-wall-marquee__row {{ $r === 1 ? 'jc-wall-marquee__row--reverse' : '' }}">
+                        @foreach ([false, true] as $dup)
+                            <ul class="jc-wall" @if ($dup) aria-hidden="true" data-dup @endif>
+                                @foreach ($row as $app)
+                                    <li>
+                                        <img src="{{ $app['src'] }}" alt="{{ $dup ? '' : $app['alt'] }}" width="56" height="56" loading="lazy">
+                                        @if ($app['own'])<span class="jc-wall__own" aria-hidden="true"></span>@endif
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endforeach
+                    </div>
                 @endforeach
-            </ul>
+            </div>
             <p class="jc-media__note">로고와 앱 아이콘은 각 사의 상표입니다. 실제 연동 매체와 지원 범위는 캠페인 조건에 따라 확정합니다. 2026년 10월 기준.</p>
         </div>
     </div>

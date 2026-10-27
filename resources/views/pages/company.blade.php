@@ -45,7 +45,6 @@
                 <a href="#how-we-work">운영 원칙</a>
                 <a href="#capabilities">역량</a>
                 <a href="#products">자체 솔루션</a>
-                <a href="#anarchy">아나키</a>
                 <a href="#faq">FAQ</a>
             </div>
         </nav>
@@ -139,19 +138,6 @@
                     <div class="landing__point"><strong>특정 영역 실행</strong><span>광고 채널, CPA, 리워드, SEO, 웹 제작처럼 필요한 구간만 맡습니다.</span></div>
                     <div class="landing__point"><strong>통합 운영</strong><span>유입부터 전환·콘텐츠·페이지 개선까지 하나의 리듬으로 운영합니다.</span></div>
                     <div class="landing__point"><strong>솔루션 도입</strong><span>반복되는 운영 문제는 제이커브가 만든 제품으로 연결해 검토합니다.</span></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="landing__section landing__section--parchment" id="anarchy">
-            <div class="landing__inner">
-                <span class="landing__eyebrow">Anarchy · YouTube</span>
-                <h2 class="landing__head">2011년부터, 현장에서 배운 것을 공개해왔습니다</h2>
-                <div class="prose">
-                    <p>총괄이사가 직접 운영하는 ‘아나키’ 채널은 마케팅 현장에서 실행하고 확인한 내용을 다룹니다. 유행하는 말을 반복하기보다 실제 운영자가 무엇을 보고 판단해야 하는지 설명합니다.</p>
-                </div>
-                <div class="cta-row" style="margin-top:24px;">
-                    <a class="btn-ghost" href="https://www.youtube.com/@anarchy" target="_blank" rel="noopener">아나키 채널 보기 →</a>
                 </div>
             </div>
         </section>

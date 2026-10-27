@@ -12,6 +12,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/jc.css', 'resources/css/legacy-reskin.css', 'resources/js/jc.js'])
     </head>
     <body class="site jc-legacy">
+        @include('partials.jc.icons')
         @include('partials.jc.header')
 
         @isset($header)

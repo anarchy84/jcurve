@@ -22,6 +22,14 @@
                     @endforeach
                 </ul>
             </nav>
+            <nav aria-label="고객센터">
+                <h2>고객센터</h2>
+                <ul>
+                    @foreach ($jcMenu['support'] as $link)
+                        <li><a href="{{ $link['href'] }}">{{ $link['label'] }}</a></li>
+                    @endforeach
+                </ul>
+            </nav>
             <nav aria-label="회사">
                 <h2>회사</h2>
                 <ul>

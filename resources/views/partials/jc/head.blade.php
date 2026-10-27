@@ -15,6 +15,8 @@
     $jcRobots = $jcIsPublicHost ? (trim($__env->yieldContent('robots')) ?: 'index, follow') : 'noindex, nofollow';
     $jcTitle = trim($__env->yieldContent('title')) ?: '제이커브인터렉티브';
 @endphp
+{{-- 스크립트가 켜진 화면 표시(첫 화면 전환 패널 등이 그려지기 전에 자리를 잡아 화면이 덜컹이지 않게) --}}
+<script>document.documentElement.classList.add('jc-js')</script>
 <link rel="canonical" href="{{ $jcCanonical }}">
 <meta name="robots" content="{{ $jcRobots }}">
 <meta property="og:type" content="website">

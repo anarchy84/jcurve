@@ -652,24 +652,6 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; }
 .home__works-cta { display: flex; justify-content: center; }
 
 /* ============================================================
-   S9. 아나키 밴드 [파치먼트] — 은은하게 (얇은 1줄)
-   ============================================================ */
-.home__anarchy {
-    background: var(--parchment);
-    padding: 32px clamp(24px, 5vw, 40px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 24px;
-    flex-wrap: wrap;
-    text-align: center;
-}
-.home__anarchy-text { font-size: 17px; letter-spacing: -0.374px; color: var(--ink); margin: 0; }
-.home__anarchy-text span { color: var(--text-muted); }
-.home__anarchy-link { font-size: 17px; color: var(--primary); white-space: nowrap; }
-.home__anarchy-link:hover { opacity: 0.7; }
-
-/* ============================================================
    S10a. 인사이트 프리뷰 [라이트]
    ============================================================ */
 .home__insights {

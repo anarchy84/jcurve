@@ -17,3 +17,6 @@ Route::view('/self-marketing', 'pages.self-marketing')->name('self-marketing');
 
 // 운영 서비스 소개 — 쇼피트렌드 (실제 서비스: https://shopitrend.co)
 Route::view('/solutions/shopitrend', 'solutions.shopitrend')->name('solutions.shopitrend');
+
+// 고객센터 — 자주 묻는 질문 (대웅 지시 10/27). 문의게시판은 비회원 작성이라 Codex 백엔드 필요 → QUEUE Q-028
+Route::view('/support/faq', 'pages.faq')->name('support.faq');

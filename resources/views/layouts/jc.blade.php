@@ -12,6 +12,7 @@
         @vite(['resources/css/jc.css', 'resources/js/jc.js'])
     </head>
     <body class="jc-site">
+        @include('partials.jc.icons')
         @include('partials.jc.header')
         <main id="main">
             @yield('content')

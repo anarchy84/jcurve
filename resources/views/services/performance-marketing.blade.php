@@ -154,6 +154,11 @@
                 <h2 class="landing__head">매체를 따로 돌려도, 판단은 한 판 위에서</h2>
                 <p class="landing__body">채널마다 강점과 전환 집계 방식이 다릅니다. 제이커브는 각 매체의 보고서를 단순 합산하지 않고 같은 비즈니스 목표 아래에서 역할과 중복을 확인합니다.</p>
                 <div class="subcards">
+                    <a class="subcard" id="google-ads" href="{{ config('subpages.performance.items.google-ads') ? route('services.performance.sub', ['sub' => 'google-ads']) : route('contact') }}">
+                        <strong>구글애즈</strong>
+                        <p>검색·디스플레이·실적 최대화(P-MAX) 캠페인을 같은 전환 기준으로 묶어 운영하는 구글 광고.</p>
+                        <span>{{ config('subpages.performance.items.google-ads') ? '구글애즈 자세히 →' : '구글애즈 운영 문의 →' }}</span>
+                    </a>
                     <a class="subcard" href="{{ route('services.performance.sub', ['sub' => 'naver-gfa']) }}">
                         <strong>네이버 GFA</strong>
                         <p>네이버 지면 안의 발견을 전환으로 연결하는 소재·타깃·랜딩 구조.</p>

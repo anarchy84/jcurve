@@ -1,3 +1,9 @@
+# 제이커브 홈페이지 리뉴얼
+
+현재 기획 기준: [리뉴얼 통합 최종안 v3](docs/PLAN-FINAL.md). Claude·Codex 두 계획을 통합했고 **기존 URL 보존 우선·순위상승 표현 적극 활용**을 반영했다. **현재 개발 미착수·보류이며**, Claude가 확인 중인 나머지 항목은 문서 §11에서 이어간다.
+
+조사·변경 이력은 [Codex 인수인계](docs/HANDOFF-CODEX-2026-10-27.md), 화면 문서 안내는 [프론트 README](docs/frontend/README.md)를 참고한다. 아래는 기존 프레임워크 안내다.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

@@ -47,6 +47,11 @@
 | `contact` | 세션 `status` = `inquiry-received` | 문의 접수 후 리다이렉트 플래시 | 구현 |
 | `seo.check` | `SeoCheckController::run()` 반환 배열 | 진단 결과 | 구현 |
 | `community.*` | `$boards`, `$board`, `$notices`, `$posts`, `$post`, `$comments` | 기존 커뮤니티 | 구현 |
+| `insights.show` (새 디자인) | `$toc` | `array<{id, text}>` — 본문 H2에서 추출한 목차. 각 H2에 같은 `id` 부여 | 제안 (Claude, 10/27) |
+| `insights.show` (새 디자인) | `$readingMinutes` | `int` — 본문 길이 기준 읽는 시간(분) | 제안 (Claude, 10/27) |
+| `insights.show` (새 디자인) | `$related` | `Collection<Insight>` 같은 카테고리 최신 2~3건 (`title, slug, published_at`) | 제안 (Claude, 10/27) |
+| `insights.show` (새 디자인) | `$insight->sources` | `array<string>` — 인용 자료 목록. 없으면 블록 숨김 | 제안 (Claude, 10/27) |
+| 홈·셀프마케팅 순위 확인 폼 | 폼 전송 대상 | 랭크프리 검색으로 바로 보낼지(외부 링크 + 쿼리) 사이트 안에서 받을지 결정 필요 | 제안 (Claude, 10/27) — 대웅 확인 |
 
 ## 4. 요청 큐 사용법 (`docs/collab/QUEUE.md`)
 

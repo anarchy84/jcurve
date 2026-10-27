@@ -2,12 +2,17 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Observers\UserRankfreeConnectionObserver;
 use App\Services\Seo\Backlinks\BacklinkProvider;
 use App\Services\Seo\Backlinks\MockBacklinkProvider;
 use App\Services\Seo\Keywords\KeywordProvider;
 use App\Services\Seo\Keywords\MockKeywordProvider;
 use App\Services\Seo\Traffic\MockTrafficProvider;
 use App\Services\Seo\Traffic\TrafficProvider;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        User::observe(UserRankfreeConnectionObserver::class);
+        RateLimiter::for('rankfree-connection-read', fn (Request $request) => Limit::perMinute(60)->by('rankfree-read:'.$request->user()->getAuthIdentifier()));
+        RateLimiter::for('rankfree-connection-write', fn (Request $request) => Limit::perMinute(5)->by('rankfree-write:'.$request->user()->getAuthIdentifier()));
     }
 }

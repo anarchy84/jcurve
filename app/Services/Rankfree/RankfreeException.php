@@ -14,6 +14,8 @@ class RankfreeException extends RuntimeException
         parent::__construct(match ($reason) {
             'disabled' => '랭크프리 API 연동이 비활성화되어 있습니다.',
             'not_configured' => '랭크프리 서버 설정을 확인해야 합니다.',
+            'account_not_connected' => '고객의 랭크프리 계정 연결이 필요합니다.',
+            'account_mismatch' => '고객의 계정 연결 정보가 일치하지 않습니다.',
             'submission_disabled' => '주문 전송이 비활성화되어 있습니다.',
             'product_not_approved' => '검수되지 않은 상품입니다.',
             'not_orderable' => 'API로 주문할 수 없는 상품입니다.',

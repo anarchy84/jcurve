@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
 /** Server-only adapter. Public routes must add customer ownership and durable duplicate protection. */
-class RankfreeClient
+final class RankfreeClient
 {
     private const BASE_URL = 'https://rankfree.kr/api/v1';
 
@@ -19,6 +19,30 @@ class RankfreeClient
         'TEXT', 'TEXTAREA', 'URL', 'NUMBER', 'SELECT', 'MULTI_SELECT',
         'TOGGLE', 'DATE', 'ADDRESS', 'MISSION_OPTIONS', 'TAGS', 'FILE', 'IMAGE',
     ];
+
+    private function __construct(private readonly CustomerCredential $credential) {}
+
+    public static function forCustomer(int $authenticatedCustomerId, ?CustomerCredential $credential): self
+    {
+        if ($authenticatedCustomerId < 1 || $credential === null) {
+            throw new RankfreeException('account_not_connected');
+        }
+        if ($credential->customerId !== $authenticatedCustomerId) {
+            throw new RankfreeException('account_mismatch');
+        }
+
+        return new self($credential);
+    }
+
+    public function customerId(): int
+    {
+        return $this->credential->customerId;
+    }
+
+    public function __debugInfo(): array
+    {
+        return ['customer_id' => $this->customerId()];
+    }
 
     public function products(): array
     {
@@ -112,10 +136,7 @@ class RankfreeClient
         if (config('rankfree.enabled') !== true) {
             throw new RankfreeException('disabled');
         }
-        $key = config('rankfree.api_key');
-        if (! is_string($key) || ! preg_match('/^rk_[A-Za-z0-9_-]+$/D', $key)) {
-            throw new RankfreeException('not_configured');
-        }
+        $key = $this->credential->authorizationKey();
         $creating = $method === 'POST';
         try {
             $response = Http::withToken($key)->acceptJson()->asJson()->withoutRedirecting()

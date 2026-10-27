@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Services\Rankfree\CustomerCredential;
 use App\Services\Rankfree\RankfreeClient;
 use App\Services\Rankfree\RankfreeException;
 use Illuminate\Http\Client\Request;
@@ -16,22 +17,21 @@ class RankfreeClientTest extends TestCase
     {
         parent::setUp();
         config([
-            'rankfree.enabled' => true, 'rankfree.api_key' => 'rk_unit_test_secret',
+            'rankfree.enabled' => true, 'rankfree.api_key' => 'rk_legacy_global_key',
             'rankfree.submission_enabled' => true,
             'rankfree.product_fields' => [12 => ['place_url', 'daily_qty', 'start_date', 'end_date', 'tags', 'attachment']],
         ]);
         Http::preventStrayRequests();
-        $this->client = app(RankfreeClient::class);
+        $this->client = RankfreeClient::forCustomer(1, new CustomerCredential(1, 'rk_unit_test_secret'));
     }
 
     public function test_disabled_missing_key_and_submission_gate_never_contact_remote(): void
     {
         config(['rankfree.enabled' => false]);
         $this->failsWith('disabled', fn () => $this->client->products());
-        config(['rankfree.enabled' => true, 'rankfree.api_key' => null]);
-        $this->failsWith('not_configured', fn () => $this->client->products());
-        config(['rankfree.api_key' => "rk_bad\r\nInjected: header"]);
-        $this->failsWith('not_configured', fn () => $this->client->products());
+        config(['rankfree.enabled' => true]);
+        $this->failsWith('account_not_connected', fn () => RankfreeClient::forCustomer(1, null));
+        $this->failsWith('not_configured', fn () => new CustomerCredential(1, "rk_bad\r\nInjected: header"));
         config(['rankfree.submission_enabled' => false]);
         $this->failsWith('submission_disabled', fn () => $this->client->createOrder(12));
         Http::assertNothingSent();

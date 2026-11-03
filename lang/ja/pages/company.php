@@ -5,7 +5,7 @@
 */
 
 return [
-    'title' => '会社概要 | J-Curve Interactive（2009年設立・ソウルのデジタルマーケティング代理店）',
+    'title' => '会社概要 | J-Curve Interactive',
     'description' => '2009年設立。広告運用、CPA、リワード広告、検索、Web制作と自社ソリューションの開発をひとつのチームでつなぐJ-Curve Interactiveの歩みと仕事の進め方をご紹介します。',
 
     'hero' => [

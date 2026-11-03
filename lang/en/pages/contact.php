@@ -7,7 +7,7 @@
 
 return [
     'title' => 'Contact us | J-Curve Interactive',
-    'description' => 'Talk to us about performance ads, CPA, reward ads, SEO, websites or our own products. Tell us where you are and what you want to achieve, and we will come back with what to check and how to proceed.',
+    'description' => 'Talk to us about performance ads, CPA, reward ads, SEO, websites or our own products. Tell us your goals and we will come back with next steps.',
 
     'hero' => [
         'eyebrow' => 'Project Inquiry',

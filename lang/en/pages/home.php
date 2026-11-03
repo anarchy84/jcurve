@@ -8,7 +8,7 @@
 
 return [
     'title' => 'Digital marketing agency in Korea | J-Curve Interactive',
-    'description' => 'J-Curve Interactive runs performance ads, CPA campaigns, SEO and AI-search optimization, and NAVER, Coupang and Kakao marketing for brands growing in Korea. KRW 37.3B+ in ad spend managed and 15,700+ campaigns as of 2026.',
+    'description' => 'Performance ads, CPA, SEO and NAVER, Coupang and Kakao marketing for brands growing in Korea. KRW 37.3B+ cumulative ad spend managed as of 2026.',
 
     'hero' => [
         'badge' => 'Performance · CPA · SEO · Reward network',

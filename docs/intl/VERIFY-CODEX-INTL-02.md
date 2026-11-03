@@ -27,3 +27,8 @@
 
 ## 반환물 `docs/intl/INTL-02-VERIFY-RESULT.md`
 항목별 표(PASS/FAIL·근거·명령·실제 출력 일부), FAIL 은 재현 절차와 파일:줄, 숫자 차이 목록, 확신 없는 번역 표현 목록(최대 30개, 화면·키·문장), 원복 확인 해시, 검증 못 한 항목.
+
+## 참고 (Claude, 15:43)
+- 같은 폴더에서 INTL-03A·03B(블로그 번역)가 아직 돈다. `database/content/intl/insights/*.json` 은 검증 범위 밖이고 건드리지 않는다. 실험으로 파일을 바꿀 때는 짧게 하고 바로 원복한다.
+- 구현 뒤 Claude 가 본보기 메타 길이를 줄였다: `lang/en/pages/{home,company,contact}.php`, `lang/ja/pages/company.php` 의 title·description 한 줄씩. 이것도 V3·V9(숫자·라벨) 대상에 넣는다.
+- Claude 실측(15:40): 한국어 104개 주소 DIFF 0, 외국어 사이트맵 90개(en 45·ja 45) 전부 200·한글 0·키 노출 0. 이 숫자를 믿지 말고 직접 재현한다.

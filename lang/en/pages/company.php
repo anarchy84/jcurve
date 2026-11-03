@@ -5,7 +5,7 @@
 */
 
 return [
-    'title' => 'About us | J-Curve Interactive, digital marketing agency in Seoul since 2009',
+    'title' => 'About us | J-Curve Interactive, Seoul agency since 2009',
     'description' => 'Founded in 2009, J-Curve Interactive connects ad buying, CPA, reward ads, search, web builds and its own software in one team. Our story and how we work.',
 
     'hero' => [

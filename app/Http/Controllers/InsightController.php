@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Insight;
 use App\Models\InsightCategory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class InsightController extends Controller
@@ -15,7 +16,8 @@ class InsightController extends Controller
             ->published()
             ->latest('published_at')
             ->latest('id')
-            ->paginate(12);
+            ->paginate(12)
+            ->withPath(route('insights.index'));
 
         $categories = InsightCategory::query()->orderBy('name')->get();
 
@@ -33,15 +35,20 @@ class InsightController extends Controller
             ->published()
             ->latest('published_at')
             ->latest('id')
-            ->paginate(12);
+            ->paginate(12)
+            ->withPath(route('insights.category', ['slug' => $slug]));
 
         $categories = InsightCategory::query()->orderBy('name')->get();
 
         return view('insights.category', compact('category', 'insights', 'categories'));
     }
 
-    public function show(Insight $insight): View
+    public function show(Insight $insight): View|RedirectResponse
     {
+        if ($insight->isHidden()) {
+            return redirect()->route('insights.index', [], 302);
+        }
+
         $insight = Insight::query()
             ->with(['category', 'user'])
             ->published()

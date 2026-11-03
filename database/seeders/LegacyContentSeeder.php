@@ -6,6 +6,7 @@ use App\Models\Insight;
 use App\Models\InsightCategory;
 use App\Models\LegacyRedirect;
 use App\Models\User;
+use App\Services\Seo\Publishing\PreservedPaths;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -17,6 +18,7 @@ class LegacyContentSeeder extends Seeder
 
     public function run(): void
     {
+        $this->usedSlugs = [];
         // insights.user_id는 NOT NULL — 콘텐츠 소유 관리자 계정 확보
         $author = User::query()->firstOrCreate(
             ['email' => 'jcurve19@gmail.com'],
@@ -78,10 +80,10 @@ class LegacyContentSeeder extends Seeder
                         'bo_table' => 'column',
                         'wr_id' => (string) $wrId,
                     ]),
-                    '/insights/'.$slug,
+                    $this->columnDestination($slug),
                 );
             }
-            $this->registerRedirect('v1/manager/column/'.$slug, '/insights/'.$slug);
+            $this->registerRedirect('v1/manager/column/'.$slug, $this->columnDestination($slug));
 
             $i++;
         }
@@ -120,8 +122,8 @@ class LegacyContentSeeder extends Seeder
                 ],
             );
 
-            // 워드프레스 원 URL(/seo/{슬러그}) → /insights/{슬러그}
-            $this->registerRedirect('seo/'.$slug, '/insights/'.$slug);
+            // The three original WP addresses now render directly.
+            LegacyRedirect::query()->where('from_path', LegacyRedirect::normalizePath('seo/'.$slug))->delete();
         }
     }
 
@@ -216,7 +218,12 @@ class LegacyContentSeeder extends Seeder
     {
         LegacyRedirect::query()->updateOrCreate(
             ['from_path' => LegacyRedirect::normalizePath($from)],
-            ['to_path' => $to, 'status_code' => 301],
+            ['to_path' => PreservedPaths::path($to), 'status_code' => 301],
         );
+    }
+
+    private function columnDestination(string $slug): string
+    {
+        return in_array($slug, config('seo.hidden_insights', []), true) ? '/blog/' : '/insights/'.$slug;
     }
 }

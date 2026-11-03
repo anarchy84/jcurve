@@ -48,12 +48,12 @@ class SeoUrlAuditTest extends TestCase
     {
         Http::fake([
             'https://stage.example/seo/' => $this->page('/seo/', '<h1>원래 SEO 내용</h1>'),
-            'https://stage.example/old' => Http::response('', 301, ['Location' => '/company#team']),
-            'https://stage.example/company' => $this->page('/company', '<h1>회사소개</h1>'),
+            'https://stage.example/old' => Http::response('', 301, ['Location' => '/about-us/#team']),
+            'https://stage.example/about-us/' => $this->page('/about-us/', '<h1>회사소개</h1>'),
         ]);
         $manifest = $this->manifest([
             ['path' => '/seo/', 'contains' => ['원래 SEO 내용']],
-            ['path' => '/old', 'status' => 301, 'to' => '/company#team'],
+            ['path' => '/old', 'status' => 301, 'to' => '/about-us/#team'],
         ]);
         $this->artisan('seo:audit-urls', ['--base-url' => 'https://stage.example', '--manifest' => $manifest, '--json' => true])
             ->expectsOutputToContain('"failed": 0')->assertSuccessful();
@@ -93,13 +93,15 @@ class SeoUrlAuditTest extends TestCase
         Http::assertNotSent(fn ($request) => str_contains($request->url(), 'other.example') || str_contains($request->url(), 'unfollowed'));
     }
 
-    public function test_default_manifest_contains_legacy_original_urls_without_approving_redirects(): void
+    public function test_default_manifest_preserves_pages_and_explicitly_approves_existing_column_redirects(): void
     {
         $entries = app(UrlAuditManifest::class)->load();
         $this->assertGreaterThan(60, count($entries));
         $this->assertContains('/seo/', array_column($entries, 'path'));
         $this->assertNotEmpty(array_filter($entries, fn ($entry) => str_contains($entry['path'], 'board.php?') && str_contains($entry['path'], 'wr_id=')));
-        $this->assertSame([200], array_values(array_unique(array_column($entries, 'status'))));
+        $this->assertSame([200, 301], array_values(array_unique(array_column($entries, 'status'))));
+        $this->assertSame(16, count(array_filter($entries, fn ($entry) => $entry['status'] === 200)));
+        $this->assertSame(50, count(array_filter($entries, fn ($entry) => $entry['status'] === 301 && isset($entry['to']))));
     }
 
     public function test_no_base_url_does_not_contact_any_server(): void

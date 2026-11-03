@@ -17,18 +17,18 @@ class MarketingContentTest extends TestCase
             '/services/performance-marketing',
             '/services/cpa-marketing',
             '/services/reward-network',
-            '/services/seo',
+            '/seo/',
             '/services/seo/aeo',
             '/services/seo/geo',
-            '/services/wordpress',
+            '/wordpress-agency/',
             '/services/marketing-support',
             '/solutions',
             '/solutions/rankfree',
             '/solutions/boostingshop',
             '/solutions/leadbay',
             '/solutions/call2sale',
-            '/company',
-            '/contact',
+            '/about-us/',
+            '/contact-us/',
             '/work',
         ];
 
@@ -42,11 +42,11 @@ class MarketingContentTest extends TestCase
     public function test_all_configured_subpages_render(): void
     {
         $paths = [
-            '/services/seo/backlinks',
-            '/services/seo/naver-place',
-            '/services/seo/naver-shopping',
-            '/services/seo/kakao-gift',
-            '/services/seo/coupang',
+            '/seo-backlinks/',
+            '/naver-place-marketing/',
+            '/naver-shopping-marketing/',
+            '/kakao-gift/',
+            '/coupang/',
             '/services/cpa-marketing/real-estate',
             '/services/cpa-marketing/stock',
             '/services/cpa-marketing/insurance',
@@ -73,11 +73,11 @@ class MarketingContentTest extends TestCase
 
     public function test_reward_inquiry_paths_prefill_distinct_roles(): void
     {
-        $this->get('/contact?service_interest=reward-advertiser')
+        $this->get('/contact-us/?service_interest=reward-advertiser')
             ->assertOk()
             ->assertSee('value="reward-advertiser" selected', false);
 
-        $this->get('/contact?service_interest=reward-publisher')
+        $this->get('/contact-us/?service_interest=reward-publisher')
             ->assertOk()
             ->assertSee('value="reward-publisher" selected', false);
     }
@@ -109,8 +109,9 @@ class MarketingContentTest extends TestCase
             ->assertSee('품질은 ‘느낌’이 아니라 승인 규칙으로 관리합니다')
             ->assertSee('매체 검토부터 운영 안정화까지')
             ->assertDontSee('캠페인이 마르지 않습니다')
-            ->assertDontSee('버즈빌')
-            ->assertDontSee('NBT');
+            // Q-018: approved partners are visible; keep guarding the sales copy.
+            ->assertSee('버즈빌')
+            ->assertSee('NBT');
 
         $this->assertGreaterThanOrEqual(15, substr_count($response->getContent(), '<section'));
     }
@@ -181,7 +182,7 @@ class MarketingContentTest extends TestCase
 
     public function test_insurance_inquiry_is_prefilled_and_stored(): void
     {
-        $this->get('/contact?service_interest=cpa-insurance&message=insurance')
+        $this->get('/contact-us/?service_interest=cpa-insurance&message=insurance')
             ->assertOk()
             ->assertSee('value="cpa-insurance" selected', false)
             ->assertSee('insurance');

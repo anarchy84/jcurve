@@ -8,8 +8,8 @@
 @php
     $jcPublicUrl = rtrim((string) config('seo.public_url'), '/');
     $jcPublicHost = parse_url($jcPublicUrl, PHP_URL_HOST);
-    $jcPath = '/'.ltrim(request()->path(), '/');
-    $jcCanonical = trim($__env->yieldContent('canonical')) ?: $jcPublicUrl.($jcPath === '/' ? '/' : $jcPath);
+    $jcPath = \App\Services\Seo\Publishing\PreservedPaths::path('/'.ltrim(request()->path(), '/'));
+    $jcCanonical = \App\Services\Seo\Publishing\PreservedPaths::destination($jcPath) !== null ? $jcPublicUrl.$jcPath : (trim($__env->yieldContent('canonical')) ?: $jcPublicUrl.$jcPath);
     $jcHost = request()->getHost();
     $jcIsPublicHost = $jcPublicHost && $jcHost === $jcPublicHost && ! str_starts_with($jcHost, 'dev.');
     $jcRobots = $jcIsPublicHost ? (trim($__env->yieldContent('robots')) ?: 'index, follow') : 'noindex, nofollow';
@@ -19,6 +19,10 @@
 <script>document.documentElement.classList.add('jc-js')</script>
 <link rel="canonical" href="{{ $jcCanonical }}">
 <meta name="robots" content="{{ $jcRobots }}">
+@if ($jcIsPublicHost)
+{{-- 구글 서치콘솔 소유 확인 — 기존 워드프레스(랭크매스)가 내던 값 그대로. 빠지면 전환 뒤 서치콘솔 소유 확인이 풀린다(2026-11-03 운영 홈 head 대조) --}}
+<meta name="google-site-verification" content="-JI9b9PGuPzBzPbZQXEAqZR8YfikUXM7GOP_5lgEQXM">
+@endif
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="제이커브">
 <meta property="og:title" content="{{ $jcTitle }}">

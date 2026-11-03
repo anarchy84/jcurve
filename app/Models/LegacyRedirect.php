@@ -39,6 +39,7 @@ class LegacyRedirect extends Model
      */
     public static function buildQueryKey(string $path, array $params): string
     {
+        $params = array_change_key_case($params, CASE_LOWER);
         ksort($params);
         $pairs = [];
         foreach ($params as $key => $value) {
@@ -55,12 +56,14 @@ class LegacyRedirect extends Model
      */
     public static function resolveFor(Request $request): ?self
     {
-        $path = $request->path();
+        $path = self::normalizePath($request->path());
+        $params = array_change_key_case($request->query(), CASE_LOWER);
 
-        if (str_contains($path, 'board.php') && $request->query('bo_table') !== null) {
+        if (str_contains($path, 'board.php') && is_string($params['bo_table'] ?? null)
+            && is_scalar($params['wr_id'] ?? '')) {
             $queryKey = self::buildQueryKey($path, [
-                'bo_table' => (string) $request->query('bo_table'),
-                'wr_id' => (string) $request->query('wr_id', ''),
+                'bo_table' => $params['bo_table'],
+                'wr_id' => (string) ($params['wr_id'] ?? ''),
             ]);
 
             $match = self::query()->where('from_path', $queryKey)->first();

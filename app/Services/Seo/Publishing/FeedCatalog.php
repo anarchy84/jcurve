@@ -34,7 +34,8 @@ class FeedCatalog
             }
         }
 
-        foreach (InsightCategory::query()->whereHas('insights', fn ($query) => $query->published())->get() as $category) {
+        foreach (InsightCategory::query()->whereHas('insights', fn ($query) => $query->published())
+            ->orWhereIn('slug', ['seo', 'link-building'])->get() as $category) {
             $path = '/insights/category/'.rawurlencode($category->slug);
             if ($this->indexable($path, $meta)) {
                 $sections['pages'][] = ['url' => $this->urls->absolute($path), 'modified' => null];
@@ -115,6 +116,6 @@ class FeedCatalog
 
     private function key(string $path): string
     {
-        return trim(PublicUrl::comparisonKey($path), '/');
+        return trim(PublicUrl::comparisonKey(PreservedPaths::path($path)), '/');
     }
 }

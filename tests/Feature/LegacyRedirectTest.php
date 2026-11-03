@@ -24,18 +24,17 @@ class LegacyRedirectTest extends TestCase
         $this->seed(LegacyRedirectSeeder::class);
     }
 
-    public function test_wordpress_page_redirects_with_trailing_slash_single_hop(): void
+    public function test_wordpress_page_with_trailing_slash_is_preserved(): void
     {
         $this->get('/about-us/')
-            ->assertStatus(301)
-            ->assertRedirect('/company');
+            ->assertOk();
     }
 
     public function test_service_landing_redirects(): void
     {
         $this->get('/seo-backlinks')
             ->assertStatus(301)
-            ->assertRedirect('/services/seo/backlinks');
+            ->assertHeader('Location', 'http://localhost/seo-backlinks/');
     }
 
     public function test_legacy_php_landing_redirects(): void
@@ -93,7 +92,7 @@ class LegacyRedirectTest extends TestCase
 
     public function test_subpage_whitelist_enforced(): void
     {
-        $this->get('/services/seo/backlinks')->assertStatus(200);
+        $this->get('/seo-backlinks/')->assertStatus(200);
         $this->get('/services/seo/not-a-real-sub')->assertStatus(404);
     }
 

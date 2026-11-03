@@ -33,7 +33,7 @@ class PublicUrl
             throw new InvalidArgumentException('A local absolute URL path is required.');
         }
 
-        return $this->base().$path;
+        return $this->base().PreservedPaths::path($path);
     }
 
     public function canonicalMatches(string $canonical, string $expected): bool

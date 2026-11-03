@@ -8,10 +8,12 @@
         <title>@yield('title', '제이커브인터렉티브')</title>
         @yield('meta')
         @include('partials.jc.head')
+        @include('partials.jc.gtm', ['gtmSlot' => 'head'])
         @stack('head')
         @vite(['resources/css/jc.css', 'resources/js/jc.js'])
     </head>
     <body class="jc-site">
+        @include('partials.jc.gtm', ['gtmSlot' => 'body'])
         @include('partials.jc.icons')
         @include('partials.jc.header')
         <main id="main">

@@ -131,7 +131,7 @@ class SeoFeedTest extends TestCase
     public function test_existing_public_service_subpages_are_discoverable_and_respect_noindex(): void
     {
         $paths = [
-            '/services/seo/backlinks', '/services/cpa-marketing/insurance',
+            '/seo-backlinks/', '/services/cpa-marketing/insurance',
             '/services/performance-marketing/youtube', '/solutions/boostingshop/basic',
         ];
         foreach ($paths as $path) {

@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InsightController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SeoCheckController;
 use App\Http\Controllers\WorkController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Honeypot\ProtectAgainstSpam;
@@ -15,10 +16,10 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 Route::get('/', [PageController::class, 'home'])->name('home');
 
 // 무료 SEO 인스턴트 진단 (온페이지 감사) — 남용 방지 rate limit
-Route::get('/seo-check', [\App\Http\Controllers\SeoCheckController::class, 'index'])
+Route::get('/seo-check', [SeoCheckController::class, 'index'])
     ->middleware('throttle:30,1')->name('seo.check');
 // 리포트 PDF 다운로드 (dompdf) — PDF 렌더가 무거우니 더 타이트한 rate limit
-Route::get('/seo-check/report.pdf', [\App\Http\Controllers\SeoCheckController::class, 'pdf'])
+Route::get('/seo-check/report.pdf', [SeoCheckController::class, 'pdf'])
     ->middleware('throttle:10,1')->name('seo.check.pdf');
 
 Route::get('/services', [PageController::class, 'services'])->name('services.index');
@@ -39,8 +40,7 @@ Route::get('/solutions/boostingshop', [PageController::class, 'boostingshop'])->
 Route::get('/solutions/boostingshop/{sub}', [PageController::class, 'boostingshopSub'])->name('solutions.boostingshop.sub');
 Route::get('/privacy', [PageController::class, 'privacy'])->name('privacy');
 Route::get('/company', [PageController::class, 'company'])->name('company');
-// 아나키 별도 페이지 폐지 → /company#anarchy 앵커로 301 통일 (04_회사소개.md)
-Route::redirect('/company/anarchy', '/company#anarchy', 301);
+Route::redirect('/company/anarchy', '/about-us/', 301);
 
 Route::get('/work', [WorkController::class, 'index'])->name('work.index');
 Route::get('/work/{work:slug}', [WorkController::class, 'show'])->name('work.show');
@@ -71,6 +71,26 @@ Route::get('/contact', [ContactController::class, 'show'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])
     ->middleware([ProtectAgainstSpam::class, 'throttle:5,1'])
     ->name('contact.store');
+
+// Public WordPress addresses render the same controllers as their modern aliases.
+Route::get('/about-us/', [PageController::class, 'company']);
+Route::get('/contact-us/', [ContactController::class, 'show']);
+Route::post('/contact-us/', [ContactController::class, 'store'])
+    ->middleware([ProtectAgainstSpam::class, 'throttle:5,1']);
+Route::get('/blog/', [InsightController::class, 'index']);
+Route::get('/blog/seo/', [InsightController::class, 'category'])->defaults('slug', 'seo');
+Route::get('/blog/link-building/', [InsightController::class, 'category'])->defaults('slug', 'link-building');
+Route::get('/seo/', [PageController::class, 'service'])->defaults('slug', 'seo');
+Route::get('/wordpress-agency/', [PageController::class, 'service'])->defaults('slug', 'wordpress');
+foreach (['seo-backlinks' => 'backlinks', 'naver-place-marketing' => 'naver-place', 'naver-shopping-marketing' => 'naver-shopping', 'kakao-gift' => 'kakao-gift', 'coupang' => 'coupang'] as $path => $sub) {
+    Route::get('/'.$path.'/', [PageController::class, 'seoSub'])->defaults('sub', $sub);
+}
+Route::get('/seo/{insight:slug}', [InsightController::class, 'show'])
+    ->whereIn('insight', [
+        'chrome-및-firefox에서-nofollow-링크를-확인하는-방법',
+        '11가지-최고의-seo-실수와-이를-피하는-방법',
+        '경쟁자를-압도하는-6가지-고급-링크-구축-전략',
+    ]);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -8,6 +8,7 @@ use App\Services\Seo\Backlinks\BacklinkProvider;
 use App\Services\Seo\Backlinks\MockBacklinkProvider;
 use App\Services\Seo\Keywords\KeywordProvider;
 use App\Services\Seo\Keywords\MockKeywordProvider;
+use App\Services\Seo\Publishing\PreservedUrlGenerator;
 use App\Services\Seo\Traffic\MockTrafficProvider;
 use App\Services\Seo\Traffic\TrafficProvider;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -22,6 +23,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Keep Laravel's URL session/key/route extenders and request rebinding.
+        $this->app->singleton('url', function ($app) {
+            $routes = $app['router']->getRoutes();
+            $app->instance('routes', $routes);
+
+            return new PreservedUrlGenerator(
+                $routes,
+                $app->rebinding('request', fn ($app, $request) => $app['url']->setRequest($request)),
+                $app['config']['app.asset_url'],
+            );
+        });
+
         // SEO 데이터 제공자 — 지금은 전부 샘플(Mock). 유료 API 키 확보 시 여기만 실어댑터로 교체.
         $this->app->bind(BacklinkProvider::class, MockBacklinkProvider::class);
         $this->app->bind(KeywordProvider::class, MockKeywordProvider::class);

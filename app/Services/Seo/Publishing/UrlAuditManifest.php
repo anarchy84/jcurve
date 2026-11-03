@@ -20,14 +20,21 @@ class UrlAuditManifest
                 sort($files);
                 foreach ($files as $source) {
                     $data = $this->json($source);
-                    $parts = parse_url($data['source_url'] ?? '');
+                    $encodedSource = preg_replace_callback('/[\x80-\xff]/', fn ($match) => rawurlencode($match[0]), $data['source_url'] ?? '');
+                    $parts = parse_url($encodedSource);
                     if (! is_array($parts) || ! in_array($parts['host'] ?? '', config('seo.legacy_hosts', []), true)
                         || ! in_array($parts['scheme'] ?? '', ['https', 'http'], true)
                         || isset($parts['user']) || isset($parts['pass']) || isset($parts['fragment'])) {
                         throw new InvalidArgumentException("Invalid legacy source URL in {$source}");
                     }
                     $path = ($parts['path'] ?? '/').(isset($parts['query']) ? '?'.$parts['query'] : '');
-                    $entries[] = ['path' => $path, 'status' => 200];
+                    if ($group === 'columns') {
+                        $slug = $data['slug'];
+                        $to = in_array($slug, config('seo.hidden_insights', []), true) ? '/blog/' : '/insights/'.$slug;
+                        $entries[] = ['path' => $path, 'status' => 301, 'to' => PreservedPaths::path($to)];
+                    } elseif (! in_array(PublicUrl::comparisonKey($path), array_map(fn ($entry) => PublicUrl::comparisonKey($entry['path']), $entries), true)) {
+                        $entries[] = ['path' => $path, 'status' => 200];
+                    }
                 }
             }
         }

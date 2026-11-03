@@ -25,12 +25,34 @@ return [
         'boostingshop' => '/solutions/boostingshop',
     ],
 
-    // 이 목록은 보존 목표다. 기존 301을 승인한 것으로 간주하지 않는다.
+    // URL-PRESERVE-01: 공개된 원주소를 정식 주소로 유지한다(끝 슬래시 포함).
+    'preserved_map' => [
+        '/company' => '/about-us/',
+        '/contact' => '/contact-us/',
+        '/insights' => '/blog/',
+        '/insights/category/seo' => '/blog/seo/',
+        '/insights/category/link-building' => '/blog/link-building/',
+        '/services/seo' => '/seo/',
+        '/services/seo/backlinks' => '/seo-backlinks/',
+        '/services/wordpress' => '/wordpress-agency/',
+        '/services/seo/naver-place' => '/naver-place-marketing/',
+        '/services/seo/naver-shopping' => '/naver-shopping-marketing/',
+        '/services/seo/kakao-gift' => '/kakao-gift/',
+        '/services/seo/coupang' => '/coupang/',
+        '/insights/chrome-및-firefox에서-nofollow-링크를-확인하는-방법' => '/seo/chrome-및-firefox에서-nofollow-링크를-확인하는-방법/',
+        '/insights/11가지-최고의-seo-실수와-이를-피하는-방법' => '/seo/11가지-최고의-seo-실수와-이를-피하는-방법/',
+        '/insights/경쟁자를-압도하는-6가지-고급-링크-구축-전략' => '/seo/경쟁자를-압도하는-6가지-고급-링크-구축-전략/',
+    ],
+    // 삭제/발행일 변경 없이 설정을 비우면 다시 공개할 수 있다.
+    'hidden_insights' => ['온라인-마케팅-제대로-배울-수-있는-아나키-강의'],
     'preserved_paths' => [
-        '/seo/', '/seo-backlinks/', '/wordpress-agency/',
+        '/', '/seo/', '/seo-backlinks/', '/wordpress-agency/',
         '/naver-place-marketing/', '/naver-shopping-marketing/',
         '/kakao-gift/', '/coupang/', '/about-us/', '/contact-us/',
-        '/blog/', '/blog/seo/', '/blog/link-building/', '/shop/',
+        '/blog/', '/blog/seo/', '/blog/link-building/',
+        '/seo/chrome-및-firefox에서-nofollow-링크를-확인하는-방법/',
+        '/seo/11가지-최고의-seo-실수와-이를-피하는-방법/',
+        '/seo/경쟁자를-압도하는-6가지-고급-링크-구축-전략/',
     ],
     'legacy_hosts' => ['j-curve.co.kr', 'www.j-curve.co.kr'],
 ];

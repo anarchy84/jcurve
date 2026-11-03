@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Middleware\PreservePublicUrls;
 use App\Http\Responses\RankfreeConnectionError;
 use App\Models\LegacyRedirect;
+use App\Services\Seo\Publishing\PreservedPaths;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -22,7 +24,7 @@ return Application::configure(basePath: dirname(__DIR__))
         },
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->prepend(PreservePublicUrls::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->dontFlash(['api_key', 'credential_ciphertext', 'current_password']);
@@ -58,6 +60,10 @@ return Application::configure(basePath: dirname(__DIR__))
 
             $redirect->increment('hit_count');
 
-            return redirect($redirect->to_path, $redirect->status_code);
+            if ($redirect->status_code === 410) {
+                return response()->view('errors.410', [], 410)->header('X-Robots-Tag', 'noindex');
+            }
+
+            return redirect(PreservedPaths::encode(PreservedPaths::path($redirect->to_path)), $redirect->status_code);
         });
     })->create();

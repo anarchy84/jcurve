@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    // 구글 태그 관리자 컨테이너 ID (예: GTM-ABCD123). 비어 있으면 태그를 출력하지 않는다.
+    // 공개 도메인에서만 켜진다 — resources/views/partials/jc/gtm.blade.php
+    'gtm' => [
+        'id' => env('GTM_ID'),
+    ],
+
 ];

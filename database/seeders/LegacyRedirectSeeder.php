@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\LegacyRedirect;
+use App\Services\Seo\Publishing\PreservedPaths;
 use Illuminate\Database\Seeder;
 
 class LegacyRedirectSeeder extends Seeder
@@ -66,6 +67,20 @@ class LegacyRedirectSeeder extends Seeder
             'v1/insurance.php' => '/services/cpa-marketing/insurance',
         ];
 
+        // Root PHP landings were also indexed under /v1/.
+        foreach ($map as $from => $to) {
+            if (! str_contains($from, '/') && str_ends_with($from, '.php')) {
+                $map['v1/'.$from] = $to;
+            }
+        }
+
+        // These addresses are now served directly; remove stale redirect rows.
+        foreach (config('seo.preserved_map', []) as $preserved) {
+            $key = LegacyRedirect::normalizePath($preserved);
+            unset($map[$key]);
+            LegacyRedirect::query()->where('from_path', $key)->delete();
+        }
+
         // Avada 테마 더미 포트폴리오 13개 → /work
         $dummies = [
             'portfolio-items',
@@ -82,7 +97,19 @@ class LegacyRedirectSeeder extends Seeder
         foreach ($map as $from => $to) {
             LegacyRedirect::query()->updateOrCreate(
                 ['from_path' => LegacyRedirect::normalizePath($from)],
-                ['to_path' => $to, 'status_code' => 301],
+                ['to_path' => PreservedPaths::path($to), 'status_code' => 301],
+            );
+        }
+
+        LegacyRedirect::query()->updateOrCreate(
+            ['from_path' => LegacyRedirect::buildQueryKey('v1/manager/bbs/board.php', ['bo_table' => 'column', 'wr_id' => ''])],
+            ['to_path' => '/blog/', 'status_code' => 301],
+        );
+
+        foreach ([19, 21, 29, 38, 47, 52, 56, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80] as $wrId) {
+            LegacyRedirect::query()->updateOrCreate(
+                ['from_path' => LegacyRedirect::buildQueryKey('v1/manager/bbs/board.php', ['bo_table' => 'column', 'wr_id' => (string) $wrId])],
+                ['to_path' => '/blog/', 'status_code' => 410],
             );
         }
     }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -35,7 +36,35 @@ class Insight extends Model
     {
         return $query
             ->whereNotNull('published_at')
-            ->where('published_at', '<=', now());
+            ->where('published_at', '<=', now())
+            ->whereNotIn('slug', config('seo.hidden_insights', []));
+    }
+
+    public function isHidden(): bool
+    {
+        return in_array($this->slug, config('seo.hidden_insights', []), true);
+    }
+
+    protected function content(): Attribute
+    {
+        return Attribute::get(fn ($value) => $this->displayText($value));
+    }
+
+    protected function excerpt(): Attribute
+    {
+        return Attribute::get(fn ($value) => $this->displayText($value));
+    }
+
+    private function displayText(?string $value): ?string
+    {
+        if ($value === null || ! in_array($this->slug, ['스마트스토어-검색광고가-꼭-필요할까', '스마트스토어-내게-맞는-키워드-발굴하는-법'], true)) {
+            return $value;
+        }
+
+        return str_replace([
+            '안녕하십니까. 마케팅 비전공자이자 10년차 광고대행사 마케터로 생활하고 있는 초짜 셀러 아나키입니다.',
+            '안녕하세요. 마케팅 비전공자이자 10년차 광고대행사 마케터로 생활하고 있는 초짜 셀러 아나키입니다.',
+        ], '', $value);
     }
 
     public function user(): BelongsTo

@@ -1,0 +1,77 @@
+{
+ "source": "https://j-curve.co.kr/blog/",
+ "fetched": "2026-11-03",
+ "path": "/blog/",
+ "blocks": [
+  {
+   "type": "h",
+   "level": 1,
+   "text": "SEO Blog"
+  },
+  {
+   "type": "p",
+   "level": 0,
+   "text": "SEO에 대한 유용한 정보와 기사"
+  },
+  {
+   "type": "li",
+   "level": 0,
+   "text": "경쟁자를 압도하는 6가지 고급 링크 빌딩 구축 전략"
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "경쟁자를 압도하는 6가지 고급 링크 빌딩 구축 전략"
+  },
+  {
+   "type": "p",
+   "level": 0,
+   "text": "몇 년 후의 웹사이트를 상상해보세요. 미친 듯이 노력한다면 검색 엔진 트래픽이 늘어나고, 백링크와 참조 도메인이 늘어나고, 전환율이 높아지기를 바랄 것입니다. 하지만 미래는 예측할 수 없다는 게 문제죠. 주요 Google 알고리즘 업데이트는 갑자기 나타날 수 있습니다. 예를 들어, Google이 2022년에만 발표한 이 업데이트 이미지를 확인하세요."
+  },
+  {
+   "type": "li",
+   "level": 0,
+   "text": "11가지 최고의 SEO 실수와 이를 피하는 방법"
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "11가지 최고의 SEO 실수와 이를 피하는 방법"
+  },
+  {
+   "type": "p",
+   "level": 0,
+   "text": "Google은 지속적으로 알고리즘을 업데이트하기 위해 노력하고 있습니다. 그리고 초보자와 전문가가 모두 저지르는 가장 흔한 SEO 실수가 바로 Google의 표적이 됩니다. 2018년 3월에 경험했던 것과 같은 모든 사소한 알고리즘 조정은 품질이 낮은 콘텐츠를 제거하고 최고 품질의 콘텐츠를 SERP 상단에 올려놓는 것을 목표로 합니다. SEO 전문가로부터 매일"
+  },
+  {
+   "type": "li",
+   "level": 0,
+   "text": "Chrome 및 Firefox에서 Nofollow 링크를 확인하는 방법"
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "Chrome 및 Firefox에서 Nofollow 링크를 확인하는 방법"
+  },
+  {
+   "type": "p",
+   "level": 0,
+   "text": "웹사이트로의 링크빌딩(Links Building) 할 때 , 링크에 nofollow 속성이 없는지 확인하는 것이 매우 중요합니다 . Google 및 기타 검색 엔진의 경우 nofollow는 링크가 순위를 향상시키지 않으며 PageRank를 전송하지 않음을 의미합니다 . nofollow 속성은 다음과 같습니다. <a href=\"[링크]\" rel=\"nofollow\" > [앵커]</a> Nofollow 링크를 확인하기 위한"
+  },
+  {
+   "type": "h",
+   "level": 2,
+   "text": "Categorys"
+  },
+  {
+   "type": "li",
+   "level": 0,
+   "text": "SEO 개념"
+  },
+  {
+   "type": "li",
+   "level": 0,
+   "text": "링크빌딩"
+  }
+ ]
+}

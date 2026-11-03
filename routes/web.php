@@ -15,6 +15,13 @@ use Spatie\Honeypot\ProtectAgainstSpam;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 
+// Legacy WordPress discovery URLs go straight to their current endpoints.
+// Child sitemap list fetched from the public sitemap_index.xml on 2026-11-03.
+foreach (['sitemap_index.xml', 'news-sitemap.xml', 'wp-sitemap.xml', 'post-sitemap.xml', 'page-sitemap.xml', 'product-sitemap.xml', 'avada_portfolio-sitemap.xml', 'category-sitemap.xml'] as $sitemap) {
+    Route::permanentRedirect('/'.$sitemap, '/sitemap.xml');
+}
+Route::permanentRedirect('/feed', '/rss');
+
 // 무료 SEO 인스턴트 진단 (온페이지 감사) — 남용 방지 rate limit
 Route::get('/seo-check', [SeoCheckController::class, 'index'])
     ->middleware('throttle:30,1')->name('seo.check');

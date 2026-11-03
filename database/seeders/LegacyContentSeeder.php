@@ -13,6 +13,13 @@ use Illuminate\Support\Str;
 
 class LegacyContentSeeder extends Seeder
 {
+    /** @var array<string, string> 운영 WP 글 3편의 설명문 (SEO-META-02) */
+    private const WP_META_DESCRIPTIONS = [
+        'chrome-및-firefox에서-nofollow-링크를-확인하는-방법' => '웹사이트로의 링크빌딩(Links Building) 할 때 , 링크에 nofollow 속성이 없는지 확인하는 것이 매우 중요합니다 .',
+        '11가지-최고의-seo-실수와-이를-피하는-방법' => 'Google은 지속적으로 알고리즘을 업데이트하기 위해 노력하고 있습니다.',
+        '경쟁자를-압도하는-6가지-고급-링크-구축-전략' => '몇 년 후의 웹사이트를 상상해보세요. 미친 듯이 노력한다면 검색 엔진 트래픽이 늘어나고, 백링크와 참조 도메인이 늘어나고, 전환율이 높아지기를 바랄 것입니다.',
+    ];
+
     /** @var array<int, string> 이미 사용한 슬러그(중복 방지) */
     private array $usedSlugs = [];
 
@@ -106,6 +113,17 @@ class LegacyContentSeeder extends Seeder
 
             $slug = $this->uniqueSlug($data['slug'] ?? Str::slug($data['title']));
             $publishedAt = $this->parseDate($data['published'] ?? '') ?? now();
+            $content = $data['html'] ?? '';
+            $metadata = [];
+
+            if (isset(self::WP_META_DESCRIPTIONS[$slug])) {
+                $data['title'] = Str::beforeLast($data['title'], ' - SEO 전문 컨설팅 기업 | 제이커브인터렉티브');
+                $content = $this->wpArticleContent($content);
+                $metadata = [
+                    'meta_title' => $data['title'].' - SEO 전문 컨설팅 기업',
+                    'meta_description' => self::WP_META_DESCRIPTIONS[$slug],
+                ];
+            }
 
             Insight::query()->updateOrCreate(
                 ['slug' => $slug],
@@ -114,17 +132,37 @@ class LegacyContentSeeder extends Seeder
                     'category_id' => $seoCategoryId,
                     'title' => $data['title'],
                     'slug' => $slug,
-                    'content' => $data['html'] ?? '',
-                    'excerpt' => Str::limit(trim(strip_tags($data['html'] ?? '')), 150),
+                    'content' => $content,
+                    'excerpt' => Str::limit($this->wpExcerpt($content), 150),
                     'cover_image' => $data['og_image'] ?? null,
                     'source_url' => $data['source_url'] ?? null,
                     'published_at' => $publishedAt,
+                    ...$metadata,
                 ],
             );
 
             // The three original WP addresses now render directly.
             LegacyRedirect::query()->where('from_path', LegacyRedirect::normalizePath('seo/'.$slug))->delete();
         }
+    }
+
+    private function wpArticleContent(string $html): string
+    {
+        // Keep the original hero image and article bytes, excluding Avada's
+        // banner/title/byline before them and category/share/sidebar widgets after.
+        if (! preg_match('~(<div\b[^>]*\bclass="fusion-image-element\b.*?)(?=<div\b[^>]*\bclass="fusion-meta-tb fusion-meta-tb-2\b)~s', $html, $matches)) {
+            throw new \UnexpectedValueException('Legacy WP article boundaries were not found.');
+        }
+
+        return preg_replace('~(<\s*/?\s*)h1(?=[\s>])~i', '$1h2', $matches[1]);
+    }
+
+    private function wpExcerpt(string $html): string
+    {
+        $text = preg_replace('~</(?:p|h[1-6]|li|div)>|<br\b[^>]*>~i', ' ', $html);
+        $text = html_entity_decode(strip_tags($text), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+        return trim(preg_replace('/\s+/u', ' ', $text));
     }
 
     private function parseWrId(string $url): ?int

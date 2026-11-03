@@ -1,2 +1,3 @@
 User-agent: *
 Disallow:
+Sitemap: https://j-curve.co.kr/sitemap.xml

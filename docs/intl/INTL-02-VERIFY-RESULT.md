@@ -11,11 +11,14 @@
 
 `VERIFY-CODEX-INTL-02.md` 전체, `SPEC-CODEX-INTL-02.md` 추가 지시 A~E, `INTL-PLAN.md`, `GLOSSARY.md`, `INTL-01-IMPL-RESULT.md`의 계약, `INTL-02-IMPL-RESULT.md`의 주장·파일 표를 읽었다. 구현 반환물의 통과 수를 증거로 사용하지 않고 별도 수집기·분석기·문의 테스트를 작성했다.
 
-검증 시작 HEAD는 `7f2d2ff98d9f768fe5d8299552718b43587696ed`, 마지막 검사 준비 중 관찰한 HEAD는 `2913ec8e30ad93c9622389c1178684a644b24407`이다. 같은 작업 폴더의 다른 세션/체크포인트가 진행돼 HEAD와 전역 diff가 바뀌었다. 이 세션의 Git 사용은 조회와 `git archive 0662117`뿐이다.
+검증 시작 HEAD는 `7f2d2ff98d9f768fe5d8299552718b43587696ed`, 마지막 응답 수집 종료 시 관찰한 HEAD는 `69cc75d0a92648ed86505c3c841e8a9e0784d539`이다. 같은 작업 폴더의 다른 세션/체크포인트가 진행돼 HEAD와 전역 diff가 바뀌었다. 이 세션의 Git 사용은 조회와 `git archive 0662117`뿐이다.
+
+최종 화면 수집 확인 시각은 **2026-11-03 16:14:17 KST**다. 수집 직전/직후 **검증 범위 소스 124파일의 SHA-256 차이 0**을 확인했다(`scope-closing-before.json` / `scope-closing-after.json`). 앞선 전체 테스트 이후 다시 바뀐 `lang/ja/subpages.php`도 이 최종 수집의 19개×2언어 렌더 검사에 포함했고, 해당 파일 Pint를 별도로 재통과했다. 그때의 파일 SHA-256은 `4b61e0451d6ca16263823c257f2954cd94a47b70a334325ad6dd08a57b87773f`다.
 
 - PHP 실측: **8.5.8**. HTTP 서버를 열지 않고 Laravel HTTP Kernel에 요청했다. 금지 포트 사용 없음.
 - 실제 `.env`는 읽거나 변경하지 않았다. 전용 PHP prepend가 환경 파일 bootstrap의 경로를 빈 임시 디렉터리로 바꾸며, 필요한 값은 각 자식 프로세스의 환경 사전으로 전달했다.
 - 현재 앱의 수집용 DB는 **`storage/framework/testing/verify02.sqlite`**만 사용했다. 매 수집을 `migrate:fresh --seed`로 초기화했다. 기준본도 archive 안의 같은 상대 경로에 자기 SQLite를 만들었다. 기존 DB·Claude 임시 DB에 접속하지 않았다.
+- 위 전용 SQLite는 시작 시 없던 파일이며 최종 응답을 임시 증거 파일로 보존한 뒤 삭제해 원래의 부재 상태로 돌렸다. 저장소의 제품/번역 파일은 삭제하지 않았다.
 - 전체/독립 PHPUnit은 명령 단위 `DB_CONNECTION=sqlite`, `DB_DATABASE=:memory:`로 실행했다. 셸 `export DB_DATABASE` 없음. 테스트 시 `APP_URL=http://localhost`, 공개 SEO origin은 `https://j-curve.co.kr`이다.
 - **`database/content/intl/insights/*.json`은 열거나 수정하지 않았다.** 해당 시더는 테스트 컨테이너에서 no-op으로 바꾸고 기존 한국어 공개 글에 직접 생성한 en/ja 번역을 연결했다. 비어 있던 link-building 카테고리에는 전용 DB 안에만 한국어 fixture 글 1개를 만들었다.
 - 한국어 무변경 비교는 이 fixture를 넣기 **전** 응답으로 수행했다. fixture 후의 목록 변화는 한국어 회귀로 계산하지 않았다.
@@ -255,7 +258,7 @@ DOM에서 보이는 숫자를 수집하고, 카운트 애니메이션의 초기 
 | `resources/views/partials/jc/footer.blade.php` | `4092aa2989048952a20b40c76c39167b4130a4e761ddc139f30f7c890c2788e5` |
 | `lang/en/pages/work.php` | `ae2cc28b88151f1c1c683048f8dfb144231b1a207dbe1fec5c90b45b52f1a6a1` |
 
-`git diff | shasum` 相当の SHA-1도 별도로 기록했다.
+`git diff | shasum`에 해당하는 SHA-1도 별도로 기록했다.
 
 | 관찰 시점 | 전역 diff SHA-1 |
 |---|---|

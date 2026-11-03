@@ -89,3 +89,27 @@
 - 「Korea's No.1」 「業界No.1」 같은 근거 없는 최상급.
 - 한국어 고유 표현의 직역(「태워봤습니다」→ "burned" 대신 "managed/spent").
 - 한글이 남은 채로 두기(앱·고유명사 포함 — 로마자로).
+
+## 8. 업계 용어 (2026-11-03 Claude 검수 — 기계번역 오역에서 나온 목록, 반드시 이 대응으로)
+| 한국어 | 영어 | 일본어 | 틀린 예(쓰지 말 것) |
+|---|---|---|---|
+| (리드·DB) 반려 | rejected / rejection | 差し戻し・却下 | ペット, return |
+| 인정(유효 DB 인정) | accepted as valid | 有効認定 | recognition, 認識 |
+| 정산 | settlement / billing | 精算 | — |
+| (광고) 지면 | placement / ad inventory | 広告枠・掲載面 | ground, 地面, グラウンド |
+| (광고) 소재 | creative / ad creative | クリエイティブ・広告素材 | material, 素材だけ |
+| 운영 체계 | operating process / workflow | 運用体制 | operating system, オペレーティングシステム |
+| DB(잠재고객 정보) | leads / lead data | リード | database, DB 그대로 |
+| 퍼미션(동의) DB | consented leads | 同意取得済みリード | permission DB |
+| 상위노출 | top rankings / ranking on page one | 上位表示 | top exposure |
+| 노출 | visibility / impressions(광고 수치일 때) | 露出・表示(回数) | exposure(사람이 읽는 문장에서) |
+| 대행 | managed service / agency service | 運用代行 | — |
+| 상담 | consultation | 相談 | counseling, カウンセリング |
+| 무료 컨설팅 | free consultation | 無料相談 | — |
+| AS | after-sales support | アフターサポート | AS 그대로 |
+| 광고주·매체사 | advertisers · publishers | 広告主・媒体社 | — |
+| 공급사(리드 공급) | lead supplier | リード供給会社 | supply company |
+| 이탈 | drop-off / bounce(웹 지표일 때) | 離脱 | — |
+| 유입 | traffic / visits | 流入 | inflow |
+| 전환 | conversion | コンバージョン | — |
+| 리모델링(보험) | policy review / switching | 保険の見直し | remodeling |

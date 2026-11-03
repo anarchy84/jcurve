@@ -271,6 +271,9 @@
             </div>
         </section>
 
+        {{-- 운영 워드프레스 본문 원문 보존(SEO·AI 답변 인용 보존, 제코 2026-11-03) --}}
+        @include('partials.jc.wp-legacy', ['wpLegacy' => 'wordpress-agency', 'wpStyle' => 'landing'])
+
         <section class="landing__cta has-orb">
             <div class="landing__cta-inner">
                 <h2>홈페이지가 아니라, 운영 가능한 영업 자산을</h2>

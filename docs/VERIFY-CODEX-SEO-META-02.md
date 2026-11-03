@@ -28,12 +28,19 @@
 - **V13 회귀(URL-PRESERVE-01)**: 원주소 15개 200 + canonical, N→P 301 1홉(쿼리 보존), 410 30개, `/v1/gfa.php` 301 — 표본이 아니라 전수.
 - **V14 품질 게이트**: `php artisan test` 전체(개수·실패 0), `./vendor/bin/pint --test`, `npm run build`. 실제 출력.
 
+### 추가: 워드프레스 본문 원문 보존 구간 (Claude, `partials/jc/wp-legacy.blade.php` + `partials/jc/wp-legacy/*.json` 9개, 지시서 `docs/SPEC-CODEX-SEO-META-02B.md`)
+- **V15 원문 일치(조작 여부)**: JSON 9개의 `blocks[].text` 하나하나가 **지금 운영 `https://j-curve.co.kr` 같은 경로 페이지의 텍스트에 그대로 있는지** 독립 방법(직접 받은 HTML 을 텍스트화·공백 정규화)으로 대조. 운영에 없는 문장·숫자가 바뀐 문장이 하나라도 있으면 FAIL(목록). `excluded[]` 가 「지금 구독하고…」「※ SEO 분석을 이용하시면…」「clients」 3종 외의 것을 빼고 있으면 FAIL.
+- **V16 누락**: 운영 페이지 `<main id="main">` 본문에서 20자 이상 문장을 직접 뽑아, 새 페이지(8014 아닌 너의 8013)에 없는 것 목록. 3종 제외 문구·날짜 표시 외에 빠진 문장이 있으면 FAIL. `/about-us/`(테마 견본 영어)·블로그 목록 3개는 대상 아님(보고만).
+- **V17 화면 구조·안전**: 각 페이지 `<h1>` 1개, `id="service-detail"` 1개. JSON 텍스트는 이스케이프되어 출력(`<`·`&` 포함 문장 확인). 자동 이름 결정: `seo_title` 없는 서브페이지·`/about-us/`·`/blog/` 에 구간 없음. 이상한 경로(`/..%2f`, 대문자, 쿼리)로 다른 JSON 이나 파일이 읽히지 않음.
+- **V18 성과 숫자 보존**: 제코 결정 「전부 그대로 넣기」 — 운영 문장의 숫자(예: 「372%」「450%」「95.7%」「월 50만원」)가 새 페이지에 같은 문장 그대로 있는지 표본 10개 이상.
+
 ## §T 테스트 무력화 실험 (필수)
 1. `config/subpages.php` 의 `seo_title` 5개를 임시로 지움 → 제목 테스트가 **실제로 빨개지는지**.
 2. 시더의 3편 정리 로직을 임시로 끔 → 블로그 3편 테스트가 빨개지는지.
 3. 사이트맵 옛 주소 라우트를 임시로 지움 → 해당 테스트가 빨개지는지.
 4. `head.blade.php` 기본 robots 를 임시로 `index, follow` 로 → robots 테스트가 빨개지는지.
-5. 각각 원복 → 전체 그린 재확인 → `git diff | shasum` 실험 전후 동일.
+5. `pages/subpage.blade.php` 의 wp-legacy include 를 임시로 지움 → `WpLegacyContentTest` 가 빨개지는지. JSON 하나의 숫자 한 글자를 임시로 바꿈 → 무결성 해시 테스트가 빨개지는지.
+6. 각각 원복 → 전체 그린 재확인 → `git diff | shasum` 실험 전후 동일.
 
 ## 반환
 `docs/SEO-META-02-VERIFY-RESULT.md`: 시나리오별 PASS/FAIL 표 → FAIL 은 재현 명령·실제 출력·원인 위치(파일:줄) → 무력화 실험 결과 → 미검증 항목. 마지막 한 줄: 「운영 반영 커밋으로 써도 됨 / 안 됨」 과 이유.

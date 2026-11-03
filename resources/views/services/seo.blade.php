@@ -263,6 +263,9 @@
             </div>
         </section>
 
+        {{-- 운영 워드프레스 본문 원문 보존(SEO·AI 답변 인용 보존, 제코 2026-11-03) --}}
+        @include('partials.jc.wp-legacy', ['wpLegacy' => 'seo', 'wpStyle' => 'landing'])
+
         <section class="landing__cta has-orb">
             <div class="landing__cta-inner">
                 <h2>순위 약속보다, 지금 막힌 이유부터</h2>

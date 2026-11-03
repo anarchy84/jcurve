@@ -580,6 +580,9 @@
     </section>
 
     {{-- ⑱ 마지막 상담 --}}
+    {{-- 운영 워드프레스 본문 원문 보존(SEO·AI 답변 인용 보존, 제코 2026-11-03) --}}
+    @include('partials.jc.wp-legacy', ['wpLegacy' => 'home', 'wpStyle' => 'jc'])
+
     <section class="jc-bg-dark jc-section" aria-labelledby="home-cta-title">
         <div class="jc-wrap jc-cta">
             <div>

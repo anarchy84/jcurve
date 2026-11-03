@@ -1,8 +1,15 @@
 {
  "source": "https://j-curve.co.kr/naver-shopping-marketing/",
  "fetched": "2026-11-03",
- "path": "/naver-shopping-marketing/",
+ "note": "운영 워드프레스 본문 원문. 문구·숫자 수정 금지(제코 2026-11-03). 새 사이트에 없는 기능 안내 문구만 제외",
+ "excluded": [],
  "blocks": [
+  {
+   "type": "h",
+   "level": 1,
+   "text": "네이버쇼핑 상위노출 마케팅 성공을 위한 SEO 전략과 실전 팁",
+   "from": "본문 위 머리 구간(<main> 밖)"
+  },
   {
    "type": "h",
    "level": 1,

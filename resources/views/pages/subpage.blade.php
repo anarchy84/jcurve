@@ -280,6 +280,9 @@
             </section>
         @endif
 
+        {{-- 운영 워드프레스 본문 원문 보존 — 원주소(/seo-backlinks/ 등)에 맞는 파일이 있을 때만 나온다(제코 2026-11-03) --}}
+        @include('partials.jc.wp-legacy', ['wpStyle' => 'landing'])
+
         <section class="landing__cta has-orb">
             <div class="landing__cta-inner">
                 <h2>{{ $page['cta']['title'] ?? '현재 상황부터 함께 진단해 보겠습니다' }}</h2>

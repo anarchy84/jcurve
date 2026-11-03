@@ -1236,3 +1236,11 @@ button.jc-otarget:hover { border-color: #9AA8FF; }
     .jc-oprod__item { padding: 20px 8px 16px; }
     .jc-odays button { height: 104px; }
 }
+
+/* 운영 워드프레스 본문 원문 보존 구간(partials/jc/wp-legacy, 2026-11-03) — 읽기 폭과 목록 모양만 정한다 */
+.jc-wp-legacy__body { max-width: 760px; margin-left: auto; margin-right: auto; }
+.jc-wp-legacy__body ul { padding-left: 1.4em; list-style: disc; margin: 0 0 24px; }
+.jc-wp-legacy__body li { margin-top: .4em; }
+.jc-wp-legacy__body p strong { font-weight: 700; }
+.jc-wp-legacy__body > :first-child { margin-top: 0; }
+.jc-wp-legacy__body h4 { font-size: 18px; font-weight: 700; line-height: 1.5; margin: 28px 0 10px; color: #000; }

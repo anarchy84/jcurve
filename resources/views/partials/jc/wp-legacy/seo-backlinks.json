@@ -1,7 +1,10 @@
 {
  "source": "https://j-curve.co.kr/seo-backlinks/",
  "fetched": "2026-11-03",
- "path": "/seo-backlinks/",
+ "note": "운영 워드프레스 본문 원문. 문구·숫자 수정 금지(제코 2026-11-03). 새 사이트에 없는 기능 안내 문구만 제외",
+ "excluded": [
+  "지금 구독하고, SEO 무료 팁을 받아보세요!"
+ ],
  "blocks": [
   {
    "type": "h",
@@ -267,11 +270,6 @@
    "type": "h",
    "level": 3,
    "text": "트래픽과 매출 상승을 경험하세요."
-  },
-  {
-   "type": "h",
-   "level": 2,
-   "text": "지금 구독하고, SEO 무료 팁을 받아보세요!"
   }
  ]
 }

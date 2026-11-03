@@ -1,7 +1,8 @@
 {
  "source": "https://j-curve.co.kr/coupang/",
  "fetched": "2026-11-03",
- "path": "/coupang/",
+ "note": "운영 워드프레스 본문 원문. 문구·숫자 수정 금지(제코 2026-11-03). 새 사이트에 없는 기능 안내 문구만 제외",
+ "excluded": [],
  "blocks": [
   {
    "type": "h",

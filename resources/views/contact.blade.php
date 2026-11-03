@@ -148,6 +148,9 @@
             </div>
         </section>
 
+        {{-- 운영 워드프레스 본문 원문 보존(SEO·AI 답변 인용 보존, 제코 2026-11-03) --}}
+        @include('partials.jc.wp-legacy', ['wpLegacy' => 'contact-us', 'wpStyle' => 'landing'])
+
         <section class="landing__section landing__section--parchment">
             <div class="landing__inner">
                 <span class="landing__eyebrow">FAQ</span>

@@ -1,0 +1,86 @@
+<?php
+
+/*
+| 영어 메뉴·레이아웃 공통 문구 (Claude, 2026-11-03). 구조는 resources/views/partials/intl/menu.php 가 만든다.
+| 한국어 메뉴(partials/jc/menu.php)와 같은 항목. 외국어판이 없는 커뮤니티·로그인·문의게시판은 뺐다.
+*/
+
+return [
+    'skip' => 'Skip to content',
+    'home_aria' => 'J-Curve Interactive home',
+    'brand_name' => 'J-Curve',
+    'brand_sub' => 'Interactive',
+    'main_nav' => 'Main menu',
+    'mobile_nav' => 'Mobile menu',
+    'menu_open' => 'Open menu',
+    'menu' => 'Menu',
+    'lang_switch' => 'Language',
+
+    'company' => 'About us',
+    'marketing' => 'Marketing services',
+    'marketing_intro' => 'From ad buying to search visibility and website builds, J-Curve runs the work for you.',
+    'marketing_all' => 'All services',
+    'self' => 'Self-serve marketing',
+    'operations' => 'Our platforms',
+    'operations_intro' => 'Services J-Curve builds and runs itself. Read the overview, then go straight to each service.',
+    'operations_all' => 'All our platforms',
+    'work' => 'Results',
+    'insights' => 'Insights',
+    'support' => 'Support',
+    'support_intro' => 'Check the FAQ first. If your question is not there, send us a message.',
+    'faq' => 'FAQ',
+    'faq_desc' => 'Common questions and answers by service',
+    'project' => 'Project inquiry',
+    'project_desc' => 'Request a one-to-one consultation',
+    'contact' => 'Contact us',
+    'phone_label' => 'Phone',
+
+    'groups' => [
+        'ads' => 'Advertising',
+        'search' => 'Search marketing',
+        'build' => 'Build & support',
+    ],
+    'items' => [
+        'performance' => 'Performance marketing',
+        'google-ads' => 'Google Ads',
+        'naver-gfa' => 'NAVER GFA',
+        'facebook' => 'Facebook & Instagram',
+        'youtube' => 'YouTube',
+        'cpa' => 'CPA marketing',
+        'real-estate' => 'Real estate pre-sale',
+        'stock' => 'Stock-investor leads',
+        'insurance' => 'Insurance leads',
+        'coin' => 'Crypto-investor leads',
+        'permission-call' => 'Consent-based call leads',
+        'reward' => 'Reward ad network',
+        'seo' => 'SEO',
+        'aeo' => 'AEO',
+        'geo' => 'GEO',
+        'naver-place' => 'NAVER Place',
+        'naver-shopping' => 'NAVER Shopping',
+        'coupang' => 'Coupang',
+        'kakao-gift' => 'Kakao Gift',
+        'backlinks' => 'Backlinks',
+        'wordpress' => 'WordPress build & management',
+        'marketing-support' => 'SME marketing support programs',
+    ],
+    'ops' => [
+        'rankfree' => ['RankFree', 'NAVER rankings and market data'],
+        'boostingshop' => ['BoostingShop', 'Self-serve marketing products'],
+        'shopitrend' => ['ShopiTrend', 'ShopiTrend marketing platform'],
+        'leadbay' => ['LeadBay', 'Lead and contract management for insurance sales teams'],
+        'call2sale' => ['Call2Sale', 'Call-center CRM for insurance leads'],
+        'apps' => ['Our own reward apps', '12 apps, including Kkokko Farm and Danggeun Cash'],
+    ],
+
+    'footer' => [
+        'company_group' => 'Company',
+        'company_name' => 'J-Curve Interactive Corporation',
+        'ceo' => 'CEO Taehoon Kim · Business registration no. 753-88-01488',
+        'address' => 'Suite 703, Gasan W Center, Gasan digital 1-ro, Geumcheon-gu, Seoul, Republic of Korea',
+        'contact' => 'Tel 02-1668-2612 (Korea) · jcurve19@gmail.com',
+        'privacy' => 'Privacy policy',
+        'copyright' => '© 2026 J-Curve Interactive Corporation.',
+        'korean_only' => 'Some pages and tools are available in Korean only.',
+    ],
+];

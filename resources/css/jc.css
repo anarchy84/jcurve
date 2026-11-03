@@ -1268,3 +1268,14 @@ html:lang(ja) body { word-break: normal; line-break: strict; overflow-wrap: anyw
 html:lang(ja) .jc-display { letter-spacing: -0.02em; }
 html:lang(ja) .jc-h1--home { font-size: clamp(34px, 4.6vw, 68px); }
 html:lang(en) .jc-h1--home { font-size: clamp(38px, 5vw, 76px); }
+.jc-intl-platforms { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1080px) { .jc-intl-platforms { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .jc-intl-platforms { grid-template-columns: 1fr; } }
+/* 외국어 헤더: 로고·언어 링크·메뉴 이름은 한 덩어리로(일본어 줄바꿈 규칙이 글자 단위로 쪼개지 않게) */
+.jc-intl .jc-brand, .jc-intl .jc-nav a, .jc-intl .jc-lang, .jc-intl .jc-header__aside .jc-btn { white-space: nowrap; }
+.jc-intl .jc-header { word-break: keep-all; overflow-wrap: normal; }
+/* 영어 단어가 길어 다섯 층 이름 칸이 좁다 */
+.jc-intl .jc-layer { grid-template-columns: 240px minmax(0, 1fr) minmax(0, 1.25fr) 180px; }
+.jc-intl .jc-layer__title { font-size: 30px; }
+@media (max-width: 1080px) { .jc-intl .jc-layer { grid-template-columns: 200px minmax(0, 1fr); } }
+@media (max-width: 760px) { .jc-intl .jc-layer { grid-template-columns: 1fr; } }

@@ -1244,3 +1244,27 @@ button.jc-otarget:hover { border-color: #9AA8FF; }
 .jc-wp-legacy__body p strong { font-weight: 700; }
 .jc-wp-legacy__body > :first-child { margin-top: 0; }
 .jc-wp-legacy__body h4 { font-size: 18px; font-weight: 700; line-height: 1.5; margin: 28px 0 10px; color: #000; }
+
+/* ===== 다국어(영어·일본어) — 언어 전환 링크 · 일본어 글꼴·줄바꿈 (Claude, 2026-11-03 INTL) =====
+   - .jc-lang: 헤더의 KO · EN · JA (한국어 헤더에도 같은 블록). 모바일 메뉴 안에는 .jc-lang--mnav 로 한 줄.
+   - 일본어는 띄어쓰기가 없어 word-break: keep-all 이면 줄이 안 바뀐다 → normal + line-break: strict.
+   - 일본어 제목 글꼴(Wanted Sans)엔 가나·한자가 없어 Pretendard JP 한 가지로 통일. */
+.jc-lang { display: inline-flex; align-items: center; gap: 2px; font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+.jc-lang__item { padding: 6px 7px; border-radius: 6px; color: var(--jc-body) !important; text-decoration: none; line-height: 1; }
+.jc-lang__item:hover { background: var(--jc-fog); color: var(--jc-ink) !important; }
+.jc-lang__item[aria-current="true"] { color: var(--jc-ink) !important; font-weight: 800; }
+.jc-mnav__panel .jc-lang--mnav { display: flex; gap: 6px; margin-top: 8px; padding-top: 12px; border-top: 1px solid var(--jc-line); }
+.jc-mnav__panel .jc-lang--mnav .jc-lang__item { padding: 10px 12px; font-size: 14px; }
+@media (max-width: 1200px) { .jc-header__aside > .jc-lang { display: none; } }
+@media (max-width: 1360px) {
+    .jc-intl .jc-nav, .jc-intl .jc-header__aside > .jc-lang { display: none; }
+    .jc-intl .jc-mnav { display: block; }
+}
+html:lang(ja) {
+    --jc-font: 'Pretendard JP Variable', 'Pretendard JP', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', system-ui, sans-serif;
+    --jc-font-display: 'Pretendard JP Variable', 'Pretendard JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+}
+html:lang(ja) body { word-break: normal; line-break: strict; overflow-wrap: anywhere; }
+html:lang(ja) .jc-display { letter-spacing: -0.02em; }
+html:lang(ja) .jc-h1--home { font-size: clamp(34px, 4.6vw, 68px); }
+html:lang(en) .jc-h1--home { font-size: clamp(38px, 5vw, 76px); }

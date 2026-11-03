@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             InsightCategorySeeder::class,
             LegacyRedirectSeeder::class,
             LegacyContentSeeder::class,
+            IntlInsightSeeder::class,
         ]);
     }
 }

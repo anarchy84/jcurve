@@ -15,7 +15,7 @@ class WorkController extends Controller
             ->latest('id')
             ->paginate(12);
 
-        return view('work.index', compact('works'));
+        return intl_view('work.index', compact('works'));
     }
 
     public function show(Work $work): View

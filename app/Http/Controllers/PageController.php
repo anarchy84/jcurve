@@ -30,67 +30,71 @@ class PageController extends Controller
             ->get();
 
         // S10a 인사이트 프리뷰: 최신 3건. 없으면 뷰에서 섹션 숨김.
-        $insights = Insight::query()
-            ->with('category')
+        $query = Insight::query()->with('category');
+        if (intl_locale() !== 'ko') {
+            $query->whereHas('translations', fn ($query) => $query->where('locale', intl_locale()))
+                ->with('translation');
+        }
+        $insights = $query
             ->published()
             ->latest('published_at')
             ->latest('id')
             ->take(3)
             ->get();
 
-        return view('pages.home', compact('works', 'insights'));
+        return intl_view('pages.home', compact('works', 'insights'));
     }
 
     public function services(): View
     {
-        return view('services.index');
+        return intl_view('services.index');
     }
 
     public function service(string $slug): View
     {
         abort_unless(isset(self::SERVICE_VIEWS[$slug]), 404);
 
-        return view(self::SERVICE_VIEWS[$slug]);
+        return intl_view(self::SERVICE_VIEWS[$slug]);
     }
 
     public function seoAeo(): View
     {
-        return view('services.seo.aeo');
+        return intl_view('services.seo.aeo');
     }
 
     public function seoGeo(): View
     {
-        return view('services.seo.geo');
+        return intl_view('services.seo.geo');
     }
 
     public function solutions(): View
     {
-        return view('solutions.index');
+        return intl_view('solutions.index');
     }
 
     public function rankfree(): View
     {
-        return view('solutions.rankfree');
+        return intl_view('solutions.rankfree');
     }
 
     public function leadbay(): View
     {
-        return view('solutions.leadbay');
+        return intl_view('solutions.leadbay');
     }
 
     public function call2sale(): View
     {
-        return view('solutions.call2sale');
+        return intl_view('solutions.call2sale');
     }
 
     public function boostingshop(): View
     {
-        return view('solutions.boostingshop');
+        return intl_view('solutions.boostingshop');
     }
 
     public function company(): View
     {
-        return view('pages.company');
+        return intl_view('pages.company');
     }
 
     // ── 레거시 301 도착지 서브페이지 (config/subpages.php 데이터 주도) ──
@@ -117,12 +121,32 @@ class PageController extends Controller
 
     public function marketingSupport(): View
     {
-        return view('pages.marketing-support');
+        return intl_view('pages.marketing-support');
     }
 
     public function privacy(): View
     {
-        return view('pages.privacy');
+        return intl_view('pages.privacy');
+    }
+
+    public function selfMarketing(): View
+    {
+        return intl_view('pages.self-marketing');
+    }
+
+    public function selfMarketingPlace(): View
+    {
+        return intl_view('pages.self-marketing-place');
+    }
+
+    public function shopitrend(): View
+    {
+        return intl_view('solutions.shopitrend');
+    }
+
+    public function faq(): View
+    {
+        return intl_view('pages.faq');
     }
 
     /**
@@ -134,7 +158,7 @@ class PageController extends Controller
         $items = config("subpages.{$group}.items", []);
         abort_unless(isset($items[$sub]), 404);
 
-        return view('pages.subpage', [
+        return intl_view('pages.subpage', [
             'parent' => config("subpages.{$group}.parent"),
             'page' => $items[$sub],
         ]);

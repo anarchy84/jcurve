@@ -6,6 +6,7 @@ use App\Models\Lead;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class ContactController extends Controller
@@ -48,19 +49,26 @@ class ContactController extends Controller
             $request->session()->put(self::UTM_SESSION_KEY, array_replace($storedUtm, $utm));
         }
 
-        return view('contact');
+        return intl_view('contact');
     }
 
     public function store(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'company' => ['nullable', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:50'],
-            'service_interest' => ['required', Rule::in(self::SERVICE_INTERESTS)],
-            'message' => ['required', 'string', 'max:2000'],
-        ]);
+        try {
+            $validated = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'company' => ['nullable', 'string', 'max:255'],
+                'email' => ['required', 'email', 'max:255'],
+                'phone' => ['nullable', 'string', 'max:50'],
+                'service_interest' => ['required', Rule::in(self::SERVICE_INTERESTS)],
+                'message' => ['required', 'string', 'max:2000'],
+            ]);
+        } catch (ValidationException $exception) {
+            if (intl_locale() !== 'ko') {
+                $exception->redirectTo(intl_route('contact'));
+            }
+            throw $exception;
+        }
 
         $storedUtm = $request->session()->get(self::UTM_SESSION_KEY, []);
         $storedUtm = is_array($storedUtm) ? $storedUtm : [];
@@ -75,12 +83,13 @@ class ContactController extends Controller
         $lead->message = $validated['message'];
         $lead->utm = $utm === [] ? null : $utm;
         $lead->status = 'new';
+        $lead->locale = intl_locale() === 'ko' ? null : intl_locale();
         $lead->save();
 
         $request->session()->forget(self::UTM_SESSION_KEY);
 
         return redirect()
-            ->route('contact')
+            ->to(intl_route('contact'))
             ->with('status', 'inquiry-received');
     }
 

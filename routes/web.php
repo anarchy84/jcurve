@@ -111,3 +111,4 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 require __DIR__.'/pages.php';
+require __DIR__.'/intl.php';

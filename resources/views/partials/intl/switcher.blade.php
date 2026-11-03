@@ -6,11 +6,11 @@
     // 사용: @include('partials.intl.switcher', ['intlSwitcherClass' => '...'])
     $intlNow = intl_locale();
     $intlSwitchAlts = $intlAlts ?? intl_alternates();
+    // parse_url 은 한글(UTF-8) 경로 바이트를 깨뜨려 404 주소를 만든다(VERIFY-INTL-02 V7) → 앞의 「scheme://host」만 잘라 낸다.
     $intlPathOf = function (string $url): string {
-        $path = parse_url($url, PHP_URL_PATH) ?: '/';
-        $query = parse_url($url, PHP_URL_QUERY);
+        $path = preg_replace('~^[a-z][a-z0-9+.-]*://[^/?#]*~i', '', $url);
 
-        return $path.($query ? '?'.$query : '');
+        return $path === '' ? '/' : $path;
     };
 @endphp
 <nav class="jc-lang {{ $intlSwitcherClass ?? '' }}" aria-label="{{ $intlNow === 'ko' ? '언어 선택' : __('menu.lang_switch') }}" data-intl-switcher>

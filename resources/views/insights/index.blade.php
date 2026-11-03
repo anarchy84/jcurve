@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title', '인사이트 — 현장에서 검증한 마케팅 | 제이커브인터렉티브')
+{{-- 제목·설명문 = 운영 워드프레스 원문 그대로(SEO 보존, 제코 2026-11-03 「seo 쪽으로 되돌리는게 맞아. 퍼포먼스 마케팅 에이전시는 아니야」). 바꾸면 검색 순위가 흔들린다 --}}
+@section('title', 'SEO | 검색엔진최적화를 위한 완벽 가이드')
 @section('meta')
-    <meta name="description" content="현장에서 검증한 것만 글로 남깁니다. 퍼포먼스·SEO·콘텐츠까지, 제이커브인터렉티브의 마케팅 인사이트.">
+    <meta name="description" content="SEO가 필요하신가요? 검색엔진최적화(SEO)의 모든 것을 쉽게 이해하고, 실전에서 활용할 수 있는 팁을 제공합니다. 기술적 SEO (Technical SEO)부터 콘텐츠 SEO, 링크 빌딩과 백링크 전략, 온페이지 SEO & 오프페이지 SEO, 로컬 SEO, SEO 분석 및 측정 도구 활용까지 한눈에 알아보세요.">
 @endsection
 
 @section('content')

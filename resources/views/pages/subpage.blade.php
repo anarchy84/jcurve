@@ -44,7 +44,8 @@
     ];
 @endphp
 
-@section('title', $page['title'].' | 제이커브인터렉티브')
+{{-- seo_title: 원주소 서브페이지의 운영 워드프레스 제목 원문(꼬리 포함 전체). 있으면 그대로 쓴다(SEO 보존, 제코 2026-11-03) --}}
+@section('title', $page['seo_title'] ?? ($page['title'].' | 제이커브인터렉티브'))
 
 @section('meta')
     @if (! empty($page['meta_description']))

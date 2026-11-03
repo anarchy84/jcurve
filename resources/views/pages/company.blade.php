@@ -9,7 +9,8 @@
     ];
 @endphp
 
-@section('title', '회사소개 — 2009년부터, 실행과 데이터로 말해왔습니다 | 제이커브인터렉티브')
+{{-- 제목·설명문 = 운영 워드프레스 원문 그대로(SEO 보존, 제코 2026-11-03 「seo 쪽으로 되돌리는게 맞아. 퍼포먼스 마케팅 에이전시는 아니야」). 바꾸면 검색 순위가 흔들린다 --}}
+@section('title', 'About Us - SEO 전문 컨설팅 기업 | 제이커브인터렉티브')
 @section('meta')
     <meta name="description" content="2009년 설립. 광고 집행, CPA, 리워드, 검색, 웹 제작과 자체 솔루션 개발을 한 팀에서 연결하는 제이커브인터렉티브의 역사와 일하는 방식을 소개합니다.">
     <script type="application/ld+json">

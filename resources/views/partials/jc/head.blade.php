@@ -12,7 +12,7 @@
     $jcCanonical = \App\Services\Seo\Publishing\PreservedPaths::destination($jcPath) !== null ? $jcPublicUrl.$jcPath : (trim($__env->yieldContent('canonical')) ?: $jcPublicUrl.$jcPath);
     $jcHost = request()->getHost();
     $jcIsPublicHost = $jcPublicHost && $jcHost === $jcPublicHost && ! str_starts_with($jcHost, 'dev.');
-    $jcRobots = $jcIsPublicHost ? (trim($__env->yieldContent('robots')) ?: 'index, follow') : 'noindex, nofollow';
+    $jcRobots = $jcIsPublicHost ? (trim($__env->yieldContent('robots')) ?: 'index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large') : 'noindex, nofollow';
     $jcTitle = trim($__env->yieldContent('title')) ?: '제이커브인터렉티브';
 @endphp
 {{-- 스크립트가 켜진 화면 표시(첫 화면 전환 패널 등이 그려지기 전에 자리를 잡아 화면이 덜컹이지 않게) --}}

@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
-@section('title', $category->name.' 인사이트 | 제이커브인터렉티브')
+{{-- 원주소 카테고리(/blog/seo/, /blog/link-building/)는 운영 워드프레스 제목 그대로(SEO 보존, 제코 2026-11-03). 나머지 카테고리는 기존 형식 --}}
+@section('title', [
+    'seo' => 'SEO 개념 - SEO 전문 컨설팅 기업 | 제이커브인터렉티브',
+    'link-building' => '링크빌딩 - SEO 전문 컨설팅 기업 | 제이커브인터렉티브',
+][$category->slug] ?? $category->name.' 인사이트 | 제이커브인터렉티브')
 @section('meta')
     <meta name="description" content="{{ $category->name }} 관련 마케팅 인사이트 — 제이커브인터렉티브가 현장에서 검증한 콘텐츠입니다.">
 @endsection

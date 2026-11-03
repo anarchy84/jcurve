@@ -25,9 +25,10 @@
     ];
 @endphp
 
-@section('title', 'SEO·AEO·GEO — 검색과 AI 답변에서 발견되는 구조 | 제이커브인터렉티브')
+{{-- 제목·설명문 = 운영 워드프레스 원문 그대로(SEO 보존, 제코 2026-11-03 「seo 쪽으로 되돌리는게 맞아. 퍼포먼스 마케팅 에이전시는 아니야」). 바꾸면 검색 순위가 흔들린다 --}}
+@section('title', '구글 네이버 SEO 업체 | 검색엔진 최적화 전문 | 제이커브')
 @section('meta')
-    <meta name="description" content="구글·네이버 검색 최적화부터 AEO·GEO까지. 크롤링·색인·콘텐츠·엔티티·신뢰 근거와 전환 동선을 함께 정비하는 제이커브 SEO 서비스.">
+    <meta name="description" content="10년간 1,000여 개의 SEO 프로젝트를 성공적으로 수행하며 얻은 검색엔진최적화에 대한 깊은 이해와 경험을 바탕으로, 귀사에 딱 맞는 맞춤형 SEO 전략을 제시해드립니다. 전문적인 키워드 분석과 최적화. 지속가능한 트래픽 성장을 위한 과정을 함께합니다. 무료 컨설팅을 신청하세요.">
     <script type="application/ld+json">
         {!! json_encode([
             '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨

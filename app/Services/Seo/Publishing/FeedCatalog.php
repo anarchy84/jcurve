@@ -68,6 +68,9 @@ class FeedCatalog
         // Append only: Korean entries keep their original bytes and order.
         foreach (['en', 'ja'] as $locale) {
             foreach (IntlRoutes::variants() as $variant) {
+                if (! IntlRoutes::available($variant['name'], $variant['parameters'], $locale)) {
+                    continue;
+                }
                 $path = route($locale.'.'.$variant['name'], $variant['parameters'], false);
                 if ($this->indexable($variant['path'], $meta) && $this->indexable($path, $meta)) {
                     $section = str_starts_with($variant['name'], 'services.') || str_starts_with($variant['name'], 'solutions.') ? 'services' : 'pages';
@@ -77,14 +80,14 @@ class FeedCatalog
             foreach (InsightCategory::query()->whereHas('insights', fn ($query) => $query->published()
                 ->whereHas('translations', fn ($query) => $query->where('locale', $locale)))->get() as $category) {
                 $path = route($locale.'.insights.category', ['slug' => $category->slug], false);
-                if ($this->indexable($path, $meta)) {
+                if (IntlRoutes::available('insights.category', ['slug' => $category->slug], $locale) && $this->indexable($path, $meta)) {
                     $sections['pages'][] = ['url' => $this->urls->absolute($path), 'modified' => null];
                 }
             }
             foreach (InsightTranslation::query()->where('locale', $locale)
                 ->whereHas('insight', fn ($query) => $query->published())->with('insight')->orderBy('insight_id')->cursor() as $translation) {
                 $path = route($locale.'.insights.show', ['slug' => $translation->slug], false);
-                if ($this->indexable($this->insightPath($translation->insight), $meta) && $this->indexable($path, $meta)) {
+                if (IntlRoutes::available('insights.show', ['slug' => $translation->slug], $locale) && $this->indexable($this->insightPath($translation->insight), $meta) && $this->indexable($path, $meta)) {
                     $sections['insights'][] = ['url' => $this->urls->absolute($path), 'modified' => $translation->translated_at];
                 }
             }

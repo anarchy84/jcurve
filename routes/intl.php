@@ -22,7 +22,11 @@ foreach (['en', 'ja'] as $locale) {
                 Route::get('/insights/{slug}', [InsightController::class, 'translatedShow'])
                     ->where('slug', '[a-z0-9]+(?:-[a-z0-9]+)*')->name($name);
             } else {
-                Route::get($original->uri(), $original->getAction('uses'))->name($name);
+                $route = Route::get($original->uri(), $original->getAction('uses'))->name($name);
+                if ($name === 'services.show') {
+                    // Do not let /services/{slug} swallow /services/marketing-support.
+                    $route->whereIn('slug', config('intl.services'));
+                }
             }
         }
         // Only preserved static/category aliases; Korean article slugs are never foreign aliases.

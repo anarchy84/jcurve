@@ -2,11 +2,20 @@
 
 namespace Tests;
 
+use Database\Seeders\IntlInsightSeeder;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Uri;
 
 abstract class TestCase extends BaseTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Other sessions write production translations concurrently. Tests never
+        // read those files; UsesIntlFixture replaces this binding with test data.
+        $this->app->bindMethod([IntlInsightSeeder::class, 'run'], fn () => null);
+    }
+
     // Requests must reach the kernel verbatim: Laravel's helper otherwise uses
     // our production URL generator and strips the final slash before sending.
     protected function prepareUrlForRequest($uri)

@@ -158,8 +158,16 @@ class PageController extends Controller
         $items = config("subpages.{$group}.items", []);
         abort_unless(isset($items[$sub]), 404);
 
+        $parent = config("subpages.{$group}.parent");
+        if (intl_locale() !== 'ko') {
+            $translated = app('translator')->get('subpages', [], intl_locale(), false);
+            abort_unless(is_array($translated) && isset($translated[$group]['items'][$sub]), 404);
+            $items[$sub] = array_replace_recursive($items[$sub], $translated[$group]['items'][$sub]);
+            $parent = array_replace_recursive($parent, $translated[$group]['parent']);
+        }
+
         return intl_view('pages.subpage', [
-            'parent' => config("subpages.{$group}.parent"),
+            'parent' => $parent,
             'page' => $items[$sub],
         ]);
     }

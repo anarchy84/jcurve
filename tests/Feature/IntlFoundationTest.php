@@ -19,11 +19,13 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Spatie\Honeypot\EncryptedTime;
 use Spatie\Honeypot\ProtectAgainstSpam;
+use Tests\Support\UsesIntlFixture;
 use Tests\TestCase;
 
 class IntlFoundationTest extends TestCase
 {
     use RefreshDatabase;
+    use UsesIntlFixture;
 
     private array $temporaryDirectories = [];
 
@@ -31,11 +33,13 @@ class IntlFoundationTest extends TestCase
     {
         parent::setUp();
         config(['seo.public_url' => 'https://j-curve.co.kr', 'honeypot.randomize_name_field_name' => false]);
+        $this->isolateIntlSeeder();
         $this->seed(DatabaseSeeder::class);
     }
 
     protected function tearDown(): void
     {
+        $this->removeIntlFixture();
         foreach ($this->temporaryDirectories as $directory) {
             File::deleteDirectory($directory);
         }
@@ -146,7 +150,7 @@ class IntlFoundationTest extends TestCase
             foreach (['/v1/company.php' => '/about-us/', '/company/anarchy' => '/about-us/', '/shop/' => '/solutions/boostingshop', '/v1/gfa.php' => '/services/performance-marketing/naver-gfa'] as $alias => $canonical) {
                 $this->get('/'.$locale.$alias.'?utm_source=a%2Fb&x=1&x=2')->assertStatus(301)
                     ->assertRedirect('http://localhost/'.$locale.$canonical.'?utm_source=a%2Fb&x=1&x=2');
-                $this->get('/'.$locale.$canonical)->assertNotFound()->assertHeaderMissing('Location');
+                $this->get('/'.$locale.$canonical)->assertOk()->assertHeaderMissing('Location');
             }
             $this->get('/'.$locale.'/my-account/')->assertNotFound()->assertHeaderMissing('Location');
             $this->get('/'.$locale.'/v1/manager/bbs/board.php?bo_table=column&wr_id=51')->assertNotFound()->assertHeaderMissing('Location');
@@ -173,7 +177,10 @@ class IntlFoundationTest extends TestCase
         $this->translatedView('pages.company', '{{ json_encode(intl_alternates()) }}');
         $this->get('/en/about-us/')->assertOk()->assertSee('https:\/\/j-curve.co.kr\/en\/about-us\/', false);
         $this->get('/ja/')->assertOk();
-        $this->get('/')->assertOk()->assertDontSee('hreflang=');
+        $home = $this->get('/')->assertOk();
+        foreach (['ko', 'en', 'ja', 'x-default'] as $locale) {
+            $home->assertSee('<link rel="alternate" hreflang="'.$locale.'"', false);
+        }
     }
 
     public function test_adding_a_view_enables_its_existing_controller_without_route_changes(): void
@@ -334,7 +341,9 @@ class IntlFoundationTest extends TestCase
         $urls = collect($sections)->flatten(1)->pluck('url');
         foreach (['en', 'ja'] as $locale) {
             foreach (IntlRoutes::variants() as $variant) {
-                $this->assertContains('https://j-curve.co.kr'.route($locale.'.'.$variant['name'], $variant['parameters'], false), $urls);
+                if (IntlRoutes::available($variant['name'], $variant['parameters'], $locale)) {
+                    $this->assertContains('https://j-curve.co.kr'.route($locale.'.'.$variant['name'], $variant['parameters'], false), $urls);
+                }
             }
         }
         $this->assertContains('https://j-curve.co.kr/en/insights/mobile-marketing-strategies', $urls);

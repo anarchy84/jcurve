@@ -4,9 +4,10 @@ use App\Models\Insight;
 use App\Models\InsightCategory;
 use App\Services\Seo\Publishing\PreservedPaths;
 use App\Services\Seo\Publishing\PublicUrl;
+use App\Support\IntlRoutes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
+use Illuminate\View\View;
 
 function intl_locale(): string
 {
@@ -24,11 +25,14 @@ function intl_route($name, $params = [], $locale = null): string
     return route($locale === 'ko' ? $name : $locale.'.'.$name, $params);
 }
 
-function intl_view($name, $data = []): Illuminate\View\View
+function intl_view($name, $data = []): View
 {
     if (intl_locale() !== 'ko') {
-        $name = 'intl.'.$name;
-        abort_unless(View::exists($name), 404);
+        $route = request()->route();
+        $routeName = preg_replace('/^(?:en|ja)\./', '', $route?->getAction('intl_name') ?? $route?->getName() ?? '');
+        $parameters = $route?->parameters() ?? [];
+        abort_unless(IntlRoutes::available($routeName, $parameters, intl_locale()), 404);
+        $name = 'intl.'.IntlRoutes::viewName($routeName, $parameters);
     }
 
     return view($name, $data);
@@ -68,6 +72,9 @@ function intl_alternates(): array
     }
     $urls = [];
     foreach (array_keys(config('intl.locales')) as $locale) {
+        if ($locale !== 'ko' && ! IntlRoutes::available($name, $params, $locale)) {
+            continue;
+        }
         $localized = $params;
         if ($insight) {
             $translation = $insight->translations->firstWhere('locale', $locale);
@@ -89,5 +96,5 @@ function intl_alternates(): array
         }
     }
 
-    return $urls;
+    return count($urls) > 1 ? $urls : [];
 }

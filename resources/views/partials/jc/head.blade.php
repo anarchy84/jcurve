@@ -19,6 +19,19 @@
 <script>document.documentElement.classList.add('jc-js')</script>
 <link rel="canonical" href="{{ $jcCanonical }}">
 <meta name="robots" content="{{ $jcRobots }}">
+@php
+    // 다국어(INTL, 2026-11-03 제코 「둘 다 넣기」): 외국어판이 있는 페이지만 hreflang 을 낸다.
+    // 한국어 화면에서 바뀌는 건 이 hreflang 줄들과 헤더 언어 전환(data-intl-switcher)뿐이다(docs/intl/INTL-PLAN.md §1).
+    $jcIntlAlts = intl_alternates();
+@endphp
+@if (count($jcIntlAlts) > 1)
+@foreach ($jcIntlAlts as $jcAltLocale => $jcAltUrl)
+<link rel="alternate" hreflang="{{ config("intl.locales.{$jcAltLocale}.html_lang", $jcAltLocale) }}" href="{{ $jcAltUrl }}">
+@endforeach
+@isset($jcIntlAlts['ko'])
+<link rel="alternate" hreflang="x-default" href="{{ $jcIntlAlts['ko'] }}">
+@endisset
+@endif
 @if ($jcIsPublicHost)
 {{-- 구글 서치콘솔 소유 확인 — 기존 워드프레스(랭크매스)가 내던 값 그대로. 빠지면 전환 뒤 서치콘솔 소유 확인이 풀린다(2026-11-03 운영 홈 head 대조) --}}
 <meta name="google-site-verification" content="-JI9b9PGuPzBzPbZQXEAqZR8YfikUXM7GOP_5lgEQXM">

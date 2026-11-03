@@ -8,9 +8,9 @@ use UnexpectedValueException;
 
 class IntlInsightSeeder extends Seeder
 {
-    public function run(): void
+    public function run(?string $directory = null): void
     {
-        $files = glob(database_path('content/intl/insights/*.json')) ?: [];
+        $files = glob(($directory ?? database_path('content/intl/insights')).'/*.json') ?: [];
         sort($files);
         foreach ($files as $file) {
             $data = json_decode(file_get_contents($file), true, 512, JSON_THROW_ON_ERROR);

@@ -97,6 +97,7 @@
         </nav>
 
         <div class="jc-header__aside">
+@include('partials.intl.switcher')
             @auth
                 <a class="jc-header__login" href="{{ route('dashboard') }}">마이페이지</a>
             @else
@@ -143,6 +144,7 @@
                     @else
                         <a href="{{ route('login') }}">로그인</a>
                     @endauth
+@include('partials.intl.switcher', ['intlSwitcherClass' => 'jc-lang--mnav'])
                 </nav>
             </details>
         </div>

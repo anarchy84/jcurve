@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Insight;
 use App\Models\InsightCategory;
 use App\Models\LegacyRedirect;
+use App\Services\Seo\Publishing\PreservedPaths;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -84,11 +85,13 @@ class KeywordInsightSeeder extends Seeder
 
         $duplicatePath = '/insights/'.self::DUPLICATE_SLUG;
         $canonicalPath = '/insights/'.self::CANONICAL_SLUG;
-        $localHosts = [...config('seo.legacy_hosts', []), parse_url(config('seo.public_url'), PHP_URL_HOST)];
+        $localHosts = array_map('strtolower', array_filter([
+            ...config('seo.legacy_hosts', []), parse_url(config('seo.public_url'), PHP_URL_HOST),
+        ]));
 
         foreach (LegacyRedirect::query()->cursor() as $redirect) {
-            $target = parse_url($redirect->to_path);
-            if ($target === false || (isset($target['host']) && ! in_array($target['host'], $localHosts, true))) {
+            $target = parse_url(PreservedPaths::encode($redirect->to_path));
+            if ($target === false || (isset($target['host']) && ! in_array(strtolower($target['host']), $localHosts, true))) {
                 continue;
             }
             if (LegacyRedirect::normalizePath($target['path'] ?? '') === LegacyRedirect::normalizePath($duplicatePath)) {

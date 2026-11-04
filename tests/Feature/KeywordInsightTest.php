@@ -206,6 +206,7 @@ class KeywordInsightTest extends TestCase
             'encoded' => '/insights/'.rawurlencode(self::DUPLICATE_SLUG),
             'trailing-slash' => $path.'/',
             'absolute' => self::PUBLIC_URL.$path,
+            'uppercase-host' => 'https://J-CURVE.CO.KR'.$path,
         ] as $key => $target) {
             LegacyRedirect::query()->create(['from_path' => 'old-duplicate-'.$key, 'to_path' => $target, 'status_code' => 302]);
             $inbound[] = 'old-duplicate-'.$key;

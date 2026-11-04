@@ -10,13 +10,15 @@ return [
     // 현재 공개 라우트만 명시한다. 인증·검색 결과·UGC·폼 결과는 제외.
     'pages' => [
         '/', '/services', '/solutions', '/company', '/work', '/insights', '/contact',
+        '/self-marketing', '/self-marketing/order', '/self-marketing/place',
+        '/seo-check', '/support/faq', '/privacy',
     ],
     'services' => [
         '/services/performance-marketing', '/services/cpa-marketing',
         '/services/reward-network', '/services/seo', '/services/seo/aeo',
         '/services/seo/geo', '/services/wordpress', '/services/marketing-support',
         '/solutions/rankfree', '/solutions/leadbay', '/solutions/call2sale',
-        '/solutions/boostingshop',
+        '/solutions/boostingshop', '/solutions/shopitrend',
     ],
     'subpage_prefixes' => [
         'seo' => '/services/seo',

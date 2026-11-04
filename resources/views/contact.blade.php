@@ -131,6 +131,16 @@
                     @enderror
                 </div>
 
+                @if (config('services.turnstile.site_key') && config('services.turnstile.secret_key'))
+                    <div class="form-field">
+                        <div class="cf-turnstile" data-sitekey="{{ config('services.turnstile.site_key') }}" data-language="ko"></div>
+                        @error('cf-turnstile-response')
+                            <p role="alert">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+                @endif
+
                 <button type="submit">문의 보내기</button>
                 <p class="landing__note">보내주신 정보는 문의 검토와 회신을 위해 사용합니다. 자세한 내용은 <a href="{{ route('privacy') }}">개인정보처리방침</a>에서 확인할 수 있습니다.</p>
             </form>

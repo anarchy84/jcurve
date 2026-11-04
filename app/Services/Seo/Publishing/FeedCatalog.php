@@ -6,6 +6,7 @@ use App\Models\Insight;
 use App\Models\InsightCategory;
 use App\Models\SeoMeta;
 use App\Models\Work;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Collection;
 
 class FeedCatalog
@@ -17,6 +18,8 @@ class FeedCatalog
     {
         $meta = $this->metadata();
         $sections = ['pages' => [], 'services' => [], 'insights' => [], 'works' => []];
+        // 고정 페이지 lastmod = 화면·설정 파일이 마지막으로 바뀐 때(요청마다 지금 시각을 쓰지 않음).
+        $staticModified = $this->staticModified();
 
         foreach (['pages', 'services'] as $section) {
             $paths = config("seo.{$section}", []);
@@ -29,7 +32,7 @@ class FeedCatalog
             }
             foreach (array_unique($paths) as $path) {
                 if ($this->indexable($path, $meta)) {
-                    $sections[$section][] = ['url' => $this->urls->absolute($path), 'modified' => null];
+                    $sections[$section][] = ['url' => $this->urls->absolute($path), 'modified' => $staticModified];
                 }
             }
         }
@@ -38,7 +41,7 @@ class FeedCatalog
             ->orWhereIn('slug', ['seo', 'link-building'])->get() as $category) {
             $path = '/insights/category/'.rawurlencode($category->slug);
             if ($this->indexable($path, $meta)) {
-                $sections['pages'][] = ['url' => $this->urls->absolute($path), 'modified' => null];
+                $sections['pages'][] = ['url' => $this->urls->absolute($path), 'modified' => $staticModified];
             }
         }
 
@@ -89,6 +92,21 @@ class FeedCatalog
     public function pageSize(): int
     {
         return max(1, min(50000, (int) config('seo.sitemap_page_size', 1000)));
+    }
+
+    private function staticModified(): ?CarbonImmutable
+    {
+        $latest = 0;
+        foreach ([resource_path('views'), config_path()] as $dir) {
+            if (! is_dir($dir)) {
+                continue;
+            }
+            foreach (new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir, \FilesystemIterator::SKIP_DOTS)) as $file) {
+                $latest = max($latest, (int) $file->getMTime());
+            }
+        }
+
+        return $latest > 0 ? CarbonImmutable::createFromTimestamp($latest) : null;
     }
 
     private function insightPath(Insight $insight): string

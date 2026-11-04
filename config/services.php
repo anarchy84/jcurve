@@ -41,4 +41,10 @@ return [
         'id' => env('GTM_ID'),
     ],
 
+    // 클라우드플레어 Turnstile(문의 양식 봇 막기). 두 값이 다 있어야 켜진다 — 비어 있으면 예전처럼 통과.
+    'turnstile' => [
+        'site_key' => env('TURNSTILE_SITE_KEY'),
+        'secret_key' => env('TURNSTILE_SECRET_KEY'),
+    ],
+
 ];

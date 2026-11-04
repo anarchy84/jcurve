@@ -28,6 +28,25 @@
 <meta property="og:title" content="{{ $jcTitle }}">
 <meta property="og:url" content="{{ $jcCanonical }}">
 <meta property="og:locale" content="ko_KR">
+@php
+    // 공유 미리보기(카카오·페이스북·X): 설명은 페이지 @section('meta') 의 description 을 그대로 쓰고,
+    // 이미지는 페이지가 @section('og_image') 로 주지 않으면 기본 1200x630 이미지.
+    $jcDesc = preg_match('/<meta\s+name="description"\s+content="([^"]*)"/i', $__env->yieldContent('meta'), $jcM) ? $jcM[1] : '';
+    $jcOgImage = trim($__env->yieldContent('og_image')) ?: $jcPublicUrl.'/images/og-default.png';
+@endphp
+@if ($jcDesc !== '')
+<meta property="og:description" content="{!! $jcDesc !!}">
+<meta name="twitter:description" content="{!! $jcDesc !!}">
+@endif
+<meta property="og:image" content="{{ $jcOgImage }}">
+@if (! trim($__env->yieldContent('og_image')))
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+@endif
+<meta property="og:image:alt" content="제이커브인터렉티브">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $jcTitle }}">
+<meta name="twitter:image" content="{{ $jcOgImage }}">
 <link rel="alternate" type="application/rss+xml" title="제이커브 인사이트" href="{{ route('seo.rss') }}">
 <link rel="sitemap" type="application/xml" title="사이트맵" href="{{ route('seo.sitemap') }}">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>

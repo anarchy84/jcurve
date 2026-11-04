@@ -17,7 +17,13 @@ class SeoFeedController extends Controller
         $index = SitemapIndex::create();
         foreach ($catalog->sections() as $section => $entries) {
             for ($page = 1; $page <= max(1, (int) ceil(count($entries) / $catalog->pageSize())); $page++) {
-                $index->add($urls->absolute("/sitemaps/{$section}/{$page}.xml"));
+                // lastmod = 그 쪽 안 주소들 중 가장 최근 수정일(없으면 패키지 기본값).
+                $tag = \Spatie\Sitemap\Tags\Sitemap::create($urls->absolute("/sitemaps/{$section}/{$page}.xml"));
+                $dates = array_filter(array_column(array_slice($entries, ($page - 1) * $catalog->pageSize(), $catalog->pageSize()), 'modified'));
+                if ($dates !== []) {
+                    $tag->setLastModificationDate(max($dates));
+                }
+                $index->add($tag);
             }
         }
 

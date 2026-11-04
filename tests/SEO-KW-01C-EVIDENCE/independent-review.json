@@ -1,0 +1,32 @@
+{
+  "verdict": "PASS",
+  "required_spec": "docs/SPEC-CODEX-SEO-KW-01C.md",
+  "target_test_cases": 76,
+  "target_assertions": 1938,
+  "application_findings": [],
+  "assertion_weakening_detected": false,
+  "skip_or_mock_shortcut_detected": false,
+  "coverage_review": [
+    "B1 compares all 49 metadata rows by slug/meta_description and dynamically checks source count",
+    "B2 duplicate preserves all raw fields except published_at and meta_description",
+    "B3 manifest description strict equality retained",
+    "C1-C11 requirements mapped to passing route-render, JSON parse and DOM assertions",
+    "160-character boundaries: Korean 159/160/161 and ASCII 161",
+    "Empty, unpublished-only/future-only and preserved legacy categories exercised",
+    "All 7 required mutations produce expected red test names and restore exact view bytes"
+  ],
+  "resolved_harness_findings": [
+    "JSON parse error is PHPUnit exit 2; caught now accepts exit 1 or 2 with expected red names",
+    "Compiled Blade views retained mutation after byte restoration; fresh compiled cache before each test run prevents stale renders"
+  ],
+  "unverified": [
+    "Browser visual layout and JavaScript interaction",
+    "Production DB/MySQL and deployed host behavior",
+    "Deployment/publication and external webmaster tools"
+  ],
+  "reviewed_source_sha256": {
+    "tests/Feature/SeoKeywordViewsTest.php": "62047570c420f8de4c207307ed4763ef851ee02997c6e1bb6f95795950c3f46c",
+    "tests/Feature/KeywordInsightTest.php": "c6495a1e558a782d55b874e08e42d066d146e86b315f4b880642ca4d20b8b98f",
+    "tests/Support/seo_kw_01c_mutations.py": "13f4646aa3c0ff330f4f12ade6a580457255a232dcdc67c691794c917ec11a1e"
+  }
+}

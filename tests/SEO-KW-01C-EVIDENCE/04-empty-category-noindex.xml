@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/Users/anarchy/Claude_Projects/jcurve/phpunit.xml" tests="5" assertions="23" errors="0" failures="2" skipped="0" time="0.141811">
+    <testsuite name="Feature" tests="5" assertions="23" errors="0" failures="2" skipped="0" time="0.141811">
+      <testsuite name="Tests\Feature\SeoKeywordViewsTest" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" tests="5" assertions="23" errors="0" failures="2" skipped="0" time="0.141811">
+        <testsuite name="Tests\Feature\SeoKeywordViewsTest::test_only_empty_nonpreserved_categories_are_noindex" tests="5" assertions="23" errors="0" failures="2" skipped="0" time="0.141811">
+          <testcase name="test_only_empty_nonpreserved_categories_are_noindex with data set &quot;empty&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="166" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="4" time="0.097345">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_only_empty_nonpreserved_categories_are_noindex with data set "empty"
+Failed asserting that an array contains 'noindex'.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:180</failure>
+          </testcase>
+          <testcase name="test_only_empty_nonpreserved_categories_are_noindex with data set &quot;only unpublished and future articles&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="166" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="4" time="0.013936">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_only_empty_nonpreserved_categories_are_noindex with data set "only unpublished and future articles"
+Failed asserting that an array contains 'noindex'.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:180</failure>
+          </testcase>
+          <testcase name="test_only_empty_nonpreserved_categories_are_noindex with data set &quot;published&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="166" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="5" time="0.011454"/>
+          <testcase name="test_only_empty_nonpreserved_categories_are_noindex with data set &quot;preserved empty SEO&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="166" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="5" time="0.010047"/>
+          <testcase name="test_only_empty_nonpreserved_categories_are_noindex with data set &quot;preserved empty link building&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="166" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="5" time="0.009029"/>
+        </testsuite>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

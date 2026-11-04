@@ -1,0 +1,48 @@
+{
+  "head": "064d23434a4e2f32bcd7c29bb4fe47c935feba83",
+  "view_diff_stat": "<empty>",
+  "targets": [
+    {
+      "id": "01-head-json-hex-tag",
+      "file": "resources/views/partials/jc/head.blade.php",
+      "exact_target_count": 1,
+      "sha256": "ab284b12e1067d74666948d76cbff7d05646f81db8add63414a811a3be32eea1"
+    },
+    {
+      "id": "02-faq-json-hex-tag",
+      "file": "resources/views/partials/jc/schema-faq.blade.php",
+      "exact_target_count": 1,
+      "sha256": "51a0731e1f7560c84e967e0e39b764fbc0392d597fb54272a890853959acc934"
+    },
+    {
+      "id": "03-guest-noindex",
+      "file": "resources/views/layouts/guest.blade.php",
+      "exact_target_count": 1,
+      "sha256": "468f2b1ed79fabcd39571b19c47af04ba219abe84cd635f7972fc2b4cabe36d0"
+    },
+    {
+      "id": "04-empty-category-noindex",
+      "file": "resources/views/insights/category.blade.php",
+      "exact_target_count": 1,
+      "sha256": "62cbe5c41a6a04aa29b711546377cd7410670b7854c8668dcde92ad9e25a177f"
+    },
+    {
+      "id": "05-rankfree-sd-page",
+      "file": "resources/views/solutions/rankfree.blade.php",
+      "exact_target_count": 1,
+      "sha256": "387901f59a0a1e54c110c51e3e8feebb52d86a81059874700956d59d3d28f46f"
+    },
+    {
+      "id": "06-description-str-limit-155",
+      "file": "resources/views/insights/show.blade.php",
+      "exact_target_count": 1,
+      "sha256": "759f4274f306703b96bb96fdccd2cf835396907aa8c91b3c0fead1ec56d2e272"
+    },
+    {
+      "id": "07-footer-self-children",
+      "file": "resources/views/partials/jc/footer.blade.php",
+      "exact_target_count": 1,
+      "sha256": "3b9ea5c84822a5ede34c0290366b70bc3a2885d1f9e1483ea974be193c4ec5a4"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/Users/anarchy/Claude_Projects/jcurve/phpunit.xml" tests="19" assertions="140" errors="0" failures="10" skipped="0" time="0.285068">
+    <testsuite name="Feature" tests="19" assertions="140" errors="0" failures="10" skipped="0" time="0.285068">
+      <testsuite name="Tests\Feature\KeywordInsightTest" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/KeywordInsightTest.php" tests="1" assertions="7" errors="0" failures="1" skipped="0" time="0.111714">
+        <testcase name="test_new_articles_render_their_own_canonical_metadata_and_appear_in_the_insights_sitemap" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/KeywordInsightTest.php" line="153" class="Tests\Feature\KeywordInsightTest" classname="Tests.Feature.KeywordInsightTest" assertions="7" time="0.111714">
+          <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\KeywordInsightTest::test_new_articles_render_their_own_canonical_metadata_and_appear_in_the_insights_sitemap
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'네이버 플레이스 순위를 올리는 점검 순서를 정리했습니다. 연관성·정보 충실성·인기도·거리 네 가지 기준과 업종·소개·영업 정보 정비, 리뷰·리워드 활용, 같은 조건의 순위 기록 방법까지 다룹니다.'
++'네이버 플레이스 순위를 올리는 점검 순서를 정리했습니다. 연관성·정보 충실성·인기도·거리 네 가지 기준과 업종·소개·영업 정보 정비, 리뷰·리워드 활용, 같은 조건...'
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/KeywordInsightTest.php:164</failure>
+        </testcase>
+      </testsuite>
+      <testsuite name="Tests\Feature\SeoKeywordViewsTest" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" tests="18" assertions="133" errors="0" failures="9" skipped="0" time="0.173354">
+        <testcase name="test_head_jsonld_escapes_script_endings_and_decodes_html_entities" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="50" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="16" time="0.017283"/>
+        <testsuite name="Tests\Feature\SeoKeywordViewsTest::test_insight_description_uses_160_characters_including_the_ellipsis" tests="4" assertions="12" errors="0" failures="4" skipped="0" time="0.039262">
+          <testcase name="test_insight_description_uses_160_characters_including_the_ellipsis with data set &quot;159 Korean characters&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="127" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="3" time="0.008990">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_insight_description_uses_160_characters_including_the_ellipsis with data set "159 Korean characters"
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가'
++'가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가...'
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:132</failure>
+          </testcase>
+          <testcase name="test_insight_description_uses_160_characters_including_the_ellipsis with data set &quot;160 Korean characters&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="127" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="3" time="0.009690">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_insight_description_uses_160_characters_including_the_ellipsis with data set "160 Korean characters"
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가'
++'가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가...'
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:132</failure>
+          </testcase>
+          <testcase name="test_insight_description_uses_160_characters_including_the_ellipsis with data set &quot;161 Korean characters&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="127" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="3" time="0.009276">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_insight_description_uses_160_characters_including_the_ellipsis with data set "161 Korean characters"
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가…'
++'가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가가...'
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:132</failure>
+          </testcase>
+          <testcase name="test_insight_description_uses_160_characters_including_the_ellipsis with data set &quot;161 ASCII characters&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="127" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="3" time="0.011305">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_insight_description_uses_160_characters_including_the_ellipsis with data set "161 ASCII characters"
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa…'
++'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...'
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:132</failure>
+          </testcase>
+        </testsuite>
+        <testsuite name="Tests\Feature\SeoKeywordViewsTest::test_guest_pages_are_noindex_and_have_their_korean_titles" tests="3" assertions="18" errors="0" failures="0" skipped="0" time="0.023855">
+          <testcase name="test_guest_pages_are_noindex_and_have_their_korean_titles with data set #0" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="144" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="6" time="0.011484"/>
+          <testcase name="test_guest_pages_are_noindex_and_have_their_korean_titles with data set #1" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="144" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="6" time="0.006726"/>
+          <testcase name="test_guest_pages_are_noindex_and_have_their_korean_titles with data set #2" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="144" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="6" time="0.005645"/>
+        </testsuite>
+        <testsuite name="Tests\Feature\SeoKeywordViewsTest::test_only_empty_nonpreserved_categories_are_noindex" tests="5" assertions="23" errors="0" failures="2" skipped="0" time="0.041648">
+          <testcase name="test_only_empty_nonpreserved_categories_are_noindex with data set &quot;empty&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="166" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="4" time="0.008545">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_only_empty_nonpreserved_categories_are_noindex with data set "empty"
+Failed asserting that an array contains 'noindex'.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:180</failure>
+          </testcase>
+          <testcase name="test_only_empty_nonpreserved_categories_are_noindex with data set &quot;only unpublished and future articles&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="166" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="4" time="0.009155">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_only_empty_nonpreserved_categories_are_noindex with data set "only unpublished and future articles"
+Failed asserting that an array contains 'noindex'.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:180</failure>
+          </testcase>
+          <testcase name="test_only_empty_nonpreserved_categories_are_noindex with data set &quot;published&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="166" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="5" time="0.009089"/>
+          <testcase name="test_only_empty_nonpreserved_categories_are_noindex with data set &quot;preserved empty SEO&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="166" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="5" time="0.007588"/>
+          <testcase name="test_only_empty_nonpreserved_categories_are_noindex with data set &quot;preserved empty link building&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="166" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="5" time="0.007270"/>
+        </testsuite>
+        <testcase name="test_faq_jsonld_escapes_script_endings_in_an_insight_question" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="289" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="17" time="0.010252"/>
+        <testsuite name="Tests\Feature\SeoKeywordViewsTest::test_page_breadcrumb_and_service_contract" tests="1" assertions="38" errors="0" failures="0" skipped="0" time="0.011619">
+          <testcase name="test_page_breadcrumb_and_service_contract with data set &quot;/solutions/rankfree&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="322" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="38" time="0.011619"/>
+        </testsuite>
+        <testsuite name="Tests\Feature\SeoKeywordViewsTest::test_footer_has_both_reward_links_and_desktop_header_has_one_self_link" tests="3" assertions="9" errors="0" failures="3" skipped="0" time="0.029436">
+          <testcase name="test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #0" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="395" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="3" time="0.012994">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #0
+//footer must link to /self-marketing/place
+Failed asserting that an array is not empty.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:435
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:400</failure>
+          </testcase>
+          <testcase name="test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #1" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="395" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="3" time="0.007934">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #1
+//footer must link to /self-marketing/place
+Failed asserting that an array is not empty.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:435
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:400</failure>
+          </testcase>
+          <testcase name="test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #2" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="395" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="3" time="0.008507">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #2
+//footer must link to /self-marketing/place
+Failed asserting that an array is not empty.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:435
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:400</failure>
+          </testcase>
+        </testsuite>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

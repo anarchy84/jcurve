@@ -184,17 +184,19 @@ class KeywordInsightTest extends TestCase
         $this->assertDatabaseCount('legacy_redirects', 0);
     }
 
-    public function test_all_33_descriptions_change_without_touching_other_legacy_fields(): void
+    public function test_all_descriptions_change_without_touching_other_legacy_fields(): void
     {
         $this->seed([InsightCategorySeeder::class, LegacyRedirectSeeder::class, LegacyContentSeeder::class]);
         $before = Insight::query()->orderBy('id')->get()->keyBy('slug')->map->getRawOriginal()->all();
         $descriptions = array_column($this->descriptions(), 'meta_description', 'slug');
-        $this->assertCount(33, $descriptions);
-        $this->assertCount(33, array_intersect_key($before, $descriptions));
+        $count = count($this->descriptions());
+        $this->assertGreaterThan(0, $count);
+        $this->assertCount($count, $descriptions);
+        $this->assertCount($count, array_intersect_key($before, $descriptions));
 
         $this->artisan('db:seed', ['--class' => KeywordInsightSeeder::class, '--no-interaction' => true])
             ->expectsOutput('Keyword insights upserted: 5')
-            ->expectsOutput('Insight descriptions updated: 33; missing slugs skipped: 0')
+            ->expectsOutput("Insight descriptions updated: {$count}; missing slugs skipped: 0")
             ->assertSuccessful();
 
         foreach ($before as $slug => $original) {
@@ -207,19 +209,22 @@ class KeywordInsightTest extends TestCase
             }
             $this->assertSame($expected, Insight::query()->where('slug', $slug)->firstOrFail()->getRawOriginal(), $slug);
         }
-        foreach ([0, 16, 32] as $index) {
-            $row = $this->descriptions()[$index];
-            $this->assertDatabaseHas('insights', $row);
+        foreach ($this->descriptions() as $row) {
+            $this->assertDatabaseHas('insights', [
+                'slug' => $row['slug'],
+                'meta_description' => $row['meta_description'],
+            ]);
         }
     }
 
     public function test_missing_description_slugs_are_skipped_and_counted(): void
     {
         $this->seed(InsightCategorySeeder::class);
+        $count = count($this->descriptions());
 
         $this->artisan('db:seed', ['--class' => KeywordInsightSeeder::class, '--no-interaction' => true])
             ->expectsOutput('Keyword insights upserted: 5')
-            ->expectsOutput('Insight descriptions updated: 0; missing slugs skipped: 33')
+            ->expectsOutput("Insight descriptions updated: 0; missing slugs skipped: {$count}")
             ->assertSuccessful();
         $this->assertDatabaseCount('insights', 5);
     }
@@ -250,6 +255,8 @@ class KeywordInsightTest extends TestCase
         $this->assertSame($redirectCount, LegacyRedirect::count());
         $expected = $original;
         $expected['published_at'] = null;
+        $descriptions = array_column($this->descriptions(), 'meta_description', 'slug');
+        $expected['meta_description'] = $descriptions[self::DUPLICATE_SLUG];
         $this->assertSame($expected, $duplicate->fresh()->getRawOriginal());
         $this->assertFalse(Insight::query()->published()->whereKey($duplicate->id)->exists());
 

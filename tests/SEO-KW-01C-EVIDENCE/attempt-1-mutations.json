@@ -1,0 +1,35 @@
+{
+  "head": "064d23434a4e2f32bcd7c29bb4fe47c935feba83",
+  "view_diff_stat_before": "",
+  "view_diff_stat_after": "",
+  "all_view_hashes_equal": true,
+  "full_view_diff_equal": true,
+  "view_files": 99,
+  "mutations": [
+    {
+      "id": "01-head-json-hex-tag",
+      "file": "resources/views/partials/jc/head.blade.php",
+      "old": " | JSON_HEX_TAG",
+      "new": "",
+      "command": [
+        "php",
+        "artisan",
+        "test",
+        "--filter=test_head_jsonld_escapes_script_endings_and_decodes_html_entities",
+        "--do-not-cache-result",
+        "--log-junit=tests/SEO-KW-01C-EVIDENCE/01-head-json-hex-tag.xml"
+      ],
+      "exit_code": 2,
+      "tests": 1,
+      "red_tests": [
+        "test_head_jsonld_escapes_script_endings_and_decodes_html_entities"
+      ],
+      "output": "{\"tool\":\"phpunit\",\"result\":\"failed\",\"tests\":1,\"passed\":0,\"assertions\":3,\"duration_ms\":117,\"errors\":1,\"error_details\":[{\"test\":\"Tests\\\\Feature\\\\SeoKeywordViewsTest::test_head_jsonld_escapes_script_endings_and_decodes_html_entities\",\"file\":\"/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php\",\"line\":50,\"message\":\"Control character error, possibly incorrectly encoded\"}]}",
+      "restored_bytes": true,
+      "view_diff_stat": "",
+      "all_view_hashes_equal": true,
+      "full_view_diff_equal": true,
+      "caught": false
+    }
+  ]
+}

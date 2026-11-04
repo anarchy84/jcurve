@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/Users/anarchy/Claude_Projects/jcurve/phpunit.xml" tests="1" assertions="3" errors="1" failures="0" skipped="0" time="0.115063">
+    <testsuite name="Feature" tests="1" assertions="3" errors="1" failures="0" skipped="0" time="0.115063">
+      <testsuite name="Tests\Feature\SeoKeywordViewsTest" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" tests="1" assertions="3" errors="1" failures="0" skipped="0" time="0.115063">
+        <testcase name="test_head_jsonld_escapes_script_endings_and_decodes_html_entities" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="50" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="3" time="0.115063">
+          <error type="JsonException">Tests\Feature\SeoKeywordViewsTest::test_head_jsonld_escapes_script_endings_and_decodes_html_entities
+JsonException: Control character error, possibly incorrectly encoded
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:489
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:504
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:55</error>
+        </testcase>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

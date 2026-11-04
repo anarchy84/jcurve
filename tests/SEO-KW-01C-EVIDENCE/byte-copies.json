@@ -1,0 +1,92 @@
+{
+  "article_count": 5,
+  "meta_count": 49,
+  "meta_unique_slugs": 49,
+  "manifest_count": 5,
+  "pairs": [
+    {
+      "command": [
+        "cmp",
+        "--",
+        "docs/content/articles/kw01/01-place-rank.html",
+        "database/content/kw01/01-place-rank.html"
+      ],
+      "exit_code": 0,
+      "output": "",
+      "sha256_source": "e17578b0b623a2339936768e254c9600f00da2f085e217c68d9f4b3ce340b4da",
+      "sha256_copy": "e17578b0b623a2339936768e254c9600f00da2f085e217c68d9f4b3ce340b4da"
+    },
+    {
+      "command": [
+        "cmp",
+        "--",
+        "docs/content/articles/kw01/02-place-reward.html",
+        "database/content/kw01/02-place-reward.html"
+      ],
+      "exit_code": 0,
+      "output": "",
+      "sha256_source": "1ad9347a5e22f00f753987601082ccc47dfb1e2deaf15299875a99ed3d43c245",
+      "sha256_copy": "1ad9347a5e22f00f753987601082ccc47dfb1e2deaf15299875a99ed3d43c245"
+    },
+    {
+      "command": [
+        "cmp",
+        "--",
+        "docs/content/articles/kw01/03-smartstore-rank.html",
+        "database/content/kw01/03-smartstore-rank.html"
+      ],
+      "exit_code": 0,
+      "output": "",
+      "sha256_source": "9dbe0b5e075a716b4c7e77bf1ca4eee993233b95b657a71a3053d77a0a198c85",
+      "sha256_copy": "9dbe0b5e075a716b4c7e77bf1ca4eee993233b95b657a71a3053d77a0a198c85"
+    },
+    {
+      "command": [
+        "cmp",
+        "--",
+        "docs/content/articles/kw01/04-shopping-inflow.html",
+        "database/content/kw01/04-shopping-inflow.html"
+      ],
+      "exit_code": 0,
+      "output": "",
+      "sha256_source": "6b3ec6c8c8ab29c3c2411c7cef8b4472fa4e0a8fe96a92a181c633476ab24da6",
+      "sha256_copy": "6b3ec6c8c8ab29c3c2411c7cef8b4472fa4e0a8fe96a92a181c633476ab24da6"
+    },
+    {
+      "command": [
+        "cmp",
+        "--",
+        "docs/content/articles/kw01/05-offerwall.html",
+        "database/content/kw01/05-offerwall.html"
+      ],
+      "exit_code": 0,
+      "output": "",
+      "sha256_source": "0783b1137cbec34207a41dcd8e4dccac26b91757d8d18a5893442e7530e92454",
+      "sha256_copy": "0783b1137cbec34207a41dcd8e4dccac26b91757d8d18a5893442e7530e92454"
+    },
+    {
+      "command": [
+        "cmp",
+        "--",
+        "docs/content/insight-meta-2026-11-04.json",
+        "database/content/kw01/insight-meta.json"
+      ],
+      "exit_code": 0,
+      "output": "",
+      "sha256_source": "dff729bf7a98a8870e8ee9a62a794aeac29db4c58160490980039ded98a7cd7c",
+      "sha256_copy": "dff729bf7a98a8870e8ee9a62a794aeac29db4c58160490980039ded98a7cd7c"
+    },
+    {
+      "command": [
+        "cmp",
+        "--",
+        "docs/content/articles/kw01/manifest.json",
+        "database/content/kw01/manifest.json"
+      ],
+      "exit_code": 0,
+      "output": "",
+      "sha256_source": "b1a314911a16fe1c008283d60799e3aa9c258fe726207f376b79d927423368b6",
+      "sha256_copy": "b1a314911a16fe1c008283d60799e3aa9c258fe726207f376b79d927423368b6"
+    }
+  ]
+}

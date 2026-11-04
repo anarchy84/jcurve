@@ -1,0 +1,29 @@
+{
+  "deleted_compiled_php_files": 60,
+  "observed_markers": [
+    {
+      "file": "/private/tmp/jcurve-seo-kw-01c/views/4ab4f0f0f8a0e19566767b5ee97a6b35.php",
+      "sha256": "e554e512be267d931133725593af24151a0cb87b97d7cfab83c63e1bac7f3ce0",
+      "mtime_ns": 1793779164000000000,
+      "contains_mutated_155_limit": true,
+      "contains_category_noindex": false,
+      "contains_footer_children": false
+    },
+    {
+      "file": "/private/tmp/jcurve-seo-kw-01c/views/20dec2bc4ed94a4ea44b3ad6a65ec1a3.php",
+      "sha256": "5d3d7779cb3aebfe512b03b3317a8537e7610af40d55218d439c54fc4eff1762",
+      "mtime_ns": 1793779163000000000,
+      "contains_mutated_155_limit": false,
+      "contains_category_noindex": false,
+      "contains_footer_children": false
+    },
+    {
+      "file": "/private/tmp/jcurve-seo-kw-01c/views/aba834741dfe71a483a20aed1d7ee6a2.php",
+      "sha256": "1433a71d132a3127a69a9f57e97c6490b8fb0980fdcb406052f23c10a2724358",
+      "mtime_ns": 1793779164000000000,
+      "contains_mutated_155_limit": false,
+      "contains_category_noindex": false,
+      "contains_footer_children": false
+    }
+  ]
+}

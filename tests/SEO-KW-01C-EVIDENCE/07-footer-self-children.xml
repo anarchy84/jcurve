@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/Users/anarchy/Claude_Projects/jcurve/phpunit.xml" tests="3" assertions="9" errors="0" failures="3" skipped="0" time="0.154107">
+    <testsuite name="Feature" tests="3" assertions="9" errors="0" failures="3" skipped="0" time="0.154107">
+      <testsuite name="Tests\Feature\SeoKeywordViewsTest" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" tests="3" assertions="9" errors="0" failures="3" skipped="0" time="0.154107">
+        <testsuite name="Tests\Feature\SeoKeywordViewsTest::test_footer_has_both_reward_links_and_desktop_header_has_one_self_link" tests="3" assertions="9" errors="0" failures="3" skipped="0" time="0.154107">
+          <testcase name="test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #0" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="395" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="3" time="0.125042">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #0
+//footer must link to /self-marketing/place
+Failed asserting that an array is not empty.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:435
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:400</failure>
+          </testcase>
+          <testcase name="test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #1" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="395" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="3" time="0.015609">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #1
+//footer must link to /self-marketing/place
+Failed asserting that an array is not empty.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:435
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:400</failure>
+          </testcase>
+          <testcase name="test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #2" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="395" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="3" time="0.013456">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #2
+//footer must link to /self-marketing/place
+Failed asserting that an array is not empty.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:435
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:400</failure>
+          </testcase>
+        </testsuite>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

@@ -1,0 +1,185 @@
+{
+  "all_99_view_sha_equal": true,
+  "view_count": 99,
+  "full_view_diff_equal": true,
+  "view_diff_stat_before": "<empty>",
+  "view_diff_stat_after": "<empty>",
+  "git": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "064d23434a4e2f32bcd7c29bb4fe47c935feba83\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exit_code": 0,
+      "stdout": " M database/content/kw01/01-place-rank.html\n M database/content/kw01/02-place-reward.html\n M database/content/kw01/03-smartstore-rank.html\n M database/content/kw01/04-shopping-inflow.html\n M database/content/kw01/05-offerwall.html\n M database/content/kw01/insight-meta.json\n M tests/Feature/KeywordInsightTest.php\n?? tests/Feature/SeoKeywordViewsTest.php\n?? tests/SEO-KW-01C-EVIDENCE/\n?? tests/Support/\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--stat",
+        "--",
+        "resources/views"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--",
+        "resources/views"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "junit": {
+    "tests": 279,
+    "failure": 0,
+    "error": 0,
+    "skipped": 0,
+    "by_class": {
+      "Tests\\Unit\\ExampleTest": 1,
+      "Tests\\Feature\\Auth\\AuthenticationTest": 4,
+      "Tests\\Feature\\Auth\\EmailVerificationTest": 3,
+      "Tests\\Feature\\Auth\\PasswordConfirmationTest": 3,
+      "Tests\\Feature\\Auth\\PasswordResetTest": 4,
+      "Tests\\Feature\\Auth\\PasswordUpdateTest": 2,
+      "Tests\\Feature\\Auth\\RegistrationTest": 2,
+      "Tests\\Feature\\ExampleTest": 1,
+      "Tests\\Feature\\KeywordInsightTest": 11,
+      "Tests\\Feature\\LegacyRedirectTest": 9,
+      "Tests\\Feature\\MarketingContentTest": 9,
+      "Tests\\Feature\\ProfileTest": 5,
+      "Tests\\Feature\\RankfreeClientTest": 14,
+      "Tests\\Feature\\RankfreeConnectionApiTest": 13,
+      "Tests\\Feature\\RankfreeConnectionStoreTest": 5,
+      "Tests\\Feature\\RankfreeCustomerIsolationTest": 6,
+      "Tests\\Feature\\SeoFeedTest": 8,
+      "Tests\\Feature\\SeoKeywordFoundationTest": 20,
+      "Tests\\Feature\\SeoKeywordViewsTest": 65,
+      "Tests\\Feature\\SeoMetaRestorationTest": 32,
+      "Tests\\Feature\\SeoUrlAuditTest": 9,
+      "Tests\\Feature\\UrlPreservationTest": 28,
+      "Tests\\Feature\\WpLegacyContentTest": 25
+    }
+  },
+  "mutations": [
+    {
+      "id": "01-head-json-hex-tag",
+      "exit_code": 2,
+      "red_tests": [
+        "test_head_jsonld_escapes_script_endings_and_decodes_html_entities"
+      ],
+      "caught": true,
+      "restored_bytes": true,
+      "all_view_hashes_equal": true,
+      "full_view_diff_equal": true,
+      "view_diff_stat_before": "<empty>",
+      "view_diff_stat_after": "<empty>"
+    },
+    {
+      "id": "02-faq-json-hex-tag",
+      "exit_code": 2,
+      "red_tests": [
+        "test_faq_jsonld_escapes_script_endings_in_an_insight_question"
+      ],
+      "caught": true,
+      "restored_bytes": true,
+      "all_view_hashes_equal": true,
+      "full_view_diff_equal": true,
+      "view_diff_stat_before": "<empty>",
+      "view_diff_stat_after": "<empty>"
+    },
+    {
+      "id": "03-guest-noindex",
+      "exit_code": 1,
+      "red_tests": [
+        "test_guest_pages_are_noindex_and_have_their_korean_titles with data set #0",
+        "test_guest_pages_are_noindex_and_have_their_korean_titles with data set #1",
+        "test_guest_pages_are_noindex_and_have_their_korean_titles with data set #2"
+      ],
+      "caught": true,
+      "restored_bytes": true,
+      "all_view_hashes_equal": true,
+      "full_view_diff_equal": true,
+      "view_diff_stat_before": "<empty>",
+      "view_diff_stat_after": "<empty>"
+    },
+    {
+      "id": "04-empty-category-noindex",
+      "exit_code": 1,
+      "red_tests": [
+        "test_only_empty_nonpreserved_categories_are_noindex with data set \"empty\"",
+        "test_only_empty_nonpreserved_categories_are_noindex with data set \"only unpublished and future articles\""
+      ],
+      "caught": true,
+      "restored_bytes": true,
+      "all_view_hashes_equal": true,
+      "full_view_diff_equal": true,
+      "view_diff_stat_before": "<empty>",
+      "view_diff_stat_after": "<empty>"
+    },
+    {
+      "id": "05-rankfree-sd-page",
+      "exit_code": 1,
+      "red_tests": [
+        "test_page_breadcrumb_and_service_contract with data set \"/solutions/rankfree\""
+      ],
+      "caught": true,
+      "restored_bytes": true,
+      "all_view_hashes_equal": true,
+      "full_view_diff_equal": true,
+      "view_diff_stat_before": "<empty>",
+      "view_diff_stat_after": "<empty>"
+    },
+    {
+      "id": "06-description-str-limit-155",
+      "exit_code": 1,
+      "red_tests": [
+        "test_new_articles_render_their_own_canonical_metadata_and_appear_in_the_insights_sitemap",
+        "test_insight_description_uses_160_characters_including_the_ellipsis with data set \"159 Korean characters\"",
+        "test_insight_description_uses_160_characters_including_the_ellipsis with data set \"160 Korean characters\"",
+        "test_insight_description_uses_160_characters_including_the_ellipsis with data set \"161 Korean characters\"",
+        "test_insight_description_uses_160_characters_including_the_ellipsis with data set \"161 ASCII characters\""
+      ],
+      "caught": true,
+      "restored_bytes": true,
+      "all_view_hashes_equal": true,
+      "full_view_diff_equal": true,
+      "view_diff_stat_before": "<empty>",
+      "view_diff_stat_after": "<empty>"
+    },
+    {
+      "id": "07-footer-self-children",
+      "exit_code": 1,
+      "red_tests": [
+        "test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #0",
+        "test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #1",
+        "test_footer_has_both_reward_links_and_desktop_header_has_one_self_link with data set #2"
+      ],
+      "caught": true,
+      "restored_bytes": true,
+      "all_view_hashes_equal": true,
+      "full_view_diff_equal": true,
+      "view_diff_stat_before": "<empty>",
+      "view_diff_stat_after": "<empty>"
+    }
+  ]
+}

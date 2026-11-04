@@ -1,0 +1,11 @@
+{
+  "command": [
+    "./vendor/bin/pint",
+    "--test",
+    "tests/Feature/SeoKeywordViewsTest.php",
+    "tests/Feature/KeywordInsightTest.php"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"tool\":\"pint\",\"result\":\"passed\"}",
+  "stderr": ""
+}

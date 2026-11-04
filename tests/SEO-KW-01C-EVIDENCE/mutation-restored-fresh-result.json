@@ -1,0 +1,13 @@
+{
+  "command": [
+    "php",
+    "artisan",
+    "test",
+    "--filter=test_head_jsonld_escapes_script_endings_and_decodes_html_entities|test_faq_jsonld_escapes_script_endings_in_an_insight_question|test_guest_pages_are_noindex_and_have_their_korean_titles|test_only_empty_nonpreserved_categories_are_noindex|test_page_breadcrumb_and_service_contract.*rankfree|test_new_articles_render_their_own_canonical_metadata|test_insight_description_uses_160_characters|test_footer_has_both_reward_links_and_desktop_header_has_one_self_link",
+    "--do-not-cache-result",
+    "--log-junit=tests/SEO-KW-01C-EVIDENCE/mutation-restored-fresh.xml"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"tool\":\"phpunit\",\"result\":\"passed\",\"tests\":19,\"passed\":19,\"assertions\":254,\"duration_ms\":361}\n",
+  "stderr": ""
+}

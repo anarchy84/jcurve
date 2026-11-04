@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/Users/anarchy/Claude_Projects/jcurve/phpunit.xml" tests="1" assertions="8" errors="0" failures="1" skipped="0" time="0.092660">
+    <testsuite name="Feature" tests="1" assertions="8" errors="0" failures="1" skipped="0" time="0.092660">
+      <testsuite name="Tests\Feature\SeoKeywordViewsTest" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" tests="1" assertions="8" errors="0" failures="1" skipped="0" time="0.092660">
+        <testsuite name="Tests\Feature\SeoKeywordViewsTest::test_page_breadcrumb_and_service_contract" tests="1" assertions="8" errors="0" failures="1" skipped="0" time="0.092660">
+          <testcase name="test_page_breadcrumb_and_service_contract with data set &quot;/solutions/rankfree&quot;" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="322" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="8" time="0.092660">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_page_breadcrumb_and_service_contract with data set "/solutions/rankfree"
+BreadcrumbList must occur exactly once
+Failed asserting that actual size 0 matches expected size 1.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:505
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:325</failure>
+          </testcase>
+        </testsuite>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

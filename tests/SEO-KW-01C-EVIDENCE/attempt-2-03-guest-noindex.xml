@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="/Users/anarchy/Claude_Projects/jcurve/phpunit.xml" tests="3" assertions="6" errors="0" failures="3" skipped="0" time="0.161046">
+    <testsuite name="Feature" tests="3" assertions="6" errors="0" failures="3" skipped="0" time="0.161046">
+      <testsuite name="Tests\Feature\SeoKeywordViewsTest" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" tests="3" assertions="6" errors="0" failures="3" skipped="0" time="0.161046">
+        <testsuite name="Tests\Feature\SeoKeywordViewsTest::test_guest_pages_are_noindex_and_have_their_korean_titles" tests="3" assertions="6" errors="0" failures="3" skipped="0" time="0.161046">
+          <testcase name="test_guest_pages_are_noindex_and_have_their_korean_titles with data set #0" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="144" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="2" time="0.143886">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_guest_pages_are_noindex_and_have_their_korean_titles with data set #0
+Failed asserting that 0 is identical to 1.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:147</failure>
+          </testcase>
+          <testcase name="test_guest_pages_are_noindex_and_have_their_korean_titles with data set #1" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="144" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="2" time="0.008412">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_guest_pages_are_noindex_and_have_their_korean_titles with data set #1
+Failed asserting that 0 is identical to 1.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:147</failure>
+          </testcase>
+          <testcase name="test_guest_pages_are_noindex_and_have_their_korean_titles with data set #2" file="/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php" line="144" class="Tests\Feature\SeoKeywordViewsTest" classname="Tests.Feature.SeoKeywordViewsTest" assertions="2" time="0.008747">
+            <failure type="PHPUnit\Framework\ExpectationFailedException">Tests\Feature\SeoKeywordViewsTest::test_guest_pages_are_noindex_and_have_their_korean_titles with data set #2
+Failed asserting that 0 is identical to 1.
+
+/Users/anarchy/Claude_Projects/jcurve/tests/Feature/SeoKeywordViewsTest.php:147</failure>
+          </testcase>
+        </testsuite>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testsuites>

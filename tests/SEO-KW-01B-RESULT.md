@@ -1,7 +1,7 @@
 # SEO-KW-01B 구현 반환물
 
 - 상태: **구현 파일 작성, 합격 게이트 미충족 — 작성자 NULL과 DB NOT NULL 충돌로 실행 차단**.
-- 시작 HEAD: `925199b00e749705bb828e9c885e5f83c7d4b2f7` (`main`). 작업 중 외부 체크포인트로 `8229427eabc79883373ea411da9ac666bc56eb24`가 관찰됐다. 이 세션은 git 쓰기 명령을 실행하지 않았다.
+- 시작 HEAD: `925199b00e749705bb828e9c885e5f83c7d4b2f7` (`main`). 작업 중 외부 체크포인트 `8229427eabc79883373ea411da9ac666bc56eb24`, 최종 테스트 시점 `c04e635761a73a8dc79fb114a3f5f7cd8be2ccfc`가 관찰됐다. 이 세션은 git 쓰기 명령을 실행하지 않았다.
 - 담당: Codex = 지시 범위 구현·실행 증거, 별도 Codex 세션 = 독립 검증, Claude = 최종 합격 판정.
 - **운영 시더 실행 금지 상태**. 아래 스키마 충돌 해결 전에는 운영에 시더 실행을 요청하면 안 된다.
 
@@ -72,9 +72,9 @@ insight-meta.json byte-identical=True rows=33
 명령: `git diff --stat`
 
 ```text
- database/seeders/KeywordInsightSeeder.php | 14 ++++++++++----
- tests/Feature/KeywordInsightTest.php      |  6 +++++-
- 2 files changed, 15 insertions(+), 5 deletions(-)
+ database/seeders/KeywordInsightSeeder.php | 9 ++++++---
+ tests/Feature/KeywordInsightTest.php      | 1 +
+ 2 files changed, 7 insertions(+), 3 deletions(-)
 ```
 
 시작 HEAD 기준 이 작업 소유 구현 파일의 전체 비교:
@@ -92,10 +92,10 @@ git diff --stat 925199b -- config/subpages.php database/seeders/KeywordInsightSe
  database/content/kw01/05-offerwall.html       |  38 ++++
  database/content/kw01/insight-meta.json       |  35 ++++
  database/content/kw01/manifest.json           |  47 +++++
- database/seeders/KeywordInsightSeeder.php     | 104 ++++++++++
- tests/Feature/KeywordInsightTest.php          | 268 ++++++++++++++++++++++++++
+ database/seeders/KeywordInsightSeeder.php     | 107 ++++++++++
+ tests/Feature/KeywordInsightTest.php          | 269 ++++++++++++++++++++++++++
  tests/Feature/SeoMetaRestorationTest.php      |   5 +
- 11 files changed, 742 insertions(+), 4 deletions(-)
+ 11 files changed, 746 insertions(+), 4 deletions(-)
 ```
 
 보고서 자체는 위 통계에서 제외됐다. 이 통계는 git 읽기 명령으로만 얻었다.
@@ -124,7 +124,7 @@ env VIEW_COMPILED_PATH=/private/tmp/jcurve-seo-kw-01b/views LOG_CHANNEL=stderr p
 실제 출력의 JSON에서 긴 SQL 원고를 포함한 `error_details`만 분리했다. 나머지 필드값은 그대로다.
 
 ```json
-{"tool":"phpunit","result":"failed","tests":213,"passed":208,"assertions":21602,"duration_ms":6927,"errors":5}
+{"tool":"phpunit","result":"failed","tests":213,"passed":208,"assertions":21602,"duration_ms":7772,"errors":5}
 ```
 
 종료 코드 2. 기존 테스트 203개는 모두 통과했다. 신규 검사 10개 중 5개 통과, 아래 5개는 모두 동일한 `NOT NULL constraint failed: insights.user_id` 오류다.
@@ -226,8 +226,62 @@ index bad62c0..07b6fa9 100644
 
 ## 8. 미검증·후속 항목
 
-- 작성자 NULL 스키마 충돌 해소 후 전체 테스트 재실행이 필요하다. 현재는 새 글 5편의 실제 저장/두 번 실행/응답/메타/카테고리/사이트맵, 설명문 33편 갱신, 중복 글·기존 이전표의 단일 301·RSS 제외가 실행 완료로 검증되지 않았다.
+- 작성자 NULL 스키마 충돌 해소 후 전체 테스트 재실행이 필요하다. 새 글 5편의 실제 저장/두 번 실행/응답/메타/카테고리/사이트맵과 설명문 33편 갱신은 여전히 미검증이다. 중복 비공개·단일 301·RSS 제외는 아래 B4 메서드 단독 검사로 확인했지만 전체 시더 실행 성공은 확인하지 못했다.
 - 스키마 수정이 승인되면 새 마이그레이션 및 그 검증을 추가하고 이 보고서를 갱신해야 한다. 승인 없이 소유 범위를 확대하지 않는다.
-- 별도 Codex 검증 세션의 결과는 도착 후 아래에 보강한다. Claude 최종 합격 판정은 아직 받지 않았다.
+- 별도 Codex 검증 세션 결과는 아래 9절에 기록했다. Claude 최종 합격 판정은 아직 받지 않았다.
 - 운영 배포·발행·검색 수집·실제 순위 변화·운영 DB 데이터 일치·실서비스 MySQL은 확인하지 않았다.
 
+## 9. 별도 Codex 세션 독립 검증
+
+독립 검증 판정: **전체 FAIL — 작성자 NULL/NOT NULL 충돌 유지**. B1·B2 확정 문구·섹션 순서·FAQ·보존 필드, 배포 원본 7파일, 기존 테스트 기대값 변경 범위를 다시 확인했다. 범위 내 추가 잔여 코드 결함은 발견하지 못했다. 저장소·스키마·운영 DB 수정 없이 별도 메모리 SQLite로 실행했다.
+
+```sh
+env VIEW_COMPILED_PATH=/private/tmp/jcurve-seo-kw-01b-independent/views LOG_CHANNEL=stderr DB_CONNECTION=sqlite DB_DATABASE=:memory: DB_URL= php artisan test --do-not-cache-result
+```
+
+실제 JSON 출력에서 긴 SQL의 `error_details`만 제외:
+
+```json
+{"tool":"phpunit","result":"failed","tests":213,"passed":208,"assertions":21602,"duration_ms":6301,"errors":5}
+```
+
+종료 코드 2. 전체 로그: `/private/tmp/jcurve-seo-kw-01b-independent/full-test.log`.
+
+독립 Pint(동일 변경 PHP 4파일) 출력은 `{"tool":"pint","result":"passed"}`, 종료 코드 0. 독립 빌드 명령은 `npm run build -- --outDir /private/tmp/jcurve-seo-kw-01b-independent/build --emptyOutDir`, 실제 마지막 줄 `✓ built in 490ms`, 종료 코드 0.
+
+### B4 중복 처리 메서드 단독 검사
+
+전체 시더의 신규 글 삽입과 별개로 기존 데이터에서 `hideDuplicate()`를 호출해 중복 정리 동작만 확인했다. 첫 검사에서 한글 `to_path`를 직접 `parse_url`에 넘기면 현재 PHP의 `C.UTF-8` locale에서 경로가 손상되는 결함을 발견했다. 기존 `PreservedPaths::encode()`로 ASCII화한 뒤 파싱하도록 고쳤다. 자사 호스트 대문자 주소도 비교 전에 소문자로 바꿔 처리하도록 수정했다. 두 수정은 소유 시더 파일 안에서만 했고 회귀 데이터에 대문자 호스트를 추가했다.
+
+재현 스크립트: `/private/tmp/jcurve-seo-kw-01b-independent/b4-probe.php`.
+
+```sh
+env APP_ENV=testing DB_CONNECTION=sqlite DB_DATABASE=:memory: DB_URL= CACHE_STORE=array SESSION_DRIVER=array LOG_CHANNEL=stderr VIEW_COMPILED_PATH=/private/tmp/jcurve-seo-kw-01b-independent/views php /private/tmp/jcurve-seo-kw-01b-independent/b4-probe.php
+```
+
+실제 로그 발췌:
+
+```text
+DATABASE sqlite :memory:; LC_CTYPE=C.UTF-8
+B4 private method only; full seeder remains blocked
+idempotent redirect count: PASS
+duplicate retained; published_at only changed: PASS
+duplicate absent from published scope: PASS
+target plain: PASS status=301 actual=/insights/2019년-그로스해커에게-필요한-스킬3
+target encoded: PASS status=301 actual=/insights/2019년-그로스해커에게-필요한-스킬3
+target trailing: PASS status=301 actual=/insights/2019년-그로스해커에게-필요한-스킬3
+target absolute: PASS status=301 actual=/insights/2019년-그로스해커에게-필요한-스킬3
+target legacy-host: PASS status=301 actual=/insights/2019년-그로스해커에게-필요한-스킬3
+target query-fragment: PASS status=301 actual=/insights/2019년-그로스해커에게-필요한-스킬3
+target external: PASS status=302 actual=https://example.com/insights/2019년-그로스해커에게-필요한-스킬3-1
+target uppercase-local-host: PASS status=301 actual=/insights/2019년-그로스해커에게-필요한-스킬3
+/sitemaps/insights/1.xml status=200 duplicate_absent=PASS
+/rss status=200 duplicate_absent=PASS
+/blog/ status=200 duplicate_absent=PASS
+```
+
+전체 로그: `/private/tmp/jcurve-seo-kw-01b-independent/b4-probe.log`. 같은 로그에서 GET·HEAD로 중복 주소·기존 이전표·plain/encoded/trailing/absolute/legacy-host 주소가 각각 301 후 정상 글 200이고 다음 Location이 없음을 확인했다.
+
+이 검사는 B4 중복 정리 메서드 단독 결과다. **신규 글 5편과 설명문 33편을 포함한 전체 시더 실행 성공의 증거는 아니다.** 전체 시더의 기준 테스트가 스키마 충돌로 실패하므로 전체 기능 무력화 실험도 미실시·미판정이다.
+
+독립 검증 후 최종 코드로 루트 전체 테스트를 재실행한 결과도 5절과 같이 213개 중 208 통과·5 동일 오류였다.

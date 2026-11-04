@@ -83,12 +83,18 @@ class KeywordInsightSeeder extends Seeder
         DB::table('insights')->where('slug', self::DUPLICATE_SLUG)->update(['published_at' => null]);
 
         $duplicatePath = '/insights/'.self::DUPLICATE_SLUG;
-        $encodedPath = '/insights/'.rawurlencode(self::DUPLICATE_SLUG);
         $canonicalPath = '/insights/'.self::CANONICAL_SLUG;
+        $localHosts = [...config('seo.legacy_hosts', []), parse_url(config('seo.public_url'), PHP_URL_HOST)];
 
-        LegacyRedirect::query()->whereIn('to_path', [
-            $duplicatePath, $duplicatePath.'/', $encodedPath, $encodedPath.'/',
-        ])->update(['to_path' => $canonicalPath, 'status_code' => 301]);
+        foreach (LegacyRedirect::query()->cursor() as $redirect) {
+            $target = parse_url($redirect->to_path);
+            if ($target === false || (isset($target['host']) && ! in_array($target['host'], $localHosts, true))) {
+                continue;
+            }
+            if (LegacyRedirect::normalizePath($target['path'] ?? '') === LegacyRedirect::normalizePath($duplicatePath)) {
+                $redirect->update(['to_path' => $canonicalPath, 'status_code' => 301]);
+            }
+        }
 
         LegacyRedirect::query()->updateOrCreate(
             ['from_path' => LegacyRedirect::normalizePath($duplicatePath)],

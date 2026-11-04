@@ -202,7 +202,11 @@ class KeywordInsightTest extends TestCase
         $this->get($path)->assertOk();
         $inbound = LegacyRedirect::query()->where('to_path', $path)->pluck('from_path')->all();
         $this->assertNotEmpty($inbound);
-        foreach (['encoded' => '/insights/'.rawurlencode(self::DUPLICATE_SLUG), 'trailing-slash' => $path.'/'] as $key => $target) {
+        foreach ([
+            'encoded' => '/insights/'.rawurlencode(self::DUPLICATE_SLUG),
+            'trailing-slash' => $path.'/',
+            'absolute' => self::PUBLIC_URL.$path,
+        ] as $key => $target) {
             LegacyRedirect::query()->create(['from_path' => 'old-duplicate-'.$key, 'to_path' => $target, 'status_code' => 302]);
             $inbound[] = 'old-duplicate-'.$key;
         }

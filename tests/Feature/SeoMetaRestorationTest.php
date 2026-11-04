@@ -31,6 +31,11 @@ class SeoMetaRestorationTest extends TestCase
         $expectations = json_decode(file_get_contents(dirname(__DIR__, 2).'/docs/SEO-META-02-TITLES.json'), true, flags: JSON_THROW_ON_ERROR);
         $cases = [];
         foreach ($expectations['pages'] as $path => $page) {
+            // SEO-KW-01B B2-3: only the shopping page intentionally adds ·스마트스토어.
+            if ($path === '/naver-shopping-marketing/') {
+                $page['title'] = '네이버쇼핑·스마트스토어 상위노출 마케팅 전문가의 노하우로 매출 UP';
+                $page['description'] = '네이버쇼핑·스마트스토어 상위노출 마케팅을 위한 SEO는 제이커브에게 맡기세요! 10년 이상 풍부한 노하우로 상품 노출 극대화, 클릭률 향상, 매출 증대를 실현시켜 드립니다.';
+            }
             $cases[$path] = [$path, $page['title'], $page['description']];
         }
 

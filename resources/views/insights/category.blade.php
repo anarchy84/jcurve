@@ -8,6 +8,10 @@
 @section('meta')
     <meta name="description" content="{{ $category->name }} 관련 마케팅 인사이트 — 제이커브인터렉티브가 현장에서 검증한 콘텐츠입니다.">
 @endsection
+{{-- 글이 한 편도 없는 카테고리는 빈 페이지라 검색에 내지 않는다(SEO-KW-01, 2026-11-04 운영 확인: 9개 카테고리 0편). 원주소 두 곳(/blog/seo/·/blog/link-building/)은 보존 대상이라 제외 --}}
+@if ($insights->total() === 0 && ! in_array($category->slug, ['seo', 'link-building'], true))
+    @section('robots', 'noindex, follow')
+@endif
 
 @section('content')
     <main class="listing">

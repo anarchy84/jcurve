@@ -91,6 +91,46 @@ class SeoKeywordViewsTest extends TestCase
         $this->assertSame($insight->published_at->toAtomString(), $xpath->evaluate('string(//head/meta[@property="article:published_time"]/@content)'));
     }
 
+    public static function insightAuthors(): array
+    {
+        return [
+            'company account nickname' => ['jcurve', '제이커브 운영 계정'],
+            'different account nickname and name' => ['다른 필자', '다른 작성자'],
+        ];
+    }
+
+    #[DataProvider('insightAuthors')]
+    public function test_insight_byline_always_uses_the_jcurve_brand(string $nickname, string $name): void
+    {
+        $author = User::factory()->create(['nickname' => $nickname, 'name' => $name]);
+        $insight = $this->insight(['user_id' => $author->id]);
+        $html = $this->page($this->insightPath($insight));
+        $xpath = $this->html($html);
+        $bylines = $xpath->query('//div[contains(concat(" ", normalize-space(@class), " "), " jc-article-meta ")]/span[strong]');
+
+        $this->assertSame(1, $bylines->length);
+        $byline = $bylines->item(0);
+        $this->assertStringNotContainsString('jcurve', $byline->textContent);
+        $this->assertSame('글 제이커브', $this->normalize($byline->textContent));
+        $this->assertSame('제이커브', $xpath->evaluate('string(strong)', $byline));
+        $this->assertStringContainsString('글 <strong>제이커브</strong>', $html);
+    }
+
+    #[DataProvider('insightAuthors')]
+    public function test_insight_blogposting_author_always_uses_the_jcurve_organization(string $nickname, string $name): void
+    {
+        $author = User::factory()->create(['nickname' => $nickname, 'name' => $name]);
+        $insight = $this->insight(['user_id' => $author->id]);
+        $html = $this->page($this->insightPath($insight));
+
+        $this->assertSame([
+            '@type' => 'Organization',
+            '@id' => self::ORGANIZATION,
+            'name' => '제이커브',
+            'url' => self::PUBLIC_URL.'/about-us/',
+        ], $this->oneSchema($html, 'BlogPosting')['author']);
+    }
+
     public static function legacyArticles(): array
     {
         $pages = json_decode(file_get_contents(dirname(__DIR__, 2).'/docs/SEO-META-02-TITLES.json'), true, flags: JSON_THROW_ON_ERROR)['pages'];

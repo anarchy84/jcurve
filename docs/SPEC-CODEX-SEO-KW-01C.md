@@ -15,7 +15,6 @@
    - 페이지마다 `Organization`(id `https://j-curve.co.kr/#organization`) 1개, `WebSite` 1개, `WebPage` 1개. WebPage `url` = canonical.
    - 제목·설명에 `&`, `"`, `</script>` 가 들어간 인사이트를 만들어 렌더해도 JSON 이 깨지지 않고 `</script>` 가 원문으로 새지 않는다(JSON_HEX_TAG).
    - WebPage `name`·`description` 에 `&amp;` 같은 HTML 엔티티가 남지 않는다.
-   - 공개 호스트(`SEO_PUBLIC_URL` 호스트) `/` 에 `<meta name="naver-site-verification" content="0bb9d3fc3026860b15a7eec46a5de406b3b10569">`  정확히 1개, `google-site-verification` 은 기존 값 `-JI9b9PGuPzBzPbZQXEAqZR8YfikUXM7GOP_5lgEQXM` 과 새 값 `zSKZoidZQfYae92O-oYn9gMyIBeIxZkm_UT0XjLYtLI` 두 개. `dev.` 호스트에서는 셋 다 없음.
 2. **서비스 서브페이지** (`pages/subpage.blade.php`): `/naver-place-marketing/` 에 `Service`(provider id = organization)와 `BreadcrumbList`(홈 → 상위 → 현재, 모든 item 이 `https://j-curve.co.kr` 로 시작) 가 있다.
 3. **인사이트 글** (`insights/show.blade.php`): `BlogPosting`(headline, datePublished, dateModified, publisher id) + `BreadcrumbList`, `og:type` = `article`, `article:published_time` 메타. 원주소 글 3편(`/seo/…/`)의 `<meta name="description">` 값이 바뀌지 않았다(기존 보존 테스트와 같은 기준).
 4. **로그인류** (`layouts/guest.blade.php`): `/login`·`/register`·`/forgot-password` 에 `noindex` 메타, 제목에 `Laravel` 없음, 각각 `로그인`·`회원가입`·`비밀번호 찾기` 포함.

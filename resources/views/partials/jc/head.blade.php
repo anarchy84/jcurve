@@ -22,10 +22,6 @@
 @if ($jcIsPublicHost)
 {{-- 구글 서치콘솔 소유 확인 — 기존 워드프레스(랭크매스)가 내던 값 그대로. 빠지면 전환 뒤 서치콘솔 소유 확인이 풀린다(2026-11-03 운영 홈 head 대조) --}}
 <meta name="google-site-verification" content="-JI9b9PGuPzBzPbZQXEAqZR8YfikUXM7GOP_5lgEQXM">
-{{-- 구글 서치콘솔 소유 확인(제코 계정 soul1803 추가, 2026-11-04). 위 기존 값과 함께 둔다 — 둘 다 지워지면 안 된다 --}}
-<meta name="google-site-verification" content="zSKZoidZQfYae92O-oYn9gMyIBeIxZkm_UT0XjLYtLI">
-{{-- 네이버 서치어드바이저 소유 확인 — 제코 계정에 j-curve.co.kr 새로 등록(2026-11-04, 그전엔 등록 안 돼 있었음). 빠지면 네이버 소유 확인이 풀린다 --}}
-<meta name="naver-site-verification" content="0bb9d3fc3026860b15a7eec46a5de406b3b10569">
 @endif
 <meta property="og:type" content="{{ trim($__env->yieldContent('og_type')) ?: 'website' }}">
 <meta property="og:site_name" content="제이커브">

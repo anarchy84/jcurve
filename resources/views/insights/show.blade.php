@@ -11,7 +11,8 @@
 @php
     $plain = trim(preg_replace('/\s+/u', ' ', strip_tags((string) $insight->content)));
     $readingMinutes = max(1, (int) ceil(mb_strlen($plain) / 500));
-    $author = $insight->user ? ($insight->user->nickname ?: $insight->user->name) : '제이커브인터렉티브';
+    // 글 작성자 표기는 「제이커브」 하나로(제코 2026-11-04). 회사 계정 별명 jcurve 가 그대로 보이던 것을 바로잡음
+    $author = '제이커브';
     $related = $related ?? collect();
     $sources = $insight->sources ?? [];
 @endphp
@@ -46,7 +47,7 @@
         'image' => $sdCover ?: $sdPublic.'/images/og-default.png',
         'articleSection' => $insight->category?->name,
         'inLanguage' => 'ko-KR',
-        'author' => ['@'.'type' => 'Organization', '@'.'id' => $sdPublic.'/#organization', 'name' => '제이커브인터렉티브', 'url' => $sdPublic.'/about-us/'],
+        'author' => ['@'.'type' => 'Organization', '@'.'id' => $sdPublic.'/#organization', 'name' => $author, 'url' => $sdPublic.'/about-us/'],
         'publisher' => ['@'.'id' => $sdPublic.'/#organization'],
     ], fn ($v) => $v !== null && $v !== '');
     // 본문의 「자주 묻는 질문」 h2 아래 h3 질문 + p 답 → FAQPage (SEO-KW-02, 2026-11-04). 본문에서 그대로 뽑으니 화면과 질문이 같다.

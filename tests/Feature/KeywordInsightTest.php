@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Insight;
 use App\Models\InsightCategory;
 use App\Models\LegacyRedirect;
+use App\Models\User;
 use Database\Seeders\InsightCategorySeeder;
 use Database\Seeders\KeywordInsightSeeder;
 use Database\Seeders\LegacyContentSeeder;
@@ -99,10 +100,19 @@ class KeywordInsightTest extends TestCase
     {
         $this->seed(InsightCategorySeeder::class);
         $this->seed(KeywordInsightSeeder::class);
+        $author = User::query()->where('email', 'jcurve19@gmail.com')->sole();
+        $this->assertDatabaseCount('users', 1);
+        $this->assertSame('제이커브인터렉티브', $author->name);
+        $this->assertSame('jcurve', $author->nickname);
+        $this->assertSame('admin', $author->role);
+        $this->assertTrue($author->email_verified_at->equalTo(now()));
+        $firstAuthor = $author->getRawOriginal();
         $first = Insight::query()->orderBy('id')->get()->map->getRawOriginal()->all();
         $this->travelTo(now()->addDays(3));
         $this->seed(KeywordInsightSeeder::class);
 
+        $this->assertDatabaseCount('users', 1);
+        $this->assertSame($firstAuthor, $author->fresh()->getRawOriginal());
         $this->assertDatabaseCount('insights', 5);
         $this->assertSame($first, Insight::query()->orderBy('id')->get()->map->getRawOriginal()->all());
         $this->assertSame(5, Insight::query()->published()->count());
@@ -112,9 +122,31 @@ class KeywordInsightTest extends TestCase
                 $this->assertSame($article[$field], $insight->{$field});
             }
             $this->assertSame(file_get_contents(database_path('content/kw01/'.$article['file'])), $insight->getRawOriginal('content'));
-            $this->assertNull($insight->user_id);
+            $this->assertSame($author->id, $insight->user_id);
             $this->assertSame($article['category_slug'], $insight->category->slug);
             $this->assertSame('2026-11-04 10:00:00', $insight->published_at->setTimezone('Asia/Seoul')->format('Y-m-d H:i:s'));
+        }
+    }
+
+    public function test_existing_author_is_reused_without_changing_any_account_fields(): void
+    {
+        $author = User::factory()->create([
+            'email' => 'jcurve19@gmail.com',
+            'name' => '기존 콘텐츠 작성자',
+            'nickname' => 'existing-author',
+            'role' => 'member',
+            'email_verified_at' => null,
+        ])->fresh();
+        $original = $author->getRawOriginal();
+        $this->seed([InsightCategorySeeder::class, KeywordInsightSeeder::class]);
+        $this->travelTo(now()->addDays(3));
+        $this->seed(KeywordInsightSeeder::class);
+
+        $this->assertDatabaseCount('users', 1);
+        $this->assertSame($original, $author->fresh()->getRawOriginal());
+        $this->assertDatabaseCount('insights', 5);
+        foreach ($this->manifest() as $article) {
+            $this->assertSame($author->id, Insight::query()->where('slug', $article['slug'])->sole()->user_id);
         }
     }
 

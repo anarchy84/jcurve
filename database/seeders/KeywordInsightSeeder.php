@@ -5,10 +5,12 @@ namespace Database\Seeders;
 use App\Models\Insight;
 use App\Models\InsightCategory;
 use App\Models\LegacyRedirect;
+use App\Models\User;
 use App\Services\Seo\Publishing\PreservedPaths;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use RuntimeException;
 
 class KeywordInsightSeeder extends Seeder
@@ -39,6 +41,17 @@ class KeywordInsightSeeder extends Seeder
         unset($article);
 
         [$updated, $skipped] = DB::transaction(function () use ($articles, $descriptions, $categories): array {
+            $author = User::query()->firstOrCreate(
+                ['email' => 'jcurve19@gmail.com'],
+                [
+                    'name' => '제이커브인터렉티브',
+                    'nickname' => 'jcurve',
+                    'password' => bcrypt(Str::random(32)),
+                    'role' => 'admin',
+                    'email_verified_at' => now(),
+                ],
+            );
+
             $publishedAt = Carbon::parse('2026-11-04 10:00:00', 'Asia/Seoul')
                 ->setTimezone(config('app.timezone'));
 
@@ -51,7 +64,7 @@ class KeywordInsightSeeder extends Seeder
                     'meta_description' => $article['meta_description'],
                     'category_id' => $categories->get($article['category_slug']),
                     'published_at' => $publishedAt,
-                    'user_id' => null,
+                    'user_id' => $author->id,
                 ]);
             }
 

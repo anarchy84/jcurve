@@ -18,7 +18,7 @@
 | 지정 테스트 파일 Pint | 통과 | 0 |
 | 지정 테스트 파일 PHP 문법 | 통과 | 0 |
 | 화면 복구 | 화면 99파일 SHA 동일, 화면 diff 빈 출력 | 0 |
-| 소유 범위 밖 보존 | 점검 1,094파일의 변경·추가·삭제 0, git 메타데이터 동일 | 0 |
+| 소유 범위 밖 보존 | 소유 밖 제품 파일 변경·추가·삭제 0. 마지막 점검의 git 메타데이터 4파일 변경은 아래 checkpoint 관측으로 기록 | 0 |
 
 이 표는 로컬 실행 증거다. 브라우저 육안 검수와 운영 반영은 수행하지 않았다.
 
@@ -219,7 +219,7 @@ No syntax errors detected in tests/Feature/SeoKeywordViewsTest.php
 9a3fff5e0ff848f1105a4df78e795c21378735d4d625a4797c5c938118dee318
 ```
 
-무력화 전 기준 스냅샷과 전체 테스트 후 비교 결과. 소유 파일 두 개는 비교에서 제외했다. 비교 범위는 git이 열거한 추적·비추적 비ignored 파일에 기존 Laravel 런타임 파일과 git 메타데이터를 추가한 것이다. 비밀 환경 파일은 읽지 않았다.
+무력화 전 기준 스냅샷과 전체 테스트 직후 비교 결과(아래 checkpoint가 생기기 전). 소유 파일 두 개는 비교에서 제외했다. 비교 범위는 git이 열거한 추적·비추적 비ignored 파일에 기존 Laravel 런타임 파일과 git 메타데이터를 추가한 것이다. 비밀 환경 파일은 읽지 않았다.
 
 ```sh
 python3 /private/tmp/jcurve-seo-kw-01d/integrity.py /private/tmp/jcurve-seo-kw-01d/baseline.json
@@ -235,6 +235,36 @@ python3 /private/tmp/jcurve-seo-kw-01d/integrity.py /private/tmp/jcurve-seo-kw-0
 }
 ```
 
-HEAD도 시작 때와 동일하다. 저장소의 최종 변경은 지정 테스트와 이 보고서 두 파일뿐이다. 커밋·스테이징·push·checkout·reset·stash 등 git 쓰기는 수행하지 않았다.
+전체 테스트 직후 HEAD는 시작 때와 같았다. 보고서 저장 후 마지막 점검에서 본 세션이 실행하지 않은 checkpoint 커밋이 관측됐다. 커밋 생성 주체는 별도로 확인하지 않았다. 본 세션은 커밋·스테이징·push·checkout·reset·stash 등 git 쓰기를 수행하지 않았다.
+
+```text
+f0a236eae1578bcece804c1d91c29da006151e54
+f0a236e 2026-11-04T17:39:40+09:00 anarchy84 🤖 checkpoint: 2026-11-04 17:39:40
+```
+
+`GIT_OPTIONAL_LOCKS=0 git diff --stat a03ddc2a64d159de32b152470fa1bb81193ea015 HEAD` 실제 출력. 해당 checkpoint에는 지정 테스트와 최초 보고서만 포함됐다.
+
+```text
+ tests/Feature/SeoKeywordViewsTest.php |  40 ++++++
+ tests/SEO-KW-01D-RESULT.md            | 240 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 280 insertions(+)
+```
+
+checkpoint 관측 시 최종 무결성 검사 실제 출력. 바뀐 것은 git 메타데이터 4파일뿐이며, 화면 SHA와 소유 범위 밖 제품 파일은 그대로다. 이후 이 보고서에 관측 내용을 추가했다.
+
+```json
+{
+  "checked_files": 1094,
+  "view_files": 99,
+  "changed_outside_owned": [
+    ".git/index",
+    ".git/logs/HEAD",
+    ".git/logs/refs/heads/main",
+    ".git/refs/heads/main"
+  ],
+  "view_sha256": "9a3fff5e0ff848f1105a4df78e795c21378735d4d625a4797c5c938118dee318",
+  "git_metadata_unchanged": false
+}
+```
 
 원자료는 `/private/tmp/jcurve-seo-kw-01d/`의 `author-green.log`, `author-red.log`, `author-restored.log`, `full-suite.log`, `pint.log`, `syntax.log`, `baseline.json`, `integrity.py`에 보존했다.

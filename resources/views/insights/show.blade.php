@@ -22,7 +22,10 @@
     // 글 구조화 데이터·공유 메타 — SEO-KW-01 (2026-11-04). 옛 워드프레스(랭크매스)의 BlogPosting·article:* 를 대신한다.
     $sdPublic = rtrim((string) config('seo.public_url'), '/');
     $sdUrl = $sdPublic.\App\Services\Seo\Publishing\PreservedPaths::path('/'.ltrim(request()->path(), '/'));
-    $sdDesc = Str::limit(trim(preg_replace('/\s+/u', ' ', strip_tags((string) ($insight->meta_description ?: $insight->excerpt)))), 155);
+    // 길이 제한은 글자 수로 센다. Str::limit 은 한글 1자를 2칸으로 세서 155칸 = 약 77자에서 잘렸다(SEO-KW-01B 테스트가 찾음, 2026-11-04)
+    $sdLimit = fn (string $s, int $n): string => mb_strlen($s) > $n ? rtrim(mb_substr($s, 0, $n - 1)).'…' : $s;
+    $sdMetaDesc = $sdLimit(strip_tags((string) ($insight->meta_description ?: $insight->excerpt)), 160);
+    $sdDesc = $sdLimit(trim(preg_replace('/\s+/u', ' ', strip_tags((string) ($insight->meta_description ?: $insight->excerpt)))), 160);
     // 대표 이미지 주소: 절대 주소는 그대로, 상대 경로는 공개 주소 + 경로 (사이트맵 FeedCatalog::imageUrl 과 같은 규칙)
     $sdCover = $insight->cover_image ? (preg_match('#^https?://#i', $insight->cover_image) ? $insight->cover_image : $sdPublic.'/'.ltrim($insight->cover_image, '/')) : null;
     $sdBlog = $sdPublic.(parse_url(route('insights.index'), PHP_URL_PATH) ?: '/blog/');
@@ -34,7 +37,7 @@
     ]));
     $sdArticle = array_filter([
         '@'.'type' => 'BlogPosting',
-        'headline' => Str::limit($insight->title, 110, ''),
+        'headline' => mb_substr($insight->title, 0, 110),
         'description' => $sdDesc ?: null,
         'url' => $sdUrl,
         'mainEntityOfPage' => $sdUrl,
@@ -43,17 +46,24 @@
         'image' => $sdCover ?: $sdPublic.'/images/og-default.png',
         'articleSection' => $insight->category?->name,
         'inLanguage' => 'ko-KR',
-        'author' => ['@'.'type' => 'Organization', 'name' => $author, 'url' => $sdPublic.'/about-us/'],
+        'author' => ['@'.'type' => 'Organization', '@'.'id' => $sdPublic.'/#organization', 'name' => '제이커브인터렉티브', 'url' => $sdPublic.'/about-us/'],
         'publisher' => ['@'.'id' => $sdPublic.'/#organization'],
     ], fn ($v) => $v !== null && $v !== '');
+    // 본문의 「자주 묻는 질문」 h2 아래 h3 질문 + p 답 → FAQPage (SEO-KW-02, 2026-11-04). 본문에서 그대로 뽑으니 화면과 질문이 같다.
+    $sdFaq = [];
+    if (preg_match('#<h2[^>]*>\s*자주 묻는 질문\s*</h2>(.*?)(?=<h2|$)#su', (string) $insight->content, $sdFaqBlock)) {
+        preg_match_all('#<h3[^>]*>(.*?)</h3>\s*<p[^>]*>(.*?)</p>#su', $sdFaqBlock[1], $sdFaqPairs, PREG_SET_ORDER);
+        $sdFaq = array_map(fn ($m) => [$m[1], $m[2]], $sdFaqPairs);
+    }
 @endphp
+@include('partials.jc.schema-faq', ['items' => $sdFaq])
 @section('og_type', 'article')
 @if ($sdCover)
     @section('og_image', $sdCover)
 @endif
 @section('meta')
     @if ($insight->meta_description ?: $insight->excerpt)
-        <meta name="description" content="{{ Str::limit(strip_tags($insight->meta_description ?: $insight->excerpt), 155) }}">
+        <meta name="description" content="{{ $sdMetaDesc }}">
     @endif
     @if ($insight->published_at)
         <meta property="article:published_time" content="{{ $insight->published_at->toAtomString() }}">

@@ -103,6 +103,44 @@
         ],
     ];
     $jcGraph[2] = array_filter($jcGraph[2], fn ($v) => $v !== null);
+
+    // 위치 경로(BreadcrumbList)·서비스(Service) — 페이지가 아래 섹션을 두면 같은 그래프에 더한다. SEO-KW-02 (2026-11-04)
+    //   @section('sd_page', '이 페이지 이름')               → 홈 › (상위) › 이 페이지 위치 경로
+    //   @section('sd_crumbs', '상위 이름=/경로|상위 이름=/경로') → 홈과 이 페이지 사이 단계(없으면 홈 › 이 페이지)
+    //   @section('sd_service', '서비스 종류')                → 제공자 = 회사인 Service(이름 = sd_page, 설명 = 이 페이지 설명)
+    // pages/subpage 처럼 이미 자기 Service·BreadcrumbList 를 내는 화면에는 두지 않는다(중복 방지).
+    $jcSdText = fn ($name) => trim(html_entity_decode($__env->yieldContent($name), ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+    $jcSdPage = $jcSdText('sd_page');
+    if ($jcSdPage !== '') {
+        $jcSdItems = [['홈', $jcPublicUrl.'/']];
+        foreach (array_filter(explode('|', $jcSdText('sd_crumbs'))) as $jcSdPair) {
+            [$jcSdName, $jcSdPath] = array_pad(array_map('trim', explode('=', $jcSdPair, 2)), 2, '');
+            if ($jcSdName !== '' && str_starts_with($jcSdPath, '/')) {
+                $jcSdItems[] = [$jcSdName, $jcPublicUrl.$jcSdPath];
+            }
+        }
+        $jcSdItems[] = [$jcSdPage, $jcCanonical];
+        $jcGraph[2]['breadcrumb'] = [$jcAt.'id' => $jcCanonical.'#breadcrumb'];
+        $jcGraph[] = [
+            $jcAt.'type' => 'BreadcrumbList',
+            $jcAt.'id' => $jcCanonical.'#breadcrumb',
+            'itemListElement' => array_map(fn ($jcSdItem, $jcSdIndex) => [$jcAt.'type' => 'ListItem', 'position' => $jcSdIndex + 1, 'name' => $jcSdItem[0], 'item' => $jcSdItem[1]], $jcSdItems, array_keys($jcSdItems)),
+        ];
+        $jcSdService = $jcSdText('sd_service');
+        if ($jcSdService !== '') {
+            $jcGraph[2]['mainEntity'] = [$jcAt.'id' => $jcCanonical.'#service'];
+            $jcGraph[] = array_filter([
+                $jcAt.'type' => 'Service',
+                $jcAt.'id' => $jcCanonical.'#service',
+                'name' => $jcSdPage,
+                'serviceType' => $jcSdService,
+                'description' => $jcDesc !== '' ? html_entity_decode($jcDesc, ENT_QUOTES | ENT_HTML5, 'UTF-8') : null,
+                'url' => $jcCanonical,
+                'areaServed' => [$jcAt.'type' => 'Country', 'name' => 'KR'],
+                'provider' => [$jcAt.'id' => $jcOrgId],
+            ], fn ($v) => $v !== null);
+        }
+    }
 @endphp
 <script type="application/ld+json">{!! json_encode([$jcAt.'context' => 'https://schema.org', $jcAt.'graph' => $jcGraph], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
 @stack('jsonld')

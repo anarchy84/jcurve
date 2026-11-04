@@ -17,6 +17,9 @@
                 <h2>운영 서비스</h2>
                 <ul>
                     <li><a href="{{ $jcMenu['self']['href'] }}">{{ $jcMenu['self']['label'] }}</a></li>
+                    @foreach ($jcMenu['self']['children'] ?? [] as $link)
+                        <li><a href="{{ $link['href'] }}">{{ $link['label'] }}</a></li>
+                    @endforeach
                     @foreach ($jcMenu['operations'] as $op)
                         <li><a href="{{ $op['href'] }}">{{ $op['label'] }}</a></li>
                     @endforeach

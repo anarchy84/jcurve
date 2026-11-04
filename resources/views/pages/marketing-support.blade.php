@@ -26,6 +26,10 @@
 @endphp
 
 @section('title', '중소기업 마케팅 지원사업 실행 지원 | 제이커브인터렉티브')
+{{-- 위치 경로·서비스 구조화 데이터(head 에서 조립) — SEO-KW-02 (2026-11-04) --}}
+@section('sd_page', '마케팅 지원사업')
+@section('sd_crumbs', '서비스=/services')
+@section('sd_service', '중소기업 마케팅 지원사업 실행 지원')
 @section('meta')
     <meta name="description" content="중소기업 마케팅 지원사업의 공고·과업·증빙 기준을 확인하고 광고, SEO, 콘텐츠, 영상, 웹 제작 실행과 결과 자료 준비를 지원합니다. 선정과 지원금 지급은 보장하지 않습니다.">
     <script type="application/ld+json">

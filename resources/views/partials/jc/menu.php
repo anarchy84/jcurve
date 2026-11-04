@@ -54,7 +54,11 @@ return [
         ],
     ],
 
-    'self' => ['label' => '셀프마케팅', 'icon' => 'self', 'href' => route('self-marketing')],
+    // children: 푸터에만 쓰는 하위 링크(헤더는 셀프마케팅 한 칸 그대로). 키워드 랜딩으로 가는 사이트 전체 내부 링크 — SEO-KW-02 (2026-11-04)
+    'self' => ['label' => '셀프마케팅', 'icon' => 'self', 'href' => route('self-marketing'), 'children' => [
+        ['label' => '플레이스 리워드', 'href' => route('self-marketing.place')],
+        ['label' => '쇼핑 리워드', 'href' => route('self-marketing.shopping')],
+    ]],
 
     // desc: 각 서비스 기존 소개 페이지 문구에서 가져온 한 줄
     'operations' => [

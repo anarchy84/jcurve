@@ -23,6 +23,11 @@
         ['q' => '광고는 언제부터 시작되나요?', 'a' => '등록한 다음 날부터 진행됩니다. 주문 화면의 광고 기간에 시작일과 종료일이 함께 표시됩니다.', 'from' => [route('self-marketing.order'), '광고 시작하기']],
     ], array_slice($jcFaq, 0, 5));
 @endphp
+{{-- 구조화 데이터: FAQ(화면 질문과 같은 배열)·위치 경로·서비스 — SEO-KW-02 (2026-11-04) --}}
+@include('partials.jc.schema-faq', ['items' => $jcFaq])
+@section('sd_page', '플레이스 리워드 마케팅')
+@section('sd_crumbs', '셀프마케팅=/self-marketing')
+@section('sd_service', '네이버 플레이스 리워드 광고')
 
 @section('title', '플레이스 리워드 마케팅 — 네이버 플레이스 순위·상위노출 셀프마케팅 | 제이커브인터렉티브')
 @section('meta')

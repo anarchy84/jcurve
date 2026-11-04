@@ -26,6 +26,10 @@
 @endphp
 
 @section('title', 'AEO 답변엔진 최적화 — 질문에 답하는 콘텐츠 구조 | 제이커브인터렉티브')
+{{-- 위치 경로·서비스 구조화 데이터(head 에서 조립) — SEO-KW-02 (2026-11-04) --}}
+@section('sd_page', 'AEO 답변엔진 최적화')
+@section('sd_crumbs', '서비스=/services|SEO=/seo/')
+@section('sd_service', '답변엔진 최적화(AEO)')
 @section('meta')
     <meta name="description" content="사용자의 질문을 분해하고 핵심 답변·근거·조건·관련 문서를 명확하게 연결하는 AEO 답변엔진 최적화. 콘텐츠 구조, 내부 링크, 구조화 데이터와 측정 기준을 설계합니다.">
     <script type="application/ld+json">

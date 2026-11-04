@@ -16,6 +16,10 @@
 @endphp
 
 @section('title', '리워드 광고 · 오퍼월 — 광고주 액션과 앱 수익화를 잇는 리워드 네트워크 | 제이커브인터렉티브')
+{{-- 위치 경로·서비스 구조화 데이터(head 에서 조립) — SEO-KW-02 (2026-11-04) --}}
+@section('sd_page', '리워드 광고·오퍼월')
+@section('sd_crumbs', '서비스=/services')
+@section('sd_service', '리워드 광고')
 @section('meta')
     <meta name="description" content="리워드 광고와 오퍼월을 직접 운영하는 리워드 네트워크. 설치·가입·미션·구매 등 목표 액션 단위로 집행하는 광고주 리워드 광고부터, 앱에 오퍼월·리워드 지면을 붙여 수익을 내는 매체 제휴까지 유효 전환 기준·트래킹·정산을 한 흐름으로 연결합니다.">
     <script type="application/ld+json">

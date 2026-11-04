@@ -26,6 +26,10 @@
 @endphp
 
 @section('title', '퍼포먼스 마케팅 대행 — 광고비의 성적표 | 제이커브인터렉티브')
+{{-- 위치 경로·서비스 구조화 데이터(head 에서 조립) — SEO-KW-02 (2026-11-04) --}}
+@section('sd_page', '퍼포먼스 마케팅')
+@section('sd_crumbs', '서비스=/services')
+@section('sd_service', '퍼포먼스 마케팅 대행')
 @section('meta')
     <meta name="description" content="2026년 기준 제이커브 회사 전체 누적 광고비 373억 원, 캠페인 15,700건 이상. 매체 숫자가 아니라 매출·유효 리드·가입 등 합의한 비즈니스 KPI를 기준으로 광고를 운영합니다.">
     <script type="application/ld+json">

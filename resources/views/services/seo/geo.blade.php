@@ -26,6 +26,10 @@
 @endphp
 
 @section('title', 'GEO 생성엔진 최적화 — AI가 이해하는 브랜드 정보 | 제이커브인터렉티브')
+{{-- 위치 경로·서비스 구조화 데이터(head 에서 조립) — SEO-KW-02 (2026-11-04) --}}
+@section('sd_page', 'GEO 생성엔진 최적화')
+@section('sd_crumbs', '서비스=/services|SEO=/seo/')
+@section('sd_service', '생성엔진 최적화(GEO)')
 @section('meta')
     <meta name="description" content="생성형 AI가 회사·인물·서비스와 근거 정보를 혼동하지 않도록 엔티티, 공식 소스, 인용 가능한 콘텐츠와 기술 접근성을 정비하는 GEO 생성엔진 최적화.">
     <script type="application/ld+json">

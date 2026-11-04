@@ -16,6 +16,8 @@
 @endphp
 
 @section('title', '자주 묻는 질문 — 고객센터 | 제이커브인터렉티브')
+{{-- 위치 경로·서비스 구조화 데이터(head 에서 조립) — SEO-KW-02 (2026-11-04) --}}
+@section('sd_page', '자주 묻는 질문')
 @section('meta')
     <meta name="description" content="제이커브인터렉티브 고객센터. 퍼포먼스·CPA·리워드 광고, SEO·AEO·GEO, 셀프마케팅·부스팅샵, 리드베이·콜투세일, 웹 제작·지원사업에 대해 자주 묻는 질문과 답변을 한곳에 모았습니다.">
     <script type="application/ld+json">

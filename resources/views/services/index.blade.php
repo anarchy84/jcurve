@@ -11,6 +11,8 @@
 @endphp
 
 @section('title', '디지털 마케팅 서비스 — 유입부터 전환·재구매까지 | 제이커브인터렉티브')
+{{-- 위치 경로·서비스 구조화 데이터(head 에서 조립) — SEO-KW-02 (2026-11-04) --}}
+@section('sd_page', '서비스')
 @section('meta')
     <meta name="description" content="퍼포먼스 광고, CPA, 리워드 네트워크, SEO·AEO·GEO, 워드프레스까지. 유입·전환·측정·개선을 하나의 성장 체계로 연결합니다.">
     <script type="application/ld+json">

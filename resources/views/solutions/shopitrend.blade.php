@@ -9,6 +9,10 @@
 --}}
 
 @section('title', '쇼피트렌드 — 플레이스·쇼핑·SNS 마케팅을 직접 주문하는 플랫폼 | 제이커브인터렉티브')
+{{-- 위치 경로·서비스 구조화 데이터(head 에서 조립) — SEO-KW-02 (2026-11-04) --}}
+@section('sd_page', '쇼피트렌드')
+@section('sd_crumbs', '솔루션=/solutions')
+@section('sd_service', '마케팅 주문 플랫폼')
 @section('meta')
     <meta name="description" content="제이커브가 운영하는 셀프 마케팅 플랫폼 쇼피트렌드. 네이버 플레이스·N쇼핑·쿠팡·오늘의집·카카오 선물하기 리워드 광고와 인스타그램·유튜브 SNS 광고를 주문하고, 광고 관리·순위체크·키워드 분석까지 한곳에서 확인합니다.">
 @endsection

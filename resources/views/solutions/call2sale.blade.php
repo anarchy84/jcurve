@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('title', '콜투세일 — 동의 기반 보험 상담 리드 운영 CRM | 제이커브인터렉티브')
+{{-- 위치 경로·서비스 구조화 데이터(head 에서 조립) — SEO-KW-02 (2026-11-04) --}}
+@section('sd_page', '콜투세일')
+@section('sd_crumbs', '솔루션=/solutions')
+@section('sd_service', '보험 상담 콜센터 운영 CRM')
 @section('meta')
     <meta name="description" content="원천 DB 관리, 상담원 배분, AI 콜 품질 분석, 수주·납품·AS·전자계약·정산까지 보험DB 콜센터의 운영 흐름을 관리하는 세일즈 CRM 콜투세일.">
 @endsection
@@ -208,13 +212,22 @@
                 <span class="landing__eyebrow">FAQ</span>
                 <h2 class="landing__head">도입 전에 자주 묻는 질문</h2>
                 <div class="faq">
-                    <details class="faq__item"><summary>콜투세일은 어떤 조직을 위한 서비스인가요?</summary><p>원천 DB를 상담원에게 배분해 보험DB를 생산하고 고객사에 수주·납품·AS·정산하는 콜센터 운영조직을 위한 CRM입니다.</p></details>
-                    <details class="faq__item"><summary>AI 콜 품질 분석이 상담을 정확히 평가하나요?</summary><p>정확성을 보장하지 않습니다. 분석은 패턴과 검토 지점을 찾는 보조 정보이며 관리자 또는 검수자가 통화 원자료와 상담 맥락을 함께 확인해야 합니다.</p></details>
-                    <details class="faq__item"><summary>AI 점수로 인사평가를 자동화해도 되나요?</summary><p>AI 결과만으로 중요한 평가를 확정하는 방식은 오류와 맥락 누락 위험이 있습니다. 평가 기준을 공개하고 사람이 원자료를 검토하는 절차를 두어야 합니다.</p></details>
-                    <details class="faq__item"><summary>녹취와 AI 분석은 별도 동의가 필요 없나요?</summary><p>그렇게 단정할 수 없습니다. 통화 방식과 데이터 처리 구조에 맞는 고지·동의, 이용 목적, 접근 권한, 보유·파기 기준을 실제 운영 전에 확인해야 합니다.</p></details>
-                    <details class="faq__item"><summary>콜투세일이 DB의 적법성을 보장하나요?</summary><p>보장하지 않습니다. 원천 DB의 수집·제공·마케팅 이용 근거와 고객사 납품 조건은 운영·거래 당사자가 직접 확인해야 합니다.</p></details>
-                    <details class="faq__item"><summary>전자계약과 정산은 모두 자동 처리되나요?</summary><p>세부 자동화와 연동 범위는 현재 서비스와 계약 조건에 따라 달라질 수 있습니다. 실제 화면과 지원 범위를 확인한 뒤 기존 업무와의 차이를 점검하세요.</p></details>
-                    <details class="faq__item"><summary>기능과 이용 조건은 어디서 최종 확인하나요?</summary><p>이 페이지는 소개용입니다. 실제 기능, AI 분석 항목, 가격, 도입·연동 조건, 약관과 개인정보 처리 안내는 콜투세일의 최신 서비스가 우선합니다.</p></details>
+                    {{-- FAQ 는 배열 하나로 화면과 구조화 데이터(FAQPage)에 함께 쓴다 — 문구 그대로, SEO-KW-02 (2026-11-04) --}}
+                    @php
+                        $jcPageFaqs = [
+                        ['콜투세일은 어떤 조직을 위한 서비스인가요?', '원천 DB를 상담원에게 배분해 보험DB를 생산하고 고객사에 수주·납품·AS·정산하는 콜센터 운영조직을 위한 CRM입니다.'],
+                        ['AI 콜 품질 분석이 상담을 정확히 평가하나요?', '정확성을 보장하지 않습니다. 분석은 패턴과 검토 지점을 찾는 보조 정보이며 관리자 또는 검수자가 통화 원자료와 상담 맥락을 함께 확인해야 합니다.'],
+                        ['AI 점수로 인사평가를 자동화해도 되나요?', 'AI 결과만으로 중요한 평가를 확정하는 방식은 오류와 맥락 누락 위험이 있습니다. 평가 기준을 공개하고 사람이 원자료를 검토하는 절차를 두어야 합니다.'],
+                        ['녹취와 AI 분석은 별도 동의가 필요 없나요?', '그렇게 단정할 수 없습니다. 통화 방식과 데이터 처리 구조에 맞는 고지·동의, 이용 목적, 접근 권한, 보유·파기 기준을 실제 운영 전에 확인해야 합니다.'],
+                        ['콜투세일이 DB의 적법성을 보장하나요?', '보장하지 않습니다. 원천 DB의 수집·제공·마케팅 이용 근거와 고객사 납품 조건은 운영·거래 당사자가 직접 확인해야 합니다.'],
+                        ['전자계약과 정산은 모두 자동 처리되나요?', '세부 자동화와 연동 범위는 현재 서비스와 계약 조건에 따라 달라질 수 있습니다. 실제 화면과 지원 범위를 확인한 뒤 기존 업무와의 차이를 점검하세요.'],
+                        ['기능과 이용 조건은 어디서 최종 확인하나요?', '이 페이지는 소개용입니다. 실제 기능, AI 분석 항목, 가격, 도입·연동 조건, 약관과 개인정보 처리 안내는 콜투세일의 최신 서비스가 우선합니다.'],
+                        ];
+                    @endphp
+                    @foreach ($jcPageFaqs as [$jcFaqQ, $jcFaqA])
+                    <details class="faq__item"><summary>{{ $jcFaqQ }}</summary><p>{!! $jcFaqA !!}</p></details>
+                    @endforeach
+                    @include('partials.jc.schema-faq', ['items' => $jcPageFaqs])
                 </div>
             </div>
         </section>

@@ -31,6 +31,11 @@
         ['분석 후 실행까지 맡길 수 있나요?', '마케팅 대행으로 분석부터 실행까지 맞춤 견적을 드립니다.'],
     ];
 @endphp
+{{-- 구조화 데이터: FAQ(화면 질문과 같은 배열)·위치 경로·서비스 — SEO-KW-02 (2026-11-04) --}}
+@include('partials.jc.schema-faq', ['items' => $selfFaqs])
+@section('sd_page', '셀프마케팅')
+@section('sd_crumbs', '')
+@section('sd_service', '셀프 마케팅 광고 주문')
 
 @section('content')
     <section class="jc-wrap jc-page-hero jc-page-hero--self" aria-labelledby="sf-title">
@@ -80,7 +85,7 @@
                     <h3 class="jc-display">쇼핑</h3>
                     <p>스마트스토어 상품이 검색되는 위치</p>
                     <dl class="jc-dl"><dt>측정</dt><dd>상품 순위, 6개월 시장 규모·매출 추정</dd><dt>집행</dt><dd>쇼핑 순위상승 캠페인</dd></dl>
-                    <div class="jc-btns"><a class="jc-btn jc-btn--primary jc-btn--sm" href="{{ route('self-marketing.order', ['type' => 'shopping']) }}">광고 시작하기</a></div>
+                    <div class="jc-btns"><a class="jc-btn jc-btn--primary jc-btn--sm" href="{{ route('self-marketing.order', ['type' => 'shopping']) }}">광고 시작하기</a><a class="jc-link" href="{{ route('self-marketing.shopping') }}">쇼핑 자세히 →</a></div>
                 </div>
                 <div>
                     <h3 class="jc-display">웹 검색</h3>

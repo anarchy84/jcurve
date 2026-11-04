@@ -26,6 +26,10 @@
 @endphp
 
 @section('title', 'CPA 마케팅 — 유효 액션 기준 성과형 광고 | 제이커브인터렉티브')
+{{-- 위치 경로·서비스 구조화 데이터(head 에서 조립) — SEO-KW-02 (2026-11-04) --}}
+@section('sd_page', 'CPA 마케팅')
+@section('sd_crumbs', '서비스=/services')
+@section('sd_service', 'CPA 마케팅')
 @section('meta')
     <meta name="description" content="설치·가입·구매·상담신청 등 사전에 합의한 유효 액션을 기준으로 운영하는 CPA 마케팅. 액션 정의, 트래킹, 유효 기준, 매체 운영과 정산 구조를 설계합니다.">
     <script type="application/ld+json">

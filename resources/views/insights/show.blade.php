@@ -18,11 +18,54 @@
 
 {{-- 제목 태그는 기존(v1) 형식 그대로 — SEO 보존. 원문 제목 정리는 QUEUE Q-013(Codex) --}}
 @section('title', ($insight->meta_title ?: $insight->title).' | 제이커브인터렉티브')
+@php
+    // 글 구조화 데이터·공유 메타 — SEO-KW-01 (2026-11-04). 옛 워드프레스(랭크매스)의 BlogPosting·article:* 를 대신한다.
+    $sdPublic = rtrim((string) config('seo.public_url'), '/');
+    $sdUrl = $sdPublic.\App\Services\Seo\Publishing\PreservedPaths::path('/'.ltrim(request()->path(), '/'));
+    $sdDesc = Str::limit(trim(preg_replace('/\s+/u', ' ', strip_tags((string) ($insight->meta_description ?: $insight->excerpt)))), 155);
+    // 대표 이미지 주소: 절대 주소는 그대로, 상대 경로는 공개 주소 + 경로 (사이트맵 FeedCatalog::imageUrl 과 같은 규칙)
+    $sdCover = $insight->cover_image ? (preg_match('#^https?://#i', $insight->cover_image) ? $insight->cover_image : $sdPublic.'/'.ltrim($insight->cover_image, '/')) : null;
+    $sdBlog = $sdPublic.(parse_url(route('insights.index'), PHP_URL_PATH) ?: '/blog/');
+    $sdCrumbs = array_values(array_filter([
+        ['name' => '홈', 'item' => $sdPublic.'/'],
+        ['name' => '인사이트', 'item' => $sdBlog],
+        $insight->category ? ['name' => $insight->category->name, 'item' => $sdPublic.(parse_url(route('insights.category', $insight->category->slug), PHP_URL_PATH) ?: '/')] : null,
+        ['name' => $insight->title, 'item' => $sdUrl],
+    ]));
+    $sdArticle = array_filter([
+        '@'.'type' => 'BlogPosting',
+        'headline' => Str::limit($insight->title, 110, ''),
+        'description' => $sdDesc ?: null,
+        'url' => $sdUrl,
+        'mainEntityOfPage' => $sdUrl,
+        'datePublished' => $insight->published_at?->toAtomString(),
+        'dateModified' => ($insight->updated_at ?? $insight->published_at)?->toAtomString(),
+        'image' => $sdCover ?: $sdPublic.'/images/og-default.png',
+        'articleSection' => $insight->category?->name,
+        'inLanguage' => 'ko-KR',
+        'author' => ['@'.'type' => 'Organization', 'name' => $author, 'url' => $sdPublic.'/about-us/'],
+        'publisher' => ['@'.'id' => $sdPublic.'/#organization'],
+    ], fn ($v) => $v !== null && $v !== '');
+@endphp
+@section('og_type', 'article')
+@if ($sdCover)
+    @section('og_image', $sdCover)
+@endif
 @section('meta')
     @if ($insight->meta_description ?: $insight->excerpt)
         <meta name="description" content="{{ Str::limit(strip_tags($insight->meta_description ?: $insight->excerpt), 155) }}">
     @endif
+    @if ($insight->published_at)
+        <meta property="article:published_time" content="{{ $insight->published_at->toAtomString() }}">
+        <meta property="article:modified_time" content="{{ ($insight->updated_at ?? $insight->published_at)->toAtomString() }}">
+    @endif
+    @if ($insight->category)
+        <meta property="article:section" content="{{ $insight->category->name }}">
+    @endif
 @endsection
+@push('jsonld')
+<script type="application/ld+json">{!! json_encode(['@'.'context' => 'https://schema.org', '@'.'graph' => [$sdArticle, ['@'.'type' => 'BreadcrumbList', 'itemListElement' => array_map(fn ($c, $i) => ['@'.'type' => 'ListItem', 'position' => $i + 1, 'name' => $c['name'], 'item' => $c['item']], $sdCrumbs, array_keys($sdCrumbs))]]], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
+@endpush
 
 @section('content')
     <article>

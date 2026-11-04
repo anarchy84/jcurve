@@ -6,9 +6,11 @@ use App\Http\Controllers\Community\LikeController;
 use App\Http\Controllers\Community\PostController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\InsightController;
+use App\Http\Controllers\LegacyMediaRedirectController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SeoCheckController;
+use App\Http\Controllers\SeoFeedController;
 use App\Http\Controllers\WorkController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Honeypot\ProtectAgainstSpam;
@@ -21,6 +23,10 @@ foreach (['sitemap_index.xml', 'news-sitemap.xml', 'wp-sitemap.xml', 'post-sitem
     Route::permanentRedirect('/'.$sitemap, '/sitemap.xml');
 }
 Route::permanentRedirect('/feed', '/rss');
+
+Route::get('/manager/data/{path}', LegacyMediaRedirectController::class)
+    ->where('path', '.*')->name('legacy.media');
+Route::get('/llms.txt', [SeoFeedController::class, 'llms'])->name('seo.llms');
 
 // 무료 SEO 인스턴트 진단 (온페이지 감사) — 남용 방지 rate limit
 Route::get('/seo-check', [SeoCheckController::class, 'index'])

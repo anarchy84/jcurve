@@ -2,6 +2,8 @@
 
 @php
     $faqs = [
+        ['question' => '리워드 광고는 일반 광고와 무엇이 다른가요?', 'answer' => '리워드 광고는 유저에게 포인트나 앱 재화 같은 보상을 주고 정해진 행동을 요청하는 성과형 광고입니다. 노출이나 클릭이 아니라 설치·가입·미션 완료·구매처럼 확인 가능한 액션 단위로 비용이 정해지고, 유효 기준을 통과한 액션만 정산합니다.'],
+        ['question' => '오퍼월이란 무엇인가요?', 'answer' => '오퍼월은 앱 안에 보상형 광고 미션 목록을 띄우는 전용 지면입니다. 유저는 목록에서 설치·가입·미션 같은 광고를 골라 완료하고 보상을 받고, 앱 운영사는 그 광고 수익을 나눠 받습니다. 광고주는 설치(CPI)·액션(CPA)·참여(CPE) 같은 성과 단위로 비용을 냅니다.'],
         ['question' => '어떤 액션으로 캠페인을 만들 수 있나요?', 'answer' => '앱 설치, 첫 실행, 회원가입, 튜토리얼 완료, 특정 미션 도달, 견적·상담 신청, 구매 등 확인 가능한 행동을 기준으로 설계할 수 있습니다. 실제 가능 여부와 단가는 업종, 난이도, 검수 방식에 따라 달라집니다.'],
         ['question' => '리워드 유저는 품질이 낮지 않나요?', 'answer' => '설치만 목표로 두면 일회성 참여가 늘 수 있습니다. 후속 미션, 유효 조건, 중복 기준과 관찰 지표를 함께 설계해 캠페인 목적에 맞는 품질을 판단해야 합니다. 리워드 여부만으로 모든 유저의 가치를 단정하지 않습니다.'],
         ['question' => '원하는 물량을 보장할 수 있나요?', 'answer' => '고정 물량을 사전 보장하지 않습니다. 가용 물량은 타깃, 단가, 미션 난이도, 기간과 매체 상황에 따라 달라집니다. 초기 테스트에서 참여·승인 흐름을 확인한 뒤 확대 범위를 결정합니다.'],
@@ -13,9 +15,9 @@
     ];
 @endphp
 
-@section('title', '리워드 네트워크 — 광고주 액션과 앱 수익화를 연결합니다 | 제이커브인터렉티브')
+@section('title', '리워드 광고 · 오퍼월 — 광고주 액션과 앱 수익화를 잇는 리워드 네트워크 | 제이커브인터렉티브')
 @section('meta')
-    <meta name="description" content="설치·가입·미션·구매 등 목표 액션을 설계하는 광고주 캠페인부터 오퍼월·리워드 지면을 운영하는 앱 매체 제휴까지. 유효 전환 기준, 트래킹, 운영, 검수와 정산을 한 흐름으로 연결합니다.">
+    <meta name="description" content="리워드 광고와 오퍼월을 직접 운영하는 리워드 네트워크. 설치·가입·미션·구매 등 목표 액션 단위로 집행하는 광고주 리워드 광고부터, 앱에 오퍼월·리워드 지면을 붙여 수익을 내는 매체 제휴까지 유효 전환 기준·트래킹·정산을 한 흐름으로 연결합니다.">
     <script type="application/ld+json">
         {!! json_encode([
             '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
@@ -36,8 +38,8 @@
             <div class="landing__hero-inner">
                 <div class="landing__hero-copy">
                 <div class="landing__hero-mark"><span class="icon3d icon-il">@include('partials.icon', ['name' => 'reward'])</span></div>
-                <span class="landing__eyebrow">Reward Network</span>
-                <h1>유저의 참여가<br>광고주의 액션과 매체의 수익이 되도록</h1>
+                <span class="landing__eyebrow">Reward Ads · Offerwall</span>
+                <h1>리워드 광고와 오퍼월로<br>유저의 참여를 액션과 수익으로</h1>
                 <p class="landing__lead">설치 수만 늘리는 리워드가 아닙니다. 목표 액션, 보상, 유효 기준, 트래킹과 정산을 한 구조로 설계해 광고주·유저·매체가 오래 갈 수 있는 네트워크를 만듭니다.</p>
                 <div class="landing__chips">
                     <span style="color:var(--ink);border-color:var(--hairline);">앱 설치</span>
@@ -370,6 +372,36 @@
                     </article>
                 </div>
                 <p class="landing__note">가용 캠페인과 예상 수익은 시기, 이용자 구성, 지면, 참여율, 단가와 승인 조건에 따라 달라집니다. 제휴 검토 단계에서 고정 수익을 보장하지 않습니다.</p>
+            </div>
+        </section>
+
+        {{-- 오퍼월 정의 — 정보형 검색('오퍼월', '오퍼월이란')에 답하는 구간 (SEO-KW-01, 2026-11-04) --}}
+        <section class="landing__section landing__section--light" id="offerwall">
+            <div class="landing__inner">
+                <span class="landing__eyebrow">What is Offerwall</span>
+                <h2 class="landing__head">오퍼월이란? 앱 안에 여는 보상형 광고 지면</h2>
+                <p class="landing__lead">오퍼월(Offerwall)은 앱 안에 보상형 광고 미션 목록을 띄우는 전용 지면입니다. 유저는 목록에서 미션을 골라 완료하고 포인트나 앱 재화를 받습니다. 앱 운영사는 인앱 결제를 하지 않는 유저에게서도 광고 수익을 얻고, 광고주는 확인 가능한 액션 단위로만 비용을 냅니다.</p>
+                <div class="landing__split">
+                    <article class="landing__panel">
+                        <h3>오퍼월이 움직이는 순서</h3>
+                        <ul>
+                            <li>앱이 오퍼월 지면에 캠페인 목록을 노출합니다</li>
+                            <li>유저가 설치·가입·미션 같은 광고를 골라 참여합니다</li>
+                            <li>트래킹으로 완료를 확인하고 유효 기준을 검수합니다</li>
+                            <li>유저에게 보상을, 매체에 수익을 같은 이벤트 기준으로 지급·정산합니다</li>
+                        </ul>
+                    </article>
+                    <article class="landing__panel">
+                        <h3>누구에게 무엇이 남나요</h3>
+                        <ul>
+                            <li>광고주 — 설치(CPI)·액션(CPA)·참여(CPE) 단위 성과</li>
+                            <li>앱 운영사 — 광고 수익과 체류·재방문 같은 이용 지표</li>
+                            <li>유저 — 원하는 미션을 고르고 받는 보상</li>
+                            <li>제이커브 — 리워드 앱 12종 운영으로 쌓은 검수·CS·정산 기준</li>
+                        </ul>
+                    </article>
+                </div>
+                <p class="landing__note">오퍼월 수익과 가용 캠페인은 이용자 구성, 지면 위치, 참여율과 승인 조건에 따라 달라집니다. 예상 수익을 보장하지 않으며, 제휴 검토 단계에서 지면과 연동 방식을 함께 정합니다.</p>
             </div>
         </section>
 

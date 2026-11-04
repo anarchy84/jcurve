@@ -5,7 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        {{-- 로그인·회원가입·비밀번호 찾기 화면: 검색 결과에 나올 페이지가 아니다 → noindex (SEO-KW-01, 2026-11-04). 옛 log-in·join 주소가 여기로 301 된다 --}}
+        <meta name="robots" content="noindex, follow">
+        @php
+            $jcGuestTitles = ['login' => '로그인', 'register' => '회원가입', 'password.request' => '비밀번호 찾기', 'password.reset' => '비밀번호 재설정', 'verification.notice' => '이메일 인증', 'password.confirm' => '비밀번호 확인'];
+            $jcGuestTitle = $jcGuestTitles[request()->route()?->getName()] ?? '회원';
+        @endphp
+        <title>{{ $jcGuestTitle }} | 제이커브인터렉티브</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

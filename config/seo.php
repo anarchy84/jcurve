@@ -11,6 +11,7 @@ return [
     'pages' => [
         '/', '/services', '/solutions', '/company', '/work', '/insights', '/contact',
         '/self-marketing', '/self-marketing/order', '/self-marketing/place',
+        '/self-marketing/shopping',
         '/seo-check', '/support/faq', '/privacy',
     ],
     'services' => [

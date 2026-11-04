@@ -25,3 +25,5 @@ Route::view('/support/faq', 'pages.faq')->name('support.faq');
 // 상품표·크레딧·주문 생성은 GPT/Codex가 컨트롤러로 바꾸면서 연결 → docs/HANDOFF-CLAUDE-ORDER-UI-2026-10-27.md
 Route::view('/self-marketing/order', 'pages.self-marketing-order')->name('self-marketing.order');
 Route::view('/self-marketing/place', 'pages.self-marketing-place')->name('self-marketing.place');
+// 쇼핑 리워드 상세 (SEO-KW-01, 2026-11-04 제코 지시 — 쇼핑 유입·쇼핑 순위·스마트스토어 상위노출 키워드)
+Route::view('/self-marketing/shopping', 'pages.self-marketing-shopping')->name('self-marketing.shopping');

@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', '랭크프리 — 사장님, 지금 몇 등인지 아세요? | 제이커브인터렉티브')
+@section('title', '플레이스 순위·쇼핑 순위 무료 확인 — 랭크프리 | 제이커브인터렉티브')
 @section('meta')
-    <meta name="description" content="키워드만 넣으면 30초, 가입도 필요 없이 네이버 플레이스·쇼핑·블로그 순위와 경쟁사·시장 규모까지. 대부분 무료인 네이버 마케팅 분석 툴, 랭크프리.">
+    <meta name="description" content="네이버 플레이스 순위와 쇼핑 순위를 키워드만 넣으면 30초 안에 무료로 확인하세요. 가입 없이 플레이스·쇼핑·블로그 순위와 경쟁사·시장 규모까지 보는 네이버 마케팅 분석 툴, 랭크프리.">
 @endsection
 
 @section('content')
@@ -12,10 +12,10 @@
             <div class="landing__hero-inner">
                 <div class="landing__hero-copy">
                 <nav class="subpage__breadcrumb" aria-label="상위"><a href="{{ route('solutions.index') }}">솔루션</a></nav>
-                <span class="landing__eyebrow">RankFree</span>
+                <span class="landing__eyebrow">RankFree · 플레이스 순위 · 쇼핑 순위</span>
                 <h1>사장님, 지금 몇 등인지 아세요?</h1>
-                <p class="landing__lead">키워드만 넣으면 30초 안에 나옵니다. 가입도 필요 없어요.
-                   네이버 플레이스·쇼핑·블로그 순위, 경쟁사 비교, 시장 규모까지 — 대부분 무료입니다.</p>
+                <p class="landing__lead">네이버 플레이스 순위와 쇼핑 순위, 키워드만 넣으면 30초 안에 나옵니다. 가입도 필요 없어요.
+                   플레이스·쇼핑·블로그 순위, 경쟁사 비교, 시장 규모까지 — 대부분 무료입니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="https://rankfree.kr" target="_blank" rel="noopener">무료로 순위 확인 →</a>
                     <a class="btn-ghost" href="#limits">데이터 기준 먼저 보기</a>
@@ -212,6 +212,8 @@
                 <span class="landing__eyebrow">FAQ</span>
                 <h2 class="landing__head">데이터를 보기 전에 가장 많이 묻는 질문</h2>
                 <div class="faq">
+                    <details class="faq__item"><summary>네이버 플레이스 순위는 어떻게 확인하나요?</summary><p>랭크프리에 '지역명 + 업종'처럼 고객이 실제로 검색하는 키워드와 매장명을 넣으면 플레이스 순위가 나옵니다. 순위를 올리고 싶다면 정보 정비는 <a href="{{ url('/naver-place-marketing/') }}">플레이스 상위노출 마케팅</a>, 반응 신호는 <a href="{{ route('self-marketing.place') }}">플레이스 리워드</a>에서 이어서 볼 수 있습니다.</p></details>
+                    <details class="faq__item"><summary>네이버 쇼핑 순위는 어떻게 확인하나요?</summary><p>상품을 찾는 키워드와 스토어·상품명을 넣으면 네이버 쇼핑 순위가 나옵니다. 상품 정보 정비는 <a href="{{ url('/naver-shopping-marketing/') }}">쇼핑·스마트스토어 상위노출</a>, 유입·찜 신호는 <a href="{{ route('self-marketing.shopping') }}">쇼핑 리워드</a>에서 이어서 볼 수 있습니다.</p></details>
                     <details class="faq__item"><summary>랭크프리 순위는 네이버 공식 순위인가요?</summary><p>아닙니다. 랭크프리의 자체 수집·분석 결과입니다. 네이버 공식 지표나 내부 평가 기준으로 해석하면 안 됩니다.</p></details>
                     <details class="faq__item"><summary>제가 직접 검색한 순위와 왜 다른가요?</summary><p>검색 시점, 위치, 기기, 로그인·개인화 상태, 화면 구성과 수집 상태가 다르면 결과도 달라질 수 있습니다. 한 번의 숫자보다 같은 조건의 변화 흐름을 보는 편이 낫습니다.</p></details>
                     <details class="faq__item"><summary>시장 규모와 매출 추정치는 정확한 거래액인가요?</summary><p>아닙니다. 자체 분석에 따른 추정 정보이며 실제 거래액이나 향후 매출을 보장하지 않습니다. 상품성·원가·전환율 등 별도 자료와 함께 판단해야 합니다.</p></details>

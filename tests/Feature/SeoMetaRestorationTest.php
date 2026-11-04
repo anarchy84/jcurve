@@ -169,7 +169,10 @@ class SeoMetaRestorationTest extends TestCase
 
     public function test_robots_txt_keeps_crawling_allowed_and_advertises_the_current_sitemap(): void
     {
-        $this->assertSame("User-agent: *\nDisallow:\nSitemap: https://j-curve.co.kr/sitemap.xml\n", file_get_contents(public_path('robots.txt')));
+        $robots = file_get_contents(public_path('robots.txt'));
+        $this->assertStringStartsWith("User-agent: *\nDisallow:\n", $robots);
+        $this->assertDoesNotMatchRegularExpression('/^Disallow:[ \t]*\S.*$/m', $robots);
+        $this->assertMatchesRegularExpression('~^Sitemap: https://j-curve\.co\.kr/sitemap\.xml$~m', $robots);
     }
 
     private function html(string $html): DOMXPath

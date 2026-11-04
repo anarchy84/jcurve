@@ -23,7 +23,7 @@
 {{-- 구글 서치콘솔 소유 확인 — 기존 워드프레스(랭크매스)가 내던 값 그대로. 빠지면 전환 뒤 서치콘솔 소유 확인이 풀린다(2026-11-03 운영 홈 head 대조) --}}
 <meta name="google-site-verification" content="-JI9b9PGuPzBzPbZQXEAqZR8YfikUXM7GOP_5lgEQXM">
 @endif
-<meta property="og:type" content="website">
+<meta property="og:type" content="{{ trim($__env->yieldContent('og_type')) ?: 'website' }}">
 <meta property="og:site_name" content="제이커브">
 <meta property="og:title" content="{{ $jcTitle }}">
 <meta property="og:url" content="{{ $jcCanonical }}">
@@ -47,6 +47,65 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ $jcTitle }}">
 <meta name="twitter:image" content="{{ $jcOgImage }}">
+@php
+    // 구조화 데이터(JSON-LD) — 모든 페이지 공통: 회사(Organization)·사이트(WebSite)·이 페이지(WebPage). SEO-KW-01 (2026-11-04)
+    // 옛 워드프레스(랭크매스)가 모든 페이지에 내던 그래프를 대신한다. 페이지별 추가(글·서비스·위치 경로)는 @push('jsonld').
+    // 키를 '@'.'type' 처럼 쪼갠 이유: 붙여 쓰면 Blade 가 지시어로 읽을 수 있다(reward-network 와 같은 방식).
+    $jcAt = '@';
+    $jcOrgId = $jcPublicUrl.'/#organization';
+    $jcSiteId = $jcPublicUrl.'/#website';
+    $jcGraph = [
+        [
+            $jcAt.'type' => 'Organization',
+            $jcAt.'id' => $jcOrgId,
+            'name' => '제이커브인터렉티브',
+            'legalName' => '(주)제이커브인터렉티브',
+            'alternateName' => ['J-Curve Interactive', '제이커브'],
+            'url' => $jcPublicUrl.'/',
+            'image' => $jcPublicUrl.'/images/og-default.png',
+            'foundingDate' => '2009',
+            'email' => 'jcurve19@gmail.com',
+            'telephone' => '02-1668-2612',
+            'address' => [
+                $jcAt.'type' => 'PostalAddress',
+                'streetAddress' => '가산디지털1로, 가산더블유센터 703호',
+                'addressLocality' => '금천구',
+                'addressRegion' => '서울특별시',
+                'addressCountry' => 'KR',
+            ],
+            'contactPoint' => [
+                $jcAt.'type' => 'ContactPoint',
+                'telephone' => '02-1668-2612',
+                'contactType' => 'customer service',
+                'areaServed' => 'KR',
+                'availableLanguage' => 'ko',
+            ],
+            'knowsAbout' => ['네이버 플레이스 상위노출', '네이버 쇼핑 상위노출', '스마트스토어 상위노출', '플레이스 리워드', '쇼핑 리워드', '리워드 광고', '오퍼월', '검색엔진 최적화(SEO)', '퍼포먼스 마케팅', 'CPA 마케팅'],
+        ],
+        [
+            $jcAt.'type' => 'WebSite',
+            $jcAt.'id' => $jcSiteId,
+            'url' => $jcPublicUrl.'/',
+            'name' => '제이커브인터렉티브',
+            'inLanguage' => 'ko-KR',
+            'publisher' => [$jcAt.'id' => $jcOrgId],
+        ],
+        [
+            $jcAt.'type' => 'WebPage',
+            $jcAt.'id' => $jcCanonical.'#webpage',
+            'url' => $jcCanonical,
+            'name' => html_entity_decode($jcTitle, ENT_QUOTES | ENT_HTML5, 'UTF-8'),
+            'description' => $jcDesc !== '' ? html_entity_decode($jcDesc, ENT_QUOTES | ENT_HTML5, 'UTF-8') : null,
+            'inLanguage' => 'ko-KR',
+            'isPartOf' => [$jcAt.'id' => $jcSiteId],
+            'about' => [$jcAt.'id' => $jcOrgId],
+            'primaryImageOfPage' => ['url' => $jcOgImage],
+        ],
+    ];
+    $jcGraph[2] = array_filter($jcGraph[2], fn ($v) => $v !== null);
+@endphp
+<script type="application/ld+json">{!! json_encode([$jcAt.'context' => 'https://schema.org', $jcAt.'graph' => $jcGraph], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
+@stack('jsonld')
 <link rel="alternate" type="application/rss+xml" title="제이커브 인사이트" href="{{ route('seo.rss') }}">
 <link rel="sitemap" type="application/xml" title="사이트맵" href="{{ route('seo.sitemap') }}">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>

@@ -56,6 +56,39 @@
     @endif
 @endsection
 
+@php
+    // 서비스(Service)·위치 경로(BreadcrumbList) 구조화 데이터 — SEO-KW-01 (2026-11-04). 회사·사이트는 공통 head 가 낸다.
+    $sdPublic = rtrim((string) config('seo.public_url'), '/');
+    $sdUrl = $sdPublic.\App\Services\Seo\Publishing\PreservedPaths::path('/'.ltrim(request()->path(), '/'));
+    $sdAbs = fn (?string $u) => $u ? $sdPublic.(parse_url($u, PHP_URL_PATH) ?: '/') : null;
+    $sdCrumbs = array_values(array_filter([
+        ['name' => '홈', 'item' => $sdPublic.'/'],
+        $parentUrl ? ['name' => $parent['label'] ?? '서비스', 'item' => $sdAbs($parentUrl)] : null,
+        ['name' => $page['title'], 'item' => $sdUrl],
+    ]));
+    $sdSchema = [
+        '@'.'context' => 'https://schema.org',
+        '@'.'graph' => [
+            [
+                '@'.'type' => 'Service',
+                'name' => $page['title'],
+                'serviceType' => $page['eyebrow'] ?? $page['title'],
+                'description' => $page['meta_description'] ?? ($page['lead'] ?? null),
+                'url' => $sdUrl,
+                'areaServed' => 'KR',
+                'provider' => ['@'.'id' => $sdPublic.'/#organization'],
+            ],
+            [
+                '@'.'type' => 'BreadcrumbList',
+                'itemListElement' => array_map(fn ($c, $i) => ['@'.'type' => 'ListItem', 'position' => $i + 1, 'name' => $c['name'], 'item' => $c['item']], $sdCrumbs, array_keys($sdCrumbs)),
+            ],
+        ],
+    ];
+@endphp
+@push('jsonld')
+<script type="application/ld+json">{!! json_encode($sdSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
+@endpush
+
 @section('content')
     <main class="landing subpage">
         <section class="landing__hero">

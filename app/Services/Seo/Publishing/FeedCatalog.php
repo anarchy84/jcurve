@@ -13,7 +13,7 @@ class FeedCatalog
 {
     public function __construct(private PublicUrl $urls) {}
 
-    /** @return array<string, list<array{url: string, modified: mixed}>> */
+    /** @return array<string, list<array{url: string, modified: mixed, images?: list<string>}>> */
     public function sections(): array
     {
         $meta = $this->metadata();
@@ -55,6 +55,7 @@ class FeedCatalog
                 $sections['insights'][] = [
                     'url' => $this->urls->absolute($path),
                     'modified' => $modified,
+                    'images' => $insight->cover_image ? [$this->imageUrl($insight->cover_image)] : [],
                 ];
             }
         }
@@ -112,6 +113,18 @@ class FeedCatalog
     private function insightPath(Insight $insight): string
     {
         return '/insights/'.rawurlencode($insight->slug);
+    }
+
+    private function imageUrl(string $image): string
+    {
+        if (preg_match('~^https?://~i', $image)) {
+            return $image;
+        }
+        if (str_starts_with($image, '//')) {
+            return parse_url($this->urls->base(), PHP_URL_SCHEME).':'.$image;
+        }
+
+        return $this->urls->base().'/'.ltrim($image, '/');
     }
 
     private function metadata(): Collection

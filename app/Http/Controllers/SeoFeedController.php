@@ -16,7 +16,7 @@ class SeoFeedController extends Controller
     {
         $index = SitemapIndex::create();
         foreach ($catalog->sections() as $section => $entries) {
-            for ($page = 1; $page <= max(1, (int) ceil(count($entries) / $catalog->pageSize())); $page++) {
+            for ($page = 1; $page <= (int) ceil(count($entries) / $catalog->pageSize()); $page++) {
                 // lastmod = 그 쪽 안 주소들 중 가장 최근 수정일(없으면 패키지 기본값).
                 $tag = \Spatie\Sitemap\Tags\Sitemap::create($urls->absolute("/sitemaps/{$section}/{$page}.xml"));
                 $dates = array_filter(array_column(array_slice($entries, ($page - 1) * $catalog->pageSize(), $catalog->pageSize()), 'modified'));
@@ -27,7 +27,7 @@ class SeoFeedController extends Controller
             }
         }
 
-        return $this->xml($index->render(), 'application/xml');
+        return $this->feed($index->render(), 'application/xml');
     }
 
     public function section(string $section, string $page, FeedCatalog $catalog): Response
@@ -44,18 +44,26 @@ class SeoFeedController extends Controller
             if ($entry['modified'] !== null) {
                 $tag->setLastModificationDate($entry['modified']);
             }
+            foreach ($entry['images'] ?? [] as $image) {
+                $tag->addImage($image);
+            }
             $sitemap->add($tag);
         }
 
-        return $this->xml($sitemap->render(), 'application/xml');
+        return $this->feed($sitemap->render(), 'application/xml');
     }
 
     public function rss(FeedCatalog $catalog, FeedXml $xml): Response
     {
-        return $this->xml($xml->rss($catalog->latestInsights()), 'application/rss+xml');
+        return $this->feed($xml->rss($catalog->latestInsights()), 'application/rss+xml');
     }
 
-    private function xml(string $body, string $type): Response
+    public function llms(): Response
+    {
+        return $this->feed(view('seo.llms')->render(), 'text/plain');
+    }
+
+    private function feed(string $body, string $type): Response
     {
         return response($body, 200, [
             'Content-Type' => $type.'; charset=UTF-8',

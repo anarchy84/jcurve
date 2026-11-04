@@ -24,9 +24,9 @@
     ], array_slice($jcFaq, 0, 5));
 @endphp
 
-@section('title', '플레이스 리워드 마케팅 — 셀프마케팅 | 제이커브인터렉티브')
+@section('title', '플레이스 리워드 마케팅 — 네이버 플레이스 순위·상위노출 셀프마케팅 | 제이커브인터렉티브')
 @section('meta')
-    <meta name="description" content="제이커브가 직접 운영하는 리워드 앱과 제휴 매체에 매장 미션을 보내 실제 사람이 검색해 찾아오게 합니다. 매장·키워드·수량·기간을 직접 정하고 바로 등록하는 플레이스 셀프마케팅.">
+    <meta name="description" content="플레이스 리워드로 네이버 플레이스 순위 상승을 돕습니다. 제이커브가 직접 운영하는 리워드 앱과 제휴 매체에 매장 미션을 보내 실제 사람이 검색해 찾아오게 합니다. 매장·키워드·수량·기간을 직접 정하고 바로 등록하세요.">
 @endsection
 @section('footer_variant', 'jc-footer--white')
 
@@ -109,8 +109,22 @@
         </div>
     </section>
 
+    {{-- ③-1 플레이스 순위 기준 — 정보형 검색(플레이스 순위·플레이스 노출·플레이스 상위노출)에 답하는 구간 (SEO-KW-01) --}}
+    <section class="jc-section" aria-labelledby="pl-rank">
+        <div class="jc-wrap">
+            <h2 id="pl-rank" class="jc-display jc-h2 jc-center">네이버 플레이스 순위는 무엇으로 정해지나요?</h2>
+            <p class="jc-text jc-center" style="max-width:720px;margin:16px auto 0">네이버는 플레이스 노출 순서를 자동 계산으로 정하고 세부 가중치는 공개하지 않습니다. 일반적으로 검색어와의 연관성, 정보의 충실성, 인기도, 거리가 함께 반영된다고 알려져 있습니다. 플레이스 리워드가 돕는 영역은 그중 인기도입니다.</p>
+            <div class="jc-benefits">
+                <div><x-jc.icon name="search" class="jc-benefits__ico" /><h3>연관성 — <span class="jc-blue">먼저 정비</span></h3><p>검색어와 업종·카테고리·매장 소개·메뉴가 맞는지입니다. 어긋나면 유입이 들어와도 원하는 키워드에 노출되기 어렵습니다. <a class="jc-link" href="{{ url('/naver-place-marketing/') }}">플레이스 상위노출 마케팅 보기</a></p></div>
+                <div><x-jc.icon name="check" class="jc-benefits__ico" /><h3>정보 충실성 — <span class="jc-blue">빈칸 없애기</span></h3><p>영업시간·가격·사진·예약·소식처럼 고객이 고르는 데 필요한 정보입니다. 정보가 충실할수록 노출 뒤 방문·전화로 이어집니다.</p></div>
+                <div><x-jc.icon name="users" class="jc-benefits__ico" /><h3>인기도 — <span class="jc-blue">리워드가 돕는 곳</span></h3><p>검색 후 방문·저장·길찾기 같은 고객 반응입니다. 플레이스 리워드의 유입·저장·길찾기 미션은 이 반응 신호를 꾸준히 쌓는 데 쓰입니다.</p></div>
+                <div><x-jc.icon name="place" class="jc-benefits__ico" /><h3>거리 — <span class="jc-blue">지역 키워드로</span></h3><p>검색하는 위치와 매장 사이의 거리입니다. 그래서 '지역명 + 업종' 키워드를 메인으로 잡고, 순위는 <a class="jc-link" href="{{ route('solutions.rankfree') }}">랭크프리</a>로 같은 조건에서 다시 잽니다.</p></div>
+            </div>
+        </div>
+    </section>
+
     {{-- ④ 1분 등록 --}}
-    <section class="jc-section" aria-labelledby="pl-steps">
+    <section class="jc-section jc-bg-fog" aria-labelledby="pl-steps">
         <div class="jc-wrap">
             <h2 id="pl-steps" class="jc-display jc-h2 jc-center">처음이어도 1분이면 광고가 등록됩니다</h2>
             <div class="jc-steprows">
@@ -172,6 +186,7 @@
                 <details @if ($i === 0) open @endif><summary>{{ $f['q'] }}</summary><p>{{ $f['a'] }}</p></details>
             @endforeach
             <a class="jc-link" href="{{ route('support.faq') }}#faq-self" style="display:inline-block;margin-top:24px">자주 묻는 질문 전체 보기 →</a>
+            <p class="jc-text" style="margin-top:12px">스마트스토어 상품도 같은 방식으로 진행할 수 있습니다 → <a class="jc-link" href="{{ route('self-marketing.shopping') }}">쇼핑 리워드 마케팅</a></p>
         </div>
     </section>
 

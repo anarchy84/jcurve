@@ -26,3 +26,19 @@
 
 ## 반환물 `docs/intl/INTL-03-VERIFY-RESULT.md`
 항목별 표(PASS/FAIL·근거·명령·실제 출력 일부), 글별 요약 표(ko slug → en slug·T3~T7 결과), T5 이상치 판정 목록, T6 숫자 차이 목록, 확신 없는 번역 표현 목록(최대 40개, 글·문장), 원복 확인 해시, 검증 못 한 항목.
+
+## 추가 (Claude, 2026-11-03 — 재번역 반영. 위 표보다 이 절이 우선)
+- 현재 상태: **1~26번은 INTL-04D 가 다시 번역**(외부 번역 금지, 결과 `docs/intl/INTL-04D-IMPL-RESULT.md`), **27~52번은 INTL-03B 직접 번역**(결과 `INTL-03B-IMPL-RESULT.md`). 1~26번의 03A 기계번역 초벌 결과(`INTL-03A-IMPL-RESULT.md`)는 참고만.
+- 재번역 전 사본: `/private/tmp/claude-501/-Users-anarchy-Claude-Projects-jcurve/782fb1b7-1762-465f-befa-38be705ecc7f/scratchpad/pre04/insights-03a/`(1~26번 기계번역판 포함). 구현 로그: 같은 폴더 `codex-intl03b.log`·`codex-intl04d.log`.
+- 추가 공격:
+
+| # | 공격 | FAIL 조건 |
+|---|---|---|
+| T14 | **외부 번역.** 03B·04D 로그에서 실제 웹 요청 흔적(`translate.googleapis`·`translate_a`·`deepl.com`·`papago`·`curl http`). 지시서 인용·영어 단어(deeply 등) 오탐과 구별. | 실제 호출 1건이라도 |
+| T15 | **용어집 §8·기계번역 흔적.** 금지 예(ペット·オペレーティングシステム·地面·グラウンド·カウンセリング·インフロー·operating system·top exposure·inflow·counseling·remodeling) 0. 한국어에 `반려`·`지면`·`소재`·`운영 체계`·`DB`(리드)·`상담` 이 있는 문단은 §8 대응을 쓰는지 목록. | 금지 예 1건이라도 |
+| T16 | **뜻 뒤집힘.** 한국어 문단에 부정·면책(`않습니다` `없습니다` `아닙니다` `보장` `금지` `하지 마`)이 있으면 번역에도 부정이 있는지 전수, 의심 건은 직접 읽고 판정. | 부정·면책 누락·반대 뜻 1건이라도 |
+| T17 | **의미 대조 표본(가장 중요).** 글마다 무작위 3문단 × en·ja(seed 를 적는다) = 312쌍을 한국어와 나란히 읽고 OK/어색/오역. 오역·어색은 대안 문장. 이미 알려진 의심 1건: 49번(인스타그램 인기게시물) 일본어 「Instagramは非常に強い施策です」(원문 뜻은 강력한 마케팅 채널). 같은 유형(施策·素材·露出 남용, 주어 빠진 직역, 잘린 문장)을 글 전체에서 검색해 목록으로. | 오역(뜻이 다름) — 건수와 위치를 전부 적는다 (어색은 목록만) |
+
+## 경로 변경 (Claude, 2026-11-03 17:10 — 세션 종료로 첫 실행 중단)
+- 위 「재번역 전 사본」·「구현 로그」의 `/private/tmp/...scratchpad/` 가 없으면 작업 폴더 안 사본을 쓴다: `storage/app/intl-handoff/pre04/`(기계번역판), `storage/app/intl-handoff/logs/codex-intl03b.log.gz`·`codex-intl04d.log.gz`(`gzip -dc` 로 읽는다).
+- 첫 실행이 남긴 `storage/framework/testing/verify03.sqlite` 는 지우고 새로 만들어도 된다.

@@ -1279,3 +1279,19 @@ html:lang(en) .jc-h1--home { font-size: clamp(38px, 5vw, 76px); }
 .jc-intl .jc-layer__title { font-size: 30px; }
 @media (max-width: 1080px) { .jc-intl .jc-layer { grid-template-columns: 200px minmax(0, 1fr); } }
 @media (max-width: 760px) { .jc-intl .jc-layer { grid-template-columns: 1fr; } }
+
+/* 다국어 모바일 가로 넘침 정리 (Claude, 2026-11-03 화면 점검) — 전부 .jc-intl 안에서만, 한국어 화면은 그대로
+   - 헤더: 영·일 버튼 글자가 길어 로고+문의+메뉴가 390px 를 넘음 → 좁은 화면에서 로고 보조어 숨기고 간격·여백 축소
+   - 홈 서비스 목록: 영어 긴 낱말이 그리드 칸을 밀어냄 → min-width 0
+   - 가격 카드: 「KRW 49,000」 같은 큰 숫자가 72px 한 줄 고정 → 화면 폭에 맞춰 줄임 */
+.jc-intl .jc-biz__col, .jc-intl .jc-biz__col * { min-width: 0; }
+.jc-intl .jc-biz__col { overflow-wrap: break-word; }
+@media (max-width: 480px) {
+    .jc-intl .jc-header__bar { gap: 12px; }
+    .jc-intl .jc-brand__sub { display: none; }
+    .jc-intl .jc-header__aside { gap: 8px; }
+    .jc-intl .jc-header__aside .jc-btn--sm { padding: 0 12px; font-size: 13px; }
+    .jc-intl .jc-mnav > summary { padding: 0 10px; font-size: 13px; }
+    .jc-intl .jc-plans { grid-template-columns: minmax(0, 1fr); }
+    .jc-intl .jc-plans .jc-num { font-size: clamp(36px, 12vw, 72px); }
+}

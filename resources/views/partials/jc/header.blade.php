@@ -16,6 +16,9 @@
     ];
 @endphp
 <link rel="stylesheet" href="{{ asset('css/jc-nc.css') }}?v={{ @filemtime(public_path('css/jc-nc.css')) }}">
+{{-- 11/06 섹션 카드·도식 (jc-sec) --}}
+<link rel="stylesheet" href="{{ asset('css/jc-sec.css') }}?v={{ @filemtime(public_path('css/jc-sec.css')) }}">
+<script src="{{ asset('js/jc-sec.js') }}?v={{ @filemtime(public_path('js/jc-sec.js')) }}" defer></script>
 <a class="jc-skip" href="#main">본문 바로가기</a>
 <header class="jc-header jc-nch">
     <div class="jc-wrap jc-header__bar">

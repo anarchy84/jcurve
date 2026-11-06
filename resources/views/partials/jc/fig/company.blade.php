@@ -1,10 +1,10 @@
-{{-- 회사소개 그림: 연혁(페이지 글·숫자만. 2009 · 2026 외 연도는 페이지에 없어 적지 않음) --}}
+{{-- 회사소개 그림: 연혁(페이지 글·숫자만. 2019 · 2026 외 연도는 페이지에 없어 적지 않음) --}}
 <section class="jf" aria-label="제이커브 연혁">
     <div class="jf__in">
-        <p class="jf__cap"><b>연혁</b> · 2009년부터 지금까지</p>
+        <p class="jf__cap"><b>연혁</b> · 2019년부터 지금까지</p>
         <div class="jf-tl" data-jf-anim>
             <div class="jf-tl__it">
-                <div class="jf-tl__y">2009</div>
+                <div class="jf-tl__y">2019</div>
                 <div class="jf-tl__t">법인 설립</div>
                 <div class="jf-tl__d">“이 예산이 실제로 어떤 결과를 만들었는가”에서 출발했습니다.</div>
             </div>

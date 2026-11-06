@@ -14,7 +14,7 @@
 {{-- 위치 경로·서비스 구조화 데이터(head 에서 조립) — SEO-KW-02 (2026-11-04) --}}
 @section('sd_page', '회사소개')
 @section('meta')
-    <meta name="description" content="2009년 설립. 광고 집행, CPA, 리워드, 검색, 웹 제작과 자체 솔루션 개발을 한 팀에서 연결하는 제이커브인터렉티브의 역사와 일하는 방식을 소개합니다.">
+    <meta name="description" content="2019년 설립. 광고 집행, CPA, 리워드, 검색, 웹 제작과 자체 솔루션 개발을 한 팀에서 연결하는 제이커브인터렉티브의 역사와 일하는 방식을 소개합니다.">
     <script type="application/ld+json">
         {!! json_encode([
             '@'.'context' => 'https://schema.org', // 키를 쪼갠 이유: 붙여 쓰면 Blade 지시어로 컴파일됨
@@ -34,7 +34,7 @@
         <section class="landing__hero">
             <div class="landing__hero-inner">
                 <span class="landing__eyebrow">About J-Curve</span>
-                <h1>2009년부터,<br>실행과 데이터로 말해왔습니다</h1>
+                <h1>2019년부터,<br>실행과 데이터로 말해왔습니다</h1>
                 <p class="landing__lead">광고를 대신 집행하는 데서 멈추지 않았습니다. 유입, 전환, 검색, 리드 운영과 웹 시스템까지 현장에서 막히는 구간을 직접 풀어왔습니다.</p>
                 <div class="cta-row">
                     <a class="btn-primary" href="{{ route('contact') }}">프로젝트 문의</a>
@@ -60,7 +60,7 @@
                 <span class="landing__eyebrow">Our Story</span>
                 <h2 class="landing__head">시장 이름은 바뀌어도, 고객이 묻는 건 같았습니다</h2>
                 <div class="prose">
-                    <p>제이커브는 2009년에 시작했습니다. 매체와 기술은 계속 바뀌었지만 광고주가 알고 싶은 것은 늘 같았습니다. “이 예산이 실제로 어떤 결과를 만들었는가.”</p>
+                    <p>제이커브는 2019년에 시작했습니다. 매체와 기술은 계속 바뀌었지만 광고주가 알고 싶은 것은 늘 같았습니다. “이 예산이 실제로 어떤 결과를 만들었는가.”</p>
                     <p>그래서 노출과 클릭 뒤를 보기 시작했습니다. 상담 신청은 유효했는지, 설치한 유저는 핵심 기능까지 갔는지, 검색 방문자는 문의로 이어졌는지, 운영팀이 그 결과를 다음 행동으로 옮길 수 있는지까지 봤습니다.</p>
                     <p>필요한 도구가 없으면 직접 만들었습니다. 이 실행의 축적이 지금의 퍼포먼스·CPA·리워드·SEO·웹 제작과 네 개의 자체 솔루션으로 이어졌습니다.</p>
                 </div>
@@ -74,7 +74,7 @@
                 <div class="stat glass-card"><strong data-count-to="373" data-count-suffix="억+">373억+</strong><span>2026년 기준 · 회사 전체 누적 집행 광고비</span></div>
                 <div class="stat glass-card"><strong data-count-to="128" data-count-suffix="만+">128만+</strong><span>2026년 기준 · 회사 전체 누적 수집 DB</span></div>
                 <div class="stat glass-card"><strong data-count-to="15700" data-count-suffix="+" data-count-comma="1">15,700+</strong><span>2026년 기준 · 회사 전체 누적 진행 캠페인</span></div>
-                <div class="stat glass-card"><strong data-count-to="2009" data-count-suffix="년">2009년</strong><span>법인 설립</span></div>
+                <div class="stat glass-card"><strong data-count-to="2019" data-count-suffix="년">2019년</strong><span>법인 설립</span></div>
             </div>
         </section>
 

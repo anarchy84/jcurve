@@ -27,7 +27,7 @@
                 <div class="stat glass-card"><strong data-count-to="373" data-count-suffix="억+">373억+</strong><span>2026년 기준 · 회사 전체 누적 집행 광고비</span></div>
                 <div class="stat glass-card"><strong data-count-to="128" data-count-suffix="만+">128만+</strong><span>2026년 기준 · 회사 전체 누적 수집 DB</span></div>
                 <div class="stat glass-card"><strong data-count-to="15700" data-count-suffix="+" data-count-comma="1">15,700+</strong><span>2026년 기준 · 회사 전체 누적 진행 캠페인</span></div>
-                <div class="stat glass-card"><strong data-count-to="2009" data-count-suffix="년">2009년</strong><span>법인 설립</span></div>
+                <div class="stat glass-card"><strong data-count-to="2019" data-count-suffix="년">2019년</strong><span>법인 설립</span></div>
             </div>
         </section>
 

@@ -63,7 +63,7 @@
             'alternateName' => ['J-Curve Interactive', '제이커브'],
             'url' => $jcPublicUrl.'/',
             'image' => $jcPublicUrl.'/images/og-default.png',
-            'foundingDate' => '2009',
+            'foundingDate' => '2019',
             'email' => 'jcurve19@gmail.com',
             'telephone' => '02-1668-2612',
             'address' => [

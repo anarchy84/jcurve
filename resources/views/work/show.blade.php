@@ -8,6 +8,7 @@
 @endsection
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="detail">
         {{-- 히어로 [파치먼트] — 클라이언트·산업 · 제목 · 지표 --}}
         <section class="landing__hero @if ($work->cover_image)landing__hero--media @endif">

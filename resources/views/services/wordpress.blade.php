@@ -47,6 +47,7 @@
 @endsection
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="landing">
         <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
@@ -61,6 +62,8 @@
                 <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'wordpress'])</figure>
             </div>
         </section>
+
+    @include('partials.jc.fig.wordpress')
 
         <nav class="landing__local-nav" aria-label="워드프레스 제작 페이지 내 탐색">
             <div class="landing__local-nav-inner">

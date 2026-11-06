@@ -46,6 +46,7 @@
 @endsection
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="landing">
         <section class="landing__hero">
             <div class="landing__hero-inner">
@@ -61,6 +62,8 @@
                 </div>
             </div>
         </section>
+
+    @include('partials.jc.fig.geo')
 
         <nav class="landing__local-nav" aria-label="GEO 페이지 내 탐색">
             <div class="landing__local-nav-inner">

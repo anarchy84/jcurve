@@ -79,6 +79,7 @@
 @endpush
 
 @section('content')
+    @include('partials.jc.viz.kit', ['read' => true])
     <article>
         <div class="jc-wrap" style="padding-top:clamp(40px,5vw,72px);padding-bottom:48px">
             <div class="jc-article-grid">

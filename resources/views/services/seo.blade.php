@@ -43,6 +43,7 @@
 @endsection
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="landing">
         <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
@@ -54,9 +55,11 @@
                     <a class="btn-primary" href="{{ route('contact') }}">SEO 진단 요청</a>
                 </div>
                 </div>
-                <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'seo'])</figure>
+                <figure class="jc-nc-hero">@include('partials.jc.nc.hero', ['name' => 'seo'])</figure>
             </div>
         </section>
+
+    @include('partials.jc.fig.seo')
 
         <nav class="landing__local-nav" aria-label="SEO·AEO·GEO 페이지 내 탐색">
             <div class="landing__local-nav-inner">

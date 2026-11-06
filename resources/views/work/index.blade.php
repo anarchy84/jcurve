@@ -6,6 +6,7 @@
 @endsection
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="listing landing">
         <section class="landing__hero">
             <div class="landing__hero-inner">
@@ -18,6 +19,8 @@
                 </div>
             </div>
         </section>
+
+    @include('partials.jc.fig.work')
 
         <section class="home__stats has-orb" aria-label="회사 전체 누적 운영 지표">
             <div class="home__stats-inner">

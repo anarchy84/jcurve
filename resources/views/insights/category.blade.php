@@ -14,6 +14,7 @@
 @endif
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="listing">
         {{-- 페이지 헤더 [파치먼트] + 카테고리 탭 --}}
         <section class="landing__hero">
@@ -24,6 +25,7 @@
                 @include('insights.partials.tabs', ['activeSlug' => $category->slug])
             </div>
         </section>
+        @include('partials.jc.viz.insight-cats', ['activeSlug' => $category->slug])
 
         {{-- 아티클 카드 그리드 [라이트] --}}
         <section class="listing__body">

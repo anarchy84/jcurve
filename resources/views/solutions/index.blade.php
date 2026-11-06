@@ -8,9 +8,10 @@
 @endsection
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="landing">
         {{-- 히어로 [파치먼트] --}}
-        <section class="landing__hero">
+        <section class="landing__hero jc-nc-hasart">
             <div class="landing__hero-inner">
                 <span class="landing__eyebrow">Our Products</span>
                 <h1>빌려 쓰지 않습니다. 직접 만듭니다.</h1>
@@ -20,8 +21,11 @@
                     <a class="btn-primary" href="#products">솔루션 살펴보기</a>
                     <a class="btn-ghost" href="{{ route('contact') }}">도입·활용 문의</a>
                 </div>
+                <figure class="jc-nc-hero">@include('partials.jc.nc.hero', ['name' => 'solutions'])</figure>
             </div>
         </section>
+
+    @include('partials.jc.fig.solutions')
 
         <nav class="landing__local-nav" aria-label="솔루션 페이지 바로가기">
             <div class="landing__local-nav-inner">
@@ -88,7 +92,8 @@
                 <h2 class="landing__head">먼저 보고, 필요한 만큼 실행합니다</h2>
                 <p class="landing__lead">분석 도구와 셀프 마케팅 상품은 역할이 다릅니다. 현재 상태를 확인하려면 랭크프리, 실행 항목이 이미 정해졌다면 부스팅샵부터 살펴보세요.</p>
                 <div class="subcards">
-                    <a class="subcard" href="{{ route('solutions.rankfree') }}">
+                    <a class="subcard jc-nc-pick" href="{{ route('solutions.rankfree') }}">
+                        <span class="jc-nc-pick__art">@include('partials.jc.nc.hero', ['name' => 'solutions'])</span>
                         <strong>랭크프리 (RankFree)</strong>
                         <p>네이버 플레이스·쇼핑·키워드·블로그의 순위와 분석 데이터를 확인하는 도구입니다.</p>
                         <span>순위·시장 분석 보기 →</span>

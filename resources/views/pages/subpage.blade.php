@@ -90,6 +90,7 @@
 @endpush
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="landing subpage">
         <section class="landing__hero">
             <div class="landing__hero-inner">
@@ -107,6 +108,8 @@
                 </div>
             </div>
         </section>
+
+    @include('partials.jc.fig.sub')
 
         @if ($localNav->isNotEmpty())
             <nav class="landing__local-nav" aria-label="{{ $page['title'] }} 바로가기">

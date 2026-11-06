@@ -46,6 +46,7 @@
 @endsection
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="landing">
         <section class="landing__hero">
             <div class="landing__hero-inner">
@@ -57,6 +58,8 @@
                 </div>
             </div>
         </section>
+
+    @include('partials.jc.fig.support')
 
         <nav class="landing__local-nav" aria-label="중소기업 마케팅 지원사업 페이지 내 탐색">
             <div class="landing__local-nav-inner">

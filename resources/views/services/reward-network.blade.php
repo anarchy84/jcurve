@@ -36,6 +36,7 @@
 @endsection
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="landing">
         {{-- 경쟁사명은 meta·title·본문에 사용하지 않는다. 정보 밀도와 구조만 참고한다. --}}
         <section class="landing__hero landing__hero--media">
@@ -58,9 +59,11 @@
                     <a class="btn-ghost" href="{{ route('contact', ['service_interest' => 'reward-publisher', 'message' => '앱 리워드 매체 제휴를 문의합니다. 서비스와 이용자, 희망 지면을 상담하고 싶습니다.']) }}">앱 매체 제휴 문의</a>
                 </div>
                 </div>
-                <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'reward'])</figure>
+                <figure class="jc-nc-hero">@include('partials.jc.nc.hero', ['name' => 'reward'])</figure>
             </div>
         </section>
+
+    @include('partials.jc.fig.reward')
 
         <nav class="landing__local-nav" aria-label="리워드 네트워크 페이지 바로가기">
             <div class="landing__local-nav-inner">

@@ -1,0 +1,123 @@
+/* =====================================================================
+   jc-nc.css — 11/06 헤더 · 푸터 · 히어로 그림 · 카드 그림 (ncloud.com 배치 참고, 그림·글은 새로 만듦)
+   layouts/jc.blade.php 에서 jc.css 뒤에 붙는다. 색은 jc.css 변수만 쓴다. 그라데이션 없음.
+   ===================================================================== */
+
+/* ---------- 헤더 ---------- */
+:is(.jc-site, .jc-legacy) .jc-nch { border-bottom: 1px solid var(--jc-line); background: #fff; }
+:is(.jc-site, .jc-legacy) .jc-nch .jc-header__bar { height: 76px; }
+.jc-nch .jc-brand { align-items: center; }
+.jc-nch .jc-nav { gap: clamp(20px, 2.3vw, 38px); font-size: 16px; font-weight: 600; }
+.jc-nch .jc-nav > a, .jc-nch .jc-nav__trigger { padding: 26px 0 !important; }
+.jc-nch .jc-nav a[aria-current="page"] { box-shadow: inset 0 -3px 0 var(--jc-blue); color: var(--jc-blue) !important; }
+.jc-nch .jc-nav__menu:hover > .jc-nav__trigger { color: var(--jc-blue) !important; }
+.jc-nch .jc-header__aside { gap: 10px; }
+.jc-nch .jc-header__login { margin-right: 8px; font-weight: 500; }
+:is(.jc-site, .jc-legacy) .jc-nch__btn { display: inline-flex; align-items: center; justify-content: center; height: 40px; padding: 0 18px; border-radius: 6px; font-size: 14px; font-weight: 700; white-space: nowrap; text-decoration: none; transition: background-color .15s, color .15s, border-color .15s; }
+:is(.jc-site, .jc-legacy) .jc-nch__btn--line { border: 1px solid var(--jc-ink-2); color: var(--jc-ink-2) !important; background: #fff; }
+:is(.jc-site, .jc-legacy) .jc-nch__btn--line:hover, :is(.jc-site, .jc-legacy) .jc-nch__btn--line[aria-current="page"] { border-color: var(--jc-blue); color: var(--jc-blue) !important; }
+:is(.jc-site, .jc-legacy) .jc-nch__btn--fill { border: 1px solid var(--jc-blue); background: var(--jc-blue); color: #fff !important; }
+:is(.jc-site, .jc-legacy) .jc-nch__btn--fill:hover { background: var(--jc-blue-press); border-color: var(--jc-blue-press); color: #fff !important; }
+
+/* 메가메뉴: 왼쪽 큰 제목·설명·버튼 + 오른쪽 칸 */
+.jc-nch .jc-mega { background: #fff; border-top: 1px solid var(--jc-line); box-shadow: 0 30px 60px rgba(0,0,0,.10); }
+.jc-nch .jc-mega__inner { grid-template-columns: 280px repeat(3, minmax(0, 1fr)); gap: 0 40px; padding-top: 44px; padding-bottom: 52px; }
+.jc-nch .jc-mega__intro { padding-right: 32px; border-right: 1px solid var(--jc-line); }
+.jc-nch .jc-mega__intro strong { font-size: 28px; color: var(--jc-blue); }
+.jc-nch .jc-mega__intro p { margin: 14px 0 26px; font-size: 15px; color: var(--jc-muted); }
+:is(.jc-site, .jc-legacy) .jc-nch .jc-mega__intro a.jc-nch__introbtn { display: inline-flex; align-items: center; height: 44px; padding: 0 22px !important; border-radius: 6px; background: var(--jc-blue); color: #fff !important; font-size: 14px; font-weight: 700; }
+:is(.jc-site, .jc-legacy) .jc-nch .jc-mega__intro a.jc-nch__introbtn:hover { background: var(--jc-blue-press); color: #fff !important; }
+.jc-nch .jc-mega__label { font-size: 13px; font-weight: 700; color: var(--jc-blue); padding-bottom: 12px; margin-bottom: 4px; border-bottom: 1px solid var(--jc-ink-2); letter-spacing: -0.01em; }
+.jc-nch .jc-nch__item { padding: 10px 0 12px; border-bottom: 1px solid var(--jc-line); }
+.jc-nch .jc-nch__item:last-child { border-bottom: 0; }
+.jc-nch .jc-nav .jc-mega__link, .jc-nch .jc-mega__link { padding: 2px 0 !important; font-size: 16px; font-weight: 700; }
+.jc-nch .jc-mega__ico { width: 22px; height: 22px; }
+.jc-nch .jc-mega__sub { margin: 6px 0 0; padding-left: 32px; gap: 2px 12px; }
+.jc-nch .jc-mega__cards { gap: 0 40px; align-content: start; }
+:is(.jc-site, .jc-legacy) .jc-nch .jc-mega__card { padding: 20px 0 !important; border-top: 0; border-bottom: 1px solid var(--jc-line); }
+.jc-nch .jc-mega__cardico { width: 44px; height: 44px; padding: 9px; border-radius: 10px; background: #EEF1FF; }
+.jc-nch .jc-mega__card strong { font-size: 17px; }
+.jc-nch .jc-mega__card span { font-size: 14px; line-height: 1.5; }
+
+/* 모바일 메뉴 */
+.jc-nch .jc-mnav > summary { gap: 8px; border-color: var(--jc-ink-2); }
+.jc-nch__burger { display: inline-flex; flex-direction: column; gap: 3px; }
+.jc-nch__burger i { display: block; width: 14px; height: 2px; background: currentColor; border-radius: 1px; }
+.jc-nch__mbtns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px 4px 4px; margin-top: 8px; border-top: 1px solid var(--jc-line); }
+:is(.jc-site, .jc-legacy) .jc-mnav__panel .jc-nch__mbtns a.jc-nch__btn { padding: 0 8px; font-size: 13px; }
+:is(.jc-site, .jc-legacy) .jc-mnav__panel .jc-nch__mbtns a.jc-nch__btn--fill { color: #fff !important; }
+:is(.jc-site, .jc-legacy) .jc-mnav__panel .jc-nch__mbtns a.jc-nch__btn--fill:hover { background: var(--jc-blue-press); }
+@media (max-width: 1200px) {
+    .jc-nch .jc-header__aside > .jc-nch__btn--line { display: none; }
+}
+@media (max-width: 560px) {
+    .jc-nch .jc-header__aside > .jc-nch__btn--fill { display: none; }
+    :is(.jc-site, .jc-legacy) .jc-nch .jc-header__bar { height: 64px; }
+}
+
+/* ---------- 푸터 ---------- */
+:is(.jc-site, .jc-legacy) .jc-ncf, :is(.jc-site, .jc-legacy) .jc-ncf.jc-footer--white { background: #0E1015; border-top: 0; color: #9CA1AB; padding: 0 0 44px; }
+.jc-ncf__top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 32px; padding: 34px 0; border-bottom: 1px solid #2A2D35; }
+.jc-ncf__ask { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin: 0; }
+.jc-ncf__ask strong { font-family: var(--jc-font-display); font-size: clamp(20px, 2vw, 26px); font-weight: 800; letter-spacing: -0.03em; color: #fff; }
+.jc-ncf__ask span { font-size: 15px; color: #9CA1AB; }
+.jc-ncf__topbtns { display: flex; flex-wrap: wrap; gap: 10px; }
+:is(.jc-site, .jc-legacy) .jc-ncf a.jc-ncf__btn { display: inline-flex; align-items: center; height: 46px; padding: 0 22px; border-radius: 6px; font-size: 15px; font-weight: 700; }
+:is(.jc-site, .jc-legacy) .jc-ncf a.jc-ncf__btn--line { border: 1px solid #5A5F69; color: #fff !important; }
+:is(.jc-site, .jc-legacy) .jc-ncf a.jc-ncf__btn--line:hover { border-color: #fff; }
+:is(.jc-site, .jc-legacy) .jc-ncf a.jc-ncf__btn--fill { background: var(--jc-blue); border: 1px solid var(--jc-blue); color: #fff !important; }
+:is(.jc-site, .jc-legacy) .jc-ncf a.jc-ncf__btn--fill:hover { background: var(--jc-blue-press); }
+:is(.jc-site, .jc-legacy) .jc-ncf__grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 40px 32px; padding: 52px 0 48px; }
+.jc-ncf__stack { display: flex; flex-direction: column; gap: 36px; }
+:is(.jc-site, .jc-legacy) .jc-ncf h2 { font-size: 16px; font-weight: 700; color: #fff; }
+:is(.jc-site, .jc-legacy) .jc-ncf ul { margin-top: 18px; gap: 12px; }
+:is(.jc-site, .jc-legacy) .jc-ncf a { color: #9CA1AB !important; font-size: 14px; }
+:is(.jc-site, .jc-legacy) .jc-ncf a:hover { color: #fff !important; }
+.jc-ncf__bottom { padding-top: 28px; border-top: 1px solid #2A2D35; }
+.jc-ncf__brandrow { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; margin-bottom: 18px; }
+:is(.jc-site, .jc-legacy) .jc-ncf a.jc-ncf__brand { font-family: var(--jc-font-display); font-size: 22px; font-weight: 800; letter-spacing: -0.03em; color: #fff !important; }
+.jc-ncf__brand span { font-family: var(--jc-font); font-size: 13px; font-weight: 500; color: #7B808A; letter-spacing: 0; }
+.jc-ncf__legal { display: flex; flex-wrap: wrap; align-items: center; }
+:is(.jc-site, .jc-legacy) .jc-ncf__legal a { font-size: 13px; padding: 0 12px; border-left: 1px solid #3A3D44; line-height: 1; }
+:is(.jc-site, .jc-legacy) .jc-ncf__legal a:first-child { padding-left: 0; border-left: 0; }
+:is(.jc-site, .jc-legacy) .jc-ncf__legal a.is-strong { color: #fff !important; font-weight: 700; }
+:is(.jc-site, .jc-legacy) .jc-ncf__company { gap: 6px; font-size: 13px; color: #7B808A; }
+:is(.jc-site, .jc-legacy) .jc-ncf__company strong { font-size: 13px; color: #C4C7CD; font-weight: 600; }
+.jc-ncf__company i { display: inline-block; width: 1px; height: 10px; margin: 0 10px; background: #3A3D44; vertical-align: -1px; }
+.jc-ncf__copy { margin-top: 6px; }
+@media (max-width: 1080px) {
+    :is(.jc-site, .jc-legacy) .jc-ncf__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+    :is(.jc-site, .jc-legacy) .jc-ncf__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; padding: 40px 0 36px; }
+    .jc-ncf__top { padding: 28px 0; }
+    .jc-ncf__topbtns { width: 100%; }
+    :is(.jc-site, .jc-legacy) .jc-ncf a.jc-ncf__btn { flex: 1; justify-content: center; padding: 0 10px; }
+    .jc-ncf__company i { display: none; }
+    .jc-ncf__company span { display: flex; flex-direction: column; gap: 4px; }
+}
+
+/* ---------- 히어로 그림 (왼쪽 글 · 오른쪽 그림) ---------- */
+.jc-nc-hero { margin: 0; }
+.jc-nc-hero__svg { display: block; width: 100%; height: auto; }
+.jc-legacy .landing__hero--media .landing__hero-inner,
+.jc-legacy .landing__hero.jc-nc-hasart .landing__hero-inner { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, .88fr); column-gap: clamp(32px, 4vw, 64px); align-items: center; }
+.jc-legacy .landing__hero.jc-nc-hasart .landing__hero-inner > * { grid-column: 1; }
+.jc-legacy .landing__hero.jc-nc-hasart .landing__hero-inner > .jc-nc-hero { grid-column: 2; grid-row: 1 / span 6; }
+.jc-legacy .landing__hero--media .jc-nc-hero { grid-column: 2; }
+.jc-legacy .landing__hero .jc-nc-hero { max-width: 520px; justify-self: end; width: 100%; }
+.jc-legacy .landing__hero:has(.jc-nc-hero) h1 { font-size: clamp(34px, 4vw, 58px); }
+@media (max-width: 900px) {
+    .jc-legacy .landing__hero--media .landing__hero-inner,
+    .jc-legacy .landing__hero.jc-nc-hasart .landing__hero-inner { grid-template-columns: minmax(0, 1fr); }
+    .jc-legacy .landing__hero.jc-nc-hasart .landing__hero-inner > .jc-nc-hero,
+    .jc-legacy .landing__hero--media .jc-nc-hero { grid-column: 1; grid-row: auto; justify-self: center; max-width: 360px; margin-top: 32px; }
+}
+
+/* ---------- 카드 그림: 몇 장만 강조 (파랑 테두리 · 큰 그림) ---------- */
+.jc-legacy .subcard.jc-nc-pick { border-top: 3px solid var(--jc-blue); }
+.jc-legacy .subcard.jc-nc-pick strong { color: var(--jc-blue); font-size: 21px; }
+.jc-legacy .subcard .jc-nc-pick__art { display: block; width: 100%; max-width: 200px; margin: 0 0 2px; }
+.jc-legacy .subcard .jc-nc-pick__art svg { display: block; width: 100%; height: auto; }
+.jc-legacy .subcards:has(.jc-nc-pick) { align-items: start; }
+.jc-legacy .subcards:has(.jc-nc-pick) .subcard { justify-content: flex-start; }

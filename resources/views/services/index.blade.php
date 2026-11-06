@@ -29,8 +29,9 @@
 @endsection
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="landing">
-        <section class="landing__hero">
+        <section class="landing__hero jc-nc-hasart">
             <div class="landing__hero-inner">
                 <span class="landing__eyebrow">Growth Services</span>
                 <h1>채널은 다섯 개여도,<br>성과 기준은 하나여야 합니다</h1>
@@ -39,8 +40,11 @@
                     <a class="btn-primary" href="{{ route('contact') }}">현재 마케팅 진단받기</a>
                     <a class="btn-ghost" href="#service-map">서비스 한눈에 보기</a>
                 </div>
+                <figure class="jc-nc-hero">@include('partials.jc.nc.hero', ['name' => 'services'])</figure>
             </div>
         </section>
+
+    @include('partials.jc.fig.services')
 
         <nav class="landing__local-nav" aria-label="서비스 페이지 바로가기">
             <div class="landing__local-nav-inner">
@@ -70,7 +74,8 @@
                 <h2 class="landing__head">목표에 따라 골라도, 함께 연결해도 됩니다</h2>
                 <p class="landing__lead">각 서비스는 단독으로 시작할 수 있고, 데이터가 쌓이면 다음 단계로 확장할 수 있습니다.</p>
                 <div class="subcards">
-                    <a class="subcard" href="{{ route('services.show', ['slug' => 'performance-marketing']) }}">
+                    <a class="subcard jc-nc-pick" href="{{ route('services.show', ['slug' => 'performance-marketing']) }}">
+                        <span class="jc-nc-pick__art">@include('partials.jc.nc.hero', ['name' => 'performance'])</span>
                         <strong>퍼포먼스 마케팅</strong>
                         <p>메타·구글·네이버·유튜브의 예산과 소재를 전환 기준으로 운영합니다.</p>
                         <span>광고 성과 구조 보기 →</span>
@@ -85,7 +90,8 @@
                         <p>광고주에게는 행동을, 앱 매체에는 수익과 유저 경험을 연결합니다.</p>
                         <span>광고주·매체 제휴 보기 →</span>
                     </a>
-                    <a class="subcard" href="{{ route('services.show', ['slug' => 'seo']) }}">
+                    <a class="subcard jc-nc-pick" href="{{ route('services.show', ['slug' => 'seo']) }}">
+                        <span class="jc-nc-pick__art">@include('partials.jc.nc.hero', ['name' => 'seo'])</span>
                         <strong>SEO · AEO · GEO</strong>
                         <p>검색 결과부터 답변엔진과 생성형 AI의 인용 가능성까지 디지털 자산을 만듭니다.</p>
                         <span>검색 자산 구축 보기 →</span>

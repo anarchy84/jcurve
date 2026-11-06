@@ -46,6 +46,7 @@
 @endsection
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="landing">
         <section class="landing__hero landing__hero--media">
             <div class="landing__hero-inner">
@@ -57,9 +58,11 @@
                     <a class="btn-primary" href="{{ route('contact') }}">CPA 가능 여부 상담</a>
                 </div>
                 </div>
-                <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'cpa'])</figure>
+                <figure class="jc-nc-hero">@include('partials.jc.nc.hero', ['name' => 'cpa'])</figure>
             </div>
         </section>
+
+    @include('partials.jc.fig.cpa')
 
         <nav class="landing__local-nav" aria-label="CPA 마케팅 페이지 내 탐색">
             <div class="landing__local-nav-inner">

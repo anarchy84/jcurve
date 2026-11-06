@@ -10,6 +10,7 @@
 @endsection
 
 @section('content')
+    @include('partials.jc.viz.kit')
     <main class="landing">
         {{-- 히어로 [파치먼트] --}}
         <section class="landing__hero landing__hero--media">
@@ -29,6 +30,8 @@
                 <figure class="landing__hero-figure">@include('partials.scene', ['name' => 'leadbay'])</figure>
             </div>
         </section>
+
+    @include('partials.jc.fig.leadbay')
 
         <nav class="landing__local-nav" aria-label="리드베이 페이지 바로가기">
             <div class="landing__local-nav-inner">

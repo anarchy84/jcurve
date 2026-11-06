@@ -115,66 +115,38 @@
       return s;
     }
   };
-  function hash(s) { var h = 0; for (var i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return Math.abs(h); }
+  SCENES.rank = function () {
+    var s = BG + card(70, 26, 220, 188, 14) + bar(90, 44, 90, 8, 'c-ink') + bar(90, 58, 60, 6);
+    [[84, 'c-g', 120, 1], [118, 'c-p', 150, 2], [152, 'c-g', 100, 3]].forEach(function (r) {
+      s += '<rect class="' + (r[3] === 2 ? 'c-t' : 'c-bg') + '" x="86" y="' + (r[0] - 4) + '" width="188" height="28" rx="8"/>';
+      s += '<circle class="' + (r[3] === 2 ? 'c-p' : 'c-g') + '" cx="102" cy="' + (r[0] + 10) + '" r="9"/><text class="t-w" x="102" y="' + (r[0] + 13) + '" text-anchor="middle">' + r[3] + '</text>';
+      s += bar(118, r[0] + 6, r[2], 8, r[1] === 'c-p' ? 'c-p' : 'c-ink');
+    });
+    s += '<polyline class="s-p" stroke-width="4" points="262,136 262,112"/><polyline class="s-p" stroke-width="4" points="253,121 262,110 271,121"/>';
+    return s;
+  };
 
   function svg(w, h, inner, cls) {
     return '<svg class="' + cls + '" viewBox="0 0 ' + w + ' ' + h + '" xmlns="' + NS + '" aria-hidden="true" focusable="false">' + inner + '</svg>';
   }
 
-  /* ---------- 작은 그림(카드용) : viewBox 0 0 64 48 ---------- */
-  var MINI = {
-    chart: '<rect class="c-t" x="6" y="26" width="9" height="16" rx="2"/><rect class="c-t" x="19" y="18" width="9" height="24" rx="2"/><rect class="c-p" x="32" y="10" width="9" height="32" rx="2"/><polyline class="s-ink" stroke-width="2.5" points="46,30 52,22 58,26"/>',
-    search: '<rect class="c-t" x="4" y="8" width="44" height="12" rx="6"/><rect class="c-g" x="4" y="26" width="34" height="5" rx="2.5"/><rect class="c-g" x="4" y="35" width="26" height="5" rx="2.5"/><circle class="c-w s-p" stroke-width="4" cx="46" cy="30" r="9"/><line class="s-p" stroke-width="5" stroke-linecap="round" x1="53" y1="37" x2="59" y2="43"/>',
-    cart: '<path class="s-ink" stroke-width="3" d="M4 8 h8 l6 24 h30 l6 -18 h-38"/><circle class="c-p" cx="22" cy="40" r="4"/><circle class="c-p" cx="44" cy="40" r="4"/><rect class="c-t" x="24" y="6" width="14" height="12" rx="3"/>',
-    form: '<rect class="c-w s-ln" x="6" y="4" width="40" height="40" rx="6"/><rect class="c-g" x="12" y="11" width="28" height="6" rx="3"/><rect class="c-g" x="12" y="22" width="28" height="6" rx="3"/><rect class="c-p" x="12" y="33" width="18" height="6" rx="3"/><circle class="c-ok" cx="52" cy="34" r="9"/><polyline class="s-w" stroke-width="2.5" points="48,34 51,37 56,30"/>',
-    phone: '<rect class="c-ink" x="14" y="2" width="24" height="44" rx="6"/><rect class="c-w" x="17" y="7" width="18" height="32" rx="3"/><rect class="c-p" x="20" y="11" width="12" height="6" rx="2"/><path class="s-p" stroke-width="2.5" d="M44 16 a10 10 0 0 1 0 16 M50 11 a17 17 0 0 1 0 26"/>',
-    pin: '<rect class="c-t" x="2" y="30" width="60" height="14" rx="5"/><path class="c-p" d="M32 32 c-10 -12 -12 -16 -12 -21 a12 12 0 0 1 24 0 c0 5 -2 9 -12 21 z"/><circle class="c-w" cx="32" cy="11" r="4.5"/>',
-    people: '<circle class="c-t" cx="20" cy="16" r="8"/><path class="c-t" d="M6 42 a14 13 0 0 1 28 0 z"/><circle class="c-p" cx="42" cy="14" r="8"/><path class="c-p" d="M28 42 a14 14 0 0 1 28 0 z"/>',
-    calendar: '<rect class="c-w s-ln" x="6" y="8" width="46" height="36" rx="6"/><rect class="c-p" x="6" y="8" width="46" height="10" rx="5"/><rect class="c-g" x="12" y="24" width="8" height="6" rx="2"/><rect class="c-g" x="25" y="24" width="8" height="6" rx="2"/><rect class="c-p" x="38" y="24" width="8" height="6" rx="2"/><rect class="c-g" x="12" y="34" width="8" height="6" rx="2"/><rect class="c-g" x="25" y="34" width="8" height="6" rx="2"/>',
-    funnel: '<path class="c-t" d="M4 6 h52 l-10 12 h-32 z"/><path class="c-p2" d="M14 20 h32 l-8 10 h-16 z"/><path class="c-p" d="M22 32 h16 l-4 10 h-8 z"/>',
-    up: '<path class="c-t" d="M4 40 L18 28 L28 34 L44 16 L58 10 V44 H4 Z"/><polyline class="s-p" stroke-width="3.5" points="4,40 18,28 28,34 44,16 58,10"/><polyline class="s-p" stroke-width="3.5" points="50,10 58,10 58,18"/>',
-    doc: '<rect class="c-w s-ln" x="10" y="2" width="34" height="44" rx="5"/><rect class="c-g" x="16" y="10" width="20" height="5" rx="2"/><rect class="c-g" x="16" y="20" width="22" height="4" rx="2"/><rect class="c-g" x="16" y="28" width="16" height="4" rx="2"/><circle class="c-ok" cx="46" cy="36" r="9"/><polyline class="s-w" stroke-width="2.5" points="42,36 45,39 50,32"/>',
-    chat: '<path class="c-t" d="M4 6 h34 a5 5 0 0 1 5 5 v14 a5 5 0 0 1 -5 5 h-24 l-8 7 v-7 a5 5 0 0 1 -2 -4 v-15 a5 5 0 0 1 5 -5 z"/><path class="c-p" d="M26 20 h30 a4 4 0 0 1 4 4 v12 a4 4 0 0 1 -4 4 h-4 v6 l-7 -6 h-19 a4 4 0 0 1 -4 -4 v-12 a4 4 0 0 1 4 -4 z"/>',
-    mega: '<path class="c-p" d="M8 18 h10 l24 -12 v36 l-24 -12 h-10 z"/><rect class="c-ink" x="12" y="30" width="7" height="12" rx="2"/><path class="s-p" stroke-width="3" d="M48 16 a10 10 0 0 1 0 14 M54 11 a17 17 0 0 1 0 24"/>',
-    coin: '<ellipse class="c-amb s-amb" cx="24" cy="38" rx="18" ry="6"/><ellipse class="c-amb s-amb" cx="24" cy="30" rx="18" ry="6"/><ellipse class="c-amb s-amb" cx="24" cy="22" rx="18" ry="6"/><circle class="c-p" cx="50" cy="16" r="10"/><rect class="c-w" x="48.5" y="10" width="3" height="12" rx="1"/>',
-    play: '<rect class="c-ink" x="4" y="6" width="56" height="36" rx="8"/><path class="c-p" d="M27 16 v16 l14 -8 z"/><rect class="c-p" x="10" y="36" width="24" height="3" rx="1.5"/>',
-    social: '<rect class="c-w s-ln" x="4" y="4" width="40" height="40" rx="10"/><circle class="s-p" stroke-width="3" cx="24" cy="24" r="8"/><circle class="c-p" cx="35" cy="13" r="2.5"/><path class="c-p" d="M50 22 c-5 -6 -12 -1 -6 6 l6 6 l6 -6 c6 -7 -1 -12 -6 -6 z"/>',
-    ai: '<rect class="c-w s-ln" x="2" y="6" width="26" height="34" rx="4"/><rect class="c-g" x="7" y="13" width="16" height="4" rx="2"/><rect class="c-g" x="7" y="22" width="12" height="4" rx="2"/><path class="c-p" d="M34 10 h24 a4 4 0 0 1 4 4 v16 a4 4 0 0 1 -4 4 h-14 l-7 6 v-6 h-3 a4 4 0 0 1 -4 -4 v-16 a4 4 0 0 1 4 -4 z"/><path class="s-p dash" stroke-width="2" d="M28 22 h4"/>',
-    code: '<rect class="c-ink" x="4" y="6" width="56" height="36" rx="6"/><polyline class="s-w" stroke-width="3" points="22,16 14,24 22,32"/><polyline class="s-w" stroke-width="3" points="42,16 50,24 42,32"/><line class="s-p" stroke-width="3" x1="35" y1="14" x2="29" y2="34"/>',
-    shield: '<path class="c-t" d="M32 3 l22 8 v12 c0 13 -9 20 -22 24 c-13 -4 -22 -11 -22 -24 v-12 z"/><polyline class="s-p" stroke-width="3.5" points="22,24 29,31 42,17"/>',
-    link: '<rect class="s-p" stroke-width="4" x="6" y="16" width="26" height="16" rx="8"/><rect class="s-ink" stroke-width="4" x="32" y="16" width="26" height="16" rx="8"/><line class="s-p" stroke-width="4" x1="24" y1="24" x2="40" y2="24"/>',
-    star: '<path class="c-amb" d="M32 4 l8 16 l17 2 l-12 12 l3 17 l-16 -9 l-16 9 l3 -17 l-12 -12 l17 -2 z"/>',
-    target: '<circle class="c-t" cx="28" cy="26" r="20"/><circle class="c-w" cx="28" cy="26" r="13"/><circle class="c-p" cx="28" cy="26" r="6"/><line class="s-ink" stroke-width="3" x1="28" y1="26" x2="54" y2="6"/>'
-  };
-  var MKW = [
-    [/유튜브|영상|동영상/, 'play'], [/페이스북|인스타|메타|SNS|팔로워|좋아요|인기/, 'social'], [/AI|AEO|GEO|답변|생성형/, 'ai'],
-    [/워드프레스|개발|사이트|웹|코드|기술/, 'code'], [/백링크|링크/, 'link'], [/검색|SEO|키워드|노출|네이버|구글/, 'search'],
-    [/쿠팡|쇼핑|상품|커머스|스토어|구매/, 'cart'], [/플레이스|지도|매장|지역|위치/, 'pin'], [/리워드|포인트|코인|비용|예산|단가|가격|요금/, 'coin'],
-    [/앱|모바일|전화|콜|통화/, 'phone'], [/리드|DB|신청|문의|상담|폼|접수|보험|부동산|주식/, 'form'], [/전환|퍼널|이탈|유입/, 'funnel'],
-    [/성과|리포트|ROAS|지표|분석|데이터|측정|숫자/, 'chart'], [/성장|상승|확장|매출/, 'up'], [/일정|기간|주|월|운영|주기/, 'calendar'],
-    [/팀|사람|전문가|담당|협업|파트너|함께/, 'people'], [/정책|안전|보호|규정|위험|검수/, 'shield'], [/콘텐츠|브랜드|광고|홍보|캠페인/, 'mega'],
-    [/목표|타깃|정확|맞춤/, 'target'], [/후기|리뷰|평가|추천/, 'star'], [/기준|체크|점검|확인|계약|문서/, 'doc'], [/질문|대화|소통/, 'chat']
-  ];
-  var MFALL = ['chart', 'target', 'doc', 'chat', 'up', 'calendar'];
-  function pickMini(text, used) {
-    for (var i = 0; i < MKW.length; i++) if (MKW[i][0].test(text) && !used[MKW[i][1]]) { used[MKW[i][1]] = 1; return MKW[i][1]; }
-    var f = MFALL.filter(function (k) { return !used[k]; });
-    var k = f.length ? f[hash(text) % f.length] : MFALL[hash(text) % MFALL.length];
-    used[k] = 1; return k;
-  }
-  function mini(text, used) { var k = pickMini(text, used); return svg(64, 48, MINI[k], 'jsx-mini jsx-mini--' + k); }
-
-  function short(t, n) { t = (t || '').replace(/\s+/g, ' ').trim(); return t.length > n ? t.slice(0, n - 1).trim() + '…' : t; }
   function esc(t) { return t.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function el(tag, cls, html) { var e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; }
 
-  function ico(text, used, cls) { var s = el('span', 'jsx-ico' + (cls ? ' ' + cls : '')); s.setAttribute('aria-hidden', 'true'); s.innerHTML = mini(text, used); return s; }
-  function titleOf(c) { var h = c.querySelector('strong, h3, h4, .jc-door__title, .jc-product strong, .jc-goal__title, .jc-why__label'); return (h ? h.textContent + ' ' : '') + c.textContent.slice(0, 140); }
 
   /* 1) 「선 + 글」 칸 → 테두리 카드 */
   var CARD_SEL = '.landing__point, .subcard, .landing__panel, .jc-door, .jc-why__item, .jc-product, .jc-goal, .jc-three > div, .jc-read > div, .jc-promise > div, .jc-plans > div, .jc-work, .work-preview, .jc-order-products li';
   var OWN_ICO = '.jc-door__ico, .jc-why__ico, .jc-product__ico, .jc-goal__ico';
   var GRID_SEL = '.landing__points, .subcards, .landing__split, .jc-doors, .jc-products, .jc-three, .jc-read, .jc-promise, .jc-plans';
+  var LINKSCENE = [[/seo\/(aeo|geo)/, 'ai'], [/rankfree/, 'rank'], [/place/, 'place'], [/self-marketing|boostingshop|shopitrend|coupang|shopping|kakao/, 'commerce'], [/seo|backlink/, 'search'], [/cpa|call2sale|leadbay/, 'lead'], [/reward/, 'app'], [/wordpress/, 'code'], [/performance/, 'report'], [/marketing-support/, 'doc']];
+  function sceneOf(c) {
+    var a = c.matches('a[href]') ? c : c.querySelector('a[href]'); if (!a) return null;
+    var h = a.getAttribute('href') || '', k = null;
+    LINKSCENE.some(function (r) { if (r[0].test(h)) { k = r[1]; return true; } });
+    return k;
+  }
+  var ALT = { commerce: 'report', lead: 'doc', app: 'commerce', place: 'search', report: 'doc', search: 'ai', code: 'doc' };
+  function shot(k) { var d = el('span', 'jsx-shot', svg(360, 240, SCENES[k](), 'jsx-scene jsx-scene--' + k)); d.setAttribute('aria-hidden', 'true'); return d; }
   function cards(root) {
     var groups = [];
     root.querySelectorAll(CARD_SEL).forEach(function (c) {
@@ -185,19 +157,21 @@
       g.items.push(c);
     });
     groups.forEach(function (g) {
-      var mu = {};
       if (g.p.matches(GRID_SEL)) { g.p.classList.add('jsx-cards', 'jsx-cards--' + Math.min(g.items.length, 9)); }
+      /* 묶음 안에 그림 카드·아이콘 카드가 있으면 → 링크 카드마다 같은 크기 화면 조각(그 서비스 화면 모양) */
+      var pics = g.items.some(function (c) { return c.querySelector('.jc-nc-pick__art, ' + OWN_ICO); }) &&
+        g.items.every(function (c) { return c.querySelector('.jc-nc-pick__art') || sceneOf(c); });
+      var used = {};
       g.items.forEach(function (c) {
         if (c.classList.contains('jsx-card')) return;
-        c.classList.add('jsx-card');
-        var left = c.matches('.landing__panel, .jc-three > div, .jc-promise > div, .jc-plans > div, .jc-work, .work-preview, .jc-order-products li') || c.textContent.length > 260;
-        c.classList.add(left ? 'jsx-card--left' : 'jsx-card--mid');
-        var own = c.querySelector(OWN_ICO);
-        if (own) { var w = el('span', 'jsx-ico jsx-ico--own'); w.setAttribute('aria-hidden', 'true'); own.parentNode.insertBefore(w, own); w.appendChild(own); return; }
-        if (c.querySelector('.jc-nc-pick__art, img, :scope > svg, .jc-num, .jc-work__metric, .work-preview__metric')) return;
-        if (c.matches('.jc-promise > div')) { var ul = c.querySelector('ul'); if (ul) ul.classList.add('jsx-checks', c.previousElementSibling ? 'jsx-checks--no' : 'jsx-checks--yes'); return; }
-        c.insertBefore(ico(titleOf(c), mu), c.firstChild);
+        c.classList.add('jsx-card', 'jsx-card--left');
+        [].forEach.call(c.querySelectorAll(OWN_ICO), function (o) { o.classList.add('jsx-hide'); });
+        var art = c.querySelector('.jc-nc-pick__art');
+        if (art) art.classList.add('jsx-shot');
+        else if (pics) { var k = sceneOf(c); if (used[k]) k = [ALT[k]].concat(Object.keys(SCENES)).filter(function (x) { return x && !used[x]; })[0]; used[k] = 1; c.insertBefore(shot(k), c.firstChild); }
+        if (c.matches('.jc-promise > div')) { var ul = c.querySelector('ul'); if (ul) ul.classList.add('jsx-checks', c.previousElementSibling ? 'jsx-checks--no' : 'jsx-checks--yes'); }
       });
+      if (pics) g.p.classList.add('jsx-cards--pics');
     });
   }
 
@@ -226,8 +200,7 @@
     var ps = [].slice.call(pr.children).filter(function (p) { return p.tagName === 'P' && p.textContent.trim().length > 0; });
     if (!ps.length) return;
     var left = el('div', 'jsx-split__l'), right = el('div', 'jsx-split__r jsx-pcards');
-    var mu = {};
-    ps.forEach(function (p) { var c = el('div', 'jsx-pcard'); c.appendChild(ico(p.textContent, mu)); c.appendChild(p); right.appendChild(c); });
+    ps.forEach(function (p) { var c = el('div', 'jsx-pcard'); c.appendChild(p); right.appendChild(c); });
     var kids = [].slice.call(inner.children);
     kids.forEach(function (k) { if (k !== pr) left.appendChild(k); });
     pr.remove();
@@ -242,22 +215,45 @@
   }
 
   /* 6) 원문 보존 칸(옛 워드프레스 본문) → 소제목마다 카드, 목록은 체크 카드 */
+  function words(t) { return t.replace(/[^\w가-힣\s]/g, ' ').split(/\s+/).filter(Boolean); }
+  function nearDup(a, b) { /* a 의 낱말 대부분이 b 에 있으면 같은 말 */
+    var wa = words(a), wb = words(b); if (!wa.length || wa.length > wb.length) return false;
+    var hit = wa.filter(function (w) { return wb.indexOf(w) > -1; }).length; return hit / wa.length >= 0.7;
+  }
   function legacy(sec) {
     var body = sec.querySelector('.jc-wp-legacy__body'); if (!body || body.classList.contains('jsx-legacy')) return;
     body.classList.add('jsx-legacy');
-    var kids = [].slice.call(body.children), grid = null, card = null, mu = {};
-    kids.forEach(function (k) {
-      var t = k.tagName;
-      if (t === 'H2') { grid = null; card = null; return; }
-      if (t === 'H3') {
-        if (!grid) { grid = el('div', 'jsx-lcards'); body.insertBefore(grid, k); mu = {}; }
-        card = el('div', 'jsx-lcard'); grid.appendChild(card);
-        card.appendChild(ico(k.textContent, mu)); card.appendChild(k); return;
+    var kids = [].slice.call(body.children), grid = null, card = null, lead = null, dots = null;
+    function isH(e, lv) { return e && /^H[2-4]$/.test(e.tagName) && +e.tagName[1] <= lv; }
+    kids.forEach(function (k, i) {
+      var t = k.tagName, nx = kids[i + 1];
+      if (t === 'H2') { grid = card = lead = dots = null; return; }
+      if (t === 'H3' || (t === 'H4' && (!card || card.firstElementChild.tagName === 'H4'))) {
+        var lv = +t[1];
+        if (!nx || isH(nx, lv)) {
+          if (!lead) { lead = el('div', 'jsx-llead'); body.insertBefore(lead, k); }
+          var q = el('p'); q.textContent = k.textContent; lead.appendChild(q); k.remove(); return;
+        }
+        if (!grid) { grid = el('div', 'jsx-lcards'); body.insertBefore(grid, k); }
+        card = el('div', 'jsx-lcard'); grid.appendChild(card); card.appendChild(k); dots = null; return;
       }
-      if (t === 'UL') k.classList.add('jsx-checks');
-      if (card) card.appendChild(k);
+      if (!card) { if (t === 'UL') k.classList.add('jsx-checks'); return; }
+      if (t === 'H4' && (!nx || isH(nx, 4))) {
+        if (!dots) { dots = el('ul', 'jsx-dots'); card.appendChild(dots); }
+        var li = el('li'); li.textContent = k.textContent; dots.appendChild(li); k.remove(); return;
+      }
+      dots = null;
+      if (t === 'UL') k.classList.add('jsx-dots');
+      var prev = card.lastElementChild;
+      if (t === 'P' && prev && prev.tagName === 'P' && (nearDup(k.textContent, prev.textContent) || nearDup(prev.textContent, k.textContent))) { k.remove(); return; }
+      if (t === 'P' && k.textContent.trim().length < 50 && /\?$/.test(k.textContent.trim())) k.classList.add('jsx-lq');
+      card.appendChild(k);
     });
-    body.querySelectorAll('.jsx-lcards').forEach(function (g) { g.classList.add('jsx-lcards--' + Math.min(g.children.length, 4)); });
+    body.querySelectorAll('.jsx-llead').forEach(function (L) {
+      var ps = [].slice.call(L.children);
+      ps.forEach(function (p) { if (ps.some(function (o) { return o !== p && o.isConnected && o.textContent.length > p.textContent.length && nearDup(p.textContent, o.textContent); })) p.remove(); });
+    });
+    body.querySelectorAll('.jsx-lcards').forEach(function (g) { var n = g.children.length; g.classList.add('jsx-lcards--' + (n === 4 ? 4 : n >= 3 ? 3 : n)); });
   }
 
   /* 7) 히어로: 쪽 주제 화면 모양(검색 결과·신청서·상품 등) 또는 그 쪽 숫자 카드 */
@@ -310,17 +306,14 @@
   function related(sec) {
     var inner = sec.querySelector(':scope > .landing__inner'), eb = inner && inner.querySelector(':scope > .landing__eyebrow');
     if (!eb || !/Related/i.test(eb.textContent) || inner.classList.contains('jsx-related')) return;
-    var h = inner.querySelector('.landing__head');
     inner.classList.add('jsx-related');
-    inner.insertBefore(ico(h ? h.textContent : '', {}), inner.firstChild);
   }
 
   /* 11) 이름 알약 묶음 → 아이콘 붙은 작은 카드 */
   function chips(root) {
     root.querySelectorAll('.landing__chips').forEach(function (box) {
       if (box.classList.contains('jsx-chipcards') || box.children.length < 4) return;
-      box.classList.add('jsx-chipcards'); var mu = {};
-      [].forEach.call(box.children, function (c) { c.insertBefore(ico(c.textContent, mu), c.firstChild); });
+      box.classList.add('jsx-chipcards');
     });
   }
 

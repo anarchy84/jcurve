@@ -97,6 +97,25 @@
     .jc-ncf__company span { display: flex; flex-direction: column; gap: 4px; }
 }
 
+/* 휴대폰(768px 이하)만: 링크 칸 접기(footer 의 작은 js 가 .is-fold 를 붙임) · 회사 정보 작게 2~3줄. PC 는 위 규칙 그대로 (11/06) */
+@media (max-width: 768px) {
+    :is(.jc-site, .jc-legacy) .jc-ncf.is-fold .jc-ncf__grid { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 12px 0 28px; }
+    .jc-ncf.is-fold .jc-ncf__stack { gap: 0; }
+    .jc-ncf.is-fold .jc-ncf__grid nav { border-bottom: 1px solid #2A2D35; }
+    :is(.jc-site, .jc-legacy) .jc-ncf.is-fold .jc-ncf__grid nav > h2 { display: flex; align-items: center; justify-content: space-between; margin: 0; padding: 16px 2px; font-size: 15px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .jc-ncf.is-fold .jc-ncf__grid nav > h2::after { content: ""; width: 8px; height: 8px; border-right: 2px solid #9CA1AB; border-bottom: 2px solid #9CA1AB; transform: translateY(-3px) rotate(45deg); transition: transform .2s; }
+    .jc-ncf.is-fold .jc-ncf__grid nav.is-open > h2::after { transform: translateY(2px) rotate(-135deg); }
+    :is(.jc-site, .jc-legacy) .jc-ncf.is-fold .jc-ncf__grid nav:not(.is-open) > ul { display: none; }
+    :is(.jc-site, .jc-legacy) .jc-ncf.is-fold .jc-ncf__grid nav.is-open > ul { margin: 0 0 18px; gap: 12px; }
+    .jc-ncf__bottom { padding-top: 22px; }
+    .jc-ncf__brandrow { margin-bottom: 12px; }
+    :is(.jc-site, .jc-legacy) .jc-ncf .jc-ncf__company { gap: 3px; font-size: 11.5px; line-height: 1.6; }
+    :is(.jc-site, .jc-legacy) .jc-ncf .jc-ncf__company strong { font-size: 11.5px; }
+    :is(.jc-site, .jc-legacy) .jc-ncf .jc-ncf__company span { display: block; }
+    :is(.jc-site, .jc-legacy) .jc-ncf .jc-ncf__company i { display: inline-block; height: 9px; margin: 0 7px; }
+    .jc-ncf__copy { margin-top: 4px; }
+}
+
 /* ---------- 히어로 그림 (왼쪽 글 · 오른쪽 그림) ---------- */
 .jc-nc-hero { margin: 0; }
 .jc-nc-hero__svg { display: block; width: 100%; height: auto; }

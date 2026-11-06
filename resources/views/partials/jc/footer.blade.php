@@ -67,4 +67,31 @@
             </address>
         </div>
     </div>
+    {{-- 휴대폰(768px 이하)에서만 링크 칸을 접는다: 칸 제목을 누르면 펼침. PC 는 그대로. (11/06) --}}
+    <script>
+    (function () {
+        var f = document.currentScript && document.currentScript.closest('.jc-ncf');
+        if (!f || !window.matchMedia) return;
+        var mq = window.matchMedia('(max-width: 768px)');
+        var hs = f.querySelectorAll('.jc-ncf__grid nav > h2');
+        function sync() {
+            f.classList.toggle('is-fold', mq.matches);
+            hs.forEach(function (h) {
+                if (mq.matches) { h.setAttribute('role', 'button'); h.tabIndex = 0; h.setAttribute('aria-expanded', h.parentNode.classList.contains('is-open') ? 'true' : 'false'); }
+                else { h.removeAttribute('role'); h.removeAttribute('tabindex'); h.removeAttribute('aria-expanded'); }
+            });
+        }
+        hs.forEach(function (h) {
+            h.addEventListener('click', function () {
+                if (!mq.matches) return;
+                h.setAttribute('aria-expanded', h.parentNode.classList.toggle('is-open') ? 'true' : 'false');
+            });
+            h.addEventListener('keydown', function (e) {
+                if (mq.matches && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); h.click(); }
+            });
+        });
+        sync();
+        if (mq.addEventListener) mq.addEventListener('change', sync); else if (mq.addListener) mq.addListener(sync);
+    })();
+    </script>
 </footer>

@@ -61,6 +61,10 @@
             @if (session('status'))
                 <p class="landing__note" role="status" aria-live="polite">문의가 접수됐습니다. 내용을 확인한 뒤 남겨주신 연락처로 답변드리겠습니다.</p>
             @endif
+            {{-- GA4 문의 완료 전환(GTM 이 받음). 저장 성공 뒤 flash 로만 — 개인정보 넣지 않음 (2026-11-13) --}}
+            @if (session('status') === 'inquiry-received')
+            <script>window.dataLayer = window.dataLayer || [];window.dataLayer.push({ event: 'generate_lead', service_interest: @json(session('lead_service_interest', 'unknown')), form_type: 'contact' });</script>
+            @endif
 
             <form method="POST" action="{{ route('contact.store') }}">
                 @csrf

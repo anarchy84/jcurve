@@ -16,7 +16,6 @@ class ContactController extends Controller
         'performance-marketing',
         'cpa-marketing',
         'cpa-insurance',
-        'reward-network',
         'reward-advertiser',
         'reward-publisher',
         'seo',
@@ -85,7 +84,8 @@ class ContactController extends Controller
 
         return redirect()
             ->route('contact')
-            ->with('status', 'inquiry-received');
+            ->with('status', 'inquiry-received')
+            ->with('lead_service_interest', $validated['service_interest']);
     }
 
     /**

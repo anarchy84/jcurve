@@ -315,7 +315,7 @@
                 <span class="jc-door__desc">설치, 가입, 구매까지 목표 액션 단위로 캠페인을 설계합니다.</span>
                 <span class="jc-door__go">캠페인 상담하기</span>
             </a>
-            <a class="jc-door" href="{{ route('services.show', ['slug' => 'reward-network']) }}#publishers">
+            <a class="jc-door" href="{{ route('services.show', ['slug' => 'offerwall']) }}">
                 <x-jc.icon name="apps" class="jc-door__ico" />
                 <span class="jc-door__title">앱 매체사</span>
                 <span class="jc-door__desc">오퍼월을 붙여 우리 앱 사용자의 참여를 수익으로 바꾸세요.</span>
@@ -467,7 +467,7 @@
                 <h2 class="jc-display jc-split__title">우리 앱 이용 흐름에 맞춘<br>오퍼월 수익화</h2>
                 <p>서비스 성격에 맞는 접점을 고르고, 유저 경험과 수익 운영을 함께 설계합니다. 매체 검토부터 연동, 운영 안정화까지 같이 봅니다.</p>
                 <ul class="jc-chips"><li>오퍼월 도입</li><li>유저 경험 설계</li><li>수익 운영</li><li>정산 기준</li></ul>
-                <a class="jc-btn jc-btn--line jc-btn--md" href="{{ route('services.show', ['slug' => 'reward-network']) }}#publishers">매체 제휴 문의</a>
+                <a class="jc-btn jc-btn--line jc-btn--md" href="{{ route('services.show', ['slug' => 'offerwall']) }}">매체 제휴 문의</a>
             </div>
         </div>
     </section>

@@ -16,7 +16,7 @@ return [
     ],
     'services' => [
         '/services/performance-marketing', '/services/cpa-marketing',
-        '/services/reward-network', '/services/seo', '/services/seo/aeo',
+        '/services/reward-network', '/services/offerwall', '/services/seo', '/services/seo/aeo',
         '/services/seo/geo', '/services/wordpress', '/services/marketing-support',
         '/solutions/rankfree', '/solutions/leadbay', '/solutions/call2sale',
         '/solutions/boostingshop', '/solutions/shopitrend',

@@ -263,7 +263,7 @@ class SeoKeywordViewsTest extends TestCase
             $this->assertStringContainsString($keyword, $xpath->evaluate('string(//head/title)'));
         }
         $this->assertSame(1, $xpath->query('//section[@id="offerwall"]')->length);
-        $this->assertContains('오퍼월이란 무엇인가요?', array_column($this->oneSchema($html, 'FAQPage')['mainEntity'], 'name'));
+        $this->assertContains('리워드 네트워크에서 오퍼월은 어떤 역할인가요?', array_column($this->oneSchema($html, 'FAQPage')['mainEntity'], 'name'));
     }
 
     public function test_rankfree_title_targets_place_and_shopping_rankings(): void

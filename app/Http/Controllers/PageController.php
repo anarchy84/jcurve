@@ -15,6 +15,7 @@ class PageController extends Controller
         'performance-marketing' => 'services.performance-marketing',
         'cpa-marketing' => 'services.cpa-marketing',
         'reward-network' => 'services.reward-network',
+        'offerwall' => 'services.offerwall', // SEO-KW-03 (2026-11-16): 「오퍼월」 키워드 1순위 담당
         'seo' => 'services.seo',
         'wordpress' => 'services.wordpress',
     ];

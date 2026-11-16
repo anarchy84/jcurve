@@ -291,7 +291,7 @@ class SeoKeywordViewsTest extends TestCase
     public static function faqPages(): array
     {
         return [
-            '/self-marketing' => ['/self-marketing', 5],
+            '/self-marketing' => ['/self-marketing', 9], // 2026-11-16 JC-RELEASE-A: /self-marketing = 새 랜딩(FAQ 9개)
             '/self-marketing/place' => ['/self-marketing/place', 6],
             '/self-marketing/shopping' => ['/self-marketing/shopping', 6],
             '/solutions' => ['/solutions', 6],
@@ -309,7 +309,12 @@ class SeoKeywordViewsTest extends TestCase
         $questions = $this->oneSchema($html, 'FAQPage')['mainEntity'];
         $visible = [];
         foreach ($this->html($html)->query('//*[@id="main"]//details/summary') as $summary) {
-            $visible[] = $this->normalize($summary->textContent);
+            // 장식용 번호(aria-hidden, 예: 셀프마케팅 랜딩의 「01」)는 질문 글자가 아니다 — 빼고 읽는다 (JC-RELEASE-A)
+            $copy = $summary->cloneNode(true);
+            foreach ((new DOMXPath($summary->ownerDocument))->query('.//*[@aria-hidden="true"]', $copy) as $hidden) {
+                $hidden->parentNode->removeChild($hidden);
+            }
+            $visible[] = $this->normalize($copy->textContent);
         }
         $message = $path.': actual visible FAQ count = '.count($visible).'; actual schema FAQ count = '.count($questions);
         $this->assertCount($count, $visible, $message);
@@ -439,8 +444,16 @@ class SeoKeywordViewsTest extends TestCase
         foreach (['/self-marketing/place', '/self-marketing/shopping'] as $link) {
             $this->assertLink($xpath, '//footer', $link);
         }
-        $links = $this->assertLink($xpath, '//header//nav[@aria-label="주 메뉴"]', '/self-marketing');
-        $this->assertCount(1, $links);
+        // 6e0dba3(헤더 교체)부터 셀프마케팅은 「주 메뉴」 nav 안 링크가 아니라 헤더 오른쪽 버튼(.jc-header__aside 의 직계 링크)이다.
+        // PC 헤더에는 그 버튼 하나만, 모바일 메뉴 패널에는 한 칸이 있어야 한다.
+        $aside = '//header//div[contains(concat(" ", normalize-space(@class), " "), " jc-header__aside ")]';
+        $desktop = array_filter(
+            iterator_to_array($xpath->query($aside.'/a[@href]')),
+            fn ($link) => in_array($link->getAttribute('href'), ['/self-marketing', self::PUBLIC_URL.'/self-marketing'], true),
+        );
+        $this->assertCount(1, $desktop, 'desktop header must have exactly one self-marketing button');
+        $this->assertCount(1, $this->assertLink($xpath, $aside.'//nav[@aria-label="모바일 메뉴"]', '/self-marketing'));
+        $this->assertSame(0, $xpath->query('//header//nav[@aria-label="주 메뉴"]//a[@href="'.self::PUBLIC_URL.'/self-marketing" or @href="/self-marketing"]')->length);
     }
 
     private function assertCommonHead(string $html): void

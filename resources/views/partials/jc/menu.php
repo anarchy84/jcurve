@@ -37,6 +37,8 @@ return [
                 ['label' => '퍼미션 콜 DB', 'href' => route('services.cpa.sub', ['sub' => 'permission-call'])],
             ]],
             ['label' => '리워드 네트워크', 'icon' => 'reward', 'href' => route('services.show', ['slug' => 'reward-network'])],
+            // 오퍼월 — 제이커브가 앱에 직접 붙이고 운영(대표님 2026-11-16 JC-RELEASE-A). 헤더 메가메뉴·모바일·푸터에 함께 나간다
+            ['label' => '오퍼월', 'icon' => 'apps', 'href' => route('services.show', ['slug' => 'offerwall'])],
         ],
         '검색 마케팅' => [
             ['label' => 'SEO', 'icon' => 'seo', 'href' => route('services.show', ['slug' => 'seo'])],

@@ -2,7 +2,7 @@
 
 {{--
     셀프마케팅 랜딩 — 처음 오는 사장님용 한 페이지 안내 (팀장 배정 2026-11-16, 참고: placewizard.kr/placeai.php 섹션 순서·레이아웃만)
-    - 경로: /lp/self-marketing (routes/pages.php, 이름 lp.self-marketing). /self-marketing/ 아래에 두지 않는다 — Codex 예정 파라미터 라우트와 충돌 방지.
+    - 경로: /self-marketing (이름 self-marketing, 2026-11-16 JC-RELEASE-A 대표님 지시로 옛 허브 대신 이 화면). 옛 주소 /lp/self-marketing 은 301. 처음 판 메모 — /self-marketing/ 아래에 두지 않는다 — Codex 예정 파라미터 라우트와 충돌 방지.
     - 참고 사이트의 문장·이미지·로고·브랜드명은 쓰지 않았다. 카피는 기존 셀프마케팅 4개 화면·랭크프리 페이지에 이미 있는 사실만 다시 썼다.
     - 숫자(30초·0원·1,200+·100개·월 5회)는 self-marketing.blade.php 히어로·FAQ 와 같은 값이다(랭크프리 v1 공개 안내).
     - '순위상승' 적극 사용(PLAN-FINAL U2). 특정 순위·기간·매출 보장은 쓰지 않는다.
@@ -31,11 +31,11 @@
 @endphp
 {{-- 구조화 데이터: FAQ(화면 질문과 같은 배열)·위치 경로·서비스 --}}
 @include('partials.jc.schema-faq', ['items' => $lpFaqs])
-@section('sd_page', '셀프마케팅 시작 안내')
-@section('sd_crumbs', '셀프마케팅=/self-marketing')
+@section('sd_page', '셀프마케팅')
+@section('sd_crumbs', '')
 @section('sd_service', '플레이스·쇼핑 순위상승 셀프마케팅')
 
-@section('title', '셀프마케팅 시작 안내 — 순위 확인부터 순위상승 캠페인 주문까지 | 제이커브인터렉티브')
+@section('title', '셀프마케팅 — 순위 확인부터 순위상승 캠페인 주문까지 | 제이커브인터렉티브')
 @section('meta')
     <meta name="description" content="셀프마케팅을 처음 시작하는 사장님을 위한 한 페이지 안내. 플레이스·쇼핑 순위상승 캠페인이 하는 일, 랭크프리 무료 순위 확인, 진단 기준, 주문 3단계와 자주 묻는 질문을 정리했습니다.">
 @endsection
@@ -49,7 +49,7 @@
         <img class="jc-lp-hero__bg" src="{{ asset('images/hero/hero-bg.webp') }}" alt="" width="1672" height="941" fetchpriority="high" decoding="async">
         <div class="jc-wrap jc-lp-hero__in">
             <div class="jc-lp-hero__top">
-                <nav class="jc-crumb" aria-label="현재 위치"><a href="{{ route('home') }}">홈</a><span aria-hidden="true">/</span><a href="{{ route('self-marketing') }}">셀프마케팅</a><span aria-hidden="true">/</span><span aria-current="page">시작 안내</span></nav>
+                <nav class="jc-crumb" aria-label="현재 위치"><a href="{{ route('home') }}">홈</a><span aria-hidden="true">/</span><span aria-current="page">셀프마케팅</span></nav>
                 <h1 id="lp-title" class="jc-lp-h1">순위 확인부터<br>순위상승 캠페인 주문까지</h1>
             </div>
             <div class="jc-lp-hero__copy">

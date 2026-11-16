@@ -11,9 +11,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-// 셀프마케팅 — 이 사이트에서 바로 주문하는 허브 (대웅 확정 2026-10-27).
-// 주문 데이터(상품·주문 현황)는 Codex 컨트롤러 연결 전까지 화면의 정적 안내만 보인다 → QUEUE 참고
-Route::view('/self-marketing', 'pages.self-marketing')->name('self-marketing');
+// 셀프마케팅 — 2026-11-16 대표님 지시(JC-RELEASE-A)로 새 랜딩(pages.self-marketing-landing)을 이 주소에 띄운다.
+// 옛 허브 화면(pages.self-marketing)은 지우지 않고 남겨 둔다(삭제는 대표님 검수 사항).
+Route::view('/self-marketing', 'pages.self-marketing-landing')->name('self-marketing');
 
 // 운영 서비스 소개 — 쇼피트렌드 (실제 서비스: https://shopitrend.co)
 Route::view('/solutions/shopitrend', 'solutions.shopitrend')->name('solutions.shopitrend');
@@ -28,6 +28,5 @@ Route::view('/self-marketing/place', 'pages.self-marketing-place')->name('self-m
 // 쇼핑 리워드 상세 (SEO-KW-01, 2026-11-04 제코 지시 — 쇼핑 유입·쇼핑 순위·스마트스토어 상위노출 키워드)
 Route::view('/self-marketing/shopping', 'pages.self-marketing-shopping')->name('self-marketing.shopping');
 
-// 셀프마케팅 랜딩 — 처음 오는 사장님용 한 페이지 안내 (팀장 배정 2026-11-16). /self-marketing/ 아래에 두지 않는다:
-// Codex 예정 파라미터 라우트(self-marketing.products.show)와 겹치지 않게. 메뉴·sitemap 포함 여부는 대웅 결정 대기 → QUEUE
-Route::view('/lp/self-marketing', 'pages.self-marketing-landing')->name('lp.self-marketing');
+// 옛 랜딩 주소 → /self-marketing 영구 이동(301). Route::view 가 아니지만 같은 화면을 두 주소로 띄우지 않으려는 예외(JC-RELEASE-A)
+Route::permanentRedirect('/lp/self-marketing', '/self-marketing')->name('lp.self-marketing');

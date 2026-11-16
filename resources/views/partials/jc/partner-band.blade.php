@@ -6,8 +6,8 @@
     사용: @include('partials.jc.partner-band', ['plain' => true|false])
 --}}
 @php
-    $jcPartner = fn (string $n, string $alt) => ['src' => asset("images/partners/logo-{$n}.png"), 'alt' => $alt, 'own' => false];
-    $jcOwn = fn (string $file, string $name) => ['src' => asset("images/apps/{$file}.png"), 'alt' => "{$name} (제이커브 자체 앱)", 'own' => true];
+    $jcPartner = fn (string $n, string $alt) => ['src' => asset("images/partners/logo-{$n}.webp"), 'alt' => $alt, 'own' => false];
+    $jcOwn = fn (string $file, string $name) => ['src' => asset("images/apps/{$file}.webp"), 'alt' => "{$name} (제이커브 자체 앱)", 'own' => true];
     $jcWall = [
         $jcPartner('01', 'OK캐쉬백'), $jcPartner('18', '카카오페이'), $jcOwn('eggfarm', '꼬꼬농장'),
         $jcPartner('24', '신한 SOL Pay'), $jcPartner('26', 'PAYCO'), $jcOwn('saimcash', '사임캐시'),
@@ -33,7 +33,7 @@
             <{{ $jcHeading }} class="jc-networks__title">제휴 리워드 네트워크</{{ $jcHeading }}>
             <ul class="jc-networks__logos">
                 <li><img src="{{ asset('images/networks/buzzvil.svg') }}" alt="버즈빌" width="113" height="34" style="height:34px"></li>
-                <li><img src="{{ asset('images/networks/adpopcorn.png') }}" alt="애드팝콘" width="152" height="22" style="height:22px"></li>
+                <li><img src="{{ asset('images/networks/adpopcorn.webp') }}" alt="애드팝콘" width="152" height="22" style="height:22px"></li>
                 <li class="jc-networks__word jc-networks__word--latin">NBT</li>
                 <li class="jc-networks__word">OK캐쉬백</li>
             </ul>

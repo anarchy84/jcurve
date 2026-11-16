@@ -8,10 +8,21 @@
     - 움직임 줄이기 설정이면 정지 화면으로 보인다.
 --}}
 @php($jcHeroImg = file_exists(public_path('images/hero/hero-bg.webp')))
+@if ($jcHeroImg)
+    @push('head')
+        {{-- 첫 화면 가장 큰 그림(LCP)을 먼저 받는다 — 휴대폰판 / PC판 --}}
+        <link rel="preload" as="image" href="{{ asset('images/hero/hero-bg-m.webp') }}" media="(max-width: 767px)" fetchpriority="high">
+        <link rel="preload" as="image" href="{{ asset('images/hero/hero-bg.webp') }}" media="(min-width: 768px)" fetchpriority="high">
+    @endpush
+@endif
 <div class="jc-stage__bg" aria-hidden="true">
     @if ($jcHeroImg)
         <div class="jc-stage__media">
-            <img class="jc-stage__img" src="{{ asset('images/hero/hero-bg.webp') }}" alt="제이커브 매출 성장 곡선 배경" width="1672" height="941" fetchpriority="high" decoding="async">
+            {{-- 휴대폰(767px 이하)은 가로 800px 판(hero-bg-m.webp, 같은 비율)을 받는다(2026-11-16 휴대폰 맞춤) --}}
+            <picture>
+                <source media="(max-width: 767px)" srcset="{{ asset('images/hero/hero-bg-m.webp') }}" width="800" height="450">
+                <img class="jc-stage__img" src="{{ asset('images/hero/hero-bg.webp') }}" alt="제이커브 매출 성장 곡선 배경" width="1672" height="941" fetchpriority="high" decoding="async">
+            </picture>
             <svg class="jc-curve jc-curve--overlay" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice">
                 <path id="jc-curve-path" d="M0 832 C 520 856 1000 796 1250 646 S 1585 236 1662 0" fill="none" stroke="none"/>
                 <g class="jc-curve__dots" fill="#C9D2FF">

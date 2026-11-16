@@ -404,7 +404,7 @@
             <ul class="jc-apps" data-jc-apps>
                 @foreach ($runningApps as [$file, $name, $desc])
                     <li>
-                        <img src="{{ asset("images/screens/{$file}.jpg") }}" alt="{{ $name }} 앱 화면" width="390" height="847" loading="lazy">
+                        <img src="{{ asset("images/screens/{$file}.webp") }}" alt="{{ $name }} 앱 화면" width="390" height="847" loading="lazy">
                         <span>
                             <span class="jc-apps__name">{{ $name }}</span><br>
                             <span class="jc-apps__desc">{{ $desc }}</span>

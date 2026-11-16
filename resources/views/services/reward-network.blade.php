@@ -186,7 +186,7 @@
                     <span class="rw-networks__title">제휴 리워드 네트워크</span>
                     <ul class="rw-networks__logos">
                         <li><img src="{{ asset('images/networks/buzzvil.svg') }}" alt="버즈빌" width="113" height="34" style="height:30px"></li>
-                        <li><img src="{{ asset('images/networks/adpopcorn.png') }}" alt="애드팝콘" width="152" height="22" style="height:20px"></li>
+                        <li><img src="{{ asset('images/networks/adpopcorn.webp') }}" alt="애드팝콘" width="152" height="22" style="height:20px"></li>
                         <li class="rw-networks__word">NBT</li>
                         <li class="rw-networks__word">OK캐쉬백</li>
                     </ul>
@@ -200,14 +200,14 @@
                 <div class="marquee partner-belt" aria-label="미디어 파트너 로고">
                     <ul class="marquee__track" role="list">
                         @foreach (array_merge($partnerTop, $partnerTop) as $i => $n)
-                            <li class="partner-logo" aria-hidden="true"><img src="{{ asset('images/partners/logo-'.sprintf('%02d', $n).'.png') }}" alt="" loading="lazy" width="240" height="240"></li>
+                            <li class="partner-logo" aria-hidden="true"><img src="{{ asset('images/partners/logo-'.sprintf('%02d', $n).'.webp') }}" alt="" loading="lazy" width="240" height="240"></li>
                         @endforeach
                     </ul>
                 </div>
                 <div class="marquee partner-belt" aria-hidden="true">
                     <ul class="marquee__track marquee__track--reverse" role="list">
                         @foreach (array_merge($partnerBottom, $partnerBottom) as $n)
-                            <li class="partner-logo"><img src="{{ asset('images/partners/logo-'.sprintf('%02d', $n).'.png') }}" alt="" loading="lazy" width="240" height="240"></li>
+                            <li class="partner-logo"><img src="{{ asset('images/partners/logo-'.sprintf('%02d', $n).'.webp') }}" alt="" loading="lazy" width="240" height="240"></li>
                         @endforeach
                     </ul>
                 </div>

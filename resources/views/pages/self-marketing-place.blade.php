@@ -50,7 +50,7 @@
             </div>
             <div class="jc-prod-hero__art" aria-hidden="true">
                 @foreach ($jcFloatApps as $i => $app)
-                    <img class="jc-prod-hero__app jc-prod-hero__app--{{ $i + 1 }}" src="{{ asset("images/apps/{$app}.png") }}" alt="" width="120" height="120">
+                    <img class="jc-prod-hero__app jc-prod-hero__app--{{ $i + 1 }}" src="{{ asset("images/apps/{$app}.webp") }}" alt="" width="120" height="120">
                 @endforeach
                 <span class="jc-prod-hero__pin"><x-jc.icon name="place" /></span>
             </div>
@@ -85,7 +85,7 @@
                 <li>
                     <span class="jc-how__no">1</span>
                     <p>리워드 앱에서<br>매장 미션 송출</p>
-                    <figure class="jc-how__card"><img src="{{ asset('images/screens/eggfarm-1.jpg') }}" alt="꼬꼬농장 앱 화면" width="390" height="845" loading="lazy"><figcaption>제이커브 리워드 앱·제휴 매체에 플레이스 미션</figcaption></figure>
+                    <figure class="jc-how__card"><img src="{{ asset('images/screens/eggfarm-1.webp') }}" alt="꼬꼬농장 앱 화면" width="390" height="845" loading="lazy"><figcaption>제이커브 리워드 앱·제휴 매체에 플레이스 미션</figcaption></figure>
                 </li>
                 <li>
                     <span class="jc-how__no">2</span>

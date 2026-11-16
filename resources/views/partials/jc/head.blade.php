@@ -152,8 +152,7 @@
 {{-- 회사·사이트 구조화 데이터(2026-11-16 seoptimer 점검)는 위 공통 그래프로 합쳤다 — 따로 내면 #organization·#website 가 두 번 나간다 --}}
 <link rel="alternate" type="application/rss+xml" title="제이커브 인사이트" href="{{ route('seo.rss') }}">
 <link rel="sitemap" type="application/xml" title="사이트맵" href="{{ route('seo.sitemap') }}">
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-{{-- 글꼴 CSS 는 화면 그리기를 막지 않게 늦게 붙인다(2026-11-16 seoptimer 2차 · PageSpeed 렌더 차단). 글꼴이 오기 전엔 기본 글꼴로 먼저 보인다 --}}
-<link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" onload="this.onload=null;this.rel='stylesheet'">
-<link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/fonts/webfonts/variable/split/WantedSansVariable.css" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/fonts/webfonts/variable/split/WantedSansVariable.css"></noscript>
+{{-- 글꼴 1종(Pretendard)만, 우리 서버에서 받는다(2026-11-16 휴대폰 맞춤). 쓰는 글자 묶음만 받는 나눔 파일 · font-display: swap.
+     제목용 원티드 산스는 뺐다 — 제목도 Pretendard 로 보인다. 글꼴 CSS 는 화면 그리기를 막지 않게 늦게 붙인다 --}}
+<link rel="preload" as="style" href="{{ asset('fonts/pretendard/pretendard-subset.css') }}?v=1.3.9" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="{{ asset('fonts/pretendard/pretendard-subset.css') }}?v=1.3.9"></noscript>

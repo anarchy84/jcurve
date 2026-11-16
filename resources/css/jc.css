@@ -748,7 +748,7 @@ body.jc-site {
     .jc-hx__title { font-size: 19px; }
     .jc-hx__head { flex-direction: column; gap: 6px; }
     .jc-hx__chip { padding: 8px 10px 9px; gap: 2px; }
-    .jc-hx__chip small { font-size: 11px; }
+    .jc-hx__chip small { font-size: 12px; }
     .jc-hx__num { font-size: 19px; }
     .jc-hx__chip--3 .jc-hx__num { font-size: 24px; }
     .jc-hx__chip--2 { transform: translate(-6%, 16px); }
@@ -1519,3 +1519,17 @@ button.jc-otarget:hover { border-color: #9AA8FF; }
 @media (max-width: 360px) {
     .jc-lp-h1 { font-size: 48px; }
 }
+
+/* 인라인 style 대신 쓰는 한 줄 규칙(2026-11-16 seoptimer 사용성·성능) */
+.u-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.u-h34 { height: 34px !important; }
+.u-h22 { height: 22px !important; }
+.u-mt10 { margin-top: 10px !important; }
+.u-mt18 { margin-top: 18px !important; }
+.u-mt20 { margin-top: 20px !important; }
+.u-mt32 { margin-top: 32px !important; }
+.u-mb24 { margin-bottom: 24px !important; }
+.u-mb48 { margin-bottom: 48px !important; }
+.u-mw560 { max-width: 560px; }
+.u-fs16 { font-size: 16px !important; }
+.u-ondark2 { color: var(--jc-on-dark-2) !important; }

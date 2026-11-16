@@ -32,8 +32,8 @@
         <div class="jc-networks">
             <{{ $jcHeading }} class="jc-networks__title">제휴 리워드 네트워크</{{ $jcHeading }}>
             <ul class="jc-networks__logos">
-                <li><img src="{{ asset('images/networks/buzzvil.svg') }}" alt="버즈빌" width="113" height="34" style="height:34px"></li>
-                <li><img src="{{ asset('images/networks/adpopcorn.webp') }}" alt="애드팝콘" width="152" height="22" style="height:22px"></li>
+                <li><img src="{{ asset('images/networks/buzzvil.svg') }}" alt="버즈빌" width="113" height="34" class="u-h34"></li>
+                <li><img src="{{ asset('images/networks/adpopcorn.webp') }}" alt="애드팝콘" width="152" height="22" class="u-h22"></li>
                 <li class="jc-networks__word jc-networks__word--latin">NBT</li>
                 <li class="jc-networks__word">OK캐쉬백</li>
             </ul>

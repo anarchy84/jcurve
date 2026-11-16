@@ -394,7 +394,7 @@
             <div class="jc-head">
                 <div>
                     <h2 id="home-apps" class="jc-display jc-h2">지금 운영 중인 리워드 앱</h2>
-                    <p class="jc-text" style="margin-top:18px">직접 기획하고 개발해 스토어에서 운영하는 앱입니다. 광고주의 미션이 이 앱들 안에서 실행됩니다.</p>
+                    <p class="jc-text u-mt18">직접 기획하고 개발해 스토어에서 운영하는 앱입니다. 광고주의 미션이 이 앱들 안에서 실행됩니다.</p>
                 </div>
                 <div class="jc-apps__nav" data-jc-apps-nav>
                     <button type="button" data-dir="-1" aria-label="이전 앱 보기"><x-jc.icon name="arrow-right" class="jc-apps__prev" /></button>
@@ -440,13 +440,13 @@
         <div class="jc-wrap jc-rank">
             <div>
                 <h2 id="home-self" class="jc-display jc-h2">순위상승을 위한 실행,<br>직접 시작하세요.</h2>
-                <p class="jc-text" style="margin-top:20px;color:var(--jc-on-dark-2)">플레이스·쇼핑 마케팅을 직접 설정하고, 집행량과 순위 변화를 확인하세요.</p>
+                <p class="jc-text u-mt20 u-ondark2">플레이스·쇼핑 마케팅을 직접 설정하고, 집행량과 순위 변화를 확인하세요.</p>
                 <ol class="jc-rank__steps">
                     <li><span class="jc-rank__no">1</span><span><strong>지금 순위 확인</strong><span>랭크프리로 내 가게와 상품의 현재 순위를 무료로 확인합니다.</span></span></li>
                     <li><span class="jc-rank__no">2</span><span><strong>캠페인 설정</strong><span>키워드, 수량, 기간을 직접 정하고 바로 집행합니다.</span></span></li>
                     <li><span class="jc-rank__no">3</span><span><strong>결과 확인</strong><span>집행량과 순위 변화를 기록으로 남겨 다음 집행에 씁니다.</span></span></li>
                 </ol>
-                <a class="jc-btn jc-btn--white jc-btn--md" style="margin-top:32px" href="{{ route('self-marketing') }}">셀프마케팅 주문하기</a>
+                <a class="jc-btn jc-btn--white jc-btn--md u-mt32" href="{{ route('self-marketing') }}">셀프마케팅 주문하기</a>
             </div>
             @include('partials.jc.rank-form', ['variant' => 'stack'])
         </div>
@@ -480,7 +480,7 @@
                 <div class="jc-head">
                     <div>
                         <h2 id="home-works-title" class="jc-display jc-h2">함께 만든 브랜드의 성장</h2>
-                        <p class="jc-text" style="margin-top:18px">캠페인은 끝나도 데이터는 남습니다. 대표 사례 몇 가지입니다.</p>
+                        <p class="jc-text u-mt18">캠페인은 끝나도 데이터는 남습니다. 대표 사례 몇 가지입니다.</p>
                     </div>
                     <a class="jc-link" href="{{ route('work.index') }}">전체 성과 보기 →</a>
                 </div>
@@ -512,10 +512,10 @@
         <section class="jc-section" aria-labelledby="home-insights-title">
             <div class="jc-wrap">
                 <span class="jc-label">INSIGHTS</span>
-                <div class="jc-head" style="margin-bottom:24px">
+                <div class="jc-head u-mb24">
                     <div>
                         <h2 id="home-insights-title" class="jc-display jc-h2">마케팅, 계속 공부합니다</h2>
-                        <p class="jc-text" style="margin-top:18px">현장에서 검증한 것만 글로 남깁니다.</p>
+                        <p class="jc-text u-mt18">현장에서 검증한 것만 글로 남깁니다.</p>
                     </div>
                     <a class="jc-link" href="{{ route('insights.index') }}">인사이트 전체 보기 →</a>
                 </div>
@@ -542,7 +542,7 @@
     {{-- ⑯ 전체 서비스 목록 + 무료 SEO·GEO·AEO 진단 --}}
     <section class="jc-section jc-bg-fog" aria-labelledby="home-index">
         <div class="jc-wrap">
-            <h2 id="home-index" class="jc-display jc-h2" style="margin-bottom:48px">제이커브가 하는 일 전체</h2>
+            <h2 id="home-index" class="jc-display jc-h2 u-mb48">제이커브가 하는 일 전체</h2>
             <div class="jc-index">
                 @foreach ($jcMenu['marketing'] as $group => $links)
                     <div><h3>{{ $group }}</h3><ul>
@@ -564,10 +564,10 @@
                 </ul></div>
             </div>
             <form class="jc-tool" method="GET" action="{{ route('seo.check') }}" role="search">
-                <div style="max-width:560px">
+                <div class="u-mw560">
                     <span class="jc-label">FREE SEO · GEO·AEO CHECK</span>
                     <h3 class="jc-display jc-h3">내 사이트, SEO와 AI 답변 최적화 몇 점일까요?</h3>
-                    <p class="jc-text" style="margin-top:10px;font-size:16px">주소만 넣으면 온페이지 SEO(타이틀·메타·모바일)부터 GEO·AEO(구조화 데이터·스키마·답변형 구조)까지 즉석 점검합니다. 무료입니다.</p>
+                    <p class="jc-text u-mt10 u-fs16">주소만 넣으면 온페이지 SEO(타이틀·메타·모바일)부터 GEO·AEO(구조화 데이터·스키마·답변형 구조)까지 즉석 점검합니다. 무료입니다.</p>
                 </div>
                 <div class="jc-tool__form">
                     <label class="jc-field jc-field--light">사이트 주소

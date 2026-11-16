@@ -149,6 +149,7 @@
 <script type="application/ld+json">{!! json_encode([$jcAt.'context' => 'https://schema.org', $jcAt.'graph' => $jcGraph], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
 @stack('jsonld')
 <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+<link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
 {{-- 회사·사이트 구조화 데이터(2026-11-16 seoptimer 점검)는 위 공통 그래프로 합쳤다 — 따로 내면 #organization·#website 가 두 번 나간다 --}}
 <link rel="alternate" type="application/rss+xml" title="제이커브 인사이트" href="{{ route('seo.rss') }}">
 <link rel="sitemap" type="application/xml" title="사이트맵" href="{{ route('seo.sitemap') }}">

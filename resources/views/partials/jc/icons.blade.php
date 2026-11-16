@@ -4,7 +4,7 @@
     - 레이아웃에서 한 번만 include 하고, 화면에서는 <x-jc.icon name="seo" /> 로 쓴다.
     - 글자·로고는 넣지 않는다(서비스 로고는 실제 파일로만).
 --}}
-<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" class="u-sprite" aria-hidden="true" focusable="false">
     <defs>
         {{-- ── 마케팅 서비스 ── --}}
         <symbol id="ji-performance" viewBox="0 0 24 24"><path d="M3.5 20.5h17"/><path d="M6.5 17v-3.5"/><path d="M11 17V11"/><path d="M15.5 17V8.5"/><path d="M5 10.5 10 6l3.5 3L20 3.5"/><path d="M16 3.5h4v4"/></symbol>

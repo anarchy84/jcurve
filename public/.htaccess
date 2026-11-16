@@ -14,6 +14,10 @@
     <ElseIf "%{REQUEST_URI} =~ m#\.(?:png|jpe?g|gif|webp|avif|svg|ico|woff2?|mp4)$#i">
         Header set Cache-Control "public, max-age=2592000"
     </ElseIf>
+    # css·js 는 주소에 ?v= 판 번호가 붙은 것만 30일(판이 바뀌면 주소가 바뀜. 2026-11-16 seoptimer)
+    <ElseIf "%{REQUEST_URI} =~ m#\.(?:css|js)$#i && %{QUERY_STRING} =~ m#(?:^|&)v=#">
+        Header set Cache-Control "public, max-age=2592000"
+    </ElseIf>
 </IfModule>
 # llms.txt 등 한글 글 파일이 깨지지 않게(2026-11-16)
 AddCharset UTF-8 .txt

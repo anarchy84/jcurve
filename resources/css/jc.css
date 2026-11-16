@@ -287,6 +287,10 @@ body.jc-site {
 .jc-page-hero--self { grid-template-columns: minmax(0, 1fr) 600px; align-items: start; }
 .jc-page-hero .jc-lead { margin-top: 28px; }
 .jc-page-hero .jc-btns { margin-top: 36px; }
+.jc-table { width: 100%; border-collapse: collapse; font-size: 16px; margin-top: 48px; }
+.jc-table th { text-align: left; font-size: 14px; font-weight: 600; color: var(--jc-muted); padding: 0 24px 14px 0; border-bottom: 2px solid #000; }
+.jc-table td { padding: 20px 24px 20px 0; border-bottom: 1px solid var(--jc-line); vertical-align: top; line-height: 1.55; color: var(--jc-body); }
+.jc-table td:first-child { color: #000; font-weight: 700; width: 160px; }
 
 
 
@@ -545,7 +549,7 @@ body.jc-site {
     .jc-layer { grid-template-columns: 160px minmax(0, 1fr); }
     .jc-layer > :nth-child(3), .jc-layer > :nth-child(4) { grid-column: 2; }
     .jc-rank, .jc-page-hero, .jc-page-hero--self, .jc-check { grid-template-columns: 1fr; gap: 48px; }
-                .jc-read { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .jc-read { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .jc-article-grid { grid-template-columns: 1fr; gap: 32px; }
     .jc-article-grid > .jc-article-spacer { display: none; }
     .jc-toc { position: static; max-height: none; overflow: visible; }
@@ -565,7 +569,10 @@ body.jc-site {
     .jc-layer > :nth-child(3), .jc-layer > :nth-child(4) { grid-column: 1; }
     .jc-site .jc-post { grid-template-columns: auto minmax(0, 1fr); gap: 6px 16px; padding: 20px 0; }
     .jc-post__title { grid-column: 1 / -1; font-size: 17px; }
-                    .jc-board > div { grid-template-columns: 22px minmax(0, 1fr); }
+    .jc-table thead { display: none; }
+    .jc-table td { display: block; padding: 4px 0; border: 0; }
+    .jc-table td:first-child { padding-top: 18px; border-top: 1px solid var(--jc-line); width: auto; }
+    .jc-board > div { grid-template-columns: 22px minmax(0, 1fr); }
     .jc-board__label { grid-column: 2; padding-top: 8px; }
     .jc-board .jc-num { font-size: 72px; }
     .jc-bigsteps .jc-num { font-size: 96px; }

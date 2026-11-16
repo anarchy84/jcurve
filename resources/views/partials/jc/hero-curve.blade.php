@@ -11,7 +11,7 @@
 <div class="jc-stage__bg" aria-hidden="true">
     @if ($jcHeroImg)
         <div class="jc-stage__media">
-            <img class="jc-stage__img" src="{{ asset('images/hero/hero-bg.webp') }}" alt="" width="1672" height="941" fetchpriority="high" decoding="async">
+            <img class="jc-stage__img" src="{{ asset('images/hero/hero-bg.webp') }}" alt="제이커브 매출 성장 곡선 배경" width="1672" height="941" fetchpriority="high" decoding="async">
             <svg class="jc-curve jc-curve--overlay" viewBox="0 0 1672 941" preserveAspectRatio="xMidYMid slice">
                 <path id="jc-curve-path" d="M0 832 C 520 856 1000 796 1250 646 S 1585 236 1662 0" fill="none" stroke="none"/>
                 <g class="jc-curve__dots" fill="#C9D2FF">

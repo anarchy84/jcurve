@@ -588,7 +588,7 @@
             <div>
                 <h2 id="home-cta-title" class="jc-display jc-h2">숫자로 증명할 준비가 되어 있습니다</h2>
                 <p class="jc-text jc-text--dark">지금 진행 중인 마케팅, 데이터로 다시 보겠습니다.<br>현재 성과를 알려주시면 개선 지점부터 짚어드립니다.</p>
-                <p class="jc-contact jc-contact--dark"><span><x-jc.icon name="phone" />전화 <a href="tel:0216682612">02-1668-2612</a></span><span><x-jc.icon name="mail" />메일 <a href="mailto:jcurve19@gmail.com">jcurve19@gmail.com</a></span></p>
+                <p class="jc-contact jc-contact--dark"><span><x-jc.icon name="phone" />전화 <a href="tel:0216682612">02-1668-2612</a></span><span><x-jc.icon name="mail" />메일 <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#99;&#117;&#114;&#118;&#101;&#49;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#106;&#99;&#117;&#114;&#118;&#101;&#49;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a></span></p>
             </div>
             <div class="jc-btns">
                 <a class="jc-btn jc-btn--primary" href="{{ route('contact') }}">프로젝트 문의하기</a>

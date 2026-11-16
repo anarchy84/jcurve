@@ -144,6 +144,39 @@
 @endphp
 <script type="application/ld+json">{!! json_encode([$jcAt.'context' => 'https://schema.org', $jcAt.'graph' => $jcGraph], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
 @stack('jsonld')
+<link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+@php
+    // 회사·사이트 구조화 데이터(검색·AI 답변용, 2026-11-16 seoptimer 점검). 주소는 대표님 11/16 「공항대로209 지엠지엘스타 616호」.
+    $jcOrgLd = [
+        '@context' => 'https://schema.org',
+        '@graph' => [
+            [
+                '@type' => ['Organization', 'ProfessionalService'],
+                '@id' => $jcPublicUrl.'/#organization',
+                'name' => '제이커브인터렉티브',
+                'legalName' => '(주)제이커브인터렉티브',
+                'alternateName' => ['제이커브', 'J-Curve Interactive'],
+                'url' => $jcPublicUrl.'/',
+                'image' => $jcPublicUrl.'/images/og-default.png',
+                'telephone' => '+82-2-1668-2612',
+                'taxID' => '753-88-01488',
+                'address' => ['@type' => 'PostalAddress', 'streetAddress' => '공항대로 209 지엠지엘스타 616호', 'addressLocality' => '강서구', 'addressRegion' => '서울특별시', 'addressCountry' => 'KR'],
+                'areaServed' => 'KR',
+                'knowsAbout' => ['SEO', 'GEO', 'AEO', '검색엔진 최적화', '퍼포먼스 마케팅', 'CPA 마케팅', '리워드 광고', '워드프레스 제작', '네이버 플레이스 마케팅'],
+                'contactPoint' => ['@type' => 'ContactPoint', 'telephone' => '+82-2-1668-2612', 'contactType' => 'customer service', 'areaServed' => 'KR', 'availableLanguage' => 'Korean'],
+            ],
+            [
+                '@type' => 'WebSite',
+                '@id' => $jcPublicUrl.'/#website',
+                'url' => $jcPublicUrl.'/',
+                'name' => '제이커브',
+                'inLanguage' => 'ko-KR',
+                'publisher' => ['@id' => $jcPublicUrl.'/#organization'],
+            ],
+        ],
+    ];
+@endphp
+<script type="application/ld+json">{!! json_encode($jcOrgLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
 <link rel="alternate" type="application/rss+xml" title="제이커브 인사이트" href="{{ route('seo.rss') }}">
 <link rel="sitemap" type="application/xml" title="사이트맵" href="{{ route('seo.sitemap') }}">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>

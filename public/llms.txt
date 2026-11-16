@@ -1,0 +1,42 @@
+# 제이커브인터렉티브 (J-Curve Interactive)
+
+> 제이커브인터렉티브는 2019년 설립된 서울 디지털 마케팅 회사입니다. 퍼포먼스 광고, CPA 마케팅, 리워드 네트워크, SEO·AEO·GEO(검색과 AI 답변 최적화), 워드프레스 제작과 자체 마케팅 솔루션(랭크프리·부스팅샵·리드베이·콜투세일)을 한 팀에서 운영합니다.
+
+- 회사명: (주)제이커브인터렉티브 / 대표이사 김태훈 / 사업자등록번호 753-88-01488
+- 주소: 서울특별시 강서구 공항대로 209 지엠지엘스타 616호
+- 전화: 02-1668-2612 / 메일: jcurve19@gmail.com
+- 상담: https://j-curve.co.kr/contact-us/
+
+## 회사
+- [회사소개](https://j-curve.co.kr/about-us/): 설립 연혁과 일하는 방식
+- [성과와 운영 기준](https://j-curve.co.kr/work): 공개 동의를 받은 사례와 측정 방식
+- [자주 묻는 질문](https://j-curve.co.kr/support/faq): 서비스별 자주 묻는 질문과 답
+
+## 서비스
+- [서비스 전체](https://j-curve.co.kr/services): 유입부터 전환·재구매까지
+- [SEO 컨설팅](https://j-curve.co.kr/seo/): 구글·네이버 검색엔진 최적화
+- [AEO 답변엔진 최적화](https://j-curve.co.kr/services/seo/aeo): 질문에 답하는 콘텐츠 구조
+- [GEO 생성엔진 최적화](https://j-curve.co.kr/services/seo/geo): AI가 이해하는 브랜드 정보
+- [무료 SEO·GEO·AEO 진단](https://j-curve.co.kr/seo-check): 주소 하나로 온페이지와 AI 답변 최적화 점검
+- [백링크 서비스](https://j-curve.co.kr/seo-backlinks/)
+- [퍼포먼스 마케팅](https://j-curve.co.kr/services/performance-marketing): 네이버 GFA, 페이스북·인스타그램, 유튜브 광고
+- [CPA 마케팅](https://j-curve.co.kr/services/cpa-marketing): 유효 액션 기준 성과형 광고(보험, 부동산 분양, 주식, 코인, 퍼미션 콜)
+- [리워드 네트워크](https://j-curve.co.kr/services/reward-network): 광고주 액션과 앱 수익화 연결
+- [워드프레스 홈페이지 제작](https://j-curve.co.kr/wordpress-agency/)
+- [네이버 플레이스 상위노출](https://j-curve.co.kr/naver-place-marketing/)
+- [네이버쇼핑 상위노출](https://j-curve.co.kr/naver-shopping-marketing/)
+- [쿠팡 상위노출](https://j-curve.co.kr/coupang/)
+- [카카오선물하기 상위노출](https://j-curve.co.kr/kakao-gift/)
+- [중소기업 마케팅 지원사업 실행 지원](https://j-curve.co.kr/services/marketing-support)
+- [셀프마케팅](https://j-curve.co.kr/self-marketing): 플레이스·쇼핑 순위상승 캠페인 직접 주문
+
+## 자체 솔루션
+- [랭크프리](https://j-curve.co.kr/solutions/rankfree): 네이버 플레이스·쇼핑·블로그 순위와 시장 분석
+- [부스팅샵](https://j-curve.co.kr/solutions/boostingshop): SEO 캠페인과 인스타그램 성장 가이드
+- [리드베이](https://j-curve.co.kr/solutions/leadbay): 보험 영업조직용 세일즈 CRM
+- [콜투세일](https://j-curve.co.kr/solutions/call2sale): 보험 상담 리드 운영 CRM
+- [쇼피트렌드](https://j-curve.co.kr/solutions/shopitrend): 플레이스·쇼핑·SNS 마케팅 주문 플랫폼
+
+## 글
+- [SEO 가이드](https://j-curve.co.kr/blog/)
+- [사이트맵](https://j-curve.co.kr/sitemap.xml)

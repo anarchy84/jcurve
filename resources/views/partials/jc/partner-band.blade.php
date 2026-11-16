@@ -51,7 +51,7 @@
                             <ul class="jc-wall" @if ($dup) aria-hidden="true" data-dup @endif>
                                 @foreach ($row as $app)
                                     <li>
-                                        <img src="{{ $app['src'] }}" alt="{{ $dup ? '' : $app['alt'] }}" width="56" height="56" loading="lazy">
+                                        <img src="{{ $app['src'] }}" alt="{{ $app['alt'] !== '' ? $app['alt'] : '제휴 리워드 매체 앱 아이콘' }}" width="56" height="56" loading="lazy">
                                         @if ($app['own'])<span class="jc-wall__own" aria-hidden="true"></span>@endif
                                     </li>
                                 @endforeach

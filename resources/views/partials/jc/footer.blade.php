@@ -62,7 +62,7 @@
             </div>
             <address class="jc-footer__company jc-ncf__company">
                 <span><strong>(주)제이커브인터렉티브</strong><i></i>대표이사 김태훈<i></i>사업자등록번호 753-88-01488</span>
-                <span>서울특별시 금천구 가산디지털1로, 가산더블유센터 703호<i></i>02-1668-2612<i></i>jcurve19@gmail.com</span>
+                <span>서울특별시 강서구 공항대로 209 지엠지엘스타 616호<i></i>02-1668-2612<i></i>&#106;&#99;&#117;&#114;&#118;&#101;&#49;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</span>
                 <span class="jc-ncf__copy">© 2026 J-Curve Interactive Corporation.</span>
             </address>
         </div>

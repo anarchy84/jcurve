@@ -98,7 +98,7 @@
             <div>
                 <h2 id="faq-cta" class="jc-display jc-h2">찾는 답이 없나요?</h2>
                 <p class="jc-text jc-text--dark">궁금한 점은 문의로 남겨 주세요. 프로젝트 상담은 1:1 문의가 가장 빠릅니다.</p>
-                <p class="jc-contact jc-contact--dark"><span><x-jc.icon name="phone" />전화 <a href="tel:0216682612">02-1668-2612</a></span><span><x-jc.icon name="mail" />메일 <a href="mailto:jcurve19@gmail.com">jcurve19@gmail.com</a></span></p>
+                <p class="jc-contact jc-contact--dark"><span><x-jc.icon name="phone" />전화 <a href="tel:0216682612">02-1668-2612</a></span><span><x-jc.icon name="mail" />메일 <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#99;&#117;&#114;&#118;&#101;&#49;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#106;&#99;&#117;&#114;&#118;&#101;&#49;&#57;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a></span></p>
             </div>
             <div class="jc-btns">
                 <a class="jc-btn jc-btn--primary" href="{{ $jcInquiryHref }}">{{ $jcInquiryLabel }}</a>

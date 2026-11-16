@@ -7,7 +7,16 @@
     Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
     Header always unset X-Powered-By
     Header unset X-Powered-By
+    # 정적 파일 브라우저 캐시(2026-11-16 seoptimer). build/ 는 파일 이름에 해시가 붙어 1년, 그림·글꼴·아이콘은 30일.
+    <If "%{REQUEST_URI} =~ m#^/build/#">
+        Header set Cache-Control "public, max-age=31536000, immutable"
+    </If>
+    <ElseIf "%{REQUEST_URI} =~ m#\.(?:png|jpe?g|gif|webp|avif|svg|ico|woff2?|mp4)$#i">
+        Header set Cache-Control "public, max-age=2592000"
+    </ElseIf>
 </IfModule>
+# llms.txt 등 한글 글 파일이 깨지지 않게(2026-11-16)
+AddCharset UTF-8 .txt
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>

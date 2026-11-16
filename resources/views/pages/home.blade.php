@@ -602,9 +602,10 @@
             <p class="jc-hfaq__more"><a href="{{ route('support.faq') }}">질문 전체 보기 →</a></p>
         </div>
     </section>
+    {{-- 키 이름을 그대로 쓰면 Blade 가 context 지시어로 먹어 출력에서 빠진다 → head 와 같은 방식('@'.'context')으로 이어 붙인다 --}}
     @push('head')
     <script type="application/ld+json">{!! json_encode([
-        '@context' => 'https://schema.org',
+        '@'.'context' => 'https://schema.org',
         '@type' => 'FAQPage',
         'mainEntity' => array_map(fn ($f) => ['@type' => 'Question', 'name' => $f['q'], 'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f['a']]], $homeFaq),
     ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>

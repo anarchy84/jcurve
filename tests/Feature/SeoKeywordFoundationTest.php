@@ -57,11 +57,15 @@ class SeoKeywordFoundationTest extends TestCase
             ->assertStatus(301)->assertHeader('Location', '/v1/manager/data/editor/image.jpg?v=1');
     }
 
-    public function test_empty_sections_are_not_advertised_but_first_pages_stay_available(): void
+    // 형 6e0dba3 — SeoFeedController 가 max(1) 로 「빈 묶음도 1쪽은 낸다」로 바뀜. 빈 구역은 색인에 1.xml 하나만 오르고, 그 쪽은 비어 있으며 2쪽은 없다.
+    public function test_empty_sections_are_advertised_as_one_empty_first_page(): void
     {
         $index = $this->xml($this->get('/sitemap.xml')->assertOk()->getContent());
-        $this->assertSame(0, $index->query('//sm:loc[contains(text(), "/sitemaps/works/")]')->length);
-        $this->assertSame(0, $index->query('//sm:loc[contains(text(), "/sitemaps/insights/")]')->length);
+        foreach (['works', 'insights'] as $section) {
+            $locs = $index->query('//sm:loc[contains(text(), "/sitemaps/'.$section.'/")]');
+            $this->assertSame(1, $locs->length, $section);
+            $this->assertSame('https://j-curve.co.kr/sitemaps/'.$section.'/1.xml', trim($locs->item(0)->textContent));
+        }
         $this->assertGreaterThan(0, $index->query('//sm:loc[contains(text(), "/sitemaps/pages/")]')->length);
 
         foreach (['works', 'insights'] as $section) {

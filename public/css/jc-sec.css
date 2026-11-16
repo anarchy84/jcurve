@@ -288,3 +288,12 @@ body main .cta-row > :is(a, button):not(.jc-check *) { min-height: 44px; border-
 }
 body .jsx-lcard > p strong { font-weight: 400 !important; color: inherit !important; }
 body .jsx-lcard > p.jsx-lq { margin-top: 6px !important; font-weight: 700 !important; color: var(--sx-head) !important; }
+
+/* 홈 자주 묻는 질문(2026-11-16 seoptimer 2차) — 답을 펼쳐 둔 카드 칸 */
+body.jc-site .jc-hfaq { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 40px; }
+body.jc-site .jc-hfaq__item { padding: 24px; border: 1px solid rgba(15, 23, 42, .1); border-radius: 16px; background: #fff; }
+body.jc-site .jc-hfaq__item h3 { margin: 0 0 10px; font-size: 18px; line-height: 1.45; font-weight: 700; }
+body.jc-site .jc-hfaq__item p { margin: 0 0 12px; font-size: 15px; line-height: 1.7; color: #475569; }
+body.jc-site .jc-hfaq__item a, body.jc-site .jc-hfaq__more a { font-size: 14px; font-weight: 600; color: #1E3AFF; }
+body.jc-site .jc-hfaq__more { margin-top: 24px; }
+@media (max-width: 640px) { body.jc-site .jc-hfaq { grid-template-columns: 1fr; } body.jc-site .jc-hfaq__item { padding: 20px; } }

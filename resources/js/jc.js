@@ -115,7 +115,7 @@ const jcFormat = (value, decimals, comma) => {
     const [int, dec] = fixed.split('.');
     return int.replace(/\B(?=(\d{3})+(?!\d))/g, ',') + (dec ? `.${dec}` : '');
 };
-// 숫자 마디를 찾아 카운트업 준비(0으로 바꿔 둠). 준비되면 true.
+// 숫자 마디를 찾아 카운트업 준비. 준비되면 true. 화면에 들어오기 전까지는 원래 숫자를 그대로 둔다(2026-11-16 seoptimer 2차 — 스크립트가 글을 바꾸지 않게, 0은 셀 때만).
 const jcPrepCount = (el) => {
     if (el.jcCount) return true;
     if (el.closest('[data-count-to]') || el.hasAttribute('data-count-to')) return false;
@@ -128,7 +128,6 @@ const jcPrepCount = (el) => {
     const target = parseFloat(raw.replace(/,/g, ''));
     if (!isFinite(target) || target === 0) return false;
     el.jcCount = { node, prefix: m[1], suffix: m[3], target, decimals: (raw.split('.')[1] || '').length, comma: raw.includes(',') || target >= 10000 };
-    node.nodeValue = m[1] + jcFormat(0, el.jcCount.decimals, el.jcCount.comma) + m[3];
     return true;
 };
 // 0에서 최종값까지 올린다. 다시 부르면 처음부터 다시 센다(첫 화면 전환 패널용).

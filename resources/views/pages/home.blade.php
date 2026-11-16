@@ -579,6 +579,37 @@
         </div>
     </section>
 
+    {{-- ⑰ 자주 묻는 질문 — 고객센터 FAQ(partials/jc/faq-data.php)에 이미 공개된 질문·답변 중 9개를 그대로 보여 준다(새 약속·새 수치 없음, 2026-11-16 seoptimer 2차 GEO 「답변 일치」). 접지 않고 펼쳐 둔다(AI·검색이 바로 읽게) --}}
+    @php
+        $jcFaqAll = require resource_path('views/partials/jc/faq-data.php');
+        $homeFaq = [];
+        foreach (['start' => [0, 4, 3], 'ads' => [0], 'search' => [0, 1, 3], 'self' => [0], 'build' => [4]] as $jcG => $jcIdx) {
+            foreach ($jcIdx as $jcI) { $homeFaq[] = $jcFaqAll[$jcG]['items'][$jcI]; }
+        }
+    @endphp
+    <section class="jc-section" aria-labelledby="home-faq-title">
+        <div class="jc-wrap">
+            <h2 id="home-faq-title" class="jc-display jc-h2">자주 묻는 질문</h2>
+            <div class="jc-hfaq">
+                @foreach ($homeFaq as $f)
+                    <article class="jc-hfaq__item">
+                        <h3>{{ $f['q'] }}</h3>
+                        <p>{{ $f['a'] }}</p>
+                        @if (! empty($f['from']))<a href="{{ $f['from'][0] }}">{{ $f['from'][1] }} 보기 →</a>@endif
+                    </article>
+                @endforeach
+            </div>
+            <p class="jc-hfaq__more"><a href="{{ route('support.faq') }}">질문 전체 보기 →</a></p>
+        </div>
+    </section>
+    @push('head')
+    <script type="application/ld+json">{!! json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => array_map(fn ($f) => ['@type' => 'Question', 'name' => $f['q'], 'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f['a']]], $homeFaq),
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
+    @endpush
+
     {{-- ⑱ 마지막 상담 --}}
     {{-- 운영 워드프레스 본문 원문 보존(SEO·AI 답변 인용 보존, 제코 2026-11-03) --}}
     @include('partials.jc.wp-legacy', ['wpLegacy' => 'home', 'wpStyle' => 'jc'])

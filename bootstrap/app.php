@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\PreservePublicUrls;
 use App\Http\Responses\RankfreeConnectionError;
 use App\Models\LegacyRedirect;
 use App\Services\Seo\Publishing\PreservedPaths;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +28,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->prepend(PreservePublicUrls::class);
+        $middleware->alias(['admin' => EnsureUserIsAdmin::class]);
+        // 모델을 찾기 전에 관리자부터 가린다(회원이 없는 id 를 찔러도 404 가 아니라 403).
+        $middleware->prependToPriorityList(SubstituteBindings::class, EnsureUserIsAdmin::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->dontFlash(['api_key', 'credential_ciphertext', 'current_password']);
@@ -43,6 +49,17 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->shouldRenderJsonWhen(
             fn (Request $request) => $request->is('api/*'),
         );
+
+        // PDF 받기 주소를 비로그인으로 바로 열면 로그인·가입 뒤 파일 응답이 아니라 자료실 목록으로 돌아오게 한다.
+        $exceptions->render(function (AuthenticationException $e, Request $request): ?Response {
+            if (! $request->routeIs('resources.download') || $request->expectsJson()) {
+                return null;
+            }
+
+            redirect()->setIntendedUrl(route('resources.index'));
+
+            return redirect()->route('login');
+        });
 
         // 라우트 매칭 실패(404) 시에만 레거시 URL 리다이렉트 조회.
         // 정상 트래픽에는 오버헤드 0 (404에서만 DB 1회 조회).

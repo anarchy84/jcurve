@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ResourceFileController as AdminResourceFileController;
 use App\Http\Controllers\Community\BoardController;
 use App\Http\Controllers\Community\CommentController;
 use App\Http\Controllers\Community\LikeController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\InsightController;
 use App\Http\Controllers\LegacyMediaRedirectController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResourceFileController;
 use App\Http\Controllers\SeoCheckController;
 use App\Http\Controllers\SeoFeedController;
 use App\Http\Controllers\WorkController;
@@ -104,6 +106,18 @@ Route::get('/seo/{insight:slug}', [InsightController::class, 'show'])
         '11가지-최고의-seo-실수와-이를-피하는-방법',
         '경쟁자를-압도하는-6가지-고급-링크-구축-전략',
     ]);
+
+// PDF 자료실 — 목록은 공개, 받기는 로그인 회원, 올리기·삭제는 관리자(users.role = admin).
+// 메일 발송이 꺼져 있어 인증 메일이 안 가므로 'verified'는 걸지 않는다.
+Route::get('/resources', [ResourceFileController::class, 'index'])->name('resources.index');
+Route::get('/resources/{resourceFile}/download', [ResourceFileController::class, 'download'])
+    ->middleware(['auth', 'throttle:30,1'])->name('resources.download');
+
+Route::middleware(['auth', 'admin'])->prefix('admin/resources')->name('admin.resources.')->group(function () {
+    Route::get('/', [AdminResourceFileController::class, 'index'])->name('index');
+    Route::post('/', [AdminResourceFileController::class, 'store'])->name('store');
+    Route::delete('/{resourceFile}', [AdminResourceFileController::class, 'destroy'])->name('destroy');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

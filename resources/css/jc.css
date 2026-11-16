@@ -1245,6 +1245,30 @@ button.jc-otarget:hover { border-color: #9AA8FF; }
 .jc-wp-legacy__body > :first-child { margin-top: 0; }
 .jc-wp-legacy__body h4 { font-size: 18px; font-weight: 700; line-height: 1.5; margin: 28px 0 10px; color: #000; }
 
+/* PDF 자료실(resources/index · admin/resources/index, 2026-11-11) — 표는 .jc-table 을 쓰고 폭·폼·알림만 더한다 */
+.jc-res { margin-top: 0; }
+.jc-res td:first-child { width: auto; }
+.jc-res td:last-child { text-align: right; white-space: nowrap; padding-right: 0; }
+.jc-res__desc { display: block; margin-top: 6px; font-size: 15px; font-weight: 400; color: var(--jc-body); white-space: pre-line; overflow-wrap: anywhere; }
+.jc-res__meta { display: block; margin-top: 6px; font-size: 13px; font-weight: 400; color: var(--jc-muted); overflow-wrap: anywhere; }
+.jc-res__empty { padding: 48px 0; border-top: 2px solid #000; color: var(--jc-body); }
+.jc-res__note { margin-top: 20px; font-size: 15px; color: var(--jc-body); }
+.jc-res-head + .jc-res-form, .jc-res-head + .jc-res, .jc-res-head + .jc-res__empty { margin-top: 20px; }
+.jc-res__pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 32px; }
+.jc-res-form { display: grid; gap: 20px; max-width: 720px; padding: 32px; border: 1px solid var(--jc-line-2); border-radius: var(--jc-radius-lg); background: #fff; }
+.jc-res-form textarea.jc-input { height: auto; min-height: 120px; padding: 14px 18px; line-height: 1.6; resize: vertical; }
+.jc-res-form input[type="file"].jc-input { height: auto; padding: 14px 18px; }
+.jc-res-form .jc-field { font-size: 14px; font-weight: 600; }
+.jc-res-form .jc-small { font-weight: 400; }
+.jc-res-msg { margin: 0 0 24px; padding: 14px 18px; border-radius: var(--jc-radius); background: var(--jc-fog); color: var(--jc-ink-2); font-size: 15px; }
+.jc-res-msg--error { background: #FDECEA; color: var(--jc-up); }
+.jc-res-msg ul { margin: 0; padding-left: 1.2em; list-style: disc; }
+.jc-res-err { font-size: 13px; font-weight: 400; color: var(--jc-up); }
+@media (max-width: 760px) {
+    .jc-res td:last-child { text-align: left; padding: 12px 0 18px; }
+    .jc-res-form { padding: 22px 18px; }
+}
+
 /* LP self-marketing (2026-11-16) — pages/self-marketing-landing 전용. 기준: docs/frontend/14_셀프마케팅랜딩_디자인지시서_2026-11-16.md
    레이아웃·글꼴·글자 크기는 마케팅마법사 실측, 색은 jc.css 변수만. 모서리 0·그림자 없음·선으로 구분·끊는 지점 1100/920/680/360 은 랜딩 한정 예외(사용자 요청 2026-11-16).
    모든 선택자는 .jc-lp(랜딩 감싸개) 또는 .jc-lp-* 로 시작한다 — 다른 페이지에 새지 않게. */

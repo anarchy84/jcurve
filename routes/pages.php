@@ -27,3 +27,7 @@ Route::view('/self-marketing/order', 'pages.self-marketing-order')->name('self-m
 Route::view('/self-marketing/place', 'pages.self-marketing-place')->name('self-marketing.place');
 // 쇼핑 리워드 상세 (SEO-KW-01, 2026-11-04 제코 지시 — 쇼핑 유입·쇼핑 순위·스마트스토어 상위노출 키워드)
 Route::view('/self-marketing/shopping', 'pages.self-marketing-shopping')->name('self-marketing.shopping');
+
+// 셀프마케팅 랜딩 — 처음 오는 사장님용 한 페이지 안내 (팀장 배정 2026-11-16). /self-marketing/ 아래에 두지 않는다:
+// Codex 예정 파라미터 라우트(self-marketing.products.show)와 겹치지 않게. 메뉴·sitemap 포함 여부는 대웅 결정 대기 → QUEUE
+Route::view('/lp/self-marketing', 'pages.self-marketing-landing')->name('lp.self-marketing');

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 420" width="200" height="420" role="img" aria-labelledby="lp-i5-t" font-family="'Pretendard Variable', Pretendard, sans-serif"><title id="lp-i5-t">미션 화면 예시: 검색 결과에서 미션 정보와 같은 매장을 고르는 단계</title>
+<rect width="200" height="420" rx="28" fill="#000"/>
+<rect x="7" y="7" width="186" height="406" rx="21" fill="#FFFFFF"/>
+<path d="M7 37V28A21 21 0 0 1 28 7H172A21 21 0 0 1 193 28V37Z" fill="#F5F6F8"/>
+<rect x="20" y="19" width="30" height="6" rx="3" fill="#D5D7DC"/>
+<rect x="113" y="13" width="66" height="18" fill="#000"/>
+<text x="146" y="26.5" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">예시 화면</text>
+<path d="M22 45.5L15.5 53L22 60.5" fill="none" stroke="#1A1C20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="100" y="58" text-anchor="middle" font-size="15" font-weight="700" fill="#1A1C20">검색 결과</text>
+<rect x="7" y="69" width="186" height="1" fill="#E6E7EA"/>
+<rect x="19" y="80" width="162" height="58" rx="6" fill="#F5F6F8"/>
+<text x="31" y="102" font-size="14" font-weight="700" fill="#6B7079">미션 정보</text>
+<text x="31" y="124" font-size="14" font-weight="500" fill="#3A3D44">양식 · 성수동</text>
+<rect x="19" y="150" width="162" height="52" rx="6" fill="#FFFFFF" stroke="#D5D7DC"/><rect x="29" y="158" width="36" height="36" rx="4" fill="#E6E7EA"/><text x="75" y="181" font-size="14" font-weight="700" fill="#1A1C20">예시 매장 A</text>
+<rect x="19.75" y="210.75" width="160.5" height="76.5" rx="6" fill="#1E3AFF" fill-opacity=".08" stroke="#1E3AFF" stroke-width="1.5"/><rect x="29" y="218" width="36" height="36" rx="4" fill="#E6E7EA"/><text x="75" y="241" font-size="14" font-weight="700" fill="#1A1C20">예시 매장 B</text>
+<circle cx="160" cy="236" r="10" fill="#1E3AFF"/><path d="M155.5 236.5L158.8 239.8L164.8 232.4" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="31" y="277" font-size="14" font-weight="700" fill="#1E3AFF">미션 정보와 같은 매장</text>
+<rect x="19" y="296" width="162" height="52" rx="6" fill="#FFFFFF" stroke="#D5D7DC"/><rect x="29" y="304" width="36" height="36" rx="4" fill="#E6E7EA"/><text x="75" y="327" font-size="14" font-weight="700" fill="#1A1C20">예시 매장 C</text>
+<circle cx="75" cy="389" r="3" fill="#D5D7DC"/><rect x="86" y="386" width="14" height="6" rx="3" fill="#1E3AFF"/><circle cx="111" cy="389" r="3" fill="#D5D7DC"/><circle cx="125" cy="389" r="3" fill="#D5D7DC"/>
+<rect x="72" y="400" width="56" height="4" rx="2" fill="#D5D7DC"/>
+</svg>

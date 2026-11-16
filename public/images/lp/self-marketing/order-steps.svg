@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 436 544" width="436" height="544" role="img" aria-labelledby="lp-i14-t" font-family="'Pretendard Variable', Pretendard, sans-serif"><title id="lp-i14-t">주문 화면 예시. 매장 정보 입력·광고 설정을 마치고 3단계 일정 설정에서 광고 기간 10일(인기)을 고른 모습. 마지막 4단계는 최종 확인</title>
+<rect x=".5" y=".5" width="435" height="543" rx="12" fill="#FFFFFF" stroke="#D5D7DC"/>
+<text x="28" y="52" font-size="22" font-weight="700" fill="#000000">광고 시작하기</text>
+<rect x="336" y="22" width="72" height="24" fill="#000000"/>
+<text x="372" y="39" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">예시 화면</text>
+<path d="M42 104V272" stroke="#E6E7EA" stroke-width="2"/>
+<rect x="16" y="188" width="404" height="56" fill="#1E3AFF" fill-opacity=".08"/><rect x="16" y="188" width="3" height="56" fill="#1E3AFF"/>
+<circle cx="42" cy="104" r="14" fill="#1E3AFF"/><path d="M35.500 104.5l4.500 4.500 8-9" fill="none" stroke="#FFFFFF" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="70" y="101" font-size="17" font-weight="600" fill="#1A1C20">매장 정보 입력</text><text x="70" y="121" font-size="14" font-weight="500" fill="#6B7079">매장의 기본 정보를 입력하세요</text>
+<circle cx="42" cy="160" r="14" fill="#1E3AFF"/><path d="M35.500 160.5l4.500 4.500 8-9" fill="none" stroke="#FFFFFF" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="70" y="157" font-size="17" font-weight="600" fill="#1A1C20">광고 설정</text><text x="70" y="177" font-size="14" font-weight="500" fill="#6B7079">광고 옵션을 설정하세요</text>
+<circle cx="42" cy="216" r="14" fill="#1E3AFF"/><text x="42" y="222" font-size="16" font-weight="800" fill="#FFFFFF" text-anchor="middle">3</text>
+<text x="70" y="213" font-size="17" font-weight="800" fill="#000000">일정 설정</text><text x="70" y="233" font-size="14" font-weight="500" fill="#3A3D44">광고 일정을 설정하세요</text>
+<circle cx="42" cy="272" r="13.500" fill="#FFFFFF" stroke="#D5D7DC" stroke-width="1.500"/><text x="42" y="278" font-size="16" font-weight="700" fill="#6B7079" text-anchor="middle">4</text>
+<text x="70" y="269" font-size="17" font-weight="600" fill="#6B7079">최종 확인</text><text x="70" y="289" font-size="14" font-weight="500" fill="#6B7079">입력한 정보를 확인하세요</text>
+<rect x="28" y="318" width="380" height="8" rx="4" fill="#E6E7EA"/><rect x="28" y="318" width="285" height="8" rx="4" fill="#1E3AFF"/>
+<text x="28" y="364" font-size="16" font-weight="700" fill="#1A1C20">광고 기간</text>
+<rect x="28.500" y="378.500" width="119" height="51" rx="6" fill="#FFFFFF" stroke="#D5D7DC"/>
+<rect x="158.500" y="378.500" width="119" height="51" rx="6" fill="#FFFFFF" stroke="#D5D7DC"/>
+<rect x="288.500" y="378.500" width="119" height="51" rx="6" fill="#FFFFFF" stroke="#D5D7DC"/>
+<rect x="28.750" y="378.750" width="118.500" height="50.500" rx="6" fill="#1E3AFF" fill-opacity=".08" stroke="#1E3AFF" stroke-width="1.500"/>
+<rect x="38" y="367" width="42" height="22" rx="11" fill="#1E3AFF"/>
+<text x="59" y="383" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">인기</text>
+<path d="M56 407l5 5 9-10" fill="none" stroke="#1E3AFF" stroke-width="2.500" stroke-linecap="round" stroke-linejoin="round"/>
+<g font-size="18" font-weight="700"><text x="80" y="411" fill="#000000">10일</text><text x="218" y="411" fill="#3A3D44" text-anchor="middle">20일</text><text x="348" y="411" fill="#3A3D44" text-anchor="middle">30일</text></g>
+<text x="28" y="456" font-size="14" font-weight="500" fill="#6B7079">등록한 광고는 다음 날부터 진행됩니다.</text>
+<rect x="28" y="478" width="180" height="42" rx="6" fill="#E6E7EA"/><rect x="228" y="478" width="180" height="42" rx="6" fill="#1E3AFF"/>
+<g font-size="17" font-weight="700" text-anchor="middle"><text x="118" y="505" fill="#3A3D44">이전</text><text x="318" y="505" fill="#FFFFFF">다음</text></g>
+</svg>

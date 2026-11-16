@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 375 340" width="375" height="340" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="lp-i3m-t" font-family="'Pretendard Variable', Pretendard, sans-serif"><title id="lp-i3m-t">쇼핑 검색 결과 예시 화면. 내 상품이 표시돼 있고, 쇼핑 유입·찜 유형이 내 상품으로 연결된 그림</title>
+<defs><clipPath id="lp-i3m-box"><rect width="375" height="340"/></clipPath></defs>
+<rect width="375" height="340" fill="#F5F6F8"/>
+<g clip-path="url(#lp-i3m-box)">
+<rect x="10" y="40" width="220" height="360" rx="30" fill="#000000"/>
+<rect x="17" y="47" width="206" height="360" rx="24" fill="#FFFFFF"/>
+<rect x="102" y="52" width="36" height="6" rx="3" fill="#E6E7EA"/>
+<rect x="25.500" y="64.500" width="189" height="30" rx="6" fill="#F5F6F8" stroke="#D5D7DC"/>
+<g transform="translate(31 70) scale(.8)" fill="none" stroke="#6B7079" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.500" cy="10.500" r="6.500"/><path d="m15.500 15.500 5 5"/></g>
+<text x="53" y="84.500" font-size="13" font-weight="500" fill="#1A1C20">무선 청소기</text>
+<rect x="25" y="102" width="64" height="22" rx="6" fill="#1E3AFF" fill-opacity=".12"/>
+<text x="57" y="117" font-size="12" font-weight="700" fill="#1229C9" text-anchor="middle">쇼핑 검색</text>
+<rect x="25.500" y="134.500" width="90" height="210" rx="6" fill="#FFFFFF" stroke="#E6E7EA"/><rect x="33" y="142" width="75" height="128" rx="6" fill="#D5D7DC"/><circle cx="92" cy="160" r="12" fill="#FFFFFF"/><g transform="translate(82.400 150.400) scale(.8)" fill="none" stroke="#6B7079" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.500-4.600-7.500-10.200A4.300 4.300 0 0 1 12 7.200a4.300 4.300 0 0 1 7.500 2.600C19.500 15.400 12 20 12 20Z"/></g><text x="33" y="294" font-size="12" font-weight="700" fill="#1A1C20">예시 상품 A</text><rect x="33" y="304" width="52" height="8" rx="4" fill="#D5D7DC"/>
+<rect x="123.750" y="134.750" width="90.500" height="209.500" rx="6" fill="#1E3AFF" fill-opacity=".08" stroke="#1E3AFF" stroke-width="1.500"/><rect x="132" y="142" width="75" height="128" rx="6" fill="#D5D7DC"/><circle cx="191" cy="160" r="12" fill="#FFFFFF"/><g transform="translate(181.400 150.400) scale(.8)" fill="#1E3AFF" stroke="#1E3AFF" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.500-4.600-7.500-10.200A4.300 4.300 0 0 1 12 7.200a4.300 4.300 0 0 1 7.500 2.600C19.500 15.400 12 20 12 20Z"/></g><text x="132" y="294" font-size="12" font-weight="800" fill="#000000">내 상품</text><rect x="132" y="304" width="52" height="8" rx="4" fill="#D5D7DC"/>
+</g>
+<rect x="282" y="8" width="85" height="26" fill="#000000"/>
+<text x="324.500" y="26" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">예시 화면</text>
+<g fill="none" stroke="#1E3AFF" stroke-width="2" stroke-dasharray="6 5"><path d="M267 160H206"/><path d="M267 230H218"/></g>
+<circle cx="203" cy="160" r="4.500" fill="#1E3AFF"/><circle cx="214.500" cy="230" r="4.500" fill="#1E3AFF"/>
+<g fill="#FFFFFF" stroke="#D5D7DC"><rect x="267.500" y="138.500" width="99" height="43" rx="6"/><rect x="267.500" y="208.500" width="99" height="43" rx="6"/></g>
+<g fill="none" stroke="#1E3AFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<g transform="translate(275 150) scale(.85)"><path d="M12 20s-7.500-4.600-7.500-10.200A4.300 4.300 0 0 1 12 7.200a4.300 4.300 0 0 1 7.500 2.600C19.500 15.400 12 20 12 20Z"/></g>
+<g transform="translate(275 220) scale(.85)"><path d="M5 8h14l-1.100 11.200a1.500 1.500 0 0 1-1.500 1.300H7.600a1.500 1.500 0 0 1-1.500-1.300Z"/><path d="M8.800 10.500V7a3.200 3.200 0 0 1 6.400 0v3.500"/></g>
+</g>
+<g font-size="13" font-weight="700" fill="#1A1C20"><text x="301" y="165">쇼핑 찜</text><text x="301" y="235">쇼핑 유입</text></g>
+</svg>

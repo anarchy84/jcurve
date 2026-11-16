@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 375 340" width="375" height="340" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="lp-i2m-t" font-family="'Pretendard Variable', Pretendard, sans-serif"><title id="lp-i2m-t">지도 검색 결과 예시 화면. 내 매장이 표시돼 있고, 플레이스 유입·저장·길찾기 유형이 내 매장으로 연결된 그림</title>
+<defs><clipPath id="lp-i2m-map"><rect x="25" y="130" width="150" height="86" rx="6"/></clipPath><clipPath id="lp-i2m-box"><rect width="375" height="340"/></clipPath></defs>
+<rect width="375" height="340" fill="#F5F6F8"/>
+<g clip-path="url(#lp-i2m-box)">
+<rect x="10" y="40" width="180" height="360" rx="30" fill="#000000"/>
+<rect x="17" y="47" width="166" height="360" rx="24" fill="#FFFFFF"/>
+<rect x="82" y="52" width="36" height="6" rx="3" fill="#E6E7EA"/>
+<rect x="25.500" y="64.500" width="149" height="30" rx="6" fill="#F5F6F8" stroke="#D5D7DC"/>
+<g transform="translate(31 70) scale(.8)" fill="none" stroke="#6B7079" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.500" cy="10.500" r="6.500"/><path d="m15.500 15.500 5 5"/></g>
+<text x="53" y="84.500" font-size="13" font-weight="500" fill="#1A1C20">성수동 파스타</text>
+<rect x="25" y="102" width="64" height="22" rx="6" fill="#1E3AFF" fill-opacity=".12"/>
+<text x="57" y="117" font-size="12" font-weight="700" fill="#1229C9" text-anchor="middle">지도 검색</text>
+<rect x="25" y="130" width="150" height="86" rx="6" fill="#FFFFFF"/>
+<g clip-path="url(#lp-i2m-map)">
+<rect x="33" y="137" width="30" height="32" fill="#F5F6F8"/><rect x="136" y="138" width="34" height="30" fill="#F5F6F8"/><rect x="33" y="186" width="30" height="24" fill="#F5F6F8"/><rect x="136" y="188" width="34" height="24" fill="#F5F6F8"/>
+<g fill="none" stroke="#E6E7EA" stroke-width="6" stroke-linecap="round"><path d="M25 178H175"/><path d="M70 130V216"/><path d="M128 130V216"/><path d="M25 150L70 178"/></g>
+</g>
+<rect x="25.500" y="130.500" width="149" height="85" rx="6" fill="none" stroke="#D5D7DC"/>
+<g fill="#6B7079"><path transform="translate(42 166) scale(.6)" d="M0 0C-9-10-11-15-11-19a11 11 0 0 1 22 0c0 4-2 9-11 19Z"/><path transform="translate(156 158) scale(.6)" d="M0 0C-9-10-11-15-11-19a11 11 0 0 1 22 0c0 4-2 9-11 19Z"/><path transform="translate(150 210) scale(.6)" d="M0 0C-9-10-11-15-11-19a11 11 0 0 1 22 0c0 4-2 9-11 19Z"/></g>
+<g fill="#FFFFFF"><circle cx="42" cy="154.600" r="2.400"/><circle cx="156" cy="146.600" r="2.400"/><circle cx="150" cy="198.600" r="2.400"/></g>
+<g transform="translate(100 210) scale(.75)"><path d="M0 0C-13-16-16-24-16-30a16 16 0 0 1 32 0c0 6-3 14-16 30Z" fill="#1E3AFF"/><circle cx="0" cy="-30" r="6" fill="#FFFFFF"/></g>
+<rect x="72" y="140" width="56" height="22" rx="6" fill="#1E3AFF"/><path d="M94 162h12l-6 7Z" fill="#1E3AFF"/>
+<text x="100" y="155.500" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">내 매장</text>
+<rect x="25.500" y="224.500" width="149" height="52" rx="6" fill="#FFFFFF" stroke="#E6E7EA"/>
+<rect x="25.750" y="284.750" width="148.500" height="60" rx="6" fill="#1E3AFF" fill-opacity=".08" stroke="#1E3AFF" stroke-width="1.500"/>
+<g fill="#D5D7DC"><rect x="33" y="233" width="34" height="34" rx="6"/><rect x="33" y="293" width="34" height="34" rx="6"/></g>
+<g font-size="13" font-weight="700" fill="#1A1C20"><text x="75" y="247">예시 매장 A</text><text x="75" y="307" fill="#000000" font-weight="800">내 매장</text></g>
+<g font-size="12" font-weight="500" fill="#6B7079"><text x="75" y="263">양식</text><text x="75" y="323">양식</text></g>
+</g>
+<rect x="282" y="8" width="85" height="26" fill="#000000"/>
+<text x="324.500" y="26" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">예시 화면</text>
+<g fill="none" stroke="#1E3AFF" stroke-width="2" stroke-dasharray="6 5"><path d="M226 112H204V310H178"/><path d="M226 182H204"/><path d="M226 252H204"/></g>
+<circle cx="174.500" cy="310" r="4.500" fill="#1E3AFF"/>
+<g fill="#FFFFFF" stroke="#D5D7DC"><rect x="226.500" y="90.500" width="140" height="43" rx="6"/><rect x="226.500" y="160.500" width="140" height="43" rx="6"/><rect x="226.500" y="230.500" width="140" height="43" rx="6"/></g>
+<g fill="none" stroke="#1E3AFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<g transform="translate(234 102) scale(.85)"><circle cx="9" cy="8" r="3.500"/><path d="M2.500 20a6.500 6.500 0 0 1 13 0"/><path d="M16 4.700a3.500 3.500 0 0 1 0 6.600"/><path d="M18.500 14.200A6.500 6.500 0 0 1 21.500 20"/></g>
+<g transform="translate(234 172) scale(.85)"><path d="M6.500 3.500h11v17l-5.500-4-5.500 4Z"/></g>
+<g transform="translate(234 242) scale(.85)"><circle cx="6" cy="18" r="2.500"/><circle cx="18" cy="6" r="2.500"/><path d="M8.500 18h6a3.500 3.500 0 0 0 0-7h-5a3.500 3.500 0 0 1 0-7h6"/></g>
+</g>
+<g font-size="13" font-weight="700" fill="#1A1C20"><text x="262" y="117">플레이스 유입</text><text x="262" y="187">플레이스 저장</text><text x="262" y="257">플레이스 길찾기</text></g>
+</svg>

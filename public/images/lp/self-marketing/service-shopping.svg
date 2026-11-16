@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 760" width="720" height="760" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="lp-i3-t" font-family="'Pretendard Variable', Pretendard, sans-serif"><title id="lp-i3-t">쇼핑 검색 결과 예시 화면. 상품 목록 가운데 내 상품이 표시돼 있고, 쇼핑 유입·찜 유형이 내 상품으로 연결된 그림</title>
+<rect width="720" height="760" fill="#F5F6F8"/>
+<rect x="210" y="70" width="300" height="620" rx="40" fill="#000000"/>
+<rect x="220" y="80" width="280" height="600" rx="30" fill="#FFFFFF"/>
+<rect x="334" y="90" width="52" height="8" rx="4" fill="#E6E7EA"/>
+<rect x="234.500" y="112.500" width="251" height="41" rx="6" fill="#F5F6F8" stroke="#D5D7DC"/>
+<g transform="translate(244 121)" fill="none" stroke="#6B7079" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.500" cy="10.500" r="6.500"/><path d="m15.500 15.500 5 5"/></g>
+<text x="278" y="139" font-size="17" font-weight="500" fill="#1A1C20">무선 청소기</text>
+<rect x="234" y="162" width="88" height="28" rx="6" fill="#1E3AFF" fill-opacity=".12"/>
+<text x="278" y="182" font-size="15" font-weight="700" fill="#1229C9" text-anchor="middle">쇼핑 검색</text>
+<rect x="234.5" y="204.5" width="121" height="227" rx="6" fill="#FFFFFF" stroke="#E6E7EA"/><rect x="242" y="212" width="106" height="144" rx="6" fill="#D5D7DC"/><circle cx="326" cy="234" r="16" fill="#FFFFFF"/><g transform="translate(314 222)" fill="none" stroke="#6B7079" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.500-4.600-7.500-10.200A4.300 4.300 0 0 1 12 7.200a4.300 4.300 0 0 1 7.500 2.600C19.500 15.400 12 20 12 20Z"/></g><text x="242" y="388" font-size="16" font-weight="700" fill="#1A1C20">예시 상품 A</text><rect x="242" y="404" width="76" height="10" rx="5" fill="#D5D7DC"/>
+<rect x="364.75" y="204.75" width="120.5" height="226.5" rx="6" fill="#1E3AFF" fill-opacity=".08" stroke="#1E3AFF" stroke-width="1.5"/><rect x="372" y="212" width="106" height="144" rx="6" fill="#D5D7DC"/><circle cx="456" cy="234" r="16" fill="#FFFFFF"/><g transform="translate(444 222)" fill="#1E3AFF" stroke="#1E3AFF" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.500-4.600-7.500-10.200A4.300 4.300 0 0 1 12 7.200a4.300 4.300 0 0 1 7.500 2.600C19.500 15.400 12 20 12 20Z"/></g><text x="372" y="388" font-size="16" font-weight="800" fill="#000000">내 상품</text><rect x="372" y="404" width="76" height="10" rx="5" fill="#D5D7DC"/>
+<rect x="234.5" y="440.5" width="121" height="227" rx="6" fill="#FFFFFF" stroke="#E6E7EA"/><rect x="242" y="448" width="106" height="144" rx="6" fill="#D5D7DC"/><circle cx="326" cy="470" r="16" fill="#FFFFFF"/><g transform="translate(314 458)" fill="none" stroke="#6B7079" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.500-4.600-7.500-10.200A4.300 4.300 0 0 1 12 7.200a4.300 4.300 0 0 1 7.500 2.600C19.500 15.400 12 20 12 20Z"/></g><text x="242" y="624" font-size="16" font-weight="700" fill="#1A1C20">예시 상품 C</text><rect x="242" y="640" width="76" height="10" rx="5" fill="#D5D7DC"/>
+<rect x="364.5" y="440.5" width="121" height="227" rx="6" fill="#FFFFFF" stroke="#E6E7EA"/><rect x="372" y="448" width="106" height="144" rx="6" fill="#D5D7DC"/><circle cx="456" cy="470" r="16" fill="#FFFFFF"/><g transform="translate(444 458)" fill="none" stroke="#6B7079" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7.500-4.600-7.500-10.200A4.300 4.300 0 0 1 12 7.200a4.300 4.300 0 0 1 7.500 2.600C19.500 15.400 12 20 12 20Z"/></g><text x="372" y="624" font-size="16" font-weight="700" fill="#1A1C20">예시 상품 D</text><rect x="372" y="640" width="76" height="10" rx="5" fill="#D5D7DC"/>
+<rect x="604" y="18" width="100" height="34" fill="#000000"/>
+<text x="654" y="42" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">예시 화면</text>
+<g fill="none" stroke="#1E3AFF" stroke-width="2" stroke-dasharray="6 5"><path d="M186 197H425V204"/><path d="M186 436H360V318H364"/></g>
+<circle cx="425" cy="204" r="4.500" fill="#1E3AFF"/><circle cx="364" cy="318" r="4.500" fill="#1E3AFF"/>
+<g fill="#FFFFFF" stroke="#D5D7DC"><rect x="36.500" y="172.500" width="149" height="49" rx="6"/><rect x="36.500" y="411.500" width="149" height="49" rx="6"/></g>
+<g fill="none" stroke="#1E3AFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<g transform="translate(48 185)"><path d="M5 8h14l-1.100 11.200a1.500 1.500 0 0 1-1.500 1.300H7.600a1.500 1.500 0 0 1-1.500-1.300Z"/><path d="M8.800 10.500V7a3.200 3.200 0 0 1 6.400 0v3.500"/></g>
+<g transform="translate(48 424)"><path d="M12 20s-7.500-4.600-7.500-10.200A4.300 4.300 0 0 1 12 7.200a4.300 4.300 0 0 1 7.500 2.600C19.500 15.400 12 20 12 20Z"/></g>
+</g>
+<g font-size="20" font-weight="700" fill="#1A1C20"><text x="84" y="204">쇼핑 유입</text><text x="84" y="443">쇼핑 찜</text></g>
+</svg>

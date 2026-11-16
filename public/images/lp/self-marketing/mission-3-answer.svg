@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 420" width="200" height="420" role="img" aria-labelledby="lp-i6-t" font-family="'Pretendard Variable', Pretendard, sans-serif"><title id="lp-i6-t">미션 화면 예시: 매장 상세 정보에서 정답을 찾는 단계</title>
+<rect width="200" height="420" rx="28" fill="#000"/>
+<rect x="7" y="7" width="186" height="406" rx="21" fill="#FFFFFF"/>
+<path d="M7 37V28A21 21 0 0 1 28 7H172A21 21 0 0 1 193 28V37Z" fill="#F5F6F8"/>
+<rect x="20" y="19" width="30" height="6" rx="3" fill="#D5D7DC"/>
+<rect x="113" y="13" width="66" height="18" fill="#000"/>
+<text x="146" y="26.5" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">예시 화면</text>
+<path d="M22 45.5L15.5 53L22 60.5" fill="none" stroke="#1A1C20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="100" y="58" text-anchor="middle" font-size="15" font-weight="700" fill="#1A1C20">매장 상세</text>
+<rect x="7" y="69" width="186" height="1" fill="#E6E7EA"/>
+<rect x="19" y="79" width="162" height="84" rx="6" fill="#E6E7EA"/>
+<text x="19" y="190" font-size="17" font-weight="800" fill="#000">예시 매장 B</text>
+<rect x="19" y="204" width="162" height="40" rx="6" fill="#FFFFFF" stroke="#E6E7EA"/><text x="29" y="229" font-size="14" font-weight="700" fill="#1A1C20">영업시간</text><rect x="100" y="220" width="60" height="8" rx="4" fill="#E6E7EA"/>
+<rect x="19" y="248" width="162" height="40" rx="6" fill="#FFFFFF" stroke="#E6E7EA"/><text x="29" y="273" font-size="14" font-weight="700" fill="#1A1C20">주소</text><rect x="100" y="264" width="60" height="8" rx="4" fill="#E6E7EA"/>
+<rect x="19" y="292" width="162" height="40" rx="6" fill="#FFFFFF" stroke="#E6E7EA"/><text x="29" y="317" font-size="14" font-weight="700" fill="#1A1C20">메뉴</text><rect x="100" y="308" width="60" height="8" rx="4" fill="#E6E7EA"/>
+<rect x="19.75" y="336.75" width="160.5" height="38.5" rx="6" fill="#1E3AFF" fill-opacity=".08" stroke="#1E3AFF" stroke-width="1.5"/><text x="29" y="361" font-size="14" font-weight="700" fill="#1A1C20">소식</text><rect x="62" y="352" width="24" height="8" rx="4" fill="#D5D7DC"/><rect x="100" y="345" width="73" height="22" rx="4" fill="#1E3AFF"/><text x="136.5" y="361" text-anchor="middle" font-size="14" font-weight="700" fill="#FFFFFF">정답 찾기</text>
+
+<circle cx="75" cy="389" r="3" fill="#D5D7DC"/><circle cx="89" cy="389" r="3" fill="#D5D7DC"/><rect x="100" y="386" width="14" height="6" rx="3" fill="#1E3AFF"/><circle cx="125" cy="389" r="3" fill="#D5D7DC"/>
+<rect x="72" y="400" width="56" height="4" rx="2" fill="#D5D7DC"/>
+</svg>

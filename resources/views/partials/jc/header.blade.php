@@ -1,6 +1,6 @@
 {{--
     공통 헤더 — 제이커브 본진 메뉴 (대웅 확정 2026-10-27)
-    회사소개 · 마케팅 서비스▾ · 운영 서비스▾ · 성과 · 인사이트 · 고객센터▾ | 로그인 · [셀프마케팅] · [문의하기]
+    회사소개 · 마케팅 서비스▾ · 운영 서비스▾ · 셀프마케팅▾ · 성과 · 인사이트 · 고객센터▾ | 로그인 · [셀프마케팅] · [문의하기]  (셀프마케팅▾ 2026-11-17 추가)
     - 11/06 ncloud 배치 참고: 오른쪽 버튼 2개(테두리 + 채움), 메가메뉴 = 왼쪽 큰 제목·설명·버튼 + 오른쪽 칸(아이콘·이름·설명)
     - ▾ 메뉴는 마우스를 올리거나 키보드로 들어가면 헤더 아래 전체 폭 패널(메가메뉴)이 열린다. 스타일은 public/css/jc-nc.css
     - 메뉴 항목은 partials/jc/menu.php 한 곳에서 관리 (헤더·모바일·푸터 공용).
@@ -78,6 +78,25 @@
                 </div>
             </div>
 
+            {{-- 2026-11-17 제코 「셀프마케팅 메뉴도 없는데?」 — 오른쪽 버튼은 1200px 이하에서 숨겨져 안 보였다. 주 메뉴 줄에도 넣는다 --}}
+            <div class="jc-nav__menu">
+                <a class="jc-nav__trigger" href="{{ $jcMenu['self']['href'] }}" aria-haspopup="true" @if (request()->is('self-marketing*')) aria-current="page" @endif>{{ $jcMenu['self']['label'] }}</a>
+                <div class="jc-mega">
+                    <div class="jc-wrap jc-mega__inner">
+                        <div class="jc-mega__intro">
+                            <strong>셀프마케팅</strong>
+                            <p>플레이스·쇼핑 순위상승 캠페인을 사장님이 직접 설정하고 이 사이트에서 바로 주문합니다.</p>
+                            <a class="jc-nch__introbtn" href="{{ $jcMenu['self']['href'] }}">셀프마케팅 시작 안내</a>
+                        </div>
+                        <div class="jc-mega__cards">
+                            <a class="jc-mega__card" href="{{ route('self-marketing.place') }}"><x-jc.icon :name="$jcMenu['self']['icon']" class="jc-mega__cardico" /><span class="jc-mega__cardtxt"><strong>플레이스 리워드</strong><span>네이버 플레이스 순위상승 캠페인</span></span></a>
+                            <a class="jc-mega__card" href="{{ route('self-marketing.shopping') }}"><x-jc.icon :name="$jcMenu['self']['icon']" class="jc-mega__cardico" /><span class="jc-mega__cardtxt"><strong>쇼핑 리워드</strong><span>스마트스토어 쇼핑 순위상승 캠페인</span></span></a>
+                            <a class="jc-mega__card" href="{{ route('self-marketing.order') }}"><x-jc.icon :name="$jcMenu['self']['icon']" class="jc-mega__cardico" /><span class="jc-mega__cardtxt"><strong>바로 주문하기</strong><span>매장·키워드·수량·기간을 골라 등록</span></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             @foreach ($jcTop as $item)
                 <a href="{{ $item['href'] }}" @if ($item['active']) aria-current="page" @endif>{{ $item['label'] }}</a>
             @endforeach
@@ -112,6 +131,7 @@
             <details class="jc-mnav">
                 <summary aria-label="메뉴 열기"><span class="jc-nch__burger" aria-hidden="true"><i></i><i></i><i></i></span>메뉴</summary>
                 <nav class="jc-mnav__panel" aria-label="모바일 메뉴">
+                    <a class="jc-mnav__self" href="{{ $jcMenu['self']['href'] }}">{{ $jcMenu['self']['label'] }}</a>
                     <a href="{{ route('company') }}">회사소개</a>
                     <details class="jc-mnav__group">
                         <summary>마케팅 서비스</summary>
@@ -126,7 +146,6 @@
                         @endforeach
                         <a href="{{ route('services.index') }}">서비스 전체 보기</a>
                     </details>
-                    <a class="jc-mnav__self" href="{{ $jcMenu['self']['href'] }}">{{ $jcMenu['self']['label'] }}</a>
                     <details class="jc-mnav__group">
                         <summary>운영 서비스</summary>
                         @foreach ($jcMenu['operations'] as $op)

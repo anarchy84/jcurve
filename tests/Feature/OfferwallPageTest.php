@@ -39,7 +39,7 @@ class OfferwallPageTest extends TestCase
         $length = mb_strlen($description);
         $this->assertGreaterThanOrEqual(80, $length);
         $this->assertLessThanOrEqual(160, $length);
-        foreach (['오퍼월', '오퍼월 도입', '앱 수익화'] as $keyword) {
+        foreach (['오퍼월', '오퍼월 도입', '앱 수익화', '연동', '단가', '앱테크'] as $keyword) {
             $this->assertStringContainsString($keyword, $description);
         }
 
@@ -56,7 +56,8 @@ class OfferwallPageTest extends TestCase
             $visible[] = trim($summary->textContent);
         }
         $this->assertGreaterThanOrEqual(5, count($visible));
-        $this->assertLessThanOrEqual(6, count($visible));
+        $this->assertLessThanOrEqual(9, count($visible));
+        $this->assertCount(9, $visible);
 
         $faqPages = $this->schemas($html, 'FAQPage');
         $this->assertCount(1, $faqPages);
@@ -73,6 +74,15 @@ class OfferwallPageTest extends TestCase
         $this->assertCount(1, $this->schemas($html, 'Service'));
     }
 
+    public function test_comparison_and_partner_selection_sections_are_present(): void
+    {
+        $xpath = $this->xpath($this->get('/services/offerwall')->assertOk()->getContent());
+
+        foreach (['compare', 'choose'] as $id) {
+            $this->assertSame(1, $xpath->query('//section[@id="'.$id.'"]')->length, $id);
+        }
+    }
+
     public function test_page_links_to_reward_network_insight_and_contact(): void
     {
         $html = $this->get('/services/offerwall')->assertOk()->getContent();
@@ -80,6 +90,8 @@ class OfferwallPageTest extends TestCase
 
         $this->assertContains(route('services.show', ['slug' => 'reward-network']), $hrefs);
         $this->assertContains(route('insights.show', ['insight' => '오퍼월이란-리워드-광고-구조와-앱-수익화']), $hrefs);
+        $this->assertContains(route('insights.show', ['insight' => '오퍼월-연동-방법-앱에-붙이는-형태와-준비할-것']), $hrefs);
+        $this->assertContains(route('insights.show', ['insight' => '오퍼월-업체-고르는-법-플랫폼-비교-기준']), $hrefs);
         $this->assertNotEmpty(array_filter($hrefs, fn ($href) => str_contains($href, 'service_interest=reward-publisher')));
         $this->assertNotEmpty(array_filter($hrefs, fn ($href) => str_contains($href, 'service_interest=reward-advertiser')));
     }

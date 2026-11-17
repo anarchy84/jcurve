@@ -16,7 +16,10 @@
         ['question' => '오퍼월이란 무엇인가요?', 'answer' => '오퍼월은 앱 안에서 여러 보상형 광고를 한 화면에 목록으로 보여 주는 전용 지면입니다. 유저가 마음에 드는 미션을 직접 골라 조건을 채우면 포인트나 앱 재화가 쌓이는 방식입니다. 앱 운영사는 광고 수익을 나눠 받고, 광고주는 완료가 확인된 액션에 대해서만 비용을 냅니다.'],
         ['question' => '오퍼월과 리워드 광고는 어떻게 다른가요?', 'answer' => '리워드 광고는 보상을 주고 정해진 행동을 요청하는 광고 방식 전체를 가리킵니다. 오퍼월은 그런 리워드 광고를 여러 개 모아 유저가 직접 고르게 하는 앱 안의 지면입니다. 같은 리워드 광고라도 기존 포인트 메뉴에 한 건씩 붙이는 미션 카드형이나 기간 한정 프로모션형으로 실을 수도 있습니다.'],
         ['question' => '오퍼월 수익은 무엇에 따라 달라지나요?', 'answer' => '오퍼월을 앱 어디에 두는지, 앱을 쓰는 이용자가 어떤 사람들인지, 유저가 미션에 얼마나 참여하는지, 광고가 어떤 조건에서 승인되는지에 따라 달라집니다. 그래서 정해진 금액을 미리 말씀드리지 않고 수익을 보장하지도 않습니다. 도입 단계에서 지면 위치와 보상 안내 방식부터 함께 정하고, 오픈 뒤에는 제이커브가 참여율과 승인 이슈를 보며 캠페인 구성을 조정합니다.'],
-        ['question' => '오퍼월을 붙이려면 SDK가 꼭 있어야 하나요?', 'answer' => '앱 구조와 개발 환경에 따라 다릅니다. 기존 지면을 활용할 수 있는지, 웹뷰나 서버 연동이 가능한지, 보상을 어떻게 처리하는지를 먼저 확인하고, 그에 맞는 연동 방식을 함께 정해 제이커브가 직접 붙입니다.'],
+        ['question' => '오퍼월 연동에 SDK가 꼭 있어야 하나요?', 'answer' => '앱 구조와 개발 환경에 따라 다릅니다. 기존 지면을 활용할 수 있는지, 웹뷰나 서버 연동이 가능한지, 보상을 어떻게 처리하는지를 먼저 확인하고, 그에 맞는 연동 방식을 함께 정해 제이커브가 직접 붙입니다.'],
+        ['question' => '오퍼월 단가는 어떻게 정해지나요?', 'answer' => '광고주가 정한 목표 액션(설치·가입·앱 안 참여)과 업종, 미션 난이도, 이용자 구성, 검수 방식을 함께 보고 캠페인마다 정합니다. 그래서 조건을 확인하기 전에 고정 단가를 말씀드리지 않습니다. 앱 운영사의 오퍼월 수익도 같은 이유로 미리 정해진 금액이 없습니다.'],
+        ['question' => '오퍼월과 앱테크는 같은 건가요?', 'answer' => '같은 구조를 보는 쪽이 다를 뿐입니다. 앱테크는 유저가 앱으로 포인트를 모으는 활동을 부르는 말이고, 그 미션이 모인 메뉴를 포인트 충전소, 광고 지면으로 볼 때를 오퍼월이라고 부릅니다.'],
+        ['question' => '오퍼월 업체는 어떤 기준으로 골라야 하나요?', 'answer' => '연동 방식, 보상을 확정하는 위치, 캠페인별 유효 기준 문서, 단가를 말하는 방식, 정산 근거, 유저 문의 대응을 문서로 설명할 수 있는지 확인하세요. 조건을 묻지 않고 고정 단가나 수익을 먼저 약속한다면 다시 확인하는 편이 좋습니다.'],
         ['question' => '광고주는 오퍼월 광고비를 어떤 기준으로 내나요?', 'answer' => '설치(CPI), 회원가입 같은 지정 액션(CPA), 앱 안 참여(CPE)처럼 목표 액션을 정하고, 집행 전에 합의한 유효 기준을 통과한 액션만큼 정산합니다. 단가와 가능 여부는 업종, 미션 난이도, 검수 방식에 따라 달라집니다.'],
         ['question' => '오퍼월 캠페인 품질은 어떤 기준으로 보나요?', 'answer' => '집행 전에 신규·중복 판별 기준, 반드시 끝내야 하는 완료 조건, 참여부터 완료까지 인정하는 기간을 문서로 정해 두고 그 기준을 통과한 참여만 승인합니다. 설치에서 멈추지 않고 회원가입·튜토리얼·특정 단계 도달처럼 다음 행동까지 미션을 나누면 캠페인 목적에 맞는 참여인지 더 분명하게 볼 수 있습니다. 처음에는 작은 규모로 승인율과 후속 행동을 확인한 뒤 확대를 정합니다.'],
     ];
@@ -30,7 +33,7 @@
 @section('sd_crumbs', '서비스=/services|리워드 광고·오퍼월=/services/reward-network')
 @section('sd_service', '오퍼월')
 @section('meta')
-    <meta name="description" content="오퍼월은 앱 안에 보상형 광고 미션 목록을 여는 지면입니다. 앱 운영사의 오퍼월 도입과 앱 수익화, 광고주의 CPI·CPA·CPE 오퍼월 광고 집행, 유효 전환 기준과 정산 흐름을 한 페이지에 정리했습니다.">
+    <meta name="description" content="오퍼월은 앱 안에 보상형 광고 미션 목록을 여는 지면입니다. 오퍼월 도입과 앱 수익화, 연동 방식, 단가가 정해지는 기준, 앱테크·포인트 충전소와의 차이, 광고주의 CPI·CPA·CPE 집행과 오퍼월 업체 고르는 법까지 정리했습니다.">
 @endsection
 @include('partials.jc.schema-faq', ['items' => $faqs])
 
@@ -68,6 +71,8 @@
                 <a href="#settlement">정산</a>
                 <a href="#advertisers">광고주</a>
                 <a href="#validity">유효 전환</a>
+                <a href="#compare">앱테크와 차이</a>
+                <a href="#choose">업체 고르기</a>
                 <a href="#process">진행 절차</a>
                 <a href="#faq">FAQ</a>
             </div>
@@ -231,6 +236,48 @@
             </div>
         </section>
 
+        {{-- 연관 키워드 보강(SEO-KW-04, 2026-11-17 제코 「"오퍼월" 이 키워드랑 연관 키워드로 노출」) — 앱테크·포인트 충전소·리워드형 광고와의 차이.
+             새 숫자·단가·제휴사 이름 없음. 다른 회사 이름을 들어 비교하지 않는다. --}}
+        <section class="landing__section landing__section--light" id="compare">
+            <div class="landing__inner">
+                <span class="landing__eyebrow">Offerwall vs App-tech</span>
+                <h2 class="landing__head">오퍼월과 앱테크·포인트 충전소는 어떻게 다른가요?</h2>
+                <p class="landing__lead">유저 쪽에서 부르는 이름과 앱 운영사·광고주 쪽에서 부르는 이름이 다를 뿐, 같은 구조를 가리키는 경우가 많습니다. 앱테크는 앱으로 포인트를 모으는 유저의 활동을, 포인트 충전소는 그 미션이 모여 있는 앱 안 메뉴를, 오퍼월은 그 메뉴를 광고 지면으로 볼 때의 이름입니다.</p>
+                <div class="compare-table-wrap">
+                    <table class="compare-table">
+                        <thead>
+                            <tr><th scope="col">이름</th><th scope="col">누가 주로 쓰는 말인가</th><th scope="col">가리키는 것</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><th scope="row">앱테크</th><td>유저</td><td>앱 설치·가입·미션으로 포인트나 현금성 보상을 모으는 활동</td></tr>
+                            <tr><th scope="row">포인트 충전소</th><td>유저·앱 운영사</td><td>앱 안에서 무료로 포인트를 채울 수 있는 미션이 모인 메뉴</td></tr>
+                            <tr><th scope="row">오퍼월</th><td>앱 운영사·광고주</td><td>여러 보상형 광고를 목록으로 보여 주고 완료한 만큼 보상을 주는 광고 지면</td></tr>
+                            <tr><th scope="row">리워드 광고(리워드형 광고·보상형 광고)</th><td>광고주</td><td>보상을 주고 정해진 행동을 요청하는 광고 방식 전체. 오퍼월은 그중 한 지면입니다.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="landing__note">어떤 이름으로 부르든 승인과 정산의 기준은 같습니다. 집행 전에 정한 유효 기준을 통과한 참여만 보상과 수익으로 확정합니다.</p>
+            </div>
+        </section>
+
+        {{-- 연관 키워드 보강 — 오퍼월 업체·플랫폼 고르는 기준(SEO-KW-04) --}}
+        <section class="landing__section landing__section--dark has-orb" id="choose">
+            <div class="landing__inner">
+                <span class="landing__eyebrow">Choosing a Partner</span>
+                <h2 class="landing__head">오퍼월 업체(플랫폼)는 무엇을 보고 고르나요?</h2>
+                <p class="landing__lead">오퍼월 수익화는 붙이는 날보다 붙인 뒤의 운영에서 갈립니다. 오퍼월 플랫폼을 비교할 때는 광고 수보다 아래 항목을 문서로 답해 줄 수 있는지 먼저 확인하세요.</p>
+                <div class="landing__points">
+                    <div class="landing__point"><strong>연동 방식</strong><span>앱 구조에 맞춰 전용 화면·기존 메뉴·웹뷰·서버 연동 중 무엇이 가능한지, 개발 부담이 어디에 생기는지 설명할 수 있어야 합니다.</span></div>
+                    <div class="landing__point"><strong>보상 확정 위치</strong><span>보상을 앱 화면에서 계산하는지, 서버가 완료를 확인한 뒤 확정하는지 봅니다. 확정 위치가 분명해야 중복 지급을 막을 수 있습니다.</span></div>
+                    <div class="landing__point"><strong>유효 기준 문서</strong><span>신규·중복, 완료 조건, 인정 기간을 캠페인마다 미리 정해 두는지, 승인·제외 사유를 같은 자료로 보여 주는지 확인합니다.</span></div>
+                    <div class="landing__point"><strong>단가를 말하는 방식</strong><span>오퍼월 단가는 업종·미션 난이도·이용자 구성·검수 방식에 따라 달라집니다. 조건을 묻지 않고 고정 단가나 수익을 먼저 약속하는 곳은 다시 확인하세요.</span></div>
+                    <div class="landing__point"><strong>정산 근거</strong><span>광고주·앱 운영사·유저 보상이 같은 완료 기록에서 나오는지, 마감 전에 확인할 수 있는 자료가 있는지 봅니다.</span></div>
+                    <div class="landing__point"><strong>유저 문의 대응</strong><span>"미션을 했는데 포인트가 안 들어왔다"는 문의를 누가 어떤 기록으로 처리하는지 정해져 있어야 앱 운영사 부담이 줄어듭니다.</span></div>
+                </div>
+                <p class="landing__note">제이커브는 오퍼월을 앱에 직접 붙이고 캠페인 공급·검수·유저 문의·정산까지 운영합니다. 위 항목은 제이커브와 상담하실 때도 그대로 물어보셔도 됩니다.</p>
+            </div>
+        </section>
+
         {{-- 제이커브 오퍼월 진행 절차 --}}
         <section class="landing__section landing__section--parchment" id="process">
             <div class="landing__inner">
@@ -316,6 +363,16 @@
                     <a class="landing__point landing__point--link landing__point--light" href="{{ route('insights.show', ['insight' => '오퍼월이란-리워드-광고-구조와-앱-수익화']) }}">
                         <strong>오퍼월이란? 리워드 광고 구조 정리</strong>
                         <span>오퍼월이 움직이는 순서와 광고주·앱 운영사가 확인할 점을 글로 정리했습니다.</span>
+                        <small class="landing__point-link">글 읽기 →</small>
+                    </a>
+                    <a class="landing__point landing__point--link landing__point--light" href="{{ route('insights.show', ['insight' => '오퍼월-연동-방법-앱에-붙이는-형태와-준비할-것']) }}">
+                        <strong>오퍼월 연동 방법</strong>
+                        <span>연동 형태 네 가지와 SDK 여부를 판단하는 질문, 오픈 전 점검 순서를 정리했습니다.</span>
+                        <small class="landing__point-link">글 읽기 →</small>
+                    </a>
+                    <a class="landing__point landing__point--link landing__point--light" href="{{ route('insights.show', ['insight' => '오퍼월-업체-고르는-법-플랫폼-비교-기준']) }}">
+                        <strong>오퍼월 업체 고르는 법</strong>
+                        <span>오퍼월 플랫폼을 비교할 때 문서로 받아야 할 여섯 가지 기준과 위험 신호입니다.</span>
                         <small class="landing__point-link">글 읽기 →</small>
                     </a>
                     <a class="landing__point landing__point--link landing__point--light" href="{{ $publisherContact }}">

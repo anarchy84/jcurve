@@ -16,13 +16,13 @@
 - [서비스 전체](https://j-curve.co.kr/services): 유입부터 전환·재구매까지
 - [SEO 컨설팅](https://j-curve.co.kr/seo/): 구글·네이버 검색엔진 최적화
 - [AEO 답변엔진 최적화](https://j-curve.co.kr/services/seo/aeo): 질문에 답하는 콘텐츠 구조
-- [GEO 생성엔진 최적화](https://j-curve.co.kr/services/seo/geo): AI가 이해하는 브랜드 정보
+- [GEO 생성엔진 최적화](https://j-curve.co.kr/services/seo/geo): AI가 읽을 수 있는 페이지 정보와 엔티티 정비, 고정한 질문으로 언급률·인용률 비교
 - [무료 SEO·GEO·AEO 진단](https://j-curve.co.kr/seo-check): 주소 하나로 온페이지와 AI 답변 최적화 점검
 - [백링크 서비스](https://j-curve.co.kr/seo-backlinks/)
 - [퍼포먼스 마케팅](https://j-curve.co.kr/services/performance-marketing): 네이버 GFA, 페이스북·인스타그램, 유튜브 광고
 - [CPA 마케팅](https://j-curve.co.kr/services/cpa-marketing): 유효 액션 기준 성과형 광고(보험, 부동산 분양, 주식, 코인, 퍼미션 콜)
 - [리워드 네트워크](https://j-curve.co.kr/services/reward-network): 광고주 액션과 앱 수익화 연결
-- [오퍼월](https://j-curve.co.kr/services/offerwall): 오퍼월의 뜻과 동작 흐름, 앱 운영사의 오퍼월 도입·정산, 광고주의 CPI·CPA·CPE 오퍼월 광고 집행
+- [오퍼월](https://j-curve.co.kr/services/offerwall): 오퍼월의 뜻과 동작 흐름, 앱 운영사의 오퍼월 도입·정산, 광고주의 CPI·CPA·CPE 오퍼월 광고 집행, 오퍼월 연동·단가 기준·앱테크와의 차이·업체 고르는 기준
 - [워드프레스 홈페이지 제작](https://j-curve.co.kr/wordpress-agency/)
 - [네이버 플레이스 상위노출](https://j-curve.co.kr/naver-place-marketing/)
 - [네이버쇼핑 상위노출](https://j-curve.co.kr/naver-shopping-marketing/)

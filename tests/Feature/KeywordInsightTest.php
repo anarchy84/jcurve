@@ -96,7 +96,7 @@ class KeywordInsightTest extends TestCase
         );
     }
 
-    public function test_seeding_twice_keeps_five_exact_public_articles_with_fixed_dates_and_categories(): void
+    public function test_seeding_twice_keeps_nine_exact_public_articles_with_fixed_dates_and_categories(): void
     {
         $this->seed(InsightCategorySeeder::class);
         $this->seed(KeywordInsightSeeder::class);
@@ -113,9 +113,9 @@ class KeywordInsightTest extends TestCase
 
         $this->assertDatabaseCount('users', 1);
         $this->assertSame($firstAuthor, $author->fresh()->getRawOriginal());
-        $this->assertDatabaseCount('insights', 5);
+        $this->assertDatabaseCount('insights', 9);
         $this->assertSame($first, Insight::query()->orderBy('id')->get()->map->getRawOriginal()->all());
-        $this->assertSame(5, Insight::query()->published()->count());
+        $this->assertSame(9, Insight::query()->published()->count());
         foreach ($this->manifest() as $article) {
             $insight = Insight::query()->where('slug', $article['slug'])->firstOrFail();
             foreach (['title', 'excerpt', 'meta_title', 'meta_description'] as $field) {
@@ -125,6 +125,23 @@ class KeywordInsightTest extends TestCase
             $this->assertSame($author->id, $insight->user_id);
             $this->assertSame($article['category_slug'], $insight->category->slug);
             $this->assertSame('2026-11-04 10:00:00', $insight->published_at->setTimezone('Asia/Seoul')->format('Y-m-d H:i:s'));
+        }
+    }
+
+    public function test_new_offerwall_and_geo_articles_keep_their_expected_slugs_and_categories(): void
+    {
+        $this->seed([InsightCategorySeeder::class, KeywordInsightSeeder::class]);
+
+        foreach ([
+            '오퍼월-연동-방법-앱에-붙이는-형태와-준비할-것' => 'reward',
+            '오퍼월-업체-고르는-법-플랫폼-비교-기준' => 'reward',
+            'geo-성과-측정-언급률-인용률-지표' => 'seo',
+            'ai-답변-출처가-되는-페이지-만드는-법' => 'seo',
+        ] as $slug => $category) {
+            $this->assertDatabaseHas('insights', [
+                'slug' => $slug,
+                'category_id' => InsightCategory::query()->where('slug', $category)->sole()->id,
+            ]);
         }
     }
 
@@ -144,7 +161,7 @@ class KeywordInsightTest extends TestCase
 
         $this->assertDatabaseCount('users', 1);
         $this->assertSame($original, $author->fresh()->getRawOriginal());
-        $this->assertDatabaseCount('insights', 5);
+        $this->assertDatabaseCount('insights', 9);
         foreach ($this->manifest() as $article) {
             $this->assertSame($author->id, Insight::query()->where('slug', $article['slug'])->sole()->user_id);
         }
@@ -195,7 +212,7 @@ class KeywordInsightTest extends TestCase
         $this->assertCount($count, array_intersect_key($before, $descriptions));
 
         $this->artisan('db:seed', ['--class' => KeywordInsightSeeder::class, '--no-interaction' => true])
-            ->expectsOutput('Keyword insights upserted: 5')
+            ->expectsOutput('Keyword insights upserted: 9')
             ->expectsOutput("Insight descriptions updated: {$count}; missing slugs skipped: 0")
             ->assertSuccessful();
 
@@ -223,10 +240,10 @@ class KeywordInsightTest extends TestCase
         $count = count($this->descriptions());
 
         $this->artisan('db:seed', ['--class' => KeywordInsightSeeder::class, '--no-interaction' => true])
-            ->expectsOutput('Keyword insights upserted: 5')
+            ->expectsOutput('Keyword insights upserted: 9')
             ->expectsOutput("Insight descriptions updated: 0; missing slugs skipped: {$count}")
             ->assertSuccessful();
-        $this->assertDatabaseCount('insights', 5);
+        $this->assertDatabaseCount('insights', 9);
     }
 
     public function test_duplicate_is_retained_unpublished_and_all_inbound_redirects_finish_in_one_hop(): void

@@ -43,6 +43,8 @@
 @section('footer_variant', 'jc-footer--white')
 
 @section('content')
+    {{-- 랜딩 전용 스타일 — 빌드 없는 정적 파일(2026-11-17). 빌드 CSS 뒤에 오도록 본문 맨 앞에서 불러온다(헤더의 jc-nc.css 와 같은 방식) --}}
+    <link rel="stylesheet" href="{{ asset('css/jc-lp.css') }}?v={{ @filemtime(public_path('css/jc-lp.css')) }}">
 <div class="jc-lp">
     {{-- ① 첫 화면 --}}
     <section class="jc-lp-hero jc-bg-dark" aria-labelledby="lp-title">

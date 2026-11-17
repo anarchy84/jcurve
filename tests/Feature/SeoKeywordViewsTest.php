@@ -294,6 +294,7 @@ class SeoKeywordViewsTest extends TestCase
             '/self-marketing' => ['/self-marketing', 9], // 2026-11-16 JC-RELEASE-A: /self-marketing = 새 랜딩(FAQ 9개)
             '/self-marketing/place' => ['/self-marketing/place', 6],
             '/self-marketing/shopping' => ['/self-marketing/shopping', 6],
+            '/services/seo/geo' => ['/services/seo/geo', 9],
             '/solutions' => ['/solutions', 6],
             '/solutions/rankfree' => ['/solutions/rankfree', 9],
             '/solutions/leadbay' => ['/solutions/leadbay', 7],
@@ -321,6 +322,20 @@ class SeoKeywordViewsTest extends TestCase
         $this->assertCount($count, $questions, $message);
         $this->assertSame($visible, array_column($questions, 'name'), $path);
         $this->assertPlainAnswers($questions);
+    }
+
+    public function test_geo_methodology_sections_and_description_render(): void
+    {
+        $xpath = $this->html($this->page('/services/seo/geo'));
+
+        foreach (['geo-readable', 'geo-quality', 'geo-questions', 'geo-metrics'] as $id) {
+            $this->assertSame(1, $xpath->query('//section[@id="'.$id.'"]')->length, $id);
+        }
+
+        $this->assertSame(1, $xpath->query('//head/meta[@name="description"]')->length);
+        $description = $xpath->evaluate('string(//head/meta[@name="description"]/@content)');
+        $this->assertNotSame('', $description);
+        $this->assertLessThanOrEqual(160, mb_strlen($description));
     }
 
     public function test_rankfree_first_visible_faq_keeps_both_service_links(): void
@@ -398,11 +413,11 @@ class SeoKeywordViewsTest extends TestCase
         $this->assertCount(0, $this->schemas($this->page('/'), 'Service'));
     }
 
-    public function test_all_five_seeded_articles_have_three_faqs_matching_their_body_headings(): void
+    public function test_all_nine_seeded_articles_have_three_faqs_matching_their_body_headings(): void
     {
         $this->seed([InsightCategorySeeder::class, KeywordInsightSeeder::class]);
         $manifest = json_decode(file_get_contents(database_path('content/kw01/manifest.json')), true, flags: JSON_THROW_ON_ERROR);
-        $this->assertCount(5, $manifest);
+        $this->assertCount(9, $manifest);
         foreach ($manifest as $article) {
             $html = $this->page('/insights/'.rawurlencode($article['slug']));
             $xpath = $this->html($html);
@@ -445,7 +460,7 @@ class SeoKeywordViewsTest extends TestCase
             $this->assertLink($xpath, '//footer', $link);
         }
         // 6e0dba3(헤더 교체)부터 셀프마케팅은 「주 메뉴」 nav 안 링크가 아니라 헤더 오른쪽 버튼(.jc-header__aside 의 직계 링크)이다.
-        // PC 헤더에는 그 버튼 하나만, 모바일 메뉴 패널에는 한 칸이 있어야 한다.
+        // PC 헤더 오른쪽에는 그 버튼 하나만, 모바일 메뉴 패널에는 한 칸이 있어야 한다.
         $aside = '//header//div[contains(concat(" ", normalize-space(@class), " "), " jc-header__aside ")]';
         $desktop = array_filter(
             iterator_to_array($xpath->query($aside.'/a[@href]')),
@@ -453,7 +468,12 @@ class SeoKeywordViewsTest extends TestCase
         );
         $this->assertCount(1, $desktop, 'desktop header must have exactly one self-marketing button');
         $this->assertCount(1, $this->assertLink($xpath, $aside.'//nav[@aria-label="모바일 메뉴"]', '/self-marketing'));
-        $this->assertSame(0, $xpath->query('//header//nav[@aria-label="주 메뉴"]//a[@href="'.self::PUBLIC_URL.'/self-marketing" or @href="/self-marketing"]')->length);
+        // 2026-11-17 제코 「셀프마케팅 메뉴도 없는데?」 — 오른쪽 버튼은 1200px 이하에서 숨겨지므로 주 메뉴 줄에도 「셀프마케팅▾」 한 칸을 둔다.
+        $trigger = '//header//nav[@aria-label="주 메뉴"]//a[contains(concat(" ", normalize-space(@class), " "), " jc-nav__trigger ")][@href="'.self::PUBLIC_URL.'/self-marketing" or @href="/self-marketing"]';
+        $this->assertSame(1, $xpath->query($trigger)->length, 'main nav must have exactly one self-marketing menu trigger');
+        foreach (['/self-marketing/place', '/self-marketing/shopping', '/self-marketing/order'] as $link) {
+            $this->assertLink($xpath, '//header//nav[@aria-label="주 메뉴"]', $link);
+        }
     }
 
     private function assertCommonHead(string $html): void

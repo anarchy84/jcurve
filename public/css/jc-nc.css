@@ -47,7 +47,8 @@
 :is(.jc-site, .jc-legacy) .jc-mnav__panel .jc-nch__mbtns a.jc-nch__btn { padding: 0 8px; font-size: 13px; }
 :is(.jc-site, .jc-legacy) .jc-mnav__panel .jc-nch__mbtns a.jc-nch__btn--fill { color: #fff !important; }
 :is(.jc-site, .jc-legacy) .jc-mnav__panel .jc-nch__mbtns a.jc-nch__btn--fill:hover { background: var(--jc-blue-press); }
-@media (max-width: 1200px) {
+/* 2026-11-17: 1200px 이하에서 주 메뉴가 햄버거로 접혀도 셀프마케팅 버튼은 남긴다(자리가 남음). 좁은 폰 폭에서만 숨긴다 */
+@media (max-width: 640px) {
     .jc-nch .jc-header__aside > .jc-nch__btn--line { display: none; }
 }
 @media (max-width: 560px) {
